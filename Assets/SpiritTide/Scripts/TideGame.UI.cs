@@ -206,7 +206,7 @@ namespace SpiritTide
             {
                 skillKeys[i].gameObject.SetActive(ShowKeyboardHints);
                 SkillDef skill=Session.Hero.Skill(i);float remaining=Mathf.Max(0,Session.Cooldowns[i]-Session.Clock);
-                Say(skillLabels[i],skill.name.Replace("·","\n"));
+                Say(skillLabels[i],TideSkillIcons.Definition(Session.Profile.hero,i).label);UpdateSkillIcon(i,remaining);
                 Say(skillFooters[i],Session.IsTraining?"수련":remaining>0?Mathf.CeilToInt(remaining)+"초":Session.Mp<skill.spirit_cost?"영압 부족":"영압 "+skill.spirit_cost);
                 skillFooters[i].color=Session.Mp<skill.spirit_cost&&!Session.IsTraining?gold:muted;
                 skillCooldownFills[i].fillAmount=Session.IsTraining?0:remaining/Mathf.Max(.01f,skill.cooldown_seconds);

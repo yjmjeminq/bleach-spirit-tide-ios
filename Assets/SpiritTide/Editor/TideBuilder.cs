@@ -71,12 +71,18 @@ namespace SpiritTide.EditorTools
             {
                 var t=AssetImporter.GetAtPath(path) as TextureImporter;t.textureType=TextureImporterType.Default;t.npotScale=TextureImporterNPOTScale.None;t.alphaIsTransparency=path.Contains("motion")||path.Contains("npcs");t.mipmapEnabled=false;t.isReadable=false;t.maxTextureSize=2048;t.textureCompression=TextureImporterCompression.Uncompressed;PhoneTexture(t);t.SaveAndReimport();
             }
-            PlayerSettings.bundleVersion="0.8.0";
+            foreach(string path in Directory.GetFiles("Assets/SpiritTide/Resources/SpiritTide/Art/Skills","*.png"))
+            {
+                var texture=AssetImporter.GetAtPath(path) as TextureImporter;texture.textureType=TextureImporterType.Default;
+                texture.npotScale=TextureImporterNPOTScale.None;texture.mipmapEnabled=false;texture.isReadable=false;texture.wrapMode=TextureWrapMode.Clamp;
+                texture.maxTextureSize=2048;texture.textureCompression=TextureImporterCompression.Uncompressed;PhoneTexture(texture);texture.SaveAndReimport();
+            }
+            PlayerSettings.bundleVersion="0.9.0";
             PlayerSettings.SetApplicationIdentifier(NamedBuildTarget.Standalone,"com.yjmjemin.bleachspirittide");
             PlayerSettings.SetApplicationIdentifier(NamedBuildTarget.iOS,"com.yjmjemin.bleachspirittide");
             PlayerSettings.SetScriptingBackend(NamedBuildTarget.Standalone,ScriptingImplementation.Mono2x);
             PlayerSettings.SetScriptingBackend(NamedBuildTarget.iOS,ScriptingImplementation.IL2CPP);
-            PlayerSettings.iOS.targetOSVersionString="17.0";PlayerSettings.iOS.buildNumber="3";
+            PlayerSettings.iOS.targetOSVersionString="17.0";PlayerSettings.iOS.buildNumber="4";
             PlayerSettings.iOS.targetDevice=iOSTargetDevice.iPhoneOnly;
             PlayerSettings.defaultInterfaceOrientation=UIOrientation.AutoRotation;
             PlayerSettings.allowedAutorotateToLandscapeLeft=true;PlayerSettings.allowedAutorotateToLandscapeRight=true;

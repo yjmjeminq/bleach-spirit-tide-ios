@@ -43,11 +43,14 @@ namespace SpiritTide
             for(int i=0;i<5;i++)
             {
                 Transform button=skillButtons[i].transform;
-                RectTransform name=skillLabels[i].rectTransform;name.sizeDelta=new Vector2(96,50);name.anchoredPosition=new Vector2(0,7);skillLabels[i].fontSize=20;
-                Image cd=Picture("Cooldown",button,new Vector2(.5f,.5f),Vector2.zero,new Vector2(110,108),new Color(0,.025f,.035f,.7f));
-                cd.type=Image.Type.Filled;cd.fillMethod=Image.FillMethod.Vertical;cd.fillOrigin=0;cd.transform.SetAsFirstSibling();skillCooldownFills[i]=cd;
+                RectTransform name=skillLabels[i].rectTransform;name.sizeDelta=new Vector2(96,24);name.anchoredPosition=new Vector2(0,-21);skillLabels[i].fontSize=18;
+                BuildSkillIcon(i);
+                Image cd=Picture("Cooldown",button,new Vector2(.5f,.5f),new Vector2(0,22),new Vector2(66,60),new Color(0,.025f,.035f,.78f));
+                cd.type=Image.Type.Filled;cd.fillMethod=Image.FillMethod.Radial360;cd.fillOrigin=2;cd.fillClockwise=true;skillCooldownFills[i]=cd;
+                skillTimers[i]=Label("",button,new Vector2(.5f,.5f),new Vector2(0,22),new Vector2(64,44),28,Color.white,true);skillTimers[i].name="SkillCooldownNumber";skillTimers[i].alignment=TextAnchor.MiddleCenter;
+                var timerOutline=skillTimers[i].gameObject.AddComponent<Outline>();timerOutline.effectColor=new Color(0,0,0,.95f);timerOutline.effectDistance=new Vector2(1,-1);
                 Text key=Label(TideUiInfo.Keys[i],button,new Vector2(.5f,.5f),new Vector2(-40,43),new Vector2(18,18),15,gold,true);key.alignment=TextAnchor.MiddleCenter;skillKeys[i]=key;
-                skillFooters[i]=Label("",button,new Vector2(.5f,.5f),new Vector2(0,-36),new Vector2(96,22),17,muted);skillFooters[i].alignment=TextAnchor.MiddleCenter;
+                skillFooters[i]=Label("",button,new Vector2(.5f,.5f),new Vector2(0,-43),new Vector2(96,20),15,muted);skillFooters[i].alignment=TextAnchor.MiddleCenter;
             }
             ApplyHudPreferences();ResetFeedback();
         }
@@ -121,7 +124,7 @@ namespace SpiritTide
             }
             else
             {
-                for(int i=0;i<5;i++){int slot=i;Button("help-slot-"+i,ShowKeyboardHints?TideUiInfo.Keys[i]:i==4?"각성":"기술 "+(i+1),panel,new Vector2(.5f,.5f),new Vector2((i-2)*183,-30),new Vector2(167,84),()=>{helpSlot=slot;Refresh();},helpSlot==i);}
+                for(int i=0;i<5;i++){int slot=i;var button=Button("help-slot-"+i,"",panel,new Vector2(.5f,.5f),new Vector2((i-2)*183,-30),new Vector2(167,84),()=>{helpSlot=slot;Refresh();},helpSlot==i);AddHelpSkillIcon(button,i);}
                 SkillDef skill=Session.Hero.Skill(helpSlot);
                 Label(skill.name+" · 영압 "+skill.spirit_cost+" · 재사용 "+skill.cooldown_seconds+"초\n"+TideUiInfo.Skill(Session.Profile.hero,helpSlot),panel,new Vector2(.5f,.5f),new Vector2(0,-130),new Vector2(950,100),27);
             }

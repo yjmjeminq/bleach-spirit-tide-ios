@@ -1,0 +1,74 @@
+{
+  "version": "0.9.0",
+  "atlas_files": 6,
+  "logical_icons": 30,
+  "files": [
+    {
+      "hero": "rukia",
+      "path": "Assets/SpiritTide/Resources/SpiritTide/Art/Skills/rukia-skills-v1.png",
+      "sha256": "9e15b30b6eaf5626b717008c2d942d449b08d859120502dc8beee28522741d8f",
+      "width": 1983,
+      "height": 793,
+      "tool": "built-in image_gen",
+      "prompt": "Create ONE production-ready RPG skill-icon SPRITE ATLAS, an extremely wide 5:1 horizontal strip containing EXACTLY FIVE equal SQUARE icon tiles side by side in one row. Desired canvas 2560x512. If canvas aspect is constrained, place the five equal square tiles in the exact vertical middle with empty dark navy padding above/below. The icon centers must be at x=10%,30%,50%,70%,90%, all y=50%. Each tile has a simple thin icy silver frame and a dark navy background. No text, numbers, letters, captions, watermark, human faces, bodies or characters. Painted premium fantasy action-RPG ability icons, high contrast bold silhouettes and luminous ice material, designed to remain legible when displayed at 64x64 pixels. Restrained details, each symbol fills 70% of its square and has generous safe margins; no parts spill into neighboring tiles. One coherent painterly art style, crisp shapes, saturated ice blue, white and deep cobalt palette. EXACT ORDER LEFT TO RIGHT: 1) two crossing pale icy sword crescents, an unmistakable sweeping double slash; 2) a six-point snowflake inscribed in a circular frost seal on the ground; 3) a single swift blue boot-shaped icy footprint with three trailing frost streaks pointing diagonally; 4) three upward clear blue crystalline ice pillars, tallest central spike; 5) a regal crown of jagged white ice over a large bright six-point snowflake, more brilliant than the other icons, ultimate ability. These are magical symbols only. This is the Rukia frost skill atlas for a mobile side-scrolling action RPG; prioritize instant visual recognition over decorative complexity.",
+      "style_reference": null,
+      "bitmap_modified": false
+    },
+    {
+      "hero": "orihime",
+      "path": "Assets/SpiritTide/Resources/SpiritTide/Art/Skills/orihime-skills-v1.png",
+      "sha256": "40d4eed90df2ba4dd76aa786d6d119745109856caf774235d60e2c39eae7fbc6",
+      "width": 1983,
+      "height": 793,
+      "tool": "built-in image_gen",
+      "prompt": "Use case: stylized-concept. Asset type: ONE production RPG skill icon sprite atlas. The attached frost sheet is a STYLE AND LAYOUT REFERENCE ONLY, not an edit target. Create a NEW atlas in the same polished hand-painted fantasy mobile action-RPG icon style. EXACTLY FIVE equal square icon tiles, side by side in ONE horizontal row, centered vertically, at x centers 10%,30%,50%,70%,90%. Preserve the reference's square tile proportions, thin metallic frames, very dark navy tile backgrounds, and empty dark navy padding above and below the row. No text, numbers, letters, captions, logos, watermarks, people, faces, or bodies. One bold instantly recognizable symbol per square; icon subject fills about 70% of its tile with safe margins. Designed to read at 64x64 pixels: strong silhouettes, rich painted materials, clean restrained detail. No icon or effect crosses the boundary between tiles. Theme: golden flower shields and healing. Gold-orange light with white and a little mint for healing. EXACT LEFT TO RIGHT: 1) triangular golden barrier outlined by three glowing flower-petal spirit nodes; 2) TWO distinct white-gold healing flowers above mint green healing ripples; 3) a sharp golden petal-shaped energy spear shooting diagonally with an orange tail; 4) a diamond-shaped FOUR-node counter-shield with a reflected curved energy arrow; 5) a radiant SIX-petal golden flower enclosing a luminous sanctuary shield, clearly the most brilliant ultimate icon. These five symbols must differ in silhouette and geometry.",
+      "style_reference": "rukia",
+      "bitmap_modified": false
+    },
+    {
+      "hero": "yoruichi",
+      "path": "Assets/SpiritTide/Resources/SpiritTide/Art/Skills/yoruichi-skills-v1.png",
+      "sha256": "a06a488565d153db80415281e094f67251a582df37b9ec258de2be0faf66fec9",
+      "width": 1983,
+      "height": 793,
+      "tool": "built-in image_gen",
+      "prompt": "Use case: stylized-concept. Asset type: ONE production RPG skill icon sprite atlas. The attached frost sheet is a STYLE AND LAYOUT REFERENCE ONLY, not an edit target. Create a NEW atlas in the same polished hand-painted fantasy mobile action-RPG icon style. EXACTLY FIVE equal square icon tiles, side by side in ONE horizontal row, centered vertically, at x centers 10%,30%,50%,70%,90%. Preserve the reference's square tile proportions, thin metallic frames, very dark navy tile backgrounds, and empty dark navy padding above and below the row. No text, numbers, letters, captions, logos, watermarks, people, faces, or bodies. One bold instantly recognizable symbol per square; icon subject fills about 70% of its tile with safe margins. Designed to read at 64x64 pixels: strong silhouettes, rich painted materials, clean restrained detail. No icon or effect crosses the boundary between tiles. Theme: violet-blue lightning, high-speed kicks and evasion. Electric purple and cyan palette. EXACT LEFT TO RIGHT: 1) two angular lightning kick crescents crossing diagonally with electric sparks; 2) one thick vertical lightning bolt striking a circular ground shockwave; 3) THREE parallel zigzag lightning dash streaks thrusting forward; 4) a sleek abstract black CAT silhouette or cat-shaped spirit shadow framed by one violet evasion crescent, no human; 5) a huge branching lightning column with a swirling electric halo and a brilliant white core, ultimate thunder power. Each icon must differ clearly in silhouette.",
+      "style_reference": "rukia",
+      "bitmap_modified": false
+    },
+    {
+      "hero": "soifon",
+      "path": "Assets/SpiritTide/Resources/SpiritTide/Art/Skills/soifon-skills-v1.png",
+      "sha256": "c0e6d241408b6ee407a48232fb06ef50aabfe64356f4416dc368a39899960e41",
+      "width": 1983,
+      "height": 793,
+      "tool": "built-in image_gen",
+      "prompt": "Use case: stylized-concept. Asset type: ONE production RPG skill icon sprite atlas. The attached frost sheet is a STYLE AND LAYOUT REFERENCE ONLY, not an edit target. Create a NEW atlas in the same polished hand-painted fantasy mobile action-RPG icon style. EXACTLY FIVE equal square icon tiles, side by side in ONE horizontal row, centered vertically, at x centers 10%,30%,50%,70%,90%. Preserve the reference's square tile proportions, thin metallic frames, very dark navy tile backgrounds, and empty dark navy padding above and below the row. No text, numbers, letters, captions, logos, watermarks, people, faces, or bodies. One bold instantly recognizable symbol per square; icon subject fills about 70% of its tile with safe margins. Designed to read at 64x64 pixels: strong silhouettes, rich painted materials, clean restrained detail. No icon or effect crosses the boundary between tiles. Theme: hornet sting, assassin speed, butterfly seal and magical cannon. Warm gold, amber and charcoal palette. EXACT LEFT TO RIGHT: 1) a single slender gold hornet stinger piercing a small target ring; 2) two sharp stylized gold insect WINGS sweeping forward with speed trails; 3) FIVE distinct thin gold needles converging inward on one point; 4) two glowing butterfly-wing seals crossing to make a gold explosive star; 5) a bold oversized stylized magical hornet CANNON muzzle with concentric aiming rings firing a blazing gold energy beam, clearly the ultimate. Pure fantasy game symbols only, no human, no gore.",
+      "style_reference": "rukia",
+      "bitmap_modified": false
+    },
+    {
+      "hero": "rangiku",
+      "path": "Assets/SpiritTide/Resources/SpiritTide/Art/Skills/rangiku-skills-v1.png",
+      "sha256": "714fc76125aab49c04136701b9b711b54fe74e7bb52e2e619090ad5c68389b1d",
+      "width": 1983,
+      "height": 793,
+      "tool": "built-in image_gen",
+      "prompt": "Use case: stylized-concept. Asset type: ONE production RPG skill icon sprite atlas. The attached frost sheet is a STYLE AND LAYOUT REFERENCE ONLY, not an edit target. Create a NEW atlas in the same polished hand-painted fantasy mobile action-RPG icon style. EXACTLY FIVE equal square icon tiles, side by side in ONE horizontal row, centered vertically, at x centers 10%,30%,50%,70%,90%. Preserve the reference's square tile proportions, thin metallic frames, very dark navy tile backgrounds, and empty dark navy padding above and below the row. No text, numbers, letters, captions, logos, watermarks, people, faces, or bodies. One bold instantly recognizable symbol per square; icon subject fills about 70% of its tile with safe margins. Designed to read at 64x64 pixels: strong silhouettes, rich painted materials, clean restrained detail. No icon or effect crosses the boundary between tiles. Theme: flowing silver ash, floating blade fragments and wind vortices. Silver-blue steel with soft pink-violet accents. EXACT LEFT TO RIGHT: 1) a wide FAN of floating silver blade shards; 2) one substantial swirling gray ASH CLOUD with small luminous metal flecks; 3) an inward spiral of silver blades with three visible arrows pointing toward its center; 4) three small ash explosions merging into one sharp silver-white burst; 5) a tall conical TORNADO of silver ash bands and curved knife-shaped fragments, the most dramatic ultimate. Preserve different distinct silhouettes; use chunky clear symbols rather than fine filigree.",
+      "style_reference": "rukia",
+      "bitmap_modified": false
+    },
+    {
+      "hero": "unohana",
+      "path": "Assets/SpiritTide/Resources/SpiritTide/Art/Skills/unohana-skills-v1.png",
+      "sha256": "3cf785dd018665cf8ac6d1427aad3ccade156cc87786ef0a224f9caf37150a99",
+      "width": 1983,
+      "height": 793,
+      "tool": "built-in image_gen",
+      "prompt": "Use case: stylized-concept. Asset type: ONE production RPG skill icon sprite atlas. The attached frost sheet is a STYLE AND LAYOUT REFERENCE ONLY, not an edit target. Create a NEW atlas in the same polished hand-painted fantasy mobile action-RPG icon style. EXACTLY FIVE equal square icon tiles, side by side in ONE horizontal row, centered vertically, at x centers 10%,30%,50%,70%,90%. Preserve the reference's square tile proportions, thin metallic frames, very dark navy tile backgrounds, and empty dark navy padding above and below the row. No text, numbers, letters, captions, logos, watermarks, people, faces, or bodies. One bold instantly recognizable symbol per square; icon subject fills about 70% of its tile with safe margins. Designed to read at 64x64 pixels: strong silhouettes, rich painted materials, clean restrained detail. No icon or effect crosses the boundary between tiles. Theme: serene healing water and crimson spiritual sword energy. Mint-white and rich crimson dual palette. EXACT LEFT TO RIGHT: 1) a mint-white healing LOTUS above three concentric water ripples; 2) one large crimson sword crescent with a bright white cutting edge; 3) two crossed spiritual sword blades, one crimson and one mint-white, with a small guarding glint; 4) a round balanced symbol of two opposing lotus-like energy halves, mint-white healing and deep crimson sword stance, no letters; 5) a broad crimson circular sword domain enclosing three sweeping white-red blade arcs and one small mint healing glow, ultimate power. Use colored magical ENERGY only: no blood, wounds or bodies.",
+      "style_reference": "rukia",
+      "bitmap_modified": false
+    }
+  ],
+  "usage": "Original PNG atlases with Unity Sprite.Create crop metadata; original generated pixels preserved"
+}

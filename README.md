@@ -1,6 +1,8 @@
-BLEACH: 영해의 균열 · Unity 캠페인 검증본 0.8.0
+BLEACH: 영해의 균열 · Unity 캠페인 검증본 0.9.0
 
 Unity **6000.3.27f1** 프로젝트입니다. 루키아·오리히메·요루이치·소이폰·란기쿠·우노하나 여섯 인물로 5개 액트, 30개 던전, 114개 전투방을 진행합니다. Windows 실행본과 iPhone 15 Pro용 iOS 17 이상 가로 화면 빌드를 제공합니다. iPhone 빌드는 Unity IL2CPP → Xcode ARM64 → unsigned IPA 순서로 제작하며 iLoader에서 서명·설치합니다. 실제 아이폰 설치·플레이 검증과 파일·화면 검증은 구분합니다.
+
+0.9.0에서는 기술 30개에 전용 그림 아이콘을 연결했습니다. 여섯 캐릭터의 아이콘 시트 6장을 built-in image_gen으로 생성했고, 원본 PNG를 유지한 채 Unity에서 각 기술의 영역을 읽습니다. 전투 버튼과 기술 도움말에 같은 그림을 표시합니다. 짧은 기술명, 원형 재사용 진행 표시, 남은 시간 숫자, 영압 부족 시 그림의 밝기와 설명을 함께 표시합니다. 원본과 프롬프트·해시는 `Docs/skill-icon-art-sources.json`에 있습니다.
 
 0.8.0에서는 여섯 캐릭터의 기술 30개에 전용 이펙트와 효과음을 추가했습니다. 루키아의 눈꽃·얼음 기둥, 오리히메의 꽃잎 결계, 요루이치의 번개·질주, 소이폰의 침·나비 표식·영자포, 란기쿠의 재 칼날·소용돌이, 우노하나의 치유 문양·진홍색 검격으로 구분합니다. 각성기는 여섯 종류의 마무리 연출을 사용합니다. GPU에 그리는 코드 기반 효과이며 원본 PNG는 수정하지 않습니다. 실제 보호막·재구름·표식·반격 태세와 연동하며 효과 줄이기, 일시정지·귀환·캐릭터 교체를 처리합니다. 자세한 목록과 렌더 검증 범위는 `Docs/skill-effects.txt`에 있습니다.
 
@@ -87,9 +89,10 @@ Windows 실행은 배포 ZIP을 **전체 압축 해제**한 다음 `SpiritTide.e
 
 ```powershell
 ./Tools/build.ps1
-./Tools/smoke.ps1
 ./Tools/smoke.ps1 -Width 2556 -Height 1179 -PhoneLayout
 python Tools/encode_review.py
+python Tools/encode_skills.py
+./Tools/smoke.ps1
 python Tools/package_release.py
 ```
 
@@ -107,6 +110,4 @@ python Tools/package_release.py
 
 이번 의뢰 검토는 `Docs/quest-review.txt`, 이전 대화 검토는 `Docs/dialogue-review.txt`, 이야기·맵·전투 검토는 `Docs/experience-review.md`, 캠페인 설계는 `Docs/campaign-review.md`에 있습니다. 이미지 프롬프트·해시·셀 매핑은 `Docs/experience-art-sources.json`, `Docs/campaign-art-sources.json`, `Docs/art-sources.json`에 있습니다. 원작 자료는 `Docs/canon-sources.json`, 폰트 라이선스는 `Assets/SpiritTide/Resources/SpiritTide/UI/Pretendard-LICENSE.txt`에 있습니다. 이전 0.1·0.2·0.3·0.4·0.5·0.6 배포 ZIP은 `Artifacts/`에 별도로 보존합니다.
 
-0.8.0 아이폰 시험판: https://github.com/yjmjeminq/bleach-spirit-tide-ios/releases/tag/v0.8.0-ios.1
-
-기술 연출 미리보기는 QA/skill-effects.mp4, 캐릭터별 목록은 Docs/skill-effects-index.json, 검증은 QA/skill-effects-verification.json과 QA/iphone-validation.json에 있습니다. IPA는 iLoader에서 서명·설치합니다. 실제 아이폰 설치·플레이는 별도 확인이 필요합니다.
+현재 iPhone 시험판: [0.9.0 IPA](https://github.com/yjmjeminq/bleach-spirit-tide-ios/releases/download/v0.9.0-ios.1/SpiritTide-iPhone-unsigned-v0.9.0.ipa). 그림 아이콘 검사 결과는 `QA/skill-icons-verification.json`, 적용 화면은 `QA/92-painted-icons-0.png`와 `QA/93-icon-cooldown-and-spirit.png`에 있습니다.

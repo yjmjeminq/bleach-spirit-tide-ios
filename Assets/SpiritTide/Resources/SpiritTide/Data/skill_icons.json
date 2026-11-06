@@ -1,0 +1,389 @@
+{
+  "schema": 1,
+  "sheets": [
+    {
+      "hero": 0,
+      "id": "rukia",
+      "resource": "SpiritTide/Art/Skills/rukia-skills-v1",
+      "width": 1983,
+      "height": 793,
+      "icons": [
+        {
+          "slot": 0,
+          "id": "rk_s1",
+          "label": "설백일섬",
+          "rect": {
+            "x": 12,
+            "y": 227,
+            "width": 392,
+            "height": 380
+          }
+        },
+        {
+          "slot": 1,
+          "id": "rk_s2",
+          "label": "빙결진",
+          "rect": {
+            "x": 411,
+            "y": 227,
+            "width": 383,
+            "height": 380
+          }
+        },
+        {
+          "slot": 2,
+          "id": "rk_s3",
+          "label": "서리걸음",
+          "rect": {
+            "x": 801,
+            "y": 227,
+            "width": 384,
+            "height": 380
+          }
+        },
+        {
+          "slot": 3,
+          "id": "rk_s4",
+          "label": "백련빙주",
+          "rect": {
+            "x": 1192,
+            "y": 227,
+            "width": 382,
+            "height": 380
+          }
+        },
+        {
+          "slot": 4,
+          "id": "rk_ult",
+          "label": "백하",
+          "rect": {
+            "x": 1581,
+            "y": 227,
+            "width": 391,
+            "height": 380
+          }
+        }
+      ]
+    },
+    {
+      "hero": 1,
+      "id": "orihime",
+      "resource": "SpiritTide/Art/Skills/orihime-skills-v1",
+      "width": 1983,
+      "height": 793,
+      "icons": [
+        {
+          "slot": 0,
+          "id": "oh_s1",
+          "label": "삼천결순",
+          "rect": {
+            "x": 12,
+            "y": 227,
+            "width": 391,
+            "height": 380
+          }
+        },
+        {
+          "slot": 1,
+          "id": "oh_s2",
+          "label": "쌍천귀순",
+          "rect": {
+            "x": 410,
+            "y": 227,
+            "width": 383,
+            "height": 380
+          }
+        },
+        {
+          "slot": 2,
+          "id": "oh_s3",
+          "label": "고천참순",
+          "rect": {
+            "x": 799,
+            "y": 227,
+            "width": 385,
+            "height": 380
+          }
+        },
+        {
+          "slot": 3,
+          "id": "oh_s4",
+          "label": "사천항순",
+          "rect": {
+            "x": 1191,
+            "y": 227,
+            "width": 382,
+            "height": 380
+          }
+        },
+        {
+          "slot": 4,
+          "id": "oh_ult",
+          "label": "육화공명",
+          "rect": {
+            "x": 1581,
+            "y": 227,
+            "width": 390,
+            "height": 380
+          }
+        }
+      ]
+    },
+    {
+      "hero": 2,
+      "id": "yoruichi",
+      "resource": "SpiritTide/Art/Skills/yoruichi-skills-v1",
+      "width": 1983,
+      "height": 793,
+      "icons": [
+        {
+          "slot": 0,
+          "id": "yr_s1",
+          "label": "뇌보연각",
+          "rect": {
+            "x": 11,
+            "y": 228,
+            "width": 392,
+            "height": 380
+          }
+        },
+        {
+          "slot": 1,
+          "id": "yr_s2",
+          "label": "낙뢰장",
+          "rect": {
+            "x": 410,
+            "y": 228,
+            "width": 383,
+            "height": 380
+          }
+        },
+        {
+          "slot": 2,
+          "id": "yr_s3",
+          "label": "순홍질주",
+          "rect": {
+            "x": 800,
+            "y": 228,
+            "width": 384,
+            "height": 380
+          }
+        },
+        {
+          "slot": 3,
+          "id": "yr_s4",
+          "label": "흑묘반격",
+          "rect": {
+            "x": 1191,
+            "y": 228,
+            "width": 382,
+            "height": 380
+          }
+        },
+        {
+          "slot": 4,
+          "id": "yr_ult",
+          "label": "뇌신연무",
+          "rect": {
+            "x": 1580,
+            "y": 228,
+            "width": 392,
+            "height": 380
+          }
+        }
+      ]
+    },
+    {
+      "hero": 3,
+      "id": "soifon",
+      "resource": "SpiritTide/Art/Skills/soifon-skills-v1",
+      "width": 1983,
+      "height": 793,
+      "icons": [
+        {
+          "slot": 0,
+          "id": "sf_s1",
+          "label": "일침",
+          "rect": {
+            "x": 11,
+            "y": 228,
+            "width": 392,
+            "height": 379
+          }
+        },
+        {
+          "slot": 1,
+          "id": "sf_s2",
+          "label": "추적순보",
+          "rect": {
+            "x": 410,
+            "y": 228,
+            "width": 382,
+            "height": 379
+          }
+        },
+        {
+          "slot": 2,
+          "id": "sf_s3",
+          "label": "독침연격",
+          "rect": {
+            "x": 800,
+            "y": 228,
+            "width": 384,
+            "height": 379
+          }
+        },
+        {
+          "slot": 3,
+          "id": "sf_s4",
+          "label": "봉익일섬",
+          "rect": {
+            "x": 1191,
+            "y": 228,
+            "width": 382,
+            "height": 379
+          }
+        },
+        {
+          "slot": 4,
+          "id": "sf_ult",
+          "label": "뇌공탄",
+          "rect": {
+            "x": 1581,
+            "y": 228,
+            "width": 391,
+            "height": 379
+          }
+        }
+      ]
+    },
+    {
+      "hero": 4,
+      "id": "rangiku",
+      "resource": "SpiritTide/Art/Skills/rangiku-skills-v1",
+      "width": 1983,
+      "height": 793,
+      "icons": [
+        {
+          "slot": 0,
+          "id": "rg_s1",
+          "label": "회묘산개",
+          "rect": {
+            "x": 12,
+            "y": 227,
+            "width": 391,
+            "height": 380
+          }
+        },
+        {
+          "slot": 1,
+          "id": "rg_s2",
+          "label": "재안개",
+          "rect": {
+            "x": 411,
+            "y": 227,
+            "width": 382,
+            "height": 380
+          }
+        },
+        {
+          "slot": 2,
+          "id": "rg_s3",
+          "label": "분진인력",
+          "rect": {
+            "x": 800,
+            "y": 227,
+            "width": 384,
+            "height": 380
+          }
+        },
+        {
+          "slot": 3,
+          "id": "rg_s4",
+          "label": "회묘폭류",
+          "rect": {
+            "x": 1191,
+            "y": 227,
+            "width": 382,
+            "height": 380
+          }
+        },
+        {
+          "slot": 4,
+          "id": "rg_ult",
+          "label": "은회폭풍",
+          "rect": {
+            "x": 1580,
+            "y": 227,
+            "width": 392,
+            "height": 380
+          }
+        }
+      ]
+    },
+    {
+      "hero": 5,
+      "id": "unohana",
+      "resource": "SpiritTide/Art/Skills/unohana-skills-v1",
+      "width": 1983,
+      "height": 793,
+      "icons": [
+        {
+          "slot": 0,
+          "id": "un_s1",
+          "label": "회복의 원",
+          "rect": {
+            "x": 12,
+            "y": 228,
+            "width": 392,
+            "height": 379
+          }
+        },
+        {
+          "slot": 1,
+          "id": "un_s2",
+          "label": "정적일섬",
+          "rect": {
+            "x": 411,
+            "y": 228,
+            "width": 383,
+            "height": 379
+          }
+        },
+        {
+          "slot": 2,
+          "id": "un_s3",
+          "label": "검연반격",
+          "rect": {
+            "x": 801,
+            "y": 228,
+            "width": 384,
+            "height": 379
+          }
+        },
+        {
+          "slot": 3,
+          "id": "un_s4",
+          "label": "유상전환",
+          "rect": {
+            "x": 1192,
+            "y": 228,
+            "width": 382,
+            "height": 379
+          }
+        },
+        {
+          "slot": 4,
+          "id": "un_ult",
+          "label": "진홍원",
+          "rect": {
+            "x": 1580,
+            "y": 228,
+            "width": 392,
+            "height": 379
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -100,6 +100,15 @@ def main():
     assert skill_fx['passed'] and skill_fx['cast_skills']==30 and skill_fx['guid']==build['guid']
     assert skill_media['guid']==build['guid'] and skill_media['decode_passed'] and skill_media['frames']==432
     assert digest(phone_path.parent/'skill-effects-review.mp4')==skill_media['movie_sha256']
+    for report in [desktop,phone]:
+        names={row['name'] for row in report['checks'] if row['passed']}
+        assert 'all thirty live skill icons and help icons were reviewed' in names
+        assert sum(name.startswith('compact skill label renders real glyphs ') for name in names)==30
+    icon_review=read(phone_path.parent/'skill-icons-review.json')
+    assert icon_review['passed'] and icon_review['guid']==build['guid'] and icon_review['icons']==30
+    icon_art=read(ROOT/'Docs/skill-icon-art-sources.json')
+    assert icon_art['atlas_files']==6 and icon_art['logical_icons']==30
+    for row in icon_art['files']:assert digest(ROOT/row['path'])==row['sha256']
     for scene in dialogue["scenes"]:
         assert "[" + scene["id"] + "]" in script
         for line in scene["lines"]:
@@ -142,6 +151,14 @@ def main():
         'tested':['Thirty real button-triggered casts per layout','Dedicated geometry and sound for every skill','Actual shield, cloud, stance and marked-target state','Nonblocking bounded meshes','Pool reuse and tail cleanup','Reduced effects for all six ultimates','Frozen effect clocks while paused','All six hero ultimates in the timed native showcase'],
         'scope':skill_fx['scope'],'media_scope':skill_media['scope'],'physical_iphone_tested':False
     })
+    write(qa/'skill-icons-verification.json',{
+        'passed':True,'version':build['version'],'guid':build['guid'],'painted_icons':30,'atlas_files':6,
+        'art_manifest':'Docs/skill-icon-art-sources.json','art_sha256':{row['path']:row['sha256'] for row in icon_art['files']},
+        'mapping_sha256':digest(ROOT/'Assets/SpiritTide/Resources/SpiritTide/Data/skill_icons.json'),
+        'evidence':['QA/92-painted-icons-0.png','QA/92-painted-icons-5.png','QA/92-painted-help-1.png','QA/93-icon-cooldown-and-spirit.png'],
+        'tested':['All thirty skill and help buttons show their own painted icon','Compact labels produce actual rendered glyphs','Icon art receives no pointer events','Radial overlay and countdown match the real cooldown','Insufficient spirit dims the art and blocks casts','Button hit areas and safe area remain valid'],
+        'scope':icon_review['scope'],'physical_iphone_tested':False
+    })
     shutil.copy2(phone_path.parent / "combat-review.mp4", qa / "experience-combat.mp4")
     shutil.copy2(phone_path.parent / "combat-review.wav", qa / "experience-combat.wav")
     write(qa / "experience-combat.json", media)
@@ -166,6 +183,7 @@ def main():
         "review_video_scope": media["scope"] + "; " + media["audio_scope"],
         "pending": ["finished coherent sprite animation for all heroes and enemies", "production VFX and audio", "native iPhone touch and Metal/performance checks"],
         "ipa_deferred": False,
+        "skill_icons": {"painted_icons":30,"atlas_files":6,"tool":"built-in image_gen","radial_cooldowns":True,"icon_help":True},
         "skill_effects": {"dedicated_skills":30,"hero_motifs":6,"sounds":30,"showcase_frames":432,"showcase_fps":30,"scope":"Unity mesh effects and synthesized game sounds; not iPhone hardware performance"},
     }
     ios_report=ROOT/"Artifacts"/("SpiritTide-ios-package-verification-v"+build["version"]+".json")
