@@ -1,8 +1,8 @@
 {
   "passed": true,
-  "archiveSHA256": "c75358dd82521f3927f5e76e9e6ddf396985a36244b0de0f2baf028d160a34b3",
+  "archiveSHA256": "c7f6fa2e9d02e138b004c5086009280944b2496c0fe422b17184fb27c99fb69c",
   "files": 2810,
-  "filesSHA256": "911ea4aca500f7137540d9b93f98bd9a6fe400ec4f25024b4c1478909d1514c8",
-  "gameFilesSHA256": "e7cbc133c0b3aa9f9446f96fbcf7abaf44b4c1febe0dbd6d913b01eefca03345",
+  "filesSHA256": "22dc87e2f1a4703fac7752029e230b9e26b8bab77928b3d6e144f1c6e4bc0733",
+  "gameFilesSHA256": "21caf5dc7a1c926101848bc6d9606ba1be133f87596e9d067a4141e3e9e5c006",
   "gameLaunched": false
 }

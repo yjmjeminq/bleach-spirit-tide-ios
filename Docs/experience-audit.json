@@ -17,12 +17,12 @@
     "hit stop, knockback, stagger, juggle, cancel and distinct effects/audio",
     "normal-health campaign and native UI evidence"
   ],
-  "verified_version": "0.9.0",
-  "build_guid": "d62acf89758b47858f02d1be04f4629d",
+  "verified_version": "0.10.0",
+  "build_guid": "788b2ff0f52c47b1a1344f0c8f0cb7ea",
   "checks": {
-    "model": 3693,
-    "desktop": 14625,
-    "phone_layout": 14178
+    "model": 3883,
+    "desktop": 16090,
+    "phone_layout": 15643
   },
   "review_results": {
     "story": "Thirty causal dungeon beats, localized clues, five act links, ten encounter introductions/resolutions and final returned-names journal verified.",

@@ -1,14 +1,14 @@
 {
   "passed": true,
   "unity": "6000.3.27f1",
-  "version": "0.9.0",
-  "build_guid": "d62acf89758b47858f02d1be04f4629d",
-  "managed_sha256": "a7cdc11182ea933d79cbeb7a721d577dc31136cd884d7989b12fd24e7088d80c",
+  "version": "0.10.0",
+  "build_guid": "788b2ff0f52c47b1a1344f0c8f0cb7ea",
+  "managed_sha256": "ccdd9c0a42ae939bba98f2e4d30010db02627bede2ebd2b5768128b6c42350d3",
   "build_errors": 0,
   "build_warnings": 0,
-  "model_checks": 3693,
-  "desktop_checks": 14625,
-  "phone_layout_checks": 14178,
+  "model_checks": 3883,
+  "desktop_checks": 16090,
+  "phone_layout_checks": 15643,
   "full_health_model_dungeons": 180,
   "full_health_model_rooms": 684,
   "playable_dungeons": 30,
@@ -39,7 +39,7 @@
   "side_quests": 15,
   "side_objectives": 30,
   "side_report_outcomes": 18,
-  "dialogue_base_lines": 513,
+  "dialogue_base_lines": 526,
   "dialogue_lead_responses": 150,
   "town_reply_states": 105,
   "maximum_font_resolved_scene_variants_per_layout": 1104,
@@ -80,6 +80,15 @@
     "native iPhone touch and Metal/performance checks"
   ],
   "ipa_deferred": false,
+  "rpg_flow": {
+    "story_contexts_per_layout": 41,
+    "boss_practices_per_layout": 10,
+    "midpoint_rests_per_layout": 5,
+    "revised_story_scenes": 9,
+    "added_story_lines": 13,
+    "recap_spoiler_gated": true,
+    "practice_resources_preserved": true
+  },
   "skill_icons": {
     "painted_icons": 30,
     "atlas_files": 6,
@@ -96,16 +105,16 @@
     "scope": "Unity mesh effects and synthesized game sounds; not iPhone hardware performance"
   },
   "ios": {
-    "version": "0.9.0",
-    "build": "4",
+    "version": "0.10.0",
+    "build": "6",
     "minimum_ios": "17.0",
-    "ipa": "SpiritTide-iPhone-unsigned-v0.9.0.ipa",
-    "bytes": 50192326,
-    "sha256": "c30fb253902203c748c9b10b6cfc9811bcf12f7f4cd31e5ab57c0acc12f4b8c0",
+    "ipa": "SpiritTide-iPhone-unsigned-v0.10.0.ipa",
+    "bytes": 50223693,
+    "sha256": "8a5e2608ecc618962b6426aab7ba180858f2b6b59f379472c4a85bcfaf896345",
     "unsigned": true,
     "physical_iphone_tested": false,
-    "source_revision": "d686417329398085eaf3dcc3f631360ee9071060",
-    "run_url": "https://github.com/yjmjeminq/bleach-spirit-tide-ios/actions/runs/42188389977",
-    "unity_export_guid": "f58418dba89c4e48a40161139f817b70"
+    "source_revision": "9645c9ccd70d24060da73296f4fb88c947f0a59d",
+    "run_url": "https://github.com/yjmjeminq/bleach-spirit-tide-ios/actions/runs/42196359780",
+    "unity_export_guid": "ab9b40f13f864201a31e77f9dfc08c1b"
   }
 }

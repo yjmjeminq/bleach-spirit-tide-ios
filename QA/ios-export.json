@@ -1,12 +1,12 @@
 {
     "passed": true,
     "unity": "6000.3.27f1",
-    "version": "0.9.0",
-    "guid": "f58418dba89c4e48a40161139f817b70",
+    "version": "0.10.0",
+    "guid": "ab9b40f13f864201a31e77f9dfc08c1b",
     "target": "iOS-arm64-device",
     "output": "C:\\jeminFolder\\자체개발\\bleach-spirit-tide-unity\\Builds\\iOS-Xcode",
     "managed_sha256": "",
-    "bytes": 743423443,
+    "bytes": 743826850,
     "errors": 0,
     "warnings": 0
 }

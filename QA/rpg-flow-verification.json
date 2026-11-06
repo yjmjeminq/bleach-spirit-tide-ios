@@ -1,0 +1,63 @@
+{
+  "passed": true,
+  "version": "0.10.0",
+  "guid": "788b2ff0f52c47b1a1344f0c8f0cb7ea",
+  "story_contexts_per_layout": 41,
+  "boss_practices_per_layout": 10,
+  "midpoint_rests_per_layout": 5,
+  "revised_story_scenes": 9,
+  "added_story_lines": 13,
+  "dialogue_base_lines": 526,
+  "source_sha256": {
+    "Assets/SpiritTide/Scripts/TideJourney.cs": "0064085fcc196a3d59327c6486d8b505d3f0180179b10e545be3082bb1b23d56",
+    "Assets/SpiritTide/Scripts/TideGame.Journey.cs": "39e00a83cf17639270f8c5f8cbceae4c4708e6d824f773df54d2d166854c55ef",
+    "Assets/SpiritTide/Scripts/TideSession.cs": "dc9e36b8a6aad636ebc23cf07fa6e7ed3e5b7855a85d87e83e075268ae4cee48",
+    "Assets/SpiritTide/Scripts/TideSession.Campaign.cs": "6e8d3966b5611171c39a5c5c7b28e1ba7ab7a1d03cce6447828b730213271925",
+    "Assets/SpiritTide/Resources/SpiritTide/Data/journey.json": "94212ec0433445fe7b3e372c01f024398507a88fa7bb646975699813e80fee4c",
+    "Tools/prepare_dialogue.py": "d5ea4c744f92459ef0c5b40fda4ced4dfcb213c4be1f2d29fdce1a4fe1aae9ea"
+  },
+  "references": {
+    "reviewed_at": "2026-11-06",
+    "baseline_version": "0.9.0",
+    "new_version": "0.10.0",
+    "sources": [
+      {
+        "game": "Dungeon Fighter Online",
+        "title": "Scenario Dungeon",
+        "url": "https://www.dfoneople.com/news/updates/406/Dungeon-Update/Scenario-Dungeon",
+        "used_for": "Quest context and named next destination"
+      },
+      {
+        "game": "Dungeon Fighter Online",
+        "title": "Additional Changes",
+        "url": "https://www.dfoneople.com/news/updates/4057/Additional-Changes",
+        "used_for": "Training room access to content; reward-free encounter gating is our own design"
+      },
+      {
+        "game": "Final Fantasy XIV",
+        "title": "Navigating the Game Screen",
+        "url": "https://eu.finalfantasyxiv.com/game_manual/view/",
+        "used_for": "Main scenario and objective navigation; evidence recap is our own design"
+      }
+    ]
+  },
+  "tested": [
+    "Evidence-only spoiler-aware recap and current checkpoint",
+    "Read-only preparation and correct menu return",
+    "Unencountered bosses locked in UI and session API",
+    "Ten real selected boss practice victories without rewards or resource writes",
+    "Actual incoming attack recorded on defeat",
+    "Defeat preparation preserves clock and checkpoint",
+    "Five voluntary companion rests keep rewards and open town preparation",
+    "All 184 dialogue scenes and six leads at maximum story font"
+  ],
+  "evidence": [
+    "QA/94-journey-act4.png",
+    "QA/95-preparation.png",
+    "QA/96-boss-lesson.png",
+    "QA/97-midpoint-rest.png",
+    "QA/98-defeat-advice.png"
+  ],
+  "scope": "Windows live UI and real combat; not iPhone hardware execution",
+  "physical_iphone_tested": false
+}
