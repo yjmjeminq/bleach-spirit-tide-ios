@@ -74,7 +74,7 @@ namespace SpiritTide
                 if(current is IEnumerator)stack.Push((IEnumerator)current);else yield return current;
             }
             bool passed=!failed&&errors.Count==0;
-            File.WriteAllText(Path.Combine(output,"report.json"),JsonUtility.ToJson(new Report{passed=passed,runMode=Array.IndexOf(Environment.GetCommandLineArgs(),"-spirit-fx-review")>=0?"skills-only":Array.IndexOf(Environment.GetCommandLineArgs(),"-spirit-icons-review")>=0?"icons-only":Array.IndexOf(Environment.GetCommandLineArgs(),"-spirit-journey-review")>=0?"journey-only":"full",version=Application.version,guid=Application.buildGUID,device=SystemInfo.graphicsDeviceType+" / "+Screen.width+"x"+Screen.height,scope="Windows live UI rendering, pointer-event simulation, menu focus, campaign loot and input-only multi-enemy victories. Not iPhone OS touch, Metal or performance validation.",checks=rows.ToArray(),errors=errors.ToArray()},true));
+            File.WriteAllText(Path.Combine(output,"report.json"),JsonUtility.ToJson(new Report{passed=passed,runMode=Array.IndexOf(Environment.GetCommandLineArgs(),"-spirit-fx-review")>=0?"skills-only":Array.IndexOf(Environment.GetCommandLineArgs(),"-spirit-icons-review")>=0?"icons-only":Array.IndexOf(Environment.GetCommandLineArgs(),"-spirit-journey-review")>=0?"journey-only":Array.IndexOf(Environment.GetCommandLineArgs(),"-spirit-motion-review")>=0?"motion-only":"full",version=Application.version,guid=Application.buildGUID,device=SystemInfo.graphicsDeviceType+" / "+Screen.width+"x"+Screen.height,scope="Windows live UI rendering, pointer-event simulation, menu focus, campaign loot and input-only multi-enemy victories. Not iPhone OS touch, Metal or performance validation.",checks=rows.ToArray(),errors=errors.ToArray()},true));
             Application.logMessageReceived-=Log;Application.Quit(passed?0:1);
         }
         private IEnumerator Capture(string name)
@@ -128,6 +128,7 @@ namespace SpiritTide
             if(Array.IndexOf(Environment.GetCommandLineArgs(),"-spirit-fx-review")>=0){yield return ReviewSkillEffects();yield break;}
             if(Array.IndexOf(Environment.GetCommandLineArgs(),"-spirit-icons-review")>=0){yield return ReviewSkillIcons();yield break;}
             if(Array.IndexOf(Environment.GetCommandLineArgs(),"-spirit-journey-review")>=0){yield return ReviewJourney();yield break;}
+            if(Array.IndexOf(Environment.GetCommandLineArgs(),"-spirit-motion-review")>=0){yield return ReviewNaturalMotion();yield break;}
             yield return ReviewUi();
             Check("town boot and one listener",game.Session.Mode==TideMode.Town&&FindObjectsByType<AudioListener>(FindObjectsSortMode.None).Length==1);
             yield return Capture("01-town");yield return TapUi("npc-urahara");yield return Capture("05-dialogue");yield return TapUi("choice-0");yield return ReadStory();
@@ -181,6 +182,7 @@ namespace SpiritTide
             yield return ReviewSkillEffects();
             yield return ReviewSkillIcons();
             yield return ReviewJourney();
+            yield return ReviewNaturalMotion();
             Check("player log has no errors",errors.Count==0);
         }
     }

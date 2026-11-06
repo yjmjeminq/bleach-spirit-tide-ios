@@ -1,6 +1,8 @@
-BLEACH: 영해의 균열 · Unity 캠페인 검증본 0.10.0
+BLEACH: 영해의 균열 · Unity 캠페인 검증본 0.11.0
 
 Unity **6000.3.27f1** 프로젝트입니다. 루키아·오리히메·요루이치·소이폰·란기쿠·우노하나 여섯 인물로 5개 액트, 30개 던전, 114개 전투방을 진행합니다. Windows 실행본과 iPhone 15 Pro용 iOS 17 이상 가로 화면 빌드를 제공합니다. iPhone 빌드는 Unity IL2CPP → Xcode ARM64 → unsigned IPA 순서로 제작하며 iLoader에서 서명·설치합니다. 실제 아이폰 설치·플레이 검증과 파일·화면 검증은 구분합니다.
+
+0.11.0에서는 여섯 캐릭터를 18개 관절로 연결한 연속 동작으로 바꿨습니다. 실제 이동량에 맞춰 발을 딛고 무릎·골반·상체가 이어지며, 기본 3연계·강공격·띄우기·공중 공격·반격·기술 30개·점프·착지·회피·피격을 연결합니다. 오리히메·요루이치·소이폰·란기쿠의 뒷머리는 몸과 별도 그림으로 움직입니다. 무기는 손을 따르고, 카메라와 지면은 같은 이동 기준을 사용합니다. 적 70종은 체형 7종에 맞춰 이동·예고·공격·피격에 반응합니다. 동작의 시계는 일시정지와 타격 정지에서 멈추며, 귀환·캐릭터 변경·방 이동과 순간 이동에서는 발 기준을 정리합니다. 모델 검사와 실제 Unity 동작 영상은 `Docs/motion-review.txt`와 `QA/motion-verification.json`, 그림과 전체 프롬프트는 `Docs/rig-art-sources.json`, `Docs/rig-layer-art-sources.json`에 있습니다. 실제 아이폰에서의 터치·Metal·성능 검사는 별도입니다.
 
 0.10.0에서는 던파·FF14의 공식 자료와 현재 게임을 비교해 복귀·정비·실패·이야기 전환을 보완했습니다. 빠른 메뉴의 ‘이야기 · 전투 준비’에서 현재 사건의 이유, 실제로 확인한 최근 단서와 다음 행동을 읽습니다. 출정 지도와 패배 화면에서도 준비를 열고 이전 화면으로 돌아갑니다. 실제로 만난 보스 10명의 패턴 연습은 보상·소모품·본편 진행을 바꾸지 않으며 무료 회복을 사용합니다. 패배 안내는 실제 마지막 피격의 적과 예고를 보여 줍니다. 중간보스 뒤에는 바로 진행하거나 현재 동료의 장면을 읽고 정비할 수 있습니다. 중간보스 정화 5장면과 액트 보고 4장면에 13문장을 더해 증거와 다음 조사를 연결했습니다. 비교 판단과 완료 기준은 `Docs/rpg-flow-review.txt`, 공식 출처는 `Docs/rpg-reference-sources.json`, 실제 검사는 `QA/rpg-flow-verification.json`에 있습니다.
 
@@ -112,4 +114,4 @@ python Tools/package_release.py
 
 이번 의뢰 검토는 `Docs/quest-review.txt`, 이전 대화 검토는 `Docs/dialogue-review.txt`, 이야기·맵·전투 검토는 `Docs/experience-review.md`, 캠페인 설계는 `Docs/campaign-review.md`에 있습니다. 이미지 프롬프트·해시·셀 매핑은 `Docs/experience-art-sources.json`, `Docs/campaign-art-sources.json`, `Docs/art-sources.json`에 있습니다. 원작 자료는 `Docs/canon-sources.json`, 폰트 라이선스는 `Assets/SpiritTide/Resources/SpiritTide/UI/Pretendard-LICENSE.txt`에 있습니다. 이전 0.1·0.2·0.3·0.4·0.5·0.6 배포 ZIP은 `Artifacts/`에 별도로 보존합니다.
 
-현재 iPhone 시험판: [0.10.0 IPA](https://github.com/yjmjeminq/bleach-spirit-tide-ios/releases/download/v0.10.0-ios.2/SpiritTide-iPhone-unsigned-v0.10.0.ipa). 그림 아이콘 검사 결과는 `QA/skill-icons-verification.json`, 적용 화면은 `QA/92-painted-icons-0.png`와 `QA/93-icon-cooldown-and-spirit.png`에 있습니다.
+현재 iPhone 시험판: [0.11.0 IPA](https://github.com/yjmjeminq/bleach-spirit-tide-ios/releases/download/v0.11.0-ios.1/SpiritTide-iPhone-unsigned-v0.11.0.ipa). 그림 아이콘 검사 결과는 `QA/skill-icons-verification.json`, 적용 화면은 `QA/92-painted-icons-0.png`와 `QA/93-icon-cooldown-and-spirit.png`에 있습니다.

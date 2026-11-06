@@ -215,10 +215,10 @@ namespace SpiritTide
         }
         private Vector2 Project(float x,float y)
         {
-            float camera=Session.InBattle?Session.X:0;
-            return new Vector2(safe.rect.width*(Session.InBattle?.23f:.32f)+(x-camera)*(Session.InBattle?TideHudLayout.UnitX(safe.rect.width,Session.Profile.controlScale):62),safe.rect.height*.4f+y*35)+(Session.InBattle?impactOffset:Vector2.zero);
+            float camera=Session.InBattle?naturalCameraX:0;
+            return new Vector2(safe.rect.width*(Session.InBattle?.30f:.32f)+(x-camera)*(Session.InBattle?TideHudLayout.UnitX(safe.rect.width,Session.Profile.controlScale):62),safe.rect.height*.4f+y*35)+(Session.InBattle?impactOffset:Vector2.zero);
         }
-        private void DrawWorld(){DrawCampaignWorld();DrawExperienceWorld();DrawQuestWorld();DrawFeel();DrawSkillEffects();}
+        private void DrawWorld(){UpdateMotionCamera();DrawCampaignWorld();DrawExperienceWorld();DrawQuestWorld();DrawFeel();DrawSkillEffects();}
         private void Talk(string npc)
         {
             if(Session.InBattle||Session.Mode==TideMode.Story)return;

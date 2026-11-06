@@ -33,6 +33,6 @@ namespace SpiritTide
         public static readonly Vector2[] Positions={new Vector2(-92,91),new Vector2(-350,91),new Vector2(-92,221),new Vector2(-222,91),new Vector2(-222,215),new Vector2(-470,215),new Vector2(-350,215),new Vector2(-470,335),new Vector2(-350,335),new Vector2(-222,335)};
         public static readonly Vector2[] Sizes={new Vector2(120,120),new Vector2(100,100),new Vector2(100,100),new Vector2(100,100),new Vector2(100,96),new Vector2(110,108),new Vector2(110,108),new Vector2(110,108),new Vector2(110,108),new Vector2(110,108)};
         public static Rect Bounds(int index,float width,float scale){Vector2 center=new Vector2(width,0)+Positions[index]*scale;return new Rect(center-Sizes[index]*scale*.5f,Sizes[index]*scale);}
-        public static float UnitX(float width,float scale){return Mathf.Clamp((width-525*scale-width*.23f-184)/6,35,62);}
+        public static float UnitX(float width,float scale){return Mathf.Clamp((width-525*scale-width*.30f-184)/6,35,62);}
     }
 }

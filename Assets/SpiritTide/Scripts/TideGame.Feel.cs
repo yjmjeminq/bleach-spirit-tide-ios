@@ -32,7 +32,7 @@ namespace SpiritTide
             }
             for(int hero=0;hero<6;hero++){attackSounds[hero]=CombatSound(650+hero*95,.075f,false,hero+1);impactSounds[hero]=CombatSound(130+hero*17,.11f,true,hero+8);}
             heavyImpact=CombatSound(80,.18f,true,41);parrySound=CombatSound(1100,.18f,false,50);breakSound=CombatSound(70,.25f,true,60);
-            ambience=gameObject.AddComponent<AudioSource>();ambience.clip=CombatSound(75,4,false,71,true);ambience.loop=true;ambience.volume=.025f;ambience.Play();BuildSkillEffects();
+            ambience=gameObject.AddComponent<AudioSource>();ambience.clip=CombatSound(75,4,false,71,true);ambience.loop=true;ambience.volume=.025f;ambience.Play();BuildSkillEffects();BuildNaturalMotion();
         }
         private AudioClip CombatSound(float hz,float length,bool impact,int seed,bool ambient=false)
         {
@@ -53,26 +53,14 @@ namespace SpiritTide
         }
         private void DrawFeel()
         {
-            float dt=SmokeMode&&ReviewStepping?1f/30:Time.unscaledDeltaTime;bool fighting=Session.IsFighting;bool moving=Joystick.Value.sqrMagnitude>.01f||keyboardMove.sqrMagnitude>.01f;
+            float dt=SmokeMode&&ReviewStepping?1f/30:Time.unscaledDeltaTime;bool fighting=Session.IsFighting;
             ambience.volume=Session.Profile.soundEnabled?(Session.InBattle?.012f:.025f):0;
             shakeTime=Mathf.Max(0,shakeTime-dt);float shake=Session.Profile.reducedEffects?0:Mathf.Min(1,shakeTime/.1f)*3;impactOffset=new Vector2(Mathf.Sin(Time.unscaledTime*125),Mathf.Cos(Time.unscaledTime*91))*shake;
             if(!Session.InBattle)impactOffset=Vector2.zero;
             if(Session.HurtSerial!=feelHurtSerial){feelHurtSerial=Session.HurtSerial;shakeTime=.16f;hurtPoseTime=.22f;audioSource.PlayOneShot(heavyImpact,.5f);}hurtPoseTime=Mathf.Max(0,hurtPoseTime-dt);
-            int frame=-1;
-            if(fighting&&hurtPoseTime>0)frame=6;
-            else if(Session.DodgeRemaining>0)frame=5;
-            else if(Session.Z>.1f)frame=7;
-            else if(Session.ActionRemaining>0){float p=Session.ActionElapsed/Mathf.Max(.01f,Session.ActionDuration);frame=Session.Action==MoveKind.Ultimate?8:p<.35f?2:p<.65f?3:4;}
-            else if(moving)frame=(int)((Session.InBattle?Session.Clock:Time.unscaledTime)*7)%2;
             bool defensive=Session.ActionRemaining>0&&(Session.Profile.hero==1&&(Session.Action==MoveKind.Skill0||Session.Action==MoveKind.Skill1||Session.Action==MoveKind.Skill3)||Session.Profile.hero==5&&(Session.Action==MoveKind.Skill0||Session.Action==MoveKind.Skill2||Session.Action==MoveKind.Skill3));
-            if(defensive)frame=8;
-            if(frame==4&&Session.Profile.hero==5)frame=2;
-            if(frame==5)frame=0;
-            var pose=frame>=0?TideArt.Motion(Session.Profile.hero,frame):null;actorImage.sprite=pose??heroSprites[Session.Profile.hero];actor.sizeDelta=pose!=null?new Vector2(pose.rect.width/pose.rect.height*192,192):new Vector2(128,192);actor.pivot=new Vector2(pose!=null?TideArt.MotionPivot(Session.Profile.hero,frame):.5f,0);
-            float phase=Session.ActionRemaining>0?Session.ActionElapsed/Mathf.Max(.01f,Session.ActionDuration):0,drive=Mathf.Sin(Mathf.Clamp01(phase)*Mathf.PI);
-            actor.anchoredPosition+=new Vector2(Session.Facing*drive*12,Session.DodgeRemaining>0?-8:0);
-            if(pose==null){actor.localRotation=Quaternion.Euler(0,0,Session.Profile.reducedEffects?0:Session.DodgeRemaining>0?-Session.Facing*14:-Session.Facing*drive*7);actor.localScale=new Vector3(Session.Facing*(1+drive*.035f),1-drive*.025f,1);}
-            if(Session.DodgeRemaining>0){actor.localRotation=Quaternion.Euler(0,0,-Session.Facing*12);actor.localScale=new Vector3(Session.Facing*1.05f,.92f,1);}
+            DrawNaturalActor();
+            float phase=Session.ActionRemaining>0?Session.ActionElapsed/Mathf.Max(.01f,Session.ActionDuration):0;
             if(Session.AttackSerial!=feelAttackSerial){feelAttackSerial=Session.AttackSerial;if(fighting){audioSource.pitch=1;audioSource.PlayOneShot(CurrentCastSound(),.8f);ReviewSound(CurrentCastSound(),.8f);}}
             if(Session.PerfectEvents!=feelPerfectSerial){bool play=Session.PerfectEvents>feelPerfectSerial;feelPerfectSerial=Session.PerfectEvents;if(play&&fighting){audioSource.pitch=1;audioSource.PlayOneShot(parrySound);ReviewSound(parrySound);}}
             if(Session.PoiseBreaks!=feelBreakSerial){bool play=Session.PoiseBreaks>feelBreakSerial;feelBreakSerial=Session.PoiseBreaks;if(play&&fighting){audioSource.PlayOneShot(breakSound);ReviewSound(breakSound);}}
@@ -100,7 +88,7 @@ namespace SpiritTide
                 float spread=(.42f-v.life)*120;Vector2 at=Project(v.at.x,v.at.y)+new Vector2(0,82);
                 v.number.rectTransform.anchoredPosition=at+new Vector2(45,60+spread*.5f);v.number.color=new Color(color.r,color.g,color.b,Mathf.Clamp01(v.life/.15f));
                 for(int j=0;j<v.rays.Length;j++){var ray=v.rays[j];ray.gameObject.SetActive(show&&v.life>.2f);float angle=j*60+17;ray.rectTransform.anchoredPosition=at+new Vector2(Mathf.Cos(angle*Mathf.Deg2Rad),Mathf.Sin(angle*Mathf.Deg2Rad))*(12+spread);ray.rectTransform.localRotation=Quaternion.Euler(0,0,angle);ray.rectTransform.sizeDelta=new Vector2(30+spread*.2f,3);ray.color=v.life>.36f?Color.white:color;}
-                if(e!=null&&!e.Alive&&show){var body=foeViews[i];body.root.gameObject.SetActive(true);body.body.color=new Color(.65f,.86f,1,v.life/.42f);body.root.localScale=Vector3.one*(.8f+v.life*.45f);body.hp.transform.parent.gameObject.SetActive(false);body.label.gameObject.SetActive(false);}
+                if(e!=null&&!e.Alive&&show){var body=foeViews[i];body.root.gameObject.SetActive(true);body.body.color=new Color(.65f,.86f,1,v.life/.42f);body.root.localScale=Vector3.one;body.hp.transform.parent.gameObject.SetActive(false);body.label.gameObject.SetActive(false);}
                 else if(e!=null)foeViews[i].root.localScale=Vector3.one;
             }
         }

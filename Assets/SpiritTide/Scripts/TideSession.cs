@@ -10,6 +10,8 @@ namespace SpiritTide
         public TideMode Mode=TideMode.Town;
         public bool InBattle,IsTraining,IsReplay,IsPaused,CounterStance,IsCampaign,RoomCleared;
         public int BossIndex,Facing=1,Combo,Revision,AttackSerial,DamageEvents,SaveRevision,RoomIndex;
+        public float PresentationClock;
+        public int PresentationEpoch;
         public float Clock,Hp=150,Mp=100,Shield,X=-3,Y,Z,JumpSpeed,DodgeRemaining,DodgeElapsed,PerfectRemaining,ReflectRemaining,LastDamage,HitFlash,TotalDamage;
         public float ActionRemaining,ActionDuration,ActionElapsed;
         public MoveKind Action;
@@ -81,6 +83,7 @@ namespace SpiritTide
         public bool UsePotion(){if(!IsFighting||IsTraining||Hp>=MaxHp||IsCampaign&&Profile.potions<=0)return false;if(IsCampaign){Profile.potions--;PersistentChange();}Hp=Mathf.Min(MaxHp,Hp+45+Profile.level*2);Changed(IsCampaign?"회복 영자로 체력을 회복했습니다.":"연습용 회복 · 소모품은 유지됩니다.");return true;}
         public void ReturnTown()
         {
+            PresentationEpoch++;
             InBattle=IsTraining=IsPaused=IsCampaign=false;RoomCleared=false;Mode=TideMode.Town;Hp=MaxHp;Mp=100;Shield=0;X=-3;Y=Z=JumpSpeed=DodgeRemaining=0;
             Enemies.Clear();target=null;ClearAction();Changed(Quest==QuestState.Completed?"다섯 기록 봉인 · 모두의 이름과 귀환을 확인했습니다. 동료들과 쉬어 가세요.":Quest==QuestState.Ready?"우라하라에게 액트 기록을 보고하세요.":"마을로 귀환 · 정화한 방과 던전 기록은 유지됩니다.");
         }
@@ -136,9 +139,9 @@ namespace SpiritTide
         }
         public void Step(float dt,Vector2 movement,bool heldAttack)
         {
-            dt=Mathf.Clamp(dt,0,.05f);if(Mode==TideMode.Town){Move(dt,movement,3.4f);return;}if(!IsFighting)return;
+            dt=Mathf.Clamp(dt,0,.05f);if(Mode==TideMode.Town){PresentationClock+=dt;Move(dt,movement,3.4f);return;}if(!IsFighting)return;
             if(HitStopRemaining>0){HitStopRemaining=Mathf.Max(0,HitStopRemaining-dt);return;}
-            StepFeel(dt);Clock+=dt;Mp=Mathf.Min(100,Mp+dt*6);HitFlash=Mathf.Max(0,HitFlash-dt);PerfectRemaining=Mathf.Max(0,PerfectRemaining-dt);ReflectRemaining=Mathf.Max(0,ReflectRemaining-dt);hurtInvulnerability=Mathf.Max(0,hurtInvulnerability-dt);
+            PresentationClock+=dt;StepFeel(dt);Clock+=dt;Mp=Mathf.Min(100,Mp+dt*6);HitFlash=Mathf.Max(0,HitFlash-dt);PerfectRemaining=Mathf.Max(0,PerfectRemaining-dt);ReflectRemaining=Mathf.Max(0,ReflectRemaining-dt);hurtInvulnerability=Mathf.Max(0,hurtInvulnerability-dt);
             foreach(var e in Enemies){e.Stun=Mathf.Max(0,e.Stun-dt);e.Slow=Mathf.Max(0,e.Slow-dt);e.Flash=Mathf.Max(0,e.Flash-dt);e.Exposed=Mathf.Max(0,e.Exposed-dt);}
             for(int i=0;i<2;i++)CloudTime[i]=Mathf.Max(0,CloudTime[i]-dt);
             cloudTick-=dt;if(cloudTick<=0){cloudTick+=1;for(int i=0;i<2;i++)if(CloudTime[i]>0)foreach(var e in Enemies)if(e.Alive&&Vector2.Distance(Clouds[i],e.Position)<2)Damage(e,8,true,true);}

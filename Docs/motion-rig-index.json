@@ -1,0 +1,62 @@
+{
+  "version": "0.11.0",
+  "bones_per_hero": 18,
+  "source": "Tools/prepare_motion_rigs.py",
+  "png_pixels_modified": false,
+  "rigs": [
+    {
+      "id": "rukia",
+      "vertices": 7287,
+      "triangles": 12970,
+      "resource": "SpiritTide/Art/Rig/rukia-bind-v1",
+      "hair_vertices": 0,
+      "hair_triangles": 0,
+      "hair_resource": ""
+    },
+    {
+      "id": "orihime",
+      "vertices": 6543,
+      "triangles": 11946,
+      "resource": "SpiritTide/Art/Rig/orihime-body-v2",
+      "hair_vertices": 1572,
+      "hair_triangles": 2926,
+      "hair_resource": "SpiritTide/Art/Rig/orihime-hair-v2"
+    },
+    {
+      "id": "yoruichi",
+      "vertices": 6719,
+      "triangles": 12314,
+      "resource": "SpiritTide/Art/Rig/yoruichi-body-v2",
+      "hair_vertices": 832,
+      "hair_triangles": 1448,
+      "hair_resource": "SpiritTide/Art/Rig/yoruichi-hair-v2"
+    },
+    {
+      "id": "soifon",
+      "vertices": 6259,
+      "triangles": 11356,
+      "resource": "SpiritTide/Art/Rig/soifon-body-v2",
+      "hair_vertices": 282,
+      "hair_triangles": 396,
+      "hair_resource": "SpiritTide/Art/Rig/soifon-hair-v2"
+    },
+    {
+      "id": "rangiku",
+      "vertices": 7798,
+      "triangles": 14090,
+      "resource": "SpiritTide/Art/Rig/rangiku-body-v2",
+      "hair_vertices": 1761,
+      "hair_triangles": 3250,
+      "hair_resource": "SpiritTide/Art/Rig/rangiku-hair-v2"
+    },
+    {
+      "id": "unohana",
+      "vertices": 7463,
+      "triangles": 13504,
+      "resource": "SpiritTide/Art/Rig/unohana-bind-v1",
+      "hair_vertices": 0,
+      "hair_triangles": 0,
+      "hair_resource": ""
+    }
+  ]
+}

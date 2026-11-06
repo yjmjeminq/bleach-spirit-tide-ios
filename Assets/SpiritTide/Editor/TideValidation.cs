@@ -50,7 +50,7 @@ namespace SpiritTide.EditorTools
                     for(int i=0;i<60000&&s.IsFighting;i++)TideCombatDriver.Tick(s);
                     Check("replay rewards reduced and first loot never duplicated "+hero,s.Mode==TideMode.Result&&s.LastGearUid==0&&s.LastXp==24&&s.Profile.gear.Length==items&&s.Profile.reportedActs==mask);s.ReturnTown();
                 }
-                TestCombat();TestCheckpoint();TestStorage();TideUiValidation.Run(Check);TideExperienceValidation.Run(Check);TideDialogueValidation.Run(Check);TideQuestValidation.Run(Check);TideSkillFxValidation.Run(Check);TideSkillIconValidation.Run(Check);TideJourneyValidation.Run(Check);Save(true);
+                TestCombat();TestCheckpoint();TestStorage();TideUiValidation.Run(Check);TideExperienceValidation.Run(Check);TideDialogueValidation.Run(Check);TideQuestValidation.Run(Check);TideSkillFxValidation.Run(Check);TideSkillIconValidation.Run(Check);TideJourneyValidation.Run(Check);TideMotionValidation.Run(Check);Save(true);
             }
             catch{Save(false);throw;}
         }

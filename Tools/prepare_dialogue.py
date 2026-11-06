@@ -400,7 +400,7 @@ def export(campaign):
             q=next(q for q in quest_definitions if q['id']==s['quest_id']);extra+=q['index']*10+(0 if s['kind']=='side_offer' else 1+s['quest_step'] if s['kind']=='side_step' else 5+s['branch'])
         return (s["act"],{"main_accept":0,"party":900,"rescue":950,"epilogue":1000}.get(s["kind"],extra if s['kind'].startswith('side_') else s["stage"]*100+phase.get(s["kind"],0)),s["id"])
     ordered=sorted(SCENES,key=order)
-    write(ROOT / "Docs/dialogue-index.json",{"version":"0.10.0","scenes":len(SCENES),"base_lines":sum(len(s["lines"])-bool(s["responses"]) for s in SCENES),"lead_responses":sum(len(s["responses"]) for s in SCENES),"town_replies":len(data["town"]),"source":"Tools/prepare_dialogue.py + Tools/prepare_quests.py","runtime":"Assets/SpiritTide/Resources/SpiritTide/Data/dialogue.json","script":"Docs/character-dialogue-script.txt","chapters":[{"act":a,"scene_ids":[s["id"] for s in ordered if s["act"]==a]} for a in range(1,6)]})
+    write(ROOT / "Docs/dialogue-index.json",{"version":"0.11.0","scenes":len(SCENES),"base_lines":sum(len(s["lines"])-bool(s["responses"]) for s in SCENES),"lead_responses":sum(len(s["responses"]) for s in SCENES),"town_replies":len(data["town"]),"source":"Tools/prepare_dialogue.py + Tools/prepare_quests.py","runtime":"Assets/SpiritTide/Resources/SpiritTide/Data/dialogue.json","script":"Docs/character-dialogue-script.txt","chapters":[{"act":a,"scene_ids":[s["id"] for s in ordered if s["act"]==a]} for a in range(1,6)]})
     print(json.dumps({"dialogue_scenes":len(SCENES),"base_lines":sum(len(s["lines"])-bool(s["responses"]) for s in SCENES),"lead_responses":sum(len(s["responses"]) for s in SCENES),"town_replies":len(data["town"])}))
 
 

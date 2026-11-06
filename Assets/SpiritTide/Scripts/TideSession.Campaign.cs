@@ -46,7 +46,7 @@ namespace SpiritTide
         }
         private void StartBattleState(bool training)
         {
-            LastDamageFoe=LastDamageCue=null;
+            PresentationEpoch++;LastDamageFoe=LastDamageCue=null;
             InBattle=true;IsTraining=training;IsReplay=!IsCampaign&&!training;IsPaused=false;RoomCleared=false;Mode=training?TideMode.Training:TideMode.Combat;
             TrainingAttacks=training&&HasPerfectTrainingObjective();
             Hp=MaxHp;Mp=100;Shield=0;ResetFightFeel();WardActive=EnvironmentWarning=false;reinforcementOffset=0;X=-3;Y=Z=JumpSpeed=0;Facing=1;hurtInvulnerability=0;PerfectRemaining=ReflectRemaining=DodgeRemaining=0;CounterStance=false;
@@ -54,6 +54,7 @@ namespace SpiritTide
         }
         private void LoadRoom()
         {
+            PresentationEpoch++;
             Enemies.Clear();target=null;RoomCleared=false;X=-3;Y=Z=JumpSpeed=0;Facing=1;ClearAction();Array.Clear(CloudTime,0,2);
             SetupRoomWorld();SpawnRoomFoes();
             ChooseTarget();Changed(Dungeon.title+" · "+(RoomIndex+1)+" / "+Dungeon.rooms.Length+"방 · "+Room.title);

@@ -208,7 +208,7 @@ def build(campaign):
     content=json.dumps(result,ensure_ascii=False,indent=2)+'\n'
     path=DATA/'quests.json'
     if not path.is_file() or path.read_text(encoding='utf-8')!=content:path.write_text(content,encoding='utf-8')
-    book=['BLEACH: 영해의 균열 · 메인·서브 퀘스트 0.10.0','',
+    book=['BLEACH: 영해의 균열 · 메인·서브 퀘스트 0.11.0','',
           '메인 5개 챕터 · 던전 단계 30개 · 필수 현장 조사 5개 · 선택 서브퀘스트 15개.',
           '서브퀘스트는 보상이나 엔딩의 필수 조건이 아닙니다. 지나온 지역에서도 수락하고 재현 전투로 목표를 수행할 수 있습니다.',
           '지나온 의뢰는 게임에서 ‘지난 부탁’으로 표시하며, 그때의 대화와 선택을 되짚습니다.',

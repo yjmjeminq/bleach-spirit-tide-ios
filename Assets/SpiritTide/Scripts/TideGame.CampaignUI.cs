@@ -14,7 +14,7 @@ namespace SpiritTide
         private RectTransform statusPlate;
         private sealed class FoeView
         {
-            public RectTransform root,shadow;public Image body,hp;public Text label,damage;
+            public RectTransform root,shadow;public TideFoeMotionGraphic body;public Image hp;public Text label,damage;
             public Image[] areas=new Image[4];public int uid,damageSerial;public float flash;
         }
         private readonly List<FoeView> foeViews=new List<FoeView>();
@@ -37,7 +37,7 @@ namespace SpiritTide
                 for(int j=0;j<4;j++){v.areas[j]=Picture("FoeArea-"+i+"-"+j,world,Vector2.zero,Vector2.zero,new Vector2(100,30),new Color(1,.35f,.15f,.3f));v.areas[j].transform.SetSiblingIndex(actorLayer.GetSiblingIndex());}
                 v.shadow=Picture("FoeShadow-"+i,world,Vector2.zero,Vector2.zero,new Vector2(85,17),new Color(0,0,0,.3f),circle).rectTransform;v.shadow.SetSiblingIndex(actorLayer.GetSiblingIndex());
                 int slot=i;var b=Button("target-"+i,"",actorLayer,Vector2.zero,Vector2.zero,new Vector2(150,205),()=>{if(slot<Session.Enemies.Count)Session.FocusEnemy(Session.Enemies[slot].Uid);});
-                b.GetComponent<Image>().color=Color.clear;b.GetComponent<Image>().raycastTarget=false;v.body=Picture("FoeSprite",b.transform,new Vector2(.5f,.5f),Vector2.zero,new Vector2(150,205),Color.white);b.targetGraphic=v.body;v.body.preserveAspect=true;v.root=(RectTransform)b.transform;v.root.pivot=new Vector2(.5f,0);
+                b.GetComponent<Image>().color=Color.clear;b.GetComponent<Image>().raycastTarget=false;v.body=Node("FoeSprite",b.transform,new Vector2(.5f,.5f),Vector2.zero,new Vector2(150,205)).gameObject.AddComponent<TideFoeMotionGraphic>();v.body.color=Color.white;b.targetGraphic=v.body;v.body.preserveAspect=true;v.root=(RectTransform)b.transform;v.root.pivot=new Vector2(.5f,0);
                 v.label=Label("",v.root,new Vector2(.5f,1),new Vector2(0,-15),new Vector2(260,35),19,ink,true);v.label.alignment=TextAnchor.MiddleCenter;
                 v.hp=Meter(v.root,new Vector2(75,-5),100,new Color(.85f,.35f,.3f));var track=(RectTransform)v.hp.transform.parent;track.anchorMin=track.anchorMax=new Vector2(.5f,1);track.anchoredPosition=new Vector2(0,-34);
                 v.damage=Label("",world,Vector2.zero,Vector2.zero,new Vector2(100,40),27,gold,true);v.damage.alignment=TextAnchor.MiddleCenter;
@@ -49,13 +49,15 @@ namespace SpiritTide
             bool battle=Session.InBattle;scenery.sprite=TideArt.Background(battle?Session.IsCampaign?Session.Dungeon.background:"battle_act_"+Session.BattleAct:"town");
             statusPlate.anchoredPosition=statusText.rectTransform.anchoredPosition;statusPlate.sizeDelta=statusText.rectTransform.sizeDelta+new Vector2(18,0);
             scenery.color=scenery.sprite==null?bg:Color.white;
-            float pan=Session.InBattle?-Session.X*3:0;scenery.rectTransform.offsetMin=new Vector2(-70+pan,-16)+impactOffset;scenery.rectTransform.offsetMax=new Vector2(70+pan,16)+impactOffset;
+            float pan=Session.InBattle?-(naturalCameraX-cameraOriginX)*TideHudLayout.UnitX(safe.rect.width,Session.Profile.controlScale):0;
+            float margin=Session.InBattle?470:70,zoom=(safe.rect.width+margin*2)/(safe.rect.width+140),extra=(zoom-1)*safe.rect.height;
+            scenery.rectTransform.offsetMin=new Vector2(-margin+pan,-16-extra*.4f)+impactOffset;scenery.rectTransform.offsetMax=new Vector2(margin+pan,16+extra*.6f)+impactOffset;
             enemyActor.gameObject.SetActive(false);warning.gameObject.SetActive(false);enemyShadow.gameObject.SetActive(false);enemyFeedback.gameObject.SetActive(false);
             actor.gameObject.SetActive(!Session.InBattle||battle);
-            Vector2 pos=Project(Session.X,Session.Y)+new Vector2(0,Session.Z*32);actor.anchoredPosition=pos;
+            Vector2 pos=Project(Session.X,Session.Y)+new Vector2(0,Session.Z*54);actor.anchoredPosition=pos;
             float wave=Session.ActionRemaining>0?Mathf.Sin(Session.ActionElapsed/Mathf.Max(.01f,Session.ActionDuration)*Mathf.PI):0;
-            actor.localScale=new Vector3(Session.Facing*(1+wave*.025f),1,1);actor.localRotation=Quaternion.Euler(0,0,Session.Profile.reducedEffects?0:-Session.Facing*wave*4);
-            var sorting=new List<KeyValuePair<float,Transform>>{new KeyValuePair<float,Transform>(Session.Y,actor)};
+
+            var sorting=new List<KeyValuePair<float,Transform>>{new KeyValuePair<float,Transform>(Session.Y-.04f,actor)};
             for(int i=0;i<foeViews.Count;i++)
             {
                 var v=foeViews[i];var e=i<Session.Enemies.Count?Session.Enemies[i]:null;bool show=battle&&e!=null&&e.Alive;
@@ -64,6 +66,7 @@ namespace SpiritTide
                 v.root.anchoredPosition=Project(e.X,e.Y)+new Vector2(0,e.Lift*32);v.root.sizeDelta=e.Def.IsBoss?new Vector2(250,180):new Vector2(190,190);
                 v.body.rectTransform.sizeDelta=v.root.sizeDelta;v.body.rectTransform.localScale=new Vector3(e.X>=Session.X?1:-1,1,1);
                 v.body.color=e.Flash>0&&!Session.Profile.reducedEffects?new Color(.7f,.85f,1):Color.white;
+                v.body.Tick(e,Session.PresentationEpoch,Session.PresentationClock,TideHudLayout.UnitX(safe.rect.width,Session.Profile.controlScale));
                 v.shadow.anchoredPosition=Project(e.X,e.Y);v.hp.fillAmount=e.Hp/e.MaxHp;
                 v.label.gameObject.SetActive(e.Mark>0||e.Guard>0);v.hp.transform.parent.gameObject.SetActive(!e.Def.IsBoss);
                 Say(v.label,(e.Mark>0?"표식 ":"")+(e.Guard>0?"방어":""));

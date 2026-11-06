@@ -1,0 +1,135 @@
+{
+  "version": "0.11.0",
+  "tool": "built-in image_gen",
+  "original_assets_preserved": true,
+  "files": [
+    {
+      "hero": "orihime",
+      "part": "body",
+      "path": "Assets/SpiritTide/Resources/SpiritTide/Art/Rig/orihime-body-v2.png",
+      "cache": "exec-d817ab6f-cb73-4699-b68c-b9c93b147d95.png",
+      "prompt": "Use case: precise-object-edit / identity-preserve. Input image 1 is the EDIT TARGET, an existing neutral technical game animation sprite of adult epilogue Orihime Inoue age 29. Create a registered BODY LAYER for skeletal animation on genuine transparent alpha, keeping the exact same full 1024x1536 portrait canvas, camera, body size, head position, A-pose, feet baseline and existing clothes, boots, face, skin shading, hands and all isolated weapons pixel-aligned as closely as possible. The ONLY change: remove ALL long rear hair below the head, and reconstruct clean transparent space behind her arms/back. Keep scalp hair, bangs, her face-framing short front locks above the shoulders and hair ornaments unchanged. The separated long rear hair will be composited behind this body in Unity; therefore there must be absolutely no long rear hair painted on or behind the upper arms, forearms, shoulders or waist of this body layer. Retain all body skin, swimsuit straps and limb outlines correctly. This adult character keeps her genuine existing two-piece bikini; neutral standing technical pose, nonsexual. Do not change her body, expression, pose or composition. Preserve eight-head adult anatomy. No background, no glow, no gradients behind the figure, no floor, no labels, no anatomy guides. Exact edit, no new design. Do not crop, reframe, recenter or add any object. Use a genuinely transparent background.",
+      "sha256": "4ebab6b169ddedcd3ae82393adcbd94f89ca5e8fbd0ad8a7827115b1fc168c26",
+      "width": 1024,
+      "height": 1536,
+      "opaque_bounds": [
+        158,
+        9,
+        865,
+        1526
+      ]
+    },
+    {
+      "hero": "rangiku",
+      "part": "body",
+      "path": "Assets/SpiritTide/Resources/SpiritTide/Art/Rig/rangiku-body-v2.png",
+      "cache": "exec-ed457cba-794e-4bcd-8af0-18cf9cf3dbdc.png",
+      "prompt": "Use case: precise-object-edit / identity-preserve. Input image 1 is the EDIT TARGET, an existing neutral technical game animation sprite of adult Rangiku Matsumoto. Create a registered BODY LAYER for skeletal animation on genuine transparent alpha, keeping the exact same full 1024x1536 portrait canvas, camera, body size, head position, A-pose, feet baseline and existing clothes, boots, face, skin shading, hands and all isolated weapons pixel-aligned as closely as possible. The ONLY change: remove ALL long rear hair below the head, and reconstruct clean transparent space behind her arms/back. Keep scalp hair, bangs, her face-framing short front locks above the shoulders and hair ornaments unchanged. The separated long rear hair will be composited behind this body in Unity; therefore there must be absolutely no long rear hair painted on or behind the upper arms, forearms, shoulders or waist of this body layer. Retain all body skin, swimsuit straps and limb outlines correctly. This adult character keeps her genuine existing two-piece bikini; neutral standing technical pose, nonsexual. Do not change her body, expression, pose or composition. Preserve eight-head adult anatomy. No background, no glow, no gradients behind the figure, no floor, no labels, no anatomy guides. Exact edit, no new design. Do not crop, reframe, recenter or add any object. Use a genuinely transparent background.",
+      "sha256": "b72ef0bc80da28c8a64060bbd5e6c5c48e07c18df34c70aea68cc436c05d0698",
+      "width": 1024,
+      "height": 1536,
+      "opaque_bounds": [
+        47,
+        11,
+        966,
+        1516
+      ]
+    },
+    {
+      "hero": "orihime",
+      "part": "hair",
+      "path": "Assets/SpiritTide/Resources/SpiritTide/Art/Rig/orihime-hair-v2.png",
+      "cache": "exec-26c6214c-8046-42cf-9ef2-740bf95eb676.png",
+      "prompt": "Use case: precise-object-edit / background-extraction. Input image 1 is an EDIT TARGET for a neutral 2D game skeletal-animation asset. Output ONLY ONE isolated REAR HAIR LAYER: preserve the reference character's smooth orange hair with long flowing strands, linework, color, highlights, strand flow, silhouette and approximate exact position/size on the SAME 1024x1536 portrait canvas. Keep the visible hair shape registered at (x=160..600, y=15..660), with the root around (520,190). Delete the entire person, face, ears, eyes, skin, clothes, limbs, boots, weapons and hair accessories. The hair is a separate back layer composited BEHIND the body: complete and paint in any formerly occluded portions of the long hair behind the removed shoulder and arm, forming one continuous natural mass of flowing hair, with no arm-shaped gaps, no human shapes and no transparent holes inside the main hair mass. The hair's crown/top and long flowing rear strands must connect coherently. This is hair only, not a head or wig on a person. Do not center or enlarge the hair to fill the canvas: preserve the upper-left registration to the input sprite; leave the lower half of the canvas completely transparent. No background, glow, floor, cast shadow, color wash, text, frame, label or extra items. Actual transparent alpha surrounding the hair.",
+      "sha256": "309d944e331eb450872a72949769f38be57bd5fdd409049add4d8254fa6a4b1e",
+      "width": 1024,
+      "height": 1536,
+      "opaque_bounds": [
+        111,
+        7,
+        604,
+        710
+      ]
+    },
+    {
+      "hero": "rangiku",
+      "part": "hair",
+      "path": "Assets/SpiritTide/Resources/SpiritTide/Art/Rig/rangiku-hair-v2.png",
+      "cache": "exec-db495d25-8fdf-4478-80b0-347dd2814a68.png",
+      "prompt": "Use case: precise-object-edit / background-extraction. Input image 1 is an EDIT TARGET for a neutral 2D game skeletal-animation asset. Output ONLY ONE isolated REAR HAIR LAYER: preserve the reference character's wavy orange-blonde hair with layered curls, linework, color, highlights, strand flow, silhouette and approximate exact position/size on the SAME 1024x1536 portrait canvas. Keep the visible hair shape registered at (x=65..530, y=15..590), with the root around (410,190). Delete the entire person, face, ears, eyes, skin, clothes, limbs, boots, weapons and hair accessories. The hair is a separate back layer composited BEHIND the body: complete and paint in any formerly occluded portions of the long hair behind the removed shoulder and arm, forming one continuous natural mass of flowing hair, with no arm-shaped gaps, no human shapes and no transparent holes inside the main hair mass. The hair's crown/top and long flowing rear strands must connect coherently. This is hair only, not a head or wig on a person. Do not center or enlarge the hair to fill the canvas: preserve the upper-left registration to the input sprite; leave the lower half of the canvas completely transparent. No background, glow, floor, cast shadow, color wash, text, frame, label or extra items. Actual transparent alpha surrounding the hair.",
+      "sha256": "4dac77c146145a96effeb8f7c1f23915ea442deb0aaccbc2d8cdb55d8b4a111a",
+      "width": 1024,
+      "height": 1536,
+      "opaque_bounds": [
+        57,
+        14,
+        573,
+        700
+      ]
+    },
+    {
+      "hero": "yoruichi",
+      "part": "body",
+      "path": "Assets/SpiritTide/Resources/SpiritTide/Art/Rig/yoruichi-body-v2.png",
+      "cache": "exec-0c976a7d-0056-4e5d-ba11-5f122eb9c700.png",
+      "prompt": "Use case: precise-object-edit / identity-preserve. Input image 1 is the EDIT TARGET, an existing neutral technical 2D skeletal animation sprite of the ADULT Yoruichi Shihoin. Create a registered BODY LAYER on genuine transparent alpha. Keep the SAME 1024x1536 portrait canvas, size, camera, spacing and registration. Remove ONLY the long rear purple ponytail. Keep her scalp hair, bangs, golden eyes, mature face, dark brown skin, hair tie at its root, original purple/gold bikini, forearm guards, boots, every body part and exact eight-head adult A-pose unchanged. Leave clean transparent space behind shoulders and arms. The long ponytail is composited separately behind this body. There must be no strands of the rear ponytail left behind or painted on the arms. Preserve the polished painted anime style, color palette, original nonsexual technical pose and visual identity. Do not crop, recenter, enlarge or reframe. Leave all unused canvas genuinely transparent. No background, wash, glow, shadow, floor, diagram, label, text or new objects. This is a precise game-asset layer separation, not a redesign.",
+      "sha256": "4b9e802c6d9dba34603e603176527396d012eeddfea3848b579fbc084cbba666",
+      "width": 1024,
+      "height": 1536,
+      "opaque_bounds": [
+        153,
+        65,
+        866,
+        1524
+      ]
+    },
+    {
+      "hero": "soifon",
+      "part": "body",
+      "path": "Assets/SpiritTide/Resources/SpiritTide/Art/Rig/soifon-body-v2.png",
+      "cache": "exec-83d7f6d5-6b08-40a6-9305-50ef51e835d5.png",
+      "prompt": "Use case: precise-object-edit / identity-preserve. Input image 1 is the EDIT TARGET, an existing neutral technical 2D skeletal animation sprite of the ADULT Soi Fon. Create a registered BODY LAYER on genuine transparent alpha. Keep the SAME 1024x1536 portrait canvas, size, camera, spacing and registration. Remove ONLY the two long thin braids, silver ties and white ribbons below/behind the short black bob. Keep the short bob, face-framing locks above the neck, mature face, original black/yellow bikini and straps, bracers, boots, separate gold stinger accessory on the far right and exact eight-head adult A-pose unchanged. Leave genuine transparent space where the rear braids were removed. These braids will be rendered as a separate rear animation layer. Preserve the polished painted anime style, color palette, original nonsexual technical pose and visual identity. Do not crop, recenter, enlarge or reframe. Leave all unused canvas genuinely transparent. No background, wash, glow, shadow, floor, diagram, label, text or new objects. This is a precise game-asset layer separation, not a redesign.",
+      "sha256": "c9e4d00399f7f48cbc147ecd681d7d847aff30c9bcb772dd4c46c7cf3af76be9",
+      "width": 1024,
+      "height": 1536,
+      "opaque_bounds": [
+        49,
+        13,
+        989,
+        1498
+      ]
+    },
+    {
+      "hero": "yoruichi",
+      "part": "hair",
+      "path": "Assets/SpiritTide/Resources/SpiritTide/Art/Rig/yoruichi-hair-v2.png",
+      "cache": "exec-ee1557db-831c-49a2-8cef-276398a68730.png",
+      "prompt": "Use case: precise-object-edit / identity-preserve. Input image 1 is the EDIT TARGET, an existing neutral technical 2D skeletal animation sprite of the ADULT Yoruichi Shihoin. Create a registered HAIR LAYER on genuine transparent alpha. Keep the SAME 1024x1536 portrait canvas, size, camera, spacing and registration. Output ONLY the long purple rear ponytail including the hair tie at its root. Remove the entire person, scalp hair cap, bangs, face, ears, skin, clothes, limbs and boots. The ponytail begins around (400,100) and sweeps to the left behind the original body, in approximate bounds (110,5)..(495,595) of the unchanged 1024x1536 canvas. Keep the same purple highlights and continuous flowing strands. Fill hair naturally across any formerly occluded small areas so there are no arm-shaped holes. Do not add a head or a human shape. Preserve the polished painted anime style, color palette, original nonsexual technical pose and visual identity. Do not crop, recenter, enlarge or reframe. Leave all unused canvas genuinely transparent. No background, wash, glow, shadow, floor, diagram, label, text or new objects. This is a precise game-asset layer separation, not a redesign.",
+      "sha256": "5da3a626aaa0bf9bbb224c630f0712bcc13a3821c1483be55ebd069dc913c600",
+      "width": 1024,
+      "height": 1536,
+      "opaque_bounds": [
+        113,
+        5,
+        473,
+        606
+      ]
+    },
+    {
+      "hero": "soifon",
+      "part": "hair",
+      "path": "Assets/SpiritTide/Resources/SpiritTide/Art/Rig/soifon-hair-v2.png",
+      "cache": "exec-9d65c689-a7b5-47da-a162-c70ef4b5a8db.png",
+      "prompt": "Use case: precise-object-edit / identity-preserve. Input image 1 is the EDIT TARGET, an existing neutral technical 2D skeletal animation sprite of the ADULT Soi Fon. Create a registered HAIR LAYER on genuine transparent alpha. Keep the SAME 1024x1536 portrait canvas, size, camera, spacing and registration. Output ONLY the TWO narrow black rear braids, with their original silver bands and white ribbon ties at the ends. Remove the entire person, bob hair cap, face, skin, clothes, limbs, bracers, boots and gold stinger accessory. The two braids begin around (295,225) and trail diagonally down to screen left, ending around (90,480), in approximate bounds (45,195)..(335,515) of the unchanged 1024x1536 canvas. Preserve the reference linework and original narrow braided silhouette, silver bands and white ribbons. Complete any formerly occluded sections so both braids have continuous strands and coherent roots. No head or human shape. Preserve the polished painted anime style, color palette, original nonsexual technical pose and visual identity. Do not crop, recenter, enlarge or reframe. Leave all unused canvas genuinely transparent. No background, wash, glow, shadow, floor, diagram, label, text or new objects. This is a precise game-asset layer separation, not a redesign.",
+      "sha256": "af24d18cfc0348bab65c78c2cebe70b4e59d8c844da62ff6a68018076cd6ceff",
+      "width": 1024,
+      "height": 1536,
+      "opaque_bounds": [
+        70,
+        230,
+        332,
+        563
+      ]
+    }
+  ]
+}
