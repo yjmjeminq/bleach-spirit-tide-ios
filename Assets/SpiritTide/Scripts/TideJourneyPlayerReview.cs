@@ -73,8 +73,8 @@ namespace SpiritTide
             int worn=game.Session.Profile.powerGear;string gearBefore=JsonUtility.ToJson(game.Session.Profile);
             yield return OpenJourneyUi(1);Check("preparation identifies a real owned upgrade without auto equip",VisibleText("더 높은 수치의 전리품 있음")&&game.Session.Profile.powerGear==worn);yield return Capture("95-preparation-upgrade");
             yield return TapUi("journey-gear");Check("preparation opens the owned upgrade without changing inventory",game.Session.Mode==TideMode.Inventory&&VisibleText("되찾은 힘 영장")&&gearBefore==JsonUtility.ToJson(game.Session.Profile));
-            yield return TapUi("back");Check("gear comparison returns to the same preparation tab",game.Session.Mode==TideMode.Journey&&VisibleText("더 높은 수치의 전리품 있음"));
-            yield return TapUi("journey-gear");yield return TapUi("equip");Check("recommended gear equips only after the explicit button",game.Session.Profile.powerGear==7777);yield return TapUi("back");CheckJourneyText("after direct equip");game.ReturnTown();
+            yield return TapUi("close");Check("gear comparison returns to the same preparation tab",game.Session.Mode==TideMode.Journey&&VisibleText("더 높은 수치의 전리품 있음"));
+            yield return TapUi("journey-gear");yield return TapUi("equip");Check("recommended gear equips only after the explicit button",game.Session.Profile.powerGear==7777);yield return TapUi("close");CheckJourneyText("after direct equip");game.ReturnTown();
             JourneyFixture(2,4);yield return TapUi("pause");yield return TapUi("home-map");yield return TapUi("mission-guide");CheckJourneyText("map entry");yield return TapUi("back");Check("map preparation back restores the map",game.Session.Mode==TideMode.Missions);game.ReturnTown();
             for(int a=1;a<=5;a++)
             {

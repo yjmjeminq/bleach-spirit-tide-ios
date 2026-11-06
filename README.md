@@ -112,4 +112,4 @@ python Tools/package_release.py
 
 이번 의뢰 검토는 `Docs/quest-review.txt`, 이전 대화 검토는 `Docs/dialogue-review.txt`, 이야기·맵·전투 검토는 `Docs/experience-review.md`, 캠페인 설계는 `Docs/campaign-review.md`에 있습니다. 이미지 프롬프트·해시·셀 매핑은 `Docs/experience-art-sources.json`, `Docs/campaign-art-sources.json`, `Docs/art-sources.json`에 있습니다. 원작 자료는 `Docs/canon-sources.json`, 폰트 라이선스는 `Assets/SpiritTide/Resources/SpiritTide/UI/Pretendard-LICENSE.txt`에 있습니다. 이전 0.1·0.2·0.3·0.4·0.5·0.6 배포 ZIP은 `Artifacts/`에 별도로 보존합니다.
 
-현재 iPhone 시험판: [0.10.0 IPA](https://github.com/yjmjeminq/bleach-spirit-tide-ios/releases/download/v0.10.0-ios.1/SpiritTide-iPhone-unsigned-v0.10.0.ipa). 그림 아이콘 검사 결과는 `QA/skill-icons-verification.json`, 적용 화면은 `QA/92-painted-icons-0.png`와 `QA/93-icon-cooldown-and-spirit.png`에 있습니다.
+현재 iPhone 시험판: [0.10.0 IPA](https://github.com/yjmjeminq/bleach-spirit-tide-ios/releases/download/v0.10.0-ios.2/SpiritTide-iPhone-unsigned-v0.10.0.ipa). 그림 아이콘 검사 결과는 `QA/skill-icons-verification.json`, 적용 화면은 `QA/92-painted-icons-0.png`와 `QA/93-icon-cooldown-and-spirit.png`에 있습니다.

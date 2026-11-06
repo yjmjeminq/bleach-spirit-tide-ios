@@ -7,7 +7,7 @@ on:
         required: true
         type: string
       source_sha256:
-        description: SHA256 of SpiritTide-ios-export-v0.10.0.zip
+        description: SHA256 of SpiritTide-ios-export-v0.10.0-r2.zip
         required: true
         type: string
 permissions:
@@ -35,11 +35,11 @@ jobs:
         run: |
           test "$(gh repo view "$GH_REPO" --json visibility --jq .visibility)" = PUBLIC
           mkdir -p input output
-          gh release download "$SOURCE_TAG" --pattern SpiritTide-ios-export-v0.10.0.zip --dir input
+          gh release download "$SOURCE_TAG" --pattern SpiritTide-ios-export-v0.10.0-r2.zip --dir input
       - name: Verify archive and every exported file
         env:
           SOURCE_SHA256: ${{ inputs.source_sha256 }}
-        run: python3 Tools/IOSBuild.py extract --archive input/SpiritTide-ios-export-v0.10.0.zip --sha256 "$SOURCE_SHA256" --output output/extracted
+        run: python3 Tools/IOSBuild.py extract --archive input/SpiritTide-ios-export-v0.10.0-r2.zip --sha256 "$SOURCE_SHA256" --output output/extracted
       - name: Compile ARM64 iOS device app and package unsigned IPA
         run: python3 Tools/IOSBuild.py build --project output/extracted/ios-export --ipa output/SpiritTide-iPhone-unsigned-v0.10.0.ipa --work output/work --report output/build-report.json
       - name: Attach the verified IPA to the public input release

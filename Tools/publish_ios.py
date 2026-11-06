@@ -16,10 +16,10 @@ import sys
 ROOT=Path(__file__).resolve().parents[1]
 REPO='yjmjeminq/bleach-spirit-tide-ios'
 VERSION='0.10.0'
-TAG='v0.10.0-ios.1'
-STAGE=ROOT/'Builds/PublicSource-v0.10.0'
+TAG='v0.10.0-ios.2'
+STAGE=ROOT/'Builds/PublicSource-v0.10.0-r2'
 STATE=ROOT/'.runtime/ios-build-state.json'
-ARCHIVE=ROOT/'Artifacts/SpiritTide-ios-export-v0.10.0.zip'
+ARCHIVE=ROOT/'Artifacts/SpiritTide-ios-export-v0.10.0-r2.zip'
 ENV=dict(os.environ,GIT_TERMINAL_PROMPT='0',GCM_INTERACTIVE='never')
 
 
