@@ -1,0 +1,45 @@
+{
+  "baseline": "0.3.0",
+  "observed_gaps": [
+    "internal clue IDs displayed in dialogue and journal",
+    "repeated scenery within each act",
+    "town services without visible NPCs",
+    "missing midboss introductions and later-act hero reactions",
+    "single-pose motion and weak impact",
+    "identical troop room pacing",
+    "some objectives did not match named encounter rooms"
+  ],
+  "requirements": [
+    "causal reason and resolution for every dungeon",
+    "localized clues and all six voices in all five acts",
+    "visible town services and rescue follow-up",
+    "at least fifteen distinct combat environments with room layout and hazard differences",
+    "hit stop, knockback, stagger, juggle, cancel and distinct effects/audio",
+    "normal-health campaign and native UI evidence"
+  ],
+  "verified_version": "0.7.0",
+  "build_guid": "a0de0cb84cf54863bc66a60bf0d4dd4d",
+  "checks": {
+    "model": 3510,
+    "desktop": 11570,
+    "phone_layout": 11335
+  },
+  "review_results": {
+    "story": "Thirty causal dungeon beats, localized clues, five act links, ten encounter introductions/resolutions and final returned-names journal verified.",
+    "town": "Five visible NPC services, physical NPC pointer hit, six hundred maximum-font dialogue cases per layout, rescue follow-up and five report lights verified.",
+    "maps": "Fifteen combat settings rendered, six formations and five hazards validated, two-wave ambush and actual ward deactivation verified.",
+    "combat": "Connected cancel, frozen simulation during hit stop, actual knockback, launch/air follow-up and boss poise break verified; normal-health replay and full campaigns passed."
+  },
+  "evidence": [
+    "QA/model.json",
+    "QA/player-desktop.json",
+    "QA/player-phone-layout.json",
+    "QA/experience-combat.mp4",
+    "Docs/experience-review.md"
+  ],
+  "remaining": [
+    "finished coherent sprite animation for all heroes and enemies",
+    "production VFX and audio",
+    "native iPhone touch and Metal/performance checks"
+  ]
+}

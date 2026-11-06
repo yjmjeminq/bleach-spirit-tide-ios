@@ -1,0 +1,176 @@
+{
+  "pngs": 13,
+  "new_combat_backgrounds": 10,
+  "total_combat_backgrounds": 15,
+  "motion_sheets": 2,
+  "motion_regions": 18,
+  "npc_sheets": 1,
+  "files": [
+    {
+      "id": "act1_lighthouse_v1",
+      "path": "Assets/SpiritTide/Resources/SpiritTide/Art/Experience/act1_lighthouse_v1.png",
+      "sha256": "b8cc14f723591401e34847416792f45298d60f29683e663c70926f94390f6879",
+      "width": 1672,
+      "height": 941,
+      "tool": "built-in image_gen",
+      "transparent_background": false,
+      "reference": null,
+      "prompt": "Use case: stylized-concept. Asset type: wide environment for a BLEACH fan 2D belt-scrolling action RPG. Karakura lighthouse service pier at stormy midnight, tall white lighthouse and small service buildings, wooden mooring posts, dark sea with distant ship lights, light rain. Broad continuous stone pier fighting lane. Camera is side-on and slightly elevated, matching an anime brawler. The lower 45 percent is a clear walkable ground plane across the full width; detailed background architecture is in the upper half. Wide 16:9 composition, clean anime background painting, restrained high contrast cel shading and atmospheric distant layers. Distinct local landmarks. No characters, no enemies, no foreground obstructions, no UI, no text, no logos, no watermarks.",
+      "usage": "Combat backdrop"
+    },
+    {
+      "id": "act1_river_v1",
+      "path": "Assets/SpiritTide/Resources/SpiritTide/Art/Experience/act1_river_v1.png",
+      "sha256": "2b73b901f46a6cdede419534bcb74cd7c2b46e6b5509a345da9fb7e5ddd696ed",
+      "width": 1672,
+      "height": 941,
+      "tool": "built-in image_gen",
+      "transparent_background": false,
+      "reference": null,
+      "prompt": "Use case: stylized-concept. Asset type: wide environment for a BLEACH fan 2D belt-scrolling action RPG. Karakura river embankment at dusk, broad concrete riverbank path, grassy levee, warm house windows, a small bridge and distant water, blue-green water with orange sunset. Continuous flat dry fighting lane. Camera is side-on and slightly elevated, matching an anime brawler. The lower 45 percent is a clear walkable ground plane across the full width; detailed background architecture is in the upper half. Wide 16:9 composition, clean anime background painting, restrained high contrast cel shading and atmospheric distant layers. Distinct local landmarks. No characters, no enemies, no foreground obstructions, no UI, no text, no logos, no watermarks.",
+      "usage": "Combat backdrop"
+    },
+    {
+      "id": "act2_gate_v1",
+      "path": "Assets/SpiritTide/Resources/SpiritTide/Art/Experience/act2_gate_v1.png",
+      "sha256": "08d8547402d8843bbd505cc8e24f008915a902ff756e11055db975ddcfc3ee00",
+      "width": 1672,
+      "height": 941,
+      "tool": "built-in image_gen",
+      "transparent_background": false,
+      "reference": null,
+      "prompt": "Use case: stylized-concept. Asset type: wide environment for a BLEACH fan 2D belt-scrolling action RPG. Black Garganta gate opening into a white-stone subterranean Arrancar checkpoint, enormous pale arch and a sliver of alien sky, sand near the edges, spacious pale stone walkway. Camera is side-on and slightly elevated, matching an anime brawler. The lower 45 percent is a clear walkable ground plane across the full width; detailed background architecture is in the upper half. Wide 16:9 composition, clean anime background painting, restrained high contrast cel shading and atmospheric distant layers. Distinct local landmarks. No characters, no enemies, no foreground obstructions, no UI, no text, no logos, no watermarks.",
+      "usage": "Combat backdrop"
+    },
+    {
+      "id": "act2_rooftops_v1",
+      "path": "Assets/SpiritTide/Resources/SpiritTide/Art/Experience/act2_rooftops_v1.png",
+      "sha256": "36af22f93ef1f94644dee94f5f94f4c913c7e27c5e4c339e3580e100e240c8f3",
+      "width": 1672,
+      "height": 941,
+      "tool": "built-in image_gen",
+      "transparent_background": false,
+      "reference": null,
+      "prompt": "Use case: stylized-concept. Asset type: wide environment for a BLEACH fan 2D belt-scrolling action RPG. Karakura rooftop route under a purple night sky, broad flat roofs with distant water tanks and aerials, distant black Garganta in the sky, foreground has a spacious unobstructed roof surface and low parapets. Camera is side-on and slightly elevated, matching an anime brawler. The lower 45 percent is a clear walkable ground plane across the full width; detailed background architecture is in the upper half. Wide 16:9 composition, clean anime background painting, restrained high contrast cel shading and atmospheric distant layers. Distinct local landmarks. No characters, no enemies, no foreground obstructions, no UI, no text, no logos, no watermarks.",
+      "usage": "Combat backdrop"
+    },
+    {
+      "id": "act3_dunes_v1",
+      "path": "Assets/SpiritTide/Resources/SpiritTide/Art/Experience/act3_dunes_v1.png",
+      "sha256": "ac9324e4799cd9aab117ed3fa3752ac95502ad08a711fb4152054b5d89d12baa",
+      "width": 1672,
+      "height": 941,
+      "tool": "built-in image_gen",
+      "transparent_background": false,
+      "reference": null,
+      "prompt": "Use case: stylized-concept. Asset type: wide environment for a BLEACH fan 2D belt-scrolling action RPG. Hueco Mundo open white sand dunes under a black sky with crescent moon, distant dead branching quartz trees and broken white gate, pale violet shadows, spacious flat sandy fighting lane. Camera is side-on and slightly elevated, matching an anime brawler. The lower 45 percent is a clear walkable ground plane across the full width; detailed background architecture is in the upper half. Wide 16:9 composition, clean anime background painting, restrained high contrast cel shading and atmospheric distant layers. Distinct local landmarks. No characters, no enemies, no foreground obstructions, no UI, no text, no logos, no watermarks.",
+      "usage": "Combat backdrop"
+    },
+    {
+      "id": "act3_lab_v1",
+      "path": "Assets/SpiritTide/Resources/SpiritTide/Art/Experience/act3_lab_v1.png",
+      "sha256": "d2f3937e76ad91b17966f035924f51441bac1246e7e13feb81b738a150203b09",
+      "width": 1672,
+      "height": 941,
+      "tool": "built-in image_gen",
+      "transparent_background": false,
+      "reference": null,
+      "prompt": "Use case: stylized-concept. Asset type: wide environment for a BLEACH fan 2D belt-scrolling action RPG. Las Noches abandoned research archive, ribbed white stone columns and tall turquoise specimen windows without bodies, layered record cabinets and geometric doors, dramatic emerald lighting, spacious flat tiled lane. Camera is side-on and slightly elevated, matching an anime brawler. The lower 45 percent is a clear walkable ground plane across the full width; detailed background architecture is in the upper half. Wide 16:9 composition, clean anime background painting, restrained high contrast cel shading and atmospheric distant layers. Distinct local landmarks. No characters, no enemies, no foreground obstructions, no UI, no text, no logos, no watermarks.",
+      "usage": "Combat backdrop"
+    },
+    {
+      "id": "act4_canals_v1",
+      "path": "Assets/SpiritTide/Resources/SpiritTide/Art/Experience/act4_canals_v1.png",
+      "sha256": "71ddeed3ec28f3b473ec8c6138aa5ffd7eceaf1a8b44f81d14bfa5c740d80df3",
+      "width": 1672,
+      "height": 941,
+      "tool": "built-in image_gen",
+      "transparent_background": false,
+      "reference": null,
+      "prompt": "Use case: stylized-concept. Asset type: wide environment for a BLEACH fan 2D belt-scrolling action RPG. Fake Karakura quiet canal bridge battlefield at late sunset, broken concrete railings and water reflecting amber sky, Japanese city skyline and monumental pillar, spacious flat bridge lane. Camera is side-on and slightly elevated, matching an anime brawler. The lower 45 percent is a clear walkable ground plane across the full width; detailed background architecture is in the upper half. Wide 16:9 composition, clean anime background painting, restrained high contrast cel shading and atmospheric distant layers. Distinct local landmarks. No characters, no enemies, no foreground obstructions, no UI, no text, no logos, no watermarks.",
+      "usage": "Combat backdrop"
+    },
+    {
+      "id": "act4_mirror_v1",
+      "path": "Assets/SpiritTide/Resources/SpiritTide/Art/Experience/act4_mirror_v1.png",
+      "sha256": "79eb3bcd18e0fa2c5955d3c3277cbac617819fc456feb5a55f7125f408851e3e",
+      "width": 1672,
+      "height": 941,
+      "tool": "built-in image_gen",
+      "transparent_background": false,
+      "reference": null,
+      "prompt": "Use case: stylized-concept. Asset type: wide environment for a BLEACH fan 2D belt-scrolling action RPG. A false Karakura plaza reflected in enormous fractured mirror planes, blue and amber architecture repeating differently in reflections, distant ghostly Japanese roofs, no legible writing, spacious dry flat square fighting lane. Camera is side-on and slightly elevated, matching an anime brawler. The lower 45 percent is a clear walkable ground plane across the full width; detailed background architecture is in the upper half. Wide 16:9 composition, clean anime background painting, restrained high contrast cel shading and atmospheric distant layers. Distinct local landmarks. No characters, no enemies, no foreground obstructions, no UI, no text, no logos, no watermarks.",
+      "usage": "Combat backdrop"
+    },
+    {
+      "id": "act5_garden_v1",
+      "path": "Assets/SpiritTide/Resources/SpiritTide/Art/Experience/act5_garden_v1.png",
+      "sha256": "acbc8158ac27c9a411ca2a6d62395dd1cb863dc1f30b2ce15460c08ceff1125a",
+      "width": 1672,
+      "height": 941,
+      "tool": "built-in image_gen",
+      "transparent_background": false,
+      "reference": null,
+      "prompt": "Use case: stylized-concept. Asset type: wide environment for a BLEACH fan 2D belt-scrolling action RPG. Wandenreich palace future garden, symmetrical white stone paths with blue crystal trees and pale floating fragments, immense throne-room doorway in the distance, dark blue sky, spacious flat stone fighting lane. Camera is side-on and slightly elevated, matching an anime brawler. The lower 45 percent is a clear walkable ground plane across the full width; detailed background architecture is in the upper half. Wide 16:9 composition, clean anime background painting, restrained high contrast cel shading and atmospheric distant layers. Distinct local landmarks. No characters, no enemies, no foreground obstructions, no UI, no text, no logos, no watermarks.",
+      "usage": "Combat backdrop"
+    },
+    {
+      "id": "act5_shadows_v1",
+      "path": "Assets/SpiritTide/Resources/SpiritTide/Art/Experience/act5_shadows_v1.png",
+      "sha256": "ed5693f649ededad1e5064346e6f98e016a4c2fb7185a0734fbe45aaad4294f9",
+      "width": 1672,
+      "height": 941,
+      "tool": "built-in image_gen",
+      "transparent_background": false,
+      "reference": null,
+      "prompt": "Use case: stylized-concept. Asset type: wide environment for a BLEACH fan 2D belt-scrolling action RPG. Wandenreich shadow barracks and transit vault, dark blue stone arches and austere white Quincy structures emerging from black shadow portals, blue fire lamps, spacious silver tiled fighting lane. Camera is side-on and slightly elevated, matching an anime brawler. The lower 45 percent is a clear walkable ground plane across the full width; detailed background architecture is in the upper half. Wide 16:9 composition, clean anime background painting, restrained high contrast cel shading and atmospheric distant layers. Distinct local landmarks. No characters, no enemies, no foreground obstructions, no UI, no text, no logos, no watermarks.",
+      "usage": "Combat backdrop"
+    },
+    {
+      "id": "orihime_motion_v1",
+      "path": "Assets/SpiritTide/Resources/SpiritTide/Art/Experience/orihime_motion_v1.png",
+      "sha256": "104b3e49d45beebddab765b32ada4df2890341f43048bc221437acb175df0223",
+      "width": 1024,
+      "height": 1536,
+      "tool": "built-in image_gen",
+      "transparent_background": true,
+      "reference": "orihime_bikini_v2.png",
+      "prompt": "Use case: identity-preserve / stylized-concept. Edit the provided reference into ONE transparent animation sprite atlas for a 2D belt-scrolling action RPG. Subject: Orihime Inoue, adult age 25, a clearly adult woman with eight-head-tall natural proportions. Preserve her face, hairstyle, skin tone, EXACT two-piece bikini colors and design, boots, wrist accessories and equipment from the reference. This is an athletic game animation sheet; use neutral side-on combat framing and no pinup posing. Weapon and action: open palm spiritual shield and golden projectile, no sword. The outfit is a genuine separate bikini top and bikini bottom as shown, never a bodysuit. Layout: EXACT uniform THREE columns by THREE rows on a PORTRAIT 2:3 canvas. NINE equal portrait-shaped cells, read top-left to bottom-right. Same body scale and ground baseline in every cell, full head and feet and weapon fit within each cell with 10 percent transparent padding. Each figure faces right in side/three-quarter view. Cell 1 walk contact, left foot forward; cell 2 walk passing, right foot forward; cell 3 attack anticipation, pull weapon or fist back; cell 4 forceful attack contact extended forward; cell 5 attack follow-through; cell 6 low forward evasion dash, feet in frame; cell 7 upright minor hit recoil, no injury; cell 8 jumping attack with bent knees; cell 9 powerful upright awakening cast, arm or weapon raised with a small colored spiritual arc. Clearly distinct keyframes that read when played in sequence. Clean anime cel shading, crisp outlines, consistent adult identity. Genuinely transparent background, no scenery, no smoky backdrop, no floor, no shadows, no text, no numbering, no grid lines. No duplicate missing or extra cells, no touching neighbors. Do not crop bodies.",
+      "usage": "Selected prototype keyframes; not a finished animation"
+    },
+    {
+      "id": "town_npcs_v1",
+      "path": "Assets/SpiritTide/Resources/SpiritTide/Art/Experience/town_npcs_v1.png",
+      "sha256": "1f3a92312bb884fea0836b5e43a09e863e04b86af64444ac5b50e68d3268f575",
+      "width": 1536,
+      "height": 1024,
+      "tool": "built-in image_gen",
+      "transparent_background": true,
+      "reference": null,
+      "prompt": "Use case: stylized-concept. ONE transparent production sprite atlas for the BLEACH fan action RPG town. EXACT THREE columns by TWO rows in a wide horizontal canvas with SIX equal portrait cells, full-body isolated cutouts centered in each with 12 percent transparent padding, no touching neighboring cells. Clean anime cel shading and recognizable original canon design and clothing. Top row left-to-right: Kisuke Urahara, adult man, green striped bucket hat, green clothes under black haori, wooden sandals and folded fan; Tessai Tsukabishi, very tall broad adult man, square glasses, moustache, apron and calm stance holding repair tools; Kon, small golden lion plush toy standing and waving, full plush body. Bottom row left-to-right: Byakuya Kuchiki, adult man, black shihakusho, white captain haori and white scarf, dignified stance with sheathed sword; Kukaku Shiba, adult woman in her original distinctive red robe, cropped black hair, headband, prosthetic/missing arm detail appropriate to canon, holding a route scroll with the other hand, original clothing not a bikini; one ornate freestanding mint green Japanese soul lantern and small memorial shelf prop, no character. True transparent alpha, no scene, no floor, no cast shadows, no labels, no text or grids. Uniform side-on town NPC view, humanoids natural adult proportions; Kon remains a plush toy.",
+      "usage": "Town NPC atlas with one lantern prop"
+    },
+    {
+      "id": "unohana_motion_v1",
+      "path": "Assets/SpiritTide/Resources/SpiritTide/Art/Experience/unohana_motion_v1.png",
+      "sha256": "1896e4a7dafd5b6a534ce3aea51958a3d34d9144e2f986fb18b5b07f264da68a",
+      "width": 1024,
+      "height": 1536,
+      "tool": "built-in image_gen",
+      "transparent_background": true,
+      "reference": "unohana_bikini_v2.png",
+      "prompt": "Use case: identity-preserve / stylized-concept. Edit the provided reference into ONE transparent animation sprite atlas for a 2D belt-scrolling action RPG. Subject: Retsu Unohana, a clearly adult woman with eight-head-tall natural proportions. Preserve her face, hairstyle, skin tone, EXACT two-piece bikini colors and design, boots, wrist accessories and equipment from the reference. This is an athletic game animation sheet; use neutral side-on combat framing and no pinup posing. Weapon and action: katana slash and green healing palm. The outfit is a genuine separate bikini top and bikini bottom as shown, never a bodysuit. Layout: EXACT uniform THREE columns by THREE rows on a PORTRAIT 2:3 canvas. NINE equal portrait-shaped cells, read top-left to bottom-right. Same body scale and ground baseline in every cell, full head and feet and weapon fit within each cell with 10 percent transparent padding. Each figure faces right in side/three-quarter view. Cell 1 walk contact, left foot forward; cell 2 walk passing, right foot forward; cell 3 attack anticipation, pull weapon or fist back; cell 4 forceful attack contact extended forward; cell 5 attack follow-through; cell 6 low forward evasion dash, feet in frame; cell 7 upright minor hit recoil, no injury; cell 8 jumping attack with bent knees; cell 9 powerful upright awakening cast, arm or weapon raised with a small colored spiritual arc. Clearly distinct keyframes that read when played in sequence. Clean anime cel shading, crisp outlines, consistent adult identity. Genuinely transparent background, no scenery, no smoky backdrop, no floor, no shadows, no text, no numbering, no grid lines. No duplicate missing or extra cells, no touching neighbors. Do not crop bodies.",
+      "usage": "Selected prototype keyframes; not a finished animation"
+    }
+  ],
+  "unavailable_motion_sheets": {
+    "ids": [
+      "rukia_motion_v1",
+      "yoruichi_motion_v1",
+      "soifon_motion_v1",
+      "rangiku_motion_v1"
+    ],
+    "status": "Generation did not return usable artwork. A Rukia retry was rejected by the image tool safety review; no bypass or alternate image service was used. Original selected adult character artwork remains the fallback."
+  },
+  "unohana_cleanup_v2": "Rejected by image tool safety review. Original PNG unchanged; runtime metadata and selected usable frames avoid visible neighboring-cell artifacts."
+}

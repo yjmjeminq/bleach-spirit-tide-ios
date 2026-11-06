@@ -1,0 +1,16 @@
+/Library/
+/Temp/
+/Obj/
+/Logs/
+/UserSettings/
+/Builds/
+/BuildLogs/
+/Artifacts/
+*.csproj
+*.sln
+*.user
+.DS_Store
+
+/.runtime/
+__pycache__/
+*.pyc

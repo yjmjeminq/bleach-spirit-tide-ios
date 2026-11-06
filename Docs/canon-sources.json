@@ -1,0 +1,30 @@
+{
+  "note": "원작의 이름·소속·기본 모티브 확인용. 이번 스토리·공략 기믹·UI·모션 타이밍은 팬게임용 창작 각색이다.",
+  "sources": [
+    {
+      "title": "천년혈전 공식 캐릭터",
+      "url": "https://bleach-anime.com/character/",
+      "use": "퀸시·슈테른릿터·관련 인물의 이름과 소속"
+    },
+    {
+      "title": "천년혈전 공식 키워드",
+      "url": "https://bleach-anime.com/keyword/",
+      "use": "영자·퀸시·권능의 기본 모티브"
+    },
+    {
+      "title": "테레토 초기 호로 에피소드",
+      "url": "https://www.tv-tokyo.co.jp/anime/bleach_2012/episodes/episodes01/index.html",
+      "use": "슈리커·그랜드 피셔·초기 호로의 사건 모티브"
+    },
+    {
+      "title": "테레토 아란칼 침입 에피소드",
+      "url": "https://www.tv-tokyo.co.jp/anime/bleach_2012/episodes/episodes10/index.html",
+      "use": "샤우롱·에드라드·일폴트·그림죠의 소속과 침입"
+    },
+    {
+      "title": "BLEACH Rebirth of Souls 공식 캐릭터 영상 목록",
+      "url": "https://bleach-ros.bn-ent.net/movie/?cat=character",
+      "use": "원작 주요 인물의 외형·전투 모티브 확인"
+    }
+  ]
+}

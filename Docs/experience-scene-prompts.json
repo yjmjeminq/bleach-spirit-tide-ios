@@ -1,0 +1,55 @@
+{
+  "tool": "built-in image_gen",
+  "prompts": [
+    {
+      "id": "act1_river_v1",
+      "transparent": false,
+      "prompt": "Use case: stylized-concept. Asset type: wide environment for a BLEACH fan 2D belt-scrolling action RPG. Karakura river embankment at dusk, broad concrete riverbank path, grassy levee, warm house windows, a small bridge and distant water, blue-green water with orange sunset. Continuous flat dry fighting lane. Camera is side-on and slightly elevated, matching an anime brawler. The lower 45 percent is a clear walkable ground plane across the full width; detailed background architecture is in the upper half. Wide 16:9 composition, clean anime background painting, restrained high contrast cel shading and atmospheric distant layers. Distinct local landmarks. No characters, no enemies, no foreground obstructions, no UI, no text, no logos, no watermarks."
+    },
+    {
+      "id": "act1_lighthouse_v1",
+      "transparent": false,
+      "prompt": "Use case: stylized-concept. Asset type: wide environment for a BLEACH fan 2D belt-scrolling action RPG. Karakura lighthouse service pier at stormy midnight, tall white lighthouse and small service buildings, wooden mooring posts, dark sea with distant ship lights, light rain. Broad continuous stone pier fighting lane. Camera is side-on and slightly elevated, matching an anime brawler. The lower 45 percent is a clear walkable ground plane across the full width; detailed background architecture is in the upper half. Wide 16:9 composition, clean anime background painting, restrained high contrast cel shading and atmospheric distant layers. Distinct local landmarks. No characters, no enemies, no foreground obstructions, no UI, no text, no logos, no watermarks."
+    },
+    {
+      "id": "act2_rooftops_v1",
+      "transparent": false,
+      "prompt": "Use case: stylized-concept. Asset type: wide environment for a BLEACH fan 2D belt-scrolling action RPG. Karakura rooftop route under a purple night sky, broad flat roofs with distant water tanks and aerials, distant black Garganta in the sky, foreground has a spacious unobstructed roof surface and low parapets. Camera is side-on and slightly elevated, matching an anime brawler. The lower 45 percent is a clear walkable ground plane across the full width; detailed background architecture is in the upper half. Wide 16:9 composition, clean anime background painting, restrained high contrast cel shading and atmospheric distant layers. Distinct local landmarks. No characters, no enemies, no foreground obstructions, no UI, no text, no logos, no watermarks."
+    },
+    {
+      "id": "act2_gate_v1",
+      "transparent": false,
+      "prompt": "Use case: stylized-concept. Asset type: wide environment for a BLEACH fan 2D belt-scrolling action RPG. Black Garganta gate opening into a white-stone subterranean Arrancar checkpoint, enormous pale arch and a sliver of alien sky, sand near the edges, spacious pale stone walkway. Camera is side-on and slightly elevated, matching an anime brawler. The lower 45 percent is a clear walkable ground plane across the full width; detailed background architecture is in the upper half. Wide 16:9 composition, clean anime background painting, restrained high contrast cel shading and atmospheric distant layers. Distinct local landmarks. No characters, no enemies, no foreground obstructions, no UI, no text, no logos, no watermarks."
+    },
+    {
+      "id": "act3_dunes_v1",
+      "transparent": false,
+      "prompt": "Use case: stylized-concept. Asset type: wide environment for a BLEACH fan 2D belt-scrolling action RPG. Hueco Mundo open white sand dunes under a black sky with crescent moon, distant dead branching quartz trees and broken white gate, pale violet shadows, spacious flat sandy fighting lane. Camera is side-on and slightly elevated, matching an anime brawler. The lower 45 percent is a clear walkable ground plane across the full width; detailed background architecture is in the upper half. Wide 16:9 composition, clean anime background painting, restrained high contrast cel shading and atmospheric distant layers. Distinct local landmarks. No characters, no enemies, no foreground obstructions, no UI, no text, no logos, no watermarks."
+    },
+    {
+      "id": "act3_lab_v1",
+      "transparent": false,
+      "prompt": "Use case: stylized-concept. Asset type: wide environment for a BLEACH fan 2D belt-scrolling action RPG. Las Noches abandoned research archive, ribbed white stone columns and tall turquoise specimen windows without bodies, layered record cabinets and geometric doors, dramatic emerald lighting, spacious flat tiled lane. Camera is side-on and slightly elevated, matching an anime brawler. The lower 45 percent is a clear walkable ground plane across the full width; detailed background architecture is in the upper half. Wide 16:9 composition, clean anime background painting, restrained high contrast cel shading and atmospheric distant layers. Distinct local landmarks. No characters, no enemies, no foreground obstructions, no UI, no text, no logos, no watermarks."
+    },
+    {
+      "id": "act4_canals_v1",
+      "transparent": false,
+      "prompt": "Use case: stylized-concept. Asset type: wide environment for a BLEACH fan 2D belt-scrolling action RPG. Fake Karakura quiet canal bridge battlefield at late sunset, broken concrete railings and water reflecting amber sky, Japanese city skyline and monumental pillar, spacious flat bridge lane. Camera is side-on and slightly elevated, matching an anime brawler. The lower 45 percent is a clear walkable ground plane across the full width; detailed background architecture is in the upper half. Wide 16:9 composition, clean anime background painting, restrained high contrast cel shading and atmospheric distant layers. Distinct local landmarks. No characters, no enemies, no foreground obstructions, no UI, no text, no logos, no watermarks."
+    },
+    {
+      "id": "act4_mirror_v1",
+      "transparent": false,
+      "prompt": "Use case: stylized-concept. Asset type: wide environment for a BLEACH fan 2D belt-scrolling action RPG. A false Karakura plaza reflected in enormous fractured mirror planes, blue and amber architecture repeating differently in reflections, distant ghostly Japanese roofs, no legible writing, spacious dry flat square fighting lane. Camera is side-on and slightly elevated, matching an anime brawler. The lower 45 percent is a clear walkable ground plane across the full width; detailed background architecture is in the upper half. Wide 16:9 composition, clean anime background painting, restrained high contrast cel shading and atmospheric distant layers. Distinct local landmarks. No characters, no enemies, no foreground obstructions, no UI, no text, no logos, no watermarks."
+    },
+    {
+      "id": "act5_shadows_v1",
+      "transparent": false,
+      "prompt": "Use case: stylized-concept. Asset type: wide environment for a BLEACH fan 2D belt-scrolling action RPG. Wandenreich shadow barracks and transit vault, dark blue stone arches and austere white Quincy structures emerging from black shadow portals, blue fire lamps, spacious silver tiled fighting lane. Camera is side-on and slightly elevated, matching an anime brawler. The lower 45 percent is a clear walkable ground plane across the full width; detailed background architecture is in the upper half. Wide 16:9 composition, clean anime background painting, restrained high contrast cel shading and atmospheric distant layers. Distinct local landmarks. No characters, no enemies, no foreground obstructions, no UI, no text, no logos, no watermarks."
+    },
+    {
+      "id": "act5_garden_v1",
+      "transparent": false,
+      "prompt": "Use case: stylized-concept. Asset type: wide environment for a BLEACH fan 2D belt-scrolling action RPG. Wandenreich palace future garden, symmetrical white stone paths with blue crystal trees and pale floating fragments, immense throne-room doorway in the distance, dark blue sky, spacious flat stone fighting lane. Camera is side-on and slightly elevated, matching an anime brawler. The lower 45 percent is a clear walkable ground plane across the full width; detailed background architecture is in the upper half. Wide 16:9 composition, clean anime background painting, restrained high contrast cel shading and atmospheric distant layers. Distinct local landmarks. No characters, no enemies, no foreground obstructions, no UI, no text, no logos, no watermarks."
+    }
+  ]
+}

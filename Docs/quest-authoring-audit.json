@@ -1,0 +1,10 @@
+{
+  "authoring_deterministic": true,
+  "runtime_files_untouched": true,
+  "scenes": 184,
+  "main": 5,
+  "side": 15,
+  "side_steps": 30,
+  "report_choices": 18,
+  "script_matches": true
+}

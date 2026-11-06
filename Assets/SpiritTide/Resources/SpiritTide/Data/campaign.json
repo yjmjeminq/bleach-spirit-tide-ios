@@ -1,0 +1,2855 @@
+{
+  "schema": 1,
+  "stages": [
+    {
+      "index": 0,
+      "act": 1,
+      "number": 1,
+      "title": "강변의 첫 가면",
+      "objective": "생존자가 마지막으로 본 것은 강변의 흰 가면입니다. 먼저 피난로를 열어, 가족의 목소리가 사라진 지점을 찾습니다.",
+      "background": "act1_river_v1",
+      "rooms": [
+        {
+          "title": "강변의 첫 가면 · 통로 1",
+          "foes": [
+            "a1_e07",
+            "a1_e08",
+            "a1_e07",
+            "a1_e08"
+          ],
+          "kind": "troops",
+          "layout": "staggered",
+          "hazard": "",
+          "echo": true,
+          "ward": false,
+          "reinforcement": false
+        },
+        {
+          "title": "강변의 첫 가면 · 통로 2",
+          "foes": [
+            "a1_e08",
+            "a1_e07"
+          ],
+          "kind": "troops",
+          "layout": "flank",
+          "hazard": "tide",
+          "echo": false,
+          "ward": true,
+          "reinforcement": false
+        },
+        {
+          "title": "독립 조우방 1",
+          "foes": [
+            "a1_e01"
+          ],
+          "kind": "named",
+          "layout": "ranged",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false
+        }
+      ],
+      "xp": 120,
+      "gold": 105,
+      "reason": "생존자가 마지막으로 본 것은 강변의 흰 가면입니다. 먼저 피난로를 열어, 가족의 목소리가 사라진 지점을 찾습니다.",
+      "resolution": "피시본의 기억을 걷어 내자 같은 구조 신호가 주택가에서 들려왔습니다. 살아 있는 사람의 신호부터 확인합니다.",
+      "landmark": "강변의 첫 가면"
+    },
+    {
+      "index": 1,
+      "act": 1,
+      "number": 2,
+      "title": "되풀이된 주택가",
+      "objective": "강변에서 찾은 신호가 주택가를 되풀이합니다. 애시드와이어의 기억과 현재 구조자를 혼동하지 않도록 기록을 따로 남깁니다.",
+      "background": "battle_act_2",
+      "rooms": [
+        {
+          "title": "되풀이된 주택가 · 통로 1",
+          "foes": [
+            "a1_e09",
+            "a1_e10"
+          ],
+          "kind": "troops",
+          "layout": "flank",
+          "hazard": "",
+          "echo": true,
+          "ward": false,
+          "reinforcement": false
+        },
+        {
+          "title": "되풀이된 주택가 · 통로 2",
+          "foes": [
+            "a1_e10",
+            "a1_e09",
+            "a1_e10"
+          ],
+          "kind": "troops",
+          "layout": "ranged",
+          "hazard": "tide",
+          "echo": false,
+          "ward": true,
+          "reinforcement": true
+        },
+        {
+          "title": "독립 조우방 1",
+          "foes": [
+            "a1_e02"
+          ],
+          "kind": "named",
+          "layout": "pincer",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false
+        },
+        {
+          "title": "독립 조우방 2",
+          "foes": [
+            "a1_e03"
+          ],
+          "kind": "named",
+          "layout": "guarded",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false
+        }
+      ],
+      "xp": 136,
+      "gold": 110,
+      "reason": "강변에서 찾은 신호가 주택가를 되풀이합니다. 애시드와이어의 기억과 현재 구조자를 혼동하지 않도록 기록을 따로 남깁니다.",
+      "resolution": "구조자의 이름은 지켰습니다. 집집마다 퍼진 소리의 출처가 슈리커의 사역체임을 확인했습니다.",
+      "landmark": "되풀이된 주택가"
+    },
+    {
+      "index": 2,
+      "act": 1,
+      "number": 3,
+      "title": "슈리커의 함정길",
+      "objective": "사역체가 진짜 구조 신호 위에 가짜 목소리를 겹칩니다. 퍼뜨리는 쪽을 먼저 끊어 미끼의 본체를 찾습니다.",
+      "background": "battle_act_1",
+      "rooms": [
+        {
+          "title": "슈리커의 함정길 · 통로 1",
+          "foes": [
+            "a1_e11",
+            "a1_e12",
+            "a1_e11"
+          ],
+          "kind": "troops",
+          "layout": "ranged",
+          "hazard": "",
+          "echo": true,
+          "ward": false,
+          "reinforcement": false
+        },
+        {
+          "title": "슈리커의 함정길 · 통로 2",
+          "foes": [
+            "a1_e12",
+            "a1_e11",
+            "a1_e12",
+            "a1_e11"
+          ],
+          "kind": "troops",
+          "layout": "pincer",
+          "hazard": "tide",
+          "echo": false,
+          "ward": true,
+          "reinforcement": false
+        },
+        {
+          "title": "핵심 기록 · 슈리커의 함정길",
+          "foes": [
+            "a1_mid_shrieker"
+          ],
+          "kind": "boss",
+          "layout": "guarded",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false
+        }
+      ],
+      "xp": 152,
+      "gold": 115,
+      "reason": "사역체가 진짜 구조 신호 위에 가짜 목소리를 겹칩니다. 퍼뜨리는 쪽을 먼저 끊어 미끼의 본체를 찾습니다.",
+      "resolution": "슈리커를 정화하자 신호가 등대 아래로 모였습니다. 상가에 남은 씨앗을 제거해야 안전하게 접근할 수 있습니다.",
+      "landmark": "슈리커의 함정길"
+    },
+    {
+      "index": 3,
+      "act": 1,
+      "number": 4,
+      "title": "닫힌 상가와 씨앗",
+      "objective": "닫힌 상가의 씨앗이 등대로 가는 피난로를 막습니다. 넘 샹들리에의 재현을 봉인하고 귀환 표지를 남깁니다.",
+      "background": "battle_act_2",
+      "rooms": [
+        {
+          "title": "닫힌 상가와 씨앗 · 통로 1",
+          "foes": [
+            "a1_e07",
+            "a1_e08",
+            "a1_e07",
+            "a1_e08"
+          ],
+          "kind": "troops",
+          "layout": "pincer",
+          "hazard": "",
+          "echo": true,
+          "ward": false,
+          "reinforcement": false
+        },
+        {
+          "title": "닫힌 상가와 씨앗 · 통로 2",
+          "foes": [
+            "a1_e08",
+            "a1_e07"
+          ],
+          "kind": "troops",
+          "layout": "guarded",
+          "hazard": "tide",
+          "echo": false,
+          "ward": true,
+          "reinforcement": false
+        },
+        {
+          "title": "독립 조우방 1",
+          "foes": [
+            "a1_e04"
+          ],
+          "kind": "named",
+          "layout": "open",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false
+        }
+      ],
+      "xp": 168,
+      "gold": 120,
+      "reason": "닫힌 상가의 씨앗이 등대로 가는 피난로를 막습니다. 넘 샹들리에의 재현을 봉인하고 귀환 표지를 남깁니다.",
+      "resolution": "씨앗이 사라진 상가에서 등대 방향의 큰 발자국을 찾았습니다. 구조 등불은 여전히 일정하게 빛납니다.",
+      "landmark": "닫힌 상가와 씨앗"
+    },
+    {
+      "index": 4,
+      "act": 1,
+      "number": 5,
+      "title": "비 오는 등대",
+      "objective": "발자국은 비 오는 부두로 이어집니다. 벌보스와 메타스타시아의 기억을 분리해, 미끼가 숨은 등대 진입로를 찾습니다.",
+      "background": "act1_lighthouse_v1",
+      "rooms": [
+        {
+          "title": "비 오는 등대 · 통로 1",
+          "foes": [
+            "a1_e09",
+            "a1_e10"
+          ],
+          "kind": "troops",
+          "layout": "guarded",
+          "hazard": "",
+          "echo": true,
+          "ward": false,
+          "reinforcement": false
+        },
+        {
+          "title": "비 오는 등대 · 통로 2",
+          "foes": [
+            "a1_e10",
+            "a1_e09",
+            "a1_e10"
+          ],
+          "kind": "troops",
+          "layout": "open",
+          "hazard": "tide",
+          "echo": false,
+          "ward": true,
+          "reinforcement": true
+        },
+        {
+          "title": "독립 조우방 1",
+          "foes": [
+            "a1_e05"
+          ],
+          "kind": "named",
+          "layout": "staggered",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false
+        },
+        {
+          "title": "독립 조우방 2",
+          "foes": [
+            "a1_e06"
+          ],
+          "kind": "named",
+          "layout": "flank",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false
+        }
+      ],
+      "xp": 184,
+      "gold": 125,
+      "reason": "발자국은 비 오는 부두로 이어집니다. 벌보스와 메타스타시아의 기억을 분리해, 미끼가 숨은 등대 진입로를 찾습니다.",
+      "resolution": "발자국 끝에서 사람 목소리를 흉내 내는 미끼를 확인했습니다. 등불과 다른 박자로 흔들리는 것이 단서입니다.",
+      "landmark": "비 오는 등대"
+    },
+    {
+      "index": 5,
+      "act": 1,
+      "number": 6,
+      "title": "그랜드 피셔의 미끼",
+      "objective": "그랜드 피셔의 미끼와 구조 등불을 구분했습니다. 미끼를 거둔 뒤 드러나는 본체와 첫 균열의 연결을 끊습니다.",
+      "background": "act1_lighthouse_v1",
+      "rooms": [
+        {
+          "title": "그랜드 피셔의 미끼 · 통로 1",
+          "foes": [
+            "a1_e11",
+            "a1_e12",
+            "a1_e11"
+          ],
+          "kind": "troops",
+          "layout": "open",
+          "hazard": "",
+          "echo": true,
+          "ward": false,
+          "reinforcement": false
+        },
+        {
+          "title": "그랜드 피셔의 미끼 · 통로 2",
+          "foes": [
+            "a1_e12",
+            "a1_e11",
+            "a1_e12",
+            "a1_e11"
+          ],
+          "kind": "troops",
+          "layout": "staggered",
+          "hazard": "tide",
+          "echo": false,
+          "ward": true,
+          "reinforcement": false
+        },
+        {
+          "title": "핵심 기록 · 그랜드 피셔의 미끼",
+          "foes": [
+            "a1_boss_grand_fisher"
+          ],
+          "kind": "boss",
+          "layout": "flank",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false
+        }
+      ],
+      "xp": 200,
+      "gold": 130,
+      "reason": "그랜드 피셔의 미끼와 구조 등불을 구분했습니다. 미끼를 거둔 뒤 드러나는 본체와 첫 균열의 연결을 끊습니다.",
+      "resolution": "첫 균열이 닫혔습니다. 회수한 이름은 기록함에 보존했고, 검은 틈의 흔적을 마을에서 대조할 차례입니다.",
+      "landmark": "그랜드 피셔의 미끼"
+    },
+    {
+      "index": 6,
+      "act": 2,
+      "number": 1,
+      "title": "찢어진 야간 순찰로",
+      "objective": "항구의 검은 틈이 야간 순찰로에 겹칩니다. 에드라드와 일폴트의 기억이 남긴 진입 방향부터 확인합니다.",
+      "background": "act2_rooftops_v1",
+      "rooms": [
+        {
+          "title": "찢어진 야간 순찰로 · 통로 1",
+          "foes": [
+            "a2_e09",
+            "a2_e10"
+          ],
+          "kind": "troops",
+          "layout": "flank",
+          "hazard": "",
+          "echo": true,
+          "ward": false,
+          "reinforcement": false
+        },
+        {
+          "title": "찢어진 야간 순찰로 · 통로 2",
+          "foes": [
+            "a2_e10",
+            "a2_e09",
+            "a2_e10"
+          ],
+          "kind": "troops",
+          "layout": "ranged",
+          "hazard": "rubble",
+          "echo": false,
+          "ward": true,
+          "reinforcement": false
+        },
+        {
+          "title": "독립 조우방 1",
+          "foes": [
+            "a2_e01"
+          ],
+          "kind": "named",
+          "layout": "pincer",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false
+        },
+        {
+          "title": "독립 조우방 2",
+          "foes": [
+            "a2_e02"
+          ],
+          "kind": "named",
+          "layout": "guarded",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false
+        }
+      ],
+      "xp": 216,
+      "gold": 125,
+      "reason": "항구의 검은 틈이 야간 순찰로에 겹칩니다. 에드라드와 일폴트의 기억이 남긴 진입 방향부터 확인합니다.",
+      "resolution": "서로 다른 습격 기록이 같은 지붕 위 길로 모입니다. 프라시온의 발자국을 더 따라갑니다.",
+      "landmark": "찢어진 야간 순찰로"
+    },
+    {
+      "index": 7,
+      "act": 2,
+      "number": 2,
+      "title": "프라시온의 거리",
+      "objective": "나킴과 디 로이의 조우 지점에는 소니도의 잔향이 남아 있습니다. 누가 통로의 방향을 바꾸는지 알아냅니다.",
+      "background": "battle_act_2",
+      "rooms": [
+        {
+          "title": "프라시온의 거리 · 통로 1",
+          "foes": [
+            "a2_e11",
+            "a2_e12",
+            "a2_e11"
+          ],
+          "kind": "troops",
+          "layout": "ranged",
+          "hazard": "",
+          "echo": true,
+          "ward": false,
+          "reinforcement": false
+        },
+        {
+          "title": "프라시온의 거리 · 통로 2",
+          "foes": [
+            "a2_e12",
+            "a2_e11",
+            "a2_e12",
+            "a2_e11"
+          ],
+          "kind": "troops",
+          "layout": "pincer",
+          "hazard": "rubble",
+          "echo": false,
+          "ward": true,
+          "reinforcement": true
+        },
+        {
+          "title": "독립 조우방 1",
+          "foes": [
+            "a2_e03"
+          ],
+          "kind": "named",
+          "layout": "guarded",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false
+        },
+        {
+          "title": "독립 조우방 2",
+          "foes": [
+            "a2_e04"
+          ],
+          "kind": "named",
+          "layout": "open",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false
+        }
+      ],
+      "xp": 232,
+      "gold": 130,
+      "reason": "나킴과 디 로이의 조우 지점에는 소니도의 잔향이 남아 있습니다. 누가 통로의 방향을 바꾸는지 알아냅니다.",
+      "resolution": "잔향의 간격이 샤우롱의 정찰 경로와 일치합니다. 교차선이 시작되는 지점으로 이동합니다.",
+      "landmark": "프라시온의 거리"
+    },
+    {
+      "index": 8,
+      "act": 2,
+      "number": 3,
+      "title": "샤우롱의 교차선",
+      "objective": "샤우롱의 교차 절단이 정찰 경로를 가립니다. 사선 사이의 빈틈으로 접근해 통로의 끝을 확인합니다.",
+      "background": "act2_rooftops_v1",
+      "rooms": [
+        {
+          "title": "샤우롱의 교차선 · 통로 1",
+          "foes": [
+            "a2_e09",
+            "a2_e10",
+            "a2_e09",
+            "a2_e10"
+          ],
+          "kind": "troops",
+          "layout": "pincer",
+          "hazard": "",
+          "echo": true,
+          "ward": false,
+          "reinforcement": false
+        },
+        {
+          "title": "샤우롱의 교차선 · 통로 2",
+          "foes": [
+            "a2_e10",
+            "a2_e09"
+          ],
+          "kind": "troops",
+          "layout": "guarded",
+          "hazard": "rubble",
+          "echo": false,
+          "ward": true,
+          "reinforcement": false
+        },
+        {
+          "title": "핵심 기록 · 샤우롱의 교차선",
+          "foes": [
+            "a2_mid_shawlong"
+          ],
+          "kind": "boss",
+          "layout": "open",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false
+        }
+      ],
+      "xp": 248,
+      "gold": 135,
+      "reason": "샤우롱의 교차 절단이 정찰 경로를 가립니다. 사선 사이의 빈틈으로 접근해 통로의 끝을 확인합니다.",
+      "resolution": "정찰 경로 끝에서 그림죠의 영압을 찾았습니다. 닫힌 가르간타를 안정시킬 두 관문을 찾아야 합니다.",
+      "landmark": "샤우롱의 교차선"
+    },
+    {
+      "index": 9,
+      "act": 2,
+      "number": 4,
+      "title": "닫힌 가르간타 관문",
+      "objective": "로리와 메노리의 기억이 가르간타 관문을 붙잡습니다. 서로 다른 견제를 끊고 경계를 통과합니다.",
+      "background": "act2_gate_v1",
+      "rooms": [
+        {
+          "title": "닫힌 가르간타 관문 · 통로 1",
+          "foes": [
+            "a2_e11",
+            "a2_e12"
+          ],
+          "kind": "troops",
+          "layout": "guarded",
+          "hazard": "",
+          "echo": true,
+          "ward": false,
+          "reinforcement": false
+        },
+        {
+          "title": "닫힌 가르간타 관문 · 통로 2",
+          "foes": [
+            "a2_e12",
+            "a2_e11",
+            "a2_e12"
+          ],
+          "kind": "troops",
+          "layout": "open",
+          "hazard": "rubble",
+          "echo": false,
+          "ward": true,
+          "reinforcement": false
+        },
+        {
+          "title": "독립 조우방 1",
+          "foes": [
+            "a2_e05"
+          ],
+          "kind": "named",
+          "layout": "staggered",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false
+        },
+        {
+          "title": "독립 조우방 2",
+          "foes": [
+            "a2_e06"
+          ],
+          "kind": "named",
+          "layout": "flank",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false
+        }
+      ],
+      "xp": 264,
+      "gold": 140,
+      "reason": "로리와 메노리의 기억이 가르간타 관문을 붙잡습니다. 서로 다른 견제를 끊고 경계를 통과합니다.",
+      "resolution": "가르간타 안쪽에는 두 감시 기록이 남아 있습니다. 통로가 무너지기 전에 각각의 방을 정리합니다.",
+      "landmark": "닫힌 가르간타 관문"
+    },
+    {
+      "index": 10,
+      "act": 2,
+      "number": 5,
+      "title": "두 관문 수호자",
+      "objective": "데모우라와 아이스링거는 별도 관문을 지킵니다. 넓은 공격과 원거리 견제를 나누어 읽고 돌아갈 길을 확보합니다.",
+      "background": "act2_gate_v1",
+      "rooms": [
+        {
+          "title": "두 관문 수호자 · 통로 1",
+          "foes": [
+            "a2_e09",
+            "a2_e10",
+            "a2_e09"
+          ],
+          "kind": "troops",
+          "layout": "open",
+          "hazard": "",
+          "echo": true,
+          "ward": false,
+          "reinforcement": false
+        },
+        {
+          "title": "두 관문 수호자 · 통로 2",
+          "foes": [
+            "a2_e10",
+            "a2_e09",
+            "a2_e10",
+            "a2_e09"
+          ],
+          "kind": "troops",
+          "layout": "staggered",
+          "hazard": "rubble",
+          "echo": false,
+          "ward": true,
+          "reinforcement": true
+        },
+        {
+          "title": "독립 조우방 1",
+          "foes": [
+            "a2_e07"
+          ],
+          "kind": "named",
+          "layout": "flank",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false
+        },
+        {
+          "title": "독립 조우방 2",
+          "foes": [
+            "a2_e08"
+          ],
+          "kind": "named",
+          "layout": "ranged",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false
+        }
+      ],
+      "xp": 280,
+      "gold": 145,
+      "reason": "데모우라와 아이스링거는 별도 관문을 지킵니다. 넓은 공격과 원거리 견제를 나누어 읽고 돌아갈 길을 확보합니다.",
+      "resolution": "왕복 좌표가 고정됐습니다. 이제 통로를 붙잡은 그림죠의 기록에 접근할 수 있습니다.",
+      "landmark": "두 관문 수호자"
+    },
+    {
+      "index": 11,
+      "act": 2,
+      "number": 6,
+      "title": "그림죠의 결투",
+      "objective": "그림죠의 재현이 통로를 고정하고 있습니다. 도약의 착지와 돌진이 멈추는 순간을 노려 기록을 분리합니다.",
+      "background": "battle_act_2",
+      "rooms": [
+        {
+          "title": "그림죠의 결투 · 통로 1",
+          "foes": [
+            "a2_e11",
+            "a2_e12",
+            "a2_e11",
+            "a2_e12"
+          ],
+          "kind": "troops",
+          "layout": "staggered",
+          "hazard": "",
+          "echo": true,
+          "ward": false,
+          "reinforcement": false
+        },
+        {
+          "title": "그림죠의 결투 · 통로 2",
+          "foes": [
+            "a2_e12",
+            "a2_e11"
+          ],
+          "kind": "troops",
+          "layout": "flank",
+          "hazard": "rubble",
+          "echo": false,
+          "ward": true,
+          "reinforcement": false
+        },
+        {
+          "title": "핵심 기록 · 그림죠의 결투",
+          "foes": [
+            "a2_boss_grimmjow"
+          ],
+          "kind": "boss",
+          "layout": "ranged",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false
+        }
+      ],
+      "xp": 296,
+      "gold": 150,
+      "reason": "그림죠의 재현이 통로를 고정하고 있습니다. 도약의 착지와 돌진이 멈추는 순간을 노려 기록을 분리합니다.",
+      "resolution": "그림죠의 기록 뒤에서 라스 노체스의 좌표가 남았습니다. 마을에서 좌표를 확인한 뒤 다음 층으로 갑니다.",
+      "landmark": "그림죠의 결투"
+    },
+    {
+      "index": 12,
+      "act": 3,
+      "number": 1,
+      "title": "백사막의 세 관문",
+      "objective": "라스 노체스 좌표는 맞지만 사막의 표지가 반복됩니다. 도르도니와 치루치의 기억을 정화해 실제 관문의 방향을 찾습니다.",
+      "background": "act3_dunes_v1",
+      "rooms": [
+        {
+          "title": "백사막의 세 관문 · 통로 1",
+          "foes": [
+            "a3_e11",
+            "a3_e12",
+            "a3_e11"
+          ],
+          "kind": "troops",
+          "layout": "ranged",
+          "hazard": "",
+          "echo": true,
+          "ward": false,
+          "reinforcement": false
+        },
+        {
+          "title": "백사막의 세 관문 · 통로 2",
+          "foes": [
+            "a3_e12",
+            "a3_e11",
+            "a3_e12",
+            "a3_e11"
+          ],
+          "kind": "troops",
+          "layout": "pincer",
+          "hazard": "wind",
+          "echo": false,
+          "ward": true,
+          "reinforcement": false
+        },
+        {
+          "title": "독립 조우방 1",
+          "foes": [
+            "a3_e01"
+          ],
+          "kind": "named",
+          "layout": "guarded",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false
+        },
+        {
+          "title": "독립 조우방 2",
+          "foes": [
+            "a3_e02"
+          ],
+          "kind": "named",
+          "layout": "open",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false
+        }
+      ],
+      "xp": 312,
+      "gold": 145,
+      "reason": "라스 노체스 좌표는 맞지만 사막의 표지가 반복됩니다. 도르도니와 치루치의 기억을 정화해 실제 관문의 방향을 찾습니다.",
+      "resolution": "관문의 좌표가 이어졌습니다. 무너진 회랑에서 돌아갈 표지가 끊긴 곳을 확인합니다.",
+      "landmark": "백사막의 세 관문"
+    },
+    {
+      "index": 13,
+      "act": 3,
+      "number": 2,
+      "title": "무너진 회랑의 귀환로",
+      "objective": "간텐바인과 테슬러의 기억이 회랑을 막습니다. 길 잃은 정령에게 귀환로를 남기고 원본 신호를 따라갑니다.",
+      "background": "battle_act_3",
+      "rooms": [
+        {
+          "title": "무너진 회랑의 귀환로 · 통로 1",
+          "foes": [
+            "a3_e11",
+            "a3_e12",
+            "a3_e11",
+            "a3_e12"
+          ],
+          "kind": "troops",
+          "layout": "pincer",
+          "hazard": "",
+          "echo": true,
+          "ward": false,
+          "reinforcement": false
+        },
+        {
+          "title": "무너진 회랑의 귀환로 · 통로 2",
+          "foes": [
+            "a3_e12",
+            "a3_e11"
+          ],
+          "kind": "troops",
+          "layout": "guarded",
+          "hazard": "wind",
+          "echo": false,
+          "ward": true,
+          "reinforcement": true
+        },
+        {
+          "title": "독립 조우방 1",
+          "foes": [
+            "a3_e03"
+          ],
+          "kind": "named",
+          "layout": "open",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false
+        },
+        {
+          "title": "독립 조우방 2",
+          "foes": [
+            "a3_e04"
+          ],
+          "kind": "named",
+          "layout": "staggered",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false
+        }
+      ],
+      "xp": 328,
+      "gold": 150,
+      "reason": "간텐바인과 테슬러의 기억이 회랑을 막습니다. 길 잃은 정령에게 귀환로를 남기고 원본 신호를 따라갑니다.",
+      "resolution": "회랑 아래의 낫 자국이 노이트라의 기록으로 이어집니다. 마지막 연격까지 확인할 수 있는 공간을 확보합니다.",
+      "landmark": "무너진 회랑의 귀환로"
+    },
+    {
+      "index": 14,
+      "act": 3,
+      "number": 3,
+      "title": "노이트라의 초승달",
+      "objective": "노이트라의 연격은 기록을 붙잡는 표식 주위를 돕니다. 연격의 끝을 버텨 표식의 위치를 확인합니다.",
+      "background": "act3_dunes_v1",
+      "rooms": [
+        {
+          "title": "노이트라의 초승달 · 통로 1",
+          "foes": [
+            "a3_e11",
+            "a3_e12"
+          ],
+          "kind": "troops",
+          "layout": "guarded",
+          "hazard": "",
+          "echo": true,
+          "ward": false,
+          "reinforcement": false
+        },
+        {
+          "title": "노이트라의 초승달 · 통로 2",
+          "foes": [
+            "a3_e12",
+            "a3_e11",
+            "a3_e12"
+          ],
+          "kind": "troops",
+          "layout": "open",
+          "hazard": "wind",
+          "echo": false,
+          "ward": true,
+          "reinforcement": false
+        },
+        {
+          "title": "핵심 기록 · 노이트라의 초승달",
+          "foes": [
+            "a3_mid_nnoitra"
+          ],
+          "kind": "boss",
+          "layout": "staggered",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false
+        }
+      ],
+      "xp": 344,
+      "gold": 155,
+      "reason": "노이트라의 연격은 기록을 붙잡는 표식 주위를 돕니다. 연격의 끝을 버텨 표식의 위치를 확인합니다.",
+      "resolution": "원본을 붙드는 표식을 찾았습니다. 기록고와 분석실의 왜곡을 정리해야 표식을 안전하게 회수할 수 있습니다.",
+      "landmark": "노이트라의 초승달"
+    },
+    {
+      "index": 15,
+      "act": 3,
+      "number": 4,
+      "title": "엑세키아스 기록고",
+      "objective": "기록고에는 루드본·아로니로·조마리의 기억이 별도 방으로 겹칩니다. 각 방의 표지를 대조해 가짜 연결을 걷어 냅니다.",
+      "background": "act3_lab_v1",
+      "rooms": [
+        {
+          "title": "엑세키아스 기록고 · 통로 1",
+          "foes": [
+            "a3_e11",
+            "a3_e12",
+            "a3_e11"
+          ],
+          "kind": "troops",
+          "layout": "open",
+          "hazard": "",
+          "echo": true,
+          "ward": false,
+          "reinforcement": false
+        },
+        {
+          "title": "엑세키아스 기록고 · 통로 2",
+          "foes": [
+            "a3_e12",
+            "a3_e11",
+            "a3_e12",
+            "a3_e11"
+          ],
+          "kind": "troops",
+          "layout": "staggered",
+          "hazard": "wind",
+          "echo": false,
+          "ward": true,
+          "reinforcement": false
+        },
+        {
+          "title": "독립 조우방 1",
+          "foes": [
+            "a3_e05"
+          ],
+          "kind": "named",
+          "layout": "flank",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false
+        },
+        {
+          "title": "독립 조우방 2",
+          "foes": [
+            "a3_e06"
+          ],
+          "kind": "named",
+          "layout": "ranged",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false
+        },
+        {
+          "title": "독립 조우방 3",
+          "foes": [
+            "a3_e07"
+          ],
+          "kind": "named",
+          "layout": "pincer",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false
+        }
+      ],
+      "xp": 360,
+      "gold": 160,
+      "reason": "기록고에는 루드본·아로니로·조마리의 기억이 별도 방으로 겹칩니다. 각 방의 표지를 대조해 가짜 연결을 걷어 냅니다.",
+      "resolution": "기록고의 표지가 분석실을 가리킵니다. 서로 다른 이름을 한 기록으로 합치지 않고 보존합니다.",
+      "landmark": "엑세키아스 기록고"
+    },
+    {
+      "index": 16,
+      "act": 3,
+      "number": 5,
+      "title": "분석실과 측면 정원",
+      "objective": "분석실과 정원에 남은 자엘아폴로·핀돌·지오의 기억을 정리합니다. 원본에 덧씌운 관측 흔적을 제거합니다.",
+      "background": "act3_lab_v1",
+      "rooms": [
+        {
+          "title": "분석실과 측면 정원 · 통로 1",
+          "foes": [
+            "a3_e11",
+            "a3_e12",
+            "a3_e11",
+            "a3_e12"
+          ],
+          "kind": "troops",
+          "layout": "staggered",
+          "hazard": "",
+          "echo": true,
+          "ward": false,
+          "reinforcement": false
+        },
+        {
+          "title": "분석실과 측면 정원 · 통로 2",
+          "foes": [
+            "a3_e12",
+            "a3_e11"
+          ],
+          "kind": "troops",
+          "layout": "flank",
+          "hazard": "wind",
+          "echo": false,
+          "ward": true,
+          "reinforcement": true
+        },
+        {
+          "title": "독립 조우방 1",
+          "foes": [
+            "a3_e08"
+          ],
+          "kind": "named",
+          "layout": "ranged",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false
+        },
+        {
+          "title": "독립 조우방 2",
+          "foes": [
+            "a3_e09"
+          ],
+          "kind": "named",
+          "layout": "pincer",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false
+        },
+        {
+          "title": "독립 조우방 3",
+          "foes": [
+            "a3_e10"
+          ],
+          "kind": "named",
+          "layout": "guarded",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false
+        }
+      ],
+      "xp": 376,
+      "gold": 165,
+      "reason": "분석실과 정원에 남은 자엘아폴로·핀돌·지오의 기억을 정리합니다. 원본에 덧씌운 관측 흔적을 제거합니다.",
+      "resolution": "덧씌운 흔적이 사라지자 천개 위의 기록실이 드러났습니다. 우르키오라의 기록 아래에 원본이 있습니다.",
+      "landmark": "분석실과 측면 정원"
+    },
+    {
+      "index": 17,
+      "act": 3,
+      "number": 6,
+      "title": "우르키오라의 천개",
+      "objective": "우르키오라의 영압이 세 단계로 변하며 천개를 막습니다. 빛의 창과 착지 뒤의 빈틈을 읽고 원본을 회수합니다.",
+      "background": "battle_act_3",
+      "rooms": [
+        {
+          "title": "우르키오라의 천개 · 통로 1",
+          "foes": [
+            "a3_e11",
+            "a3_e12"
+          ],
+          "kind": "troops",
+          "layout": "flank",
+          "hazard": "",
+          "echo": true,
+          "ward": false,
+          "reinforcement": false
+        },
+        {
+          "title": "우르키오라의 천개 · 통로 2",
+          "foes": [
+            "a3_e12",
+            "a3_e11",
+            "a3_e12"
+          ],
+          "kind": "troops",
+          "layout": "ranged",
+          "hazard": "wind",
+          "echo": false,
+          "ward": true,
+          "reinforcement": false
+        },
+        {
+          "title": "핵심 기록 · 우르키오라의 천개",
+          "foes": [
+            "a3_boss_ulquiorra"
+          ],
+          "kind": "boss",
+          "layout": "pincer",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false
+        }
+      ],
+      "xp": 392,
+      "gold": 170,
+      "reason": "우르키오라의 영압이 세 단계로 변하며 천개를 막습니다. 빛의 창과 착지 뒤의 빈틈을 읽고 원본을 회수합니다.",
+      "resolution": "원본 기록을 회수했습니다. 마을에서 여섯 사람의 영압과 맞추면 각성기를 강화하고 환영층을 대조할 수 있습니다.",
+      "landmark": "우르키오라의 천개"
+    },
+    {
+      "index": 18,
+      "act": 4,
+      "number": 1,
+      "title": "첫 번째 가짜 교차로",
+      "objective": "원본과 다른 표지가 교차로에 놓여 있습니다. 스타크와 바라간의 서로 다른 기억을 분리해 첫 어긋남을 찾습니다.",
+      "background": "battle_act_4",
+      "rooms": [
+        {
+          "title": "첫 번째 가짜 교차로 · 통로 1",
+          "foes": [
+            "a4_e11",
+            "a4_e12",
+            "a4_e11",
+            "a4_e12"
+          ],
+          "kind": "troops",
+          "layout": "pincer",
+          "hazard": "",
+          "echo": true,
+          "ward": false,
+          "reinforcement": false
+        },
+        {
+          "title": "첫 번째 가짜 교차로 · 통로 2",
+          "foes": [
+            "a4_e12",
+            "a4_e11"
+          ],
+          "kind": "troops",
+          "layout": "guarded",
+          "hazard": "barrier",
+          "echo": false,
+          "ward": true,
+          "reinforcement": false
+        },
+        {
+          "title": "독립 조우방 1",
+          "foes": [
+            "a4_e01"
+          ],
+          "kind": "named",
+          "layout": "open",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false
+        },
+        {
+          "title": "독립 조우방 2",
+          "foes": [
+            "a4_e02"
+          ],
+          "kind": "named",
+          "layout": "staggered",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false
+        }
+      ],
+      "xp": 408,
+      "gold": 165,
+      "reason": "원본과 다른 표지가 교차로에 놓여 있습니다. 스타크와 바라간의 서로 다른 기억을 분리해 첫 어긋남을 찾습니다.",
+      "resolution": "표지의 어긋남이 정지한 수로까지 이어집니다. 보이는 풍경 대신 원본의 순서를 따라갑니다.",
+      "landmark": "첫 번째 가짜 교차로"
+    },
+    {
+      "index": 19,
+      "act": 4,
+      "number": 2,
+      "title": "정지한 수로의 강적",
+      "objective": "할리벨과 야미의 기억이 수로를 가립니다. 물결과 무거운 강타를 구분해 검흔이 이어지는 다리로 접근합니다.",
+      "background": "act4_canals_v1",
+      "rooms": [
+        {
+          "title": "정지한 수로의 강적 · 통로 1",
+          "foes": [
+            "a4_e11",
+            "a4_e12"
+          ],
+          "kind": "troops",
+          "layout": "guarded",
+          "hazard": "",
+          "echo": true,
+          "ward": false,
+          "reinforcement": false
+        },
+        {
+          "title": "정지한 수로의 강적 · 통로 2",
+          "foes": [
+            "a4_e12",
+            "a4_e11",
+            "a4_e12"
+          ],
+          "kind": "troops",
+          "layout": "open",
+          "hazard": "barrier",
+          "echo": false,
+          "ward": true,
+          "reinforcement": true
+        },
+        {
+          "title": "독립 조우방 1",
+          "foes": [
+            "a4_e03"
+          ],
+          "kind": "named",
+          "layout": "staggered",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false
+        },
+        {
+          "title": "독립 조우방 2",
+          "foes": [
+            "a4_e04"
+          ],
+          "kind": "named",
+          "layout": "flank",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false
+        }
+      ],
+      "xp": 424,
+      "gold": 170,
+      "reason": "할리벨과 야미의 기억이 수로를 가립니다. 물결과 무거운 강타를 구분해 검흔이 이어지는 다리로 접근합니다.",
+      "resolution": "긴 칼날이 남긴 자국을 찾았습니다. 란기쿠가 가진 기억과 현장의 자국을 함께 확인합니다.",
+      "landmark": "정지한 수로의 강적"
+    },
+    {
+      "index": 20,
+      "act": 4,
+      "number": 3,
+      "title": "이치마루 긴의 사선",
+      "objective": "긴의 재현은 살아 돌아온 그가 아닙니다. 란기쿠의 기억을 존중하며, 신창의 궤적이 가리키는 실제 통로를 찾습니다.",
+      "background": "act4_canals_v1",
+      "rooms": [
+        {
+          "title": "이치마루 긴의 사선 · 통로 1",
+          "foes": [
+            "a4_e11",
+            "a4_e12",
+            "a4_e11"
+          ],
+          "kind": "troops",
+          "layout": "open",
+          "hazard": "",
+          "echo": true,
+          "ward": false,
+          "reinforcement": false
+        },
+        {
+          "title": "이치마루 긴의 사선 · 통로 2",
+          "foes": [
+            "a4_e12",
+            "a4_e11",
+            "a4_e12",
+            "a4_e11"
+          ],
+          "kind": "troops",
+          "layout": "staggered",
+          "hazard": "barrier",
+          "echo": false,
+          "ward": true,
+          "reinforcement": false
+        },
+        {
+          "title": "핵심 기록 · 이치마루 긴의 사선",
+          "foes": [
+            "a4_mid_gin"
+          ],
+          "kind": "boss",
+          "layout": "flank",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false
+        }
+      ],
+      "xp": 440,
+      "gold": 175,
+      "reason": "긴의 재현은 살아 돌아온 그가 아닙니다. 란기쿠의 기억을 존중하며, 신창의 궤적이 가리키는 실제 통로를 찾습니다.",
+      "resolution": "긴의 자국과 가짜 표지가 어긋나는 지점을 찾았습니다. 란기쿠는 남은 말을 가지고 동료와 돌아가기로 합니다.",
+      "landmark": "이치마루 긴의 사선"
+    },
+    {
+      "index": 21,
+      "act": 4,
+      "number": 4,
+      "title": "트레스 베스티아의 기억",
+      "objective": "원더와이스·아파치·미라 로즈의 기록이 같은 광장에 겹칩니다. 소리와 그림자를 분리해 원본의 순서를 되찾습니다.",
+      "background": "battle_act_4",
+      "rooms": [
+        {
+          "title": "트레스 베스티아의 기억 · 통로 1",
+          "foes": [
+            "a4_e11",
+            "a4_e12",
+            "a4_e11",
+            "a4_e12"
+          ],
+          "kind": "troops",
+          "layout": "staggered",
+          "hazard": "",
+          "echo": true,
+          "ward": false,
+          "reinforcement": false
+        },
+        {
+          "title": "트레스 베스티아의 기억 · 통로 2",
+          "foes": [
+            "a4_e12",
+            "a4_e11"
+          ],
+          "kind": "troops",
+          "layout": "flank",
+          "hazard": "barrier",
+          "echo": false,
+          "ward": true,
+          "reinforcement": false
+        },
+        {
+          "title": "독립 조우방 1",
+          "foes": [
+            "a4_e05"
+          ],
+          "kind": "named",
+          "layout": "ranged",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false
+        },
+        {
+          "title": "독립 조우방 2",
+          "foes": [
+            "a4_e06"
+          ],
+          "kind": "named",
+          "layout": "pincer",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false
+        },
+        {
+          "title": "독립 조우방 3",
+          "foes": [
+            "a4_e07"
+          ],
+          "kind": "named",
+          "layout": "guarded",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false
+        }
+      ],
+      "xp": 456,
+      "gold": 180,
+      "reason": "원더와이스·아파치·미라 로즈의 기록이 같은 광장에 겹칩니다. 소리와 그림자를 분리해 원본의 순서를 되찾습니다.",
+      "resolution": "뒤섞인 기록이 각각의 이름으로 돌아갔습니다. 남은 선순·아욘·샤를로테의 기록을 지나 환영의 중심으로 갑니다.",
+      "landmark": "트레스 베스티아의 기억"
+    },
+    {
+      "index": 22,
+      "act": 4,
+      "number": 5,
+      "title": "폭주한 영압의 광장",
+      "objective": "선순·아욘·샤를로테가 남긴 영압의 방향을 대조합니다. 환영을 유지하는 표지와 실제 출구를 구분합니다.",
+      "background": "act4_mirror_v1",
+      "rooms": [
+        {
+          "title": "폭주한 영압의 광장 · 통로 1",
+          "foes": [
+            "a4_e11",
+            "a4_e12"
+          ],
+          "kind": "troops",
+          "layout": "flank",
+          "hazard": "",
+          "echo": true,
+          "ward": false,
+          "reinforcement": false
+        },
+        {
+          "title": "폭주한 영압의 광장 · 통로 2",
+          "foes": [
+            "a4_e12",
+            "a4_e11",
+            "a4_e12"
+          ],
+          "kind": "troops",
+          "layout": "ranged",
+          "hazard": "barrier",
+          "echo": false,
+          "ward": true,
+          "reinforcement": true
+        },
+        {
+          "title": "독립 조우방 1",
+          "foes": [
+            "a4_e08"
+          ],
+          "kind": "named",
+          "layout": "pincer",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false
+        },
+        {
+          "title": "독립 조우방 2",
+          "foes": [
+            "a4_e09"
+          ],
+          "kind": "named",
+          "layout": "guarded",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false
+        },
+        {
+          "title": "독립 조우방 3",
+          "foes": [
+            "a4_e10"
+          ],
+          "kind": "named",
+          "layout": "open",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false
+        }
+      ],
+      "xp": 472,
+      "gold": 185,
+      "reason": "선순·아욘·샤를로테가 남긴 영압의 방향을 대조합니다. 환영을 유지하는 표지와 실제 출구를 구분합니다.",
+      "resolution": "두 기록이 어긋난 중심을 찾았습니다. 아이젠의 재현과 균열을 잇는 고리만 분리할 수 있습니다.",
+      "landmark": "폭주한 영압의 광장"
+    },
+    {
+      "index": 23,
+      "act": 4,
+      "number": 6,
+      "title": "아이젠의 거울 도시",
+      "objective": "원본을 대조해 옅은 환영과 진한 실체를 구분합니다. 아이젠의 권능 자체를 없애는 대신 이 균열의 연결을 끊습니다.",
+      "background": "act4_mirror_v1",
+      "rooms": [
+        {
+          "title": "아이젠의 거울 도시 · 통로 1",
+          "foes": [
+            "a4_e11",
+            "a4_e12",
+            "a4_e11"
+          ],
+          "kind": "troops",
+          "layout": "ranged",
+          "hazard": "",
+          "echo": true,
+          "ward": false,
+          "reinforcement": false
+        },
+        {
+          "title": "아이젠의 거울 도시 · 통로 2",
+          "foes": [
+            "a4_e12",
+            "a4_e11",
+            "a4_e12",
+            "a4_e11"
+          ],
+          "kind": "troops",
+          "layout": "pincer",
+          "hazard": "barrier",
+          "echo": false,
+          "ward": true,
+          "reinforcement": false
+        },
+        {
+          "title": "핵심 기록 · 아이젠의 거울 도시",
+          "foes": [
+            "a4_boss_aizen"
+          ],
+          "kind": "boss",
+          "layout": "guarded",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false
+        }
+      ],
+      "xp": 488,
+      "gold": 190,
+      "reason": "원본을 대조해 옅은 환영과 진한 실체를 구분합니다. 아이젠의 권능 자체를 없애는 대신 이 균열의 연결을 끊습니다.",
+      "resolution": "환영 뒤에서 퀸시 문장과 그림자 통로를 찾았습니다. 회수한 기록으로 연결이 다시 열리는 이유를 확인합니다.",
+      "landmark": "아이젠의 거울 도시"
+    },
+    {
+      "index": 24,
+      "act": 5,
+      "number": 1,
+      "title": "그림자의 진입로",
+      "objective": "그림자 통로가 봉인한 층에 다시 닿습니다. 킬게와 에스 노트의 기억을 지나 재현을 되돌리는 왕문의 방향을 찾습니다.",
+      "background": "act5_shadows_v1",
+      "rooms": [
+        {
+          "title": "그림자의 진입로 · 통로 1",
+          "foes": [
+            "a5_e11",
+            "a5_e12"
+          ],
+          "kind": "troops",
+          "layout": "guarded",
+          "hazard": "",
+          "echo": true,
+          "ward": false,
+          "reinforcement": false
+        },
+        {
+          "title": "그림자의 진입로 · 통로 2",
+          "foes": [
+            "a5_e12",
+            "a5_e11",
+            "a5_e12"
+          ],
+          "kind": "troops",
+          "layout": "open",
+          "hazard": "shadow",
+          "echo": false,
+          "ward": true,
+          "reinforcement": false
+        },
+        {
+          "title": "독립 조우방 1",
+          "foes": [
+            "a5_e01"
+          ],
+          "kind": "named",
+          "layout": "staggered",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false
+        },
+        {
+          "title": "독립 조우방 2",
+          "foes": [
+            "a5_e02"
+          ],
+          "kind": "named",
+          "layout": "flank",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false
+        }
+      ],
+      "xp": 504,
+      "gold": 185,
+      "reason": "그림자 통로가 봉인한 층에 다시 닿습니다. 킬게와 에스 노트의 기억을 지나 재현을 되돌리는 왕문의 방향을 찾습니다.",
+      "resolution": "왕문까지 이어지는 전선이 드러났습니다. 폭발과 화염으로 가려진 표지를 먼저 정리합니다.",
+      "landmark": "그림자의 진입로"
+    },
+    {
+      "index": 25,
+      "act": 5,
+      "number": 2,
+      "title": "슈테른릿터의 전선",
+      "objective": "밤비에타의 폭발과 버즈비의 화염이 서로 다른 구역을 막습니다. 두 예고를 구분해 저울 문장까지 접근합니다.",
+      "background": "act5_shadows_v1",
+      "rooms": [
+        {
+          "title": "슈테른릿터의 전선 · 통로 1",
+          "foes": [
+            "a5_e11",
+            "a5_e12",
+            "a5_e11"
+          ],
+          "kind": "troops",
+          "layout": "open",
+          "hazard": "",
+          "echo": true,
+          "ward": false,
+          "reinforcement": false
+        },
+        {
+          "title": "슈테른릿터의 전선 · 통로 2",
+          "foes": [
+            "a5_e12",
+            "a5_e11",
+            "a5_e12",
+            "a5_e11"
+          ],
+          "kind": "troops",
+          "layout": "staggered",
+          "hazard": "shadow",
+          "echo": false,
+          "ward": true,
+          "reinforcement": true
+        },
+        {
+          "title": "독립 조우방 1",
+          "foes": [
+            "a5_e03"
+          ],
+          "kind": "named",
+          "layout": "flank",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false
+        },
+        {
+          "title": "독립 조우방 2",
+          "foes": [
+            "a5_e04"
+          ],
+          "kind": "named",
+          "layout": "ranged",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false
+        }
+      ],
+      "xp": 520,
+      "gold": 190,
+      "reason": "밤비에타의 폭발과 버즈비의 화염이 서로 다른 구역을 막습니다. 두 예고를 구분해 저울 문장까지 접근합니다.",
+      "resolution": "되돌림의 중심은 하쉬발트가 지키는 연결 고리입니다. 고리를 끊으면 같은 기록이 다시 돌아오지 않습니다.",
+      "landmark": "슈테른릿터의 전선"
+    },
+    {
+      "index": 26,
+      "act": 5,
+      "number": 3,
+      "title": "하쉬발트의 저울",
+      "objective": "하쉬발트의 세 번째 타격 뒤 되돌림이 예고됩니다. 무작정 연타하지 않고 고리 밖으로 물러날 순간을 만듭니다.",
+      "background": "battle_act_5",
+      "rooms": [
+        {
+          "title": "하쉬발트의 저울 · 통로 1",
+          "foes": [
+            "a5_e11",
+            "a5_e12",
+            "a5_e11",
+            "a5_e12"
+          ],
+          "kind": "troops",
+          "layout": "staggered",
+          "hazard": "",
+          "echo": true,
+          "ward": false,
+          "reinforcement": false
+        },
+        {
+          "title": "하쉬발트의 저울 · 통로 2",
+          "foes": [
+            "a5_e12",
+            "a5_e11"
+          ],
+          "kind": "troops",
+          "layout": "flank",
+          "hazard": "shadow",
+          "echo": false,
+          "ward": true,
+          "reinforcement": false
+        },
+        {
+          "title": "핵심 기록 · 하쉬발트의 저울",
+          "foes": [
+            "a5_mid_haschwalth"
+          ],
+          "kind": "boss",
+          "layout": "ranged",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false
+        }
+      ],
+      "xp": 536,
+      "gold": 195,
+      "reason": "하쉬발트의 세 번째 타격 뒤 되돌림이 예고됩니다. 무작정 연타하지 않고 고리 밖으로 물러날 순간을 만듭니다.",
+      "resolution": "되돌림의 고리를 해제했습니다. 왕성 회랑과 미래의 정원을 지나 마지막 기록실까지 길이 열렸습니다.",
+      "landmark": "하쉬발트의 저울"
+    },
+    {
+      "index": 27,
+      "act": 5,
+      "number": 4,
+      "title": "공명하는 왕성 회랑",
+      "objective": "창 두·BG9·마스크의 서로 다른 전투 기록이 회랑에 겹칩니다. 방어·사격·돌진을 나누어 상대하고 귀환 표지를 남깁니다.",
+      "background": "battle_act_5",
+      "rooms": [
+        {
+          "title": "공명하는 왕성 회랑 · 통로 1",
+          "foes": [
+            "a5_e11",
+            "a5_e12"
+          ],
+          "kind": "troops",
+          "layout": "flank",
+          "hazard": "",
+          "echo": true,
+          "ward": false,
+          "reinforcement": false
+        },
+        {
+          "title": "공명하는 왕성 회랑 · 통로 2",
+          "foes": [
+            "a5_e12",
+            "a5_e11",
+            "a5_e12"
+          ],
+          "kind": "troops",
+          "layout": "ranged",
+          "hazard": "shadow",
+          "echo": false,
+          "ward": true,
+          "reinforcement": false
+        },
+        {
+          "title": "독립 조우방 1",
+          "foes": [
+            "a5_e05"
+          ],
+          "kind": "named",
+          "layout": "pincer",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false
+        },
+        {
+          "title": "독립 조우방 2",
+          "foes": [
+            "a5_e06"
+          ],
+          "kind": "named",
+          "layout": "guarded",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false
+        },
+        {
+          "title": "독립 조우방 3",
+          "foes": [
+            "a5_e07"
+          ],
+          "kind": "named",
+          "layout": "open",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false
+        }
+      ],
+      "xp": 552,
+      "gold": 200,
+      "reason": "창 두·BG9·마스크의 서로 다른 전투 기록이 회랑에 겹칩니다. 방어·사격·돌진을 나누어 상대하고 귀환 표지를 남깁니다.",
+      "resolution": "회랑이 안정됐습니다. 가능한 미래가 겹치는 정원에서 확정되기 전의 신호를 대조합니다.",
+      "landmark": "공명하는 왕성 회랑"
+    },
+    {
+      "index": 28,
+      "act": 5,
+      "number": 5,
+      "title": "가능한 미래의 정원",
+      "objective": "캔디스·그레미·아스킨의 기록은 다른 미래를 보여 줍니다. 원본 다섯 묶음을 대조해 실제 왕실의 좌표를 정합니다.",
+      "background": "act5_garden_v1",
+      "rooms": [
+        {
+          "title": "가능한 미래의 정원 · 통로 1",
+          "foes": [
+            "a5_e11",
+            "a5_e12",
+            "a5_e11"
+          ],
+          "kind": "troops",
+          "layout": "ranged",
+          "hazard": "",
+          "echo": true,
+          "ward": false,
+          "reinforcement": false
+        },
+        {
+          "title": "가능한 미래의 정원 · 통로 2",
+          "foes": [
+            "a5_e12",
+            "a5_e11",
+            "a5_e12",
+            "a5_e11"
+          ],
+          "kind": "troops",
+          "layout": "pincer",
+          "hazard": "shadow",
+          "echo": false,
+          "ward": true,
+          "reinforcement": true
+        },
+        {
+          "title": "독립 조우방 1",
+          "foes": [
+            "a5_e08"
+          ],
+          "kind": "named",
+          "layout": "guarded",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false
+        },
+        {
+          "title": "독립 조우방 2",
+          "foes": [
+            "a5_e09"
+          ],
+          "kind": "named",
+          "layout": "open",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false
+        },
+        {
+          "title": "독립 조우방 3",
+          "foes": [
+            "a5_e10"
+          ],
+          "kind": "named",
+          "layout": "staggered",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false
+        }
+      ],
+      "xp": 568,
+      "gold": 205,
+      "reason": "캔디스·그레미·아스킨의 기록은 다른 미래를 보여 줍니다. 원본 다섯 묶음을 대조해 실제 왕실의 좌표를 정합니다.",
+      "resolution": "왕실 좌표가 한곳으로 모였습니다. 되찾은 이름과 여섯 사람의 귀환 약속을 기록함에 고정합니다.",
+      "landmark": "가능한 미래의 정원"
+    },
+    {
+      "index": 29,
+      "act": 5,
+      "number": 6,
+      "title": "유하바하의 마지막 기록",
+      "objective": "가능한 사선이 확정되는 순간을 확인합니다. 유하바하의 재현과 다섯 균열을 잇는 기록 기능을 봉인하고 함께 돌아갑니다.",
+      "background": "battle_act_5",
+      "rooms": [
+        {
+          "title": "유하바하의 마지막 기록 · 통로 1",
+          "foes": [
+            "a5_e11",
+            "a5_e12",
+            "a5_e11",
+            "a5_e12"
+          ],
+          "kind": "troops",
+          "layout": "pincer",
+          "hazard": "",
+          "echo": true,
+          "ward": false,
+          "reinforcement": false
+        },
+        {
+          "title": "유하바하의 마지막 기록 · 통로 2",
+          "foes": [
+            "a5_e12",
+            "a5_e11"
+          ],
+          "kind": "troops",
+          "layout": "guarded",
+          "hazard": "shadow",
+          "echo": false,
+          "ward": true,
+          "reinforcement": false
+        },
+        {
+          "title": "핵심 기록 · 유하바하의 마지막 기록",
+          "foes": [
+            "a5_boss_yhwach"
+          ],
+          "kind": "boss",
+          "layout": "open",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false
+        }
+      ],
+      "xp": 584,
+      "gold": 210,
+      "reason": "가능한 사선이 확정되는 순간을 확인합니다. 유하바하의 재현과 다섯 균열을 잇는 기록 기능을 봉인하고 함께 돌아갑니다.",
+      "resolution": "재현 기능이 멈췄습니다. 구조 신호가 귀환로를 밝힙니다. 마지막 보고로 이름을 돌려주고 여섯 사람의 귀환을 남깁니다.",
+      "landmark": "유하바하의 마지막 기록"
+    }
+  ],
+  "foes": [
+    {
+      "id": "a1_e01",
+      "name": "피시본 D",
+      "act": 1,
+      "rank": "named",
+      "brain": "melee",
+      "atlas": "enemies_act_1",
+      "cell": 0,
+      "base_hp": 150,
+      "tell": "어깨를 뒤로 당기며 두 단계 부채꼴이 나타난다.",
+      "counter": "마지막 내려찍기까지 피하고 낮아진 가면을 노린다.",
+      "attack": "넓은 팔 휘두르기 후 앞으로 한 걸음 내려찍는다."
+    },
+    {
+      "id": "a1_e02",
+      "name": "애시드와이어",
+      "act": 1,
+      "rank": "named",
+      "brain": "dash",
+      "atlas": "enemies_act_1",
+      "cell": 1,
+      "base_hp": 150,
+      "tell": "감기는 꼬리와 바닥의 반원·직선이 차례 표시된다.",
+      "counter": "반원 바깥으로 이동한 뒤 돌진을 측면으로 피한다. 오리히메 관련 대사는 기억 재현 전투로 처리한다.",
+      "attack": "꼬리를 감아 한 번 휩쓴 뒤 길게 전진한다."
+    },
+    {
+      "id": "a1_e03",
+      "name": "헥사포더스",
+      "act": 1,
+      "rank": "named",
+      "brain": "dash",
+      "atlas": "enemies_act_1",
+      "cell": 2,
+      "base_hp": 150,
+      "tell": "앞발이 모이고 길게 긁힌 바닥 사각형이 나타난다.",
+      "counter": "깊이 방향으로 이탈해 멈춘 뒤 측면을 공격한다.",
+      "attack": "앞다리를 찍고 짧은 직선 돌진을 한다."
+    },
+    {
+      "id": "a1_e04",
+      "name": "넘 샹들리에",
+      "act": 1,
+      "rank": "named",
+      "brain": "zone",
+      "atlas": "enemies_act_1",
+      "cell": 3,
+      "base_hp": 150,
+      "tell": "씨앗이 떨어질 원과 촉수 방향이 먼저 보인다.",
+      "counter": "씨앗을 공격해 제거하거나 안전 틈으로 접근한다. 조작권 강탈은 사용하지 않는다.",
+      "attack": "바닥에 씨앗을 뿌려 짧게 유지되는 구속 구역을 만든다."
+    },
+    {
+      "id": "a1_e05",
+      "name": "벌보스 G",
+      "act": 1,
+      "rank": "named",
+      "brain": "melee",
+      "atlas": "enemies_act_1",
+      "cell": 4,
+      "base_hp": 150,
+      "tell": "큰 원과 바깥 고리가 순서 표시된다.",
+      "counter": "안쪽 강타를 피하고 지나간 원을 이용해 후속 파문을 피한다.",
+      "attack": "몸을 크게 실어 내려찍고 작은 충격파를 낸다."
+    },
+    {
+      "id": "a1_e06",
+      "name": "메타스타시아",
+      "act": 1,
+      "rank": "named",
+      "brain": "zone",
+      "atlas": "enemies_act_1",
+      "cell": 5,
+      "base_hp": 150,
+      "tell": "촉수가 뻗을 길과 닫히는 고리가 나타난다.",
+      "counter": "사선에서 벗어나거나 촉수를 기본 공격으로 끊는다. 무기 영구 파괴와 캐릭터 강제 합체는 쓰지 않는다.",
+      "attack": "촉수로 좁은 부위를 붙잡고 짧은 스킬 봉쇄 표식을 남긴다."
+    },
+    {
+      "id": "a1_e07",
+      "name": "메노스 그랑데·길리안",
+      "act": 1,
+      "rank": "regular",
+      "brain": "ranged",
+      "atlas": "enemies_act_1",
+      "cell": 6,
+      "base_hp": 52,
+      "tell": "가면 앞 충전 구체와 넓은 직선이 1.4초 표시된다.",
+      "counter": "깊이 방향으로 사선을 벗어나고 발사 뒤 낮게 숙인 가면을 공격한다.",
+      "attack": "긴 충전 후 한 줄 세로를 발사한다."
+    },
+    {
+      "id": "a1_e08",
+      "name": "호로·근접형",
+      "act": 1,
+      "rank": "regular",
+      "brain": "melee",
+      "atlas": "enemies_act_1",
+      "cell": 7,
+      "base_hp": 52,
+      "tell": "가면을 낮추고 앞발을 고정한다.",
+      "counter": "공격 옆으로 이동한 뒤 기본 연계로 처리한다.",
+      "attack": "짧은 물기와 앞발 공격."
+    },
+    {
+      "id": "a1_e09",
+      "name": "호로·비행형",
+      "act": 1,
+      "rank": "regular",
+      "brain": "melee",
+      "atlas": "enemies_act_1",
+      "cell": 8,
+      "base_hp": 52,
+      "tell": "긴 착지 화살표와 접힌 날개.",
+      "counter": "착지점 밖으로 이동하고 내려온 몸체를 공격한다.",
+      "attack": "낮게 급강하한 뒤 지상에서 잠깐 숨을 고른다."
+    },
+    {
+      "id": "a1_e10",
+      "name": "호로·돌진형",
+      "act": 1,
+      "rank": "regular",
+      "brain": "dash",
+      "atlas": "enemies_act_1",
+      "cell": 9,
+      "base_hp": 52,
+      "tell": "바닥 긁기와 직선 발자국.",
+      "counter": "깊이 이동으로 피한 뒤 멈춘 몸체를 노린다.",
+      "attack": "짧은 직선 돌진 한 번."
+    },
+    {
+      "id": "a1_e11",
+      "name": "호로·촉수형",
+      "act": 1,
+      "rank": "regular",
+      "brain": "melee",
+      "atlas": "enemies_act_1",
+      "cell": 10,
+      "base_hp": 52,
+      "tell": "촉수마다 짧은 직선 두 개가 순서 표시된다.",
+      "counter": "첫 공격이 지나간 쪽으로 이동한다. 구속은 일반 공격 두 번에 풀린다.",
+      "attack": "두 촉수를 전방에 번갈아 뻗는다."
+    },
+    {
+      "id": "a1_e12",
+      "name": "호로·영탄형",
+      "act": 1,
+      "rank": "regular",
+      "brain": "melee",
+      "atlas": "enemies_act_1",
+      "cell": 11,
+      "base_hp": 52,
+      "tell": "입과 세 발사 방향에 작은 충전점.",
+      "counter": "탄 사이로 접근하거나 사격 후 긴 회복을 노린다.",
+      "attack": "느린 영압 탄 세 발을 부채꼴로 보낸다."
+    },
+    {
+      "id": "a2_e01",
+      "name": "에드라드 리오네스",
+      "act": 2,
+      "rank": "named",
+      "brain": "ranged",
+      "atlas": "enemies_act_2",
+      "cell": 0,
+      "base_hp": 150,
+      "tell": "팔을 크게 들어 원과 부채꼴을 차례 표시한다.",
+      "counter": "강타를 피하고 화염 사선에서 옆으로 이동한다.",
+      "attack": "굵은 팔로 내려찍고 전방에 짧은 화염 충격을 낸다."
+    },
+    {
+      "id": "a2_e02",
+      "name": "일폴트 그란츠",
+      "act": 2,
+      "rank": "named",
+      "brain": "dash",
+      "atlas": "enemies_act_2",
+      "cell": 1,
+      "base_hp": 150,
+      "tell": "머리와 바닥 선이 고정된다.",
+      "counter": "깊이 이동으로 피하고 벽에서 멈춘 뒤 공격한다.",
+      "attack": "머리를 낮춰 직선 돌진 후 뿔로 올려친다."
+    },
+    {
+      "id": "a2_e03",
+      "name": "나킴 그린디나",
+      "act": 2,
+      "rank": "named",
+      "brain": "melee",
+      "atlas": "enemies_act_2",
+      "cell": 2,
+      "base_hp": 150,
+      "tell": "도착점의 온전한 발자국과 들어 올린 주먹.",
+      "counter": "도착점을 보고 한 번 더 옆으로 움직여 강타를 피한다.",
+      "attack": "짧은 소니도 뒤 무거운 주먹 공격."
+    },
+    {
+      "id": "a2_e04",
+      "name": "디 로이 링커",
+      "act": 2,
+      "rank": "named",
+      "brain": "melee",
+      "atlas": "enemies_act_2",
+      "cell": 3,
+      "base_hp": 150,
+      "tell": "칼을 낮추고 바닥에 좁은 직선.",
+      "counter": "뒤로만 도망가지 말고 깊이 방향으로 벗어나 빈틈을 공격한다.",
+      "attack": "낮게 미끄러져 짧은 연속 베기를 쓴다."
+    },
+    {
+      "id": "a2_e05",
+      "name": "로리 아이번",
+      "act": 2,
+      "rank": "named",
+      "brain": "melee",
+      "atlas": "enemies_act_2",
+      "cell": 4,
+      "base_hp": 150,
+      "tell": "손끝과 작은 톱니 원이 부풀어 오른다.",
+      "counter": "좁은 부식 구역을 피하고 연계가 끝난 뒤 접근한다.",
+      "attack": "짧은 연계와 가까운 바닥에 남는 부식 구역."
+    },
+    {
+      "id": "a2_e06",
+      "name": "메노리 말리아",
+      "act": 2,
+      "rank": "named",
+      "brain": "melee",
+      "atlas": "enemies_act_2",
+      "cell": 5,
+      "base_hp": 150,
+      "tell": "사격할 손이 멈추고 얇은 사선이 보인다.",
+      "counter": "사선 밖으로 걸어 접근한다. 세부 공격은 게임용 창작 패턴으로 표시한다.",
+      "attack": "짧은 이동 뒤 한 줄 영탄을 보낸다."
+    },
+    {
+      "id": "a2_e07",
+      "name": "데모우라 조드",
+      "act": 2,
+      "rank": "named",
+      "brain": "melee",
+      "atlas": "enemies_act_2",
+      "cell": 6,
+      "base_hp": 150,
+      "tell": "어깨 회전과 넓은 호.",
+      "counter": "호 안쪽 가까운 곳 또는 바깥으로 이동한다.",
+      "attack": "팔을 길게 뻗어 부채꼴로 휘두른다."
+    },
+    {
+      "id": "a2_e08",
+      "name": "아이스링거 웨르나르",
+      "act": 2,
+      "rank": "named",
+      "brain": "ranged",
+      "atlas": "enemies_act_2",
+      "cell": 7,
+      "base_hp": 150,
+      "tell": "세 손끝 방향이 차례 점멸한다.",
+      "counter": "탄 사이 통로를 따라 전진하고 재충전 중 공격한다.",
+      "attack": "간격을 둔 세 방향 영탄을 연속 사격한다."
+    },
+    {
+      "id": "a2_e09",
+      "name": "아란칼·검사",
+      "act": 2,
+      "rank": "regular",
+      "brain": "melee",
+      "atlas": "enemies_act_2",
+      "cell": 8,
+      "base_hp": 52,
+      "tell": "검의 두 궤적과 후퇴 발자국.",
+      "counter": "두 번째 베기 뒤 거리를 좁혀 공격한다.",
+      "attack": "2연 베기 후 짧은 소니도 후퇴."
+    },
+    {
+      "id": "a2_e10",
+      "name": "아란칼·창수",
+      "act": 2,
+      "rank": "regular",
+      "brain": "melee",
+      "atlas": "enemies_act_2",
+      "cell": 9,
+      "base_hp": 52,
+      "tell": "직선과 작은 반원이 차례 표시된다.",
+      "counter": "측면에서 후속 쓸기까지 피한다.",
+      "attack": "긴 찌르기 후 좁은 가로 쓸기."
+    },
+    {
+      "id": "a2_e11",
+      "name": "아란칼·발라 사수",
+      "act": 2,
+      "rank": "regular",
+      "brain": "melee",
+      "atlas": "enemies_act_2",
+      "cell": 10,
+      "base_hp": 52,
+      "tell": "손이 고정되고 작은 세 점이 표시된다.",
+      "counter": "고정 사선에서 벗어난 뒤 접근한다.",
+      "attack": "작은 발라 세 발을 같은 방향으로 빠르게 쏜다."
+    },
+    {
+      "id": "a2_e12",
+      "name": "아쥬커스급 호로",
+      "act": 2,
+      "rank": "regular",
+      "brain": "melee",
+      "atlas": "enemies_act_2",
+      "cell": 11,
+      "base_hp": 52,
+      "tell": "착지 원과 앞발 자세.",
+      "counter": "착지를 피하고 넓은 팔 동작이 끝난 뒤 공격한다.",
+      "attack": "짧은 도약과 넓은 앞발 공격."
+    },
+    {
+      "id": "a3_e01",
+      "name": "도르도니 알렉산드로 델 소캇치오",
+      "act": 3,
+      "rank": "named",
+      "brain": "melee",
+      "atlas": "enemies_act_3",
+      "cell": 0,
+      "base_hp": 150,
+      "tell": "발끝 원과 회전 방향 화살표.",
+      "counter": "기둥 바깥으로 이동해 회전이 끝난 발을 노린다.",
+      "attack": "회전 발차기로 바람 기둥을 만든다."
+    },
+    {
+      "id": "a3_e02",
+      "name": "치루치 선더위치",
+      "act": 3,
+      "rank": "named",
+      "brain": "melee",
+      "atlas": "enemies_act_3",
+      "cell": 1,
+      "base_hp": 150,
+      "tell": "왕복 선과 깃의 발사 방향.",
+      "counter": "돌아오는 요요까지 확인하고 틈으로 접근한다.",
+      "attack": "요요 궤적을 보낸 뒤 깃날을 부채꼴로 발사한다."
+    },
+    {
+      "id": "a3_e03",
+      "name": "간텐바인 모스케다",
+      "act": 3,
+      "rank": "named",
+      "brain": "melee",
+      "atlas": "enemies_act_3",
+      "cell": 2,
+      "base_hp": 150,
+      "tell": "두 번의 어깨 움직임과 마지막 원형 예고.",
+      "counter": "마지막 공격까지 피하고 긴 후딜레이를 공격한다.",
+      "attack": "정면 주먹 연타 후 한 번 크게 내려친다."
+    },
+    {
+      "id": "a3_e04",
+      "name": "테슬러 린도크루츠",
+      "act": 3,
+      "rank": "named",
+      "brain": "melee",
+      "atlas": "enemies_act_3",
+      "cell": 3,
+      "base_hp": 150,
+      "tell": "직선 발자국과 도착점의 열린 손 표시.",
+      "counter": "도착점을 비우고 회복 동작 중 접근한다.",
+      "attack": "무거운 직선 돌진 뒤 붙잡기를 시도한다."
+    },
+    {
+      "id": "a3_e05",
+      "name": "루드본 첼루트",
+      "act": 3,
+      "rank": "named",
+      "brain": "zone",
+      "atlas": "enemies_act_3",
+      "cell": 4,
+      "base_hp": 150,
+      "tell": "소환 위치에 가면 무늬가 차오른다.",
+      "counter": "소환 중 드러나는 본체를 공격해 끊는다. 소환체는 별도 도감 수·경험치로 중복 계산하지 않는다.",
+      "attack": "엑세키아스를 최대 두 기 소환하고 근접을 방어한다."
+    },
+    {
+      "id": "a3_e06",
+      "name": "아로니로 아루루에리",
+      "act": 3,
+      "rank": "named",
+      "brain": "melee",
+      "atlas": "enemies_act_3",
+      "cell": 5,
+      "base_hp": 150,
+      "tell": "창격은 선, 촉수는 부채꼴로 구분한다.",
+      "counter": "현재 자세를 읽어 대응하고 광원이 켜진 짧은 구간에 공격한다. 세부 약점은 전장 각색.",
+      "attack": "좁은 창격과 넓은 촉수 공격을 번갈아 쓴다."
+    },
+    {
+      "id": "a3_e07",
+      "name": "조마리 루루",
+      "act": 3,
+      "rank": "named",
+      "brain": "zone",
+      "atlas": "enemies_act_3",
+      "cell": 6,
+      "base_hp": 150,
+      "tell": "시선 선과 발밑 눈 고리가 1초 표시된다.",
+      "counter": "시선 선을 벗어나거나 표식 기둥을 공격한다. 입력 반전과 장시간 조작 박탈은 쓰지 않는다.",
+      "attack": "눈 모양 표식을 남겨 잠깐 움직임을 늦춘다."
+    },
+    {
+      "id": "a3_e08",
+      "name": "자엘아폴로 그란츠",
+      "act": 3,
+      "rank": "named",
+      "brain": "zone",
+      "atlas": "enemies_act_3",
+      "cell": 7,
+      "base_hp": 150,
+      "tell": "복제 앞에 직선 또는 원형 도형이 뜬다.",
+      "counter": "정해진 도형을 읽어 피하고 본체가 분석하는 동안 공격한다. 실시간 입력을 몰래 읽지 않는다.",
+      "attack": "기록한 두 가지 공격을 순서 도형과 함께 재현한다."
+    },
+    {
+      "id": "a3_e09",
+      "name": "핀돌 캐리어스",
+      "act": 3,
+      "rank": "named",
+      "brain": "melee",
+      "atlas": "enemies_act_3",
+      "cell": 8,
+      "base_hp": 150,
+      "tell": "집게 자세와 영탄의 사선을 구분해 표시한다.",
+      "counter": "거리를 읽어 공격을 피하고 방어가 비는 옆을 노린다.",
+      "attack": "좁은 수압탄과 집게 공격을 번갈아 쓴다."
+    },
+    {
+      "id": "a3_e10",
+      "name": "지오 베가",
+      "act": 3,
+      "rank": "named",
+      "brain": "melee",
+      "atlas": "enemies_act_3",
+      "cell": 9,
+      "base_hp": 150,
+      "tell": "발자국 두 개와 웅크린 다리.",
+      "counter": "첫 접근 뒤 바로 공격하지 말고 두 번째 발차기를 피한다.",
+      "attack": "빠르게 접근한 뒤 발차기 두 번."
+    },
+    {
+      "id": "a3_e11",
+      "name": "엑세키아스·검병",
+      "act": 3,
+      "rank": "regular",
+      "brain": "melee",
+      "atlas": "enemies_act_3",
+      "cell": 10,
+      "base_hp": 52,
+      "tell": "가면과 검이 번갈아 들린다.",
+      "counter": "한 명씩 공격하는 틈을 이용해 모아 처리한다.",
+      "attack": "다른 병사와 간격을 두고 한 번씩 베기."
+    },
+    {
+      "id": "a3_e12",
+      "name": "엑세키아스·창병",
+      "act": 3,
+      "rank": "regular",
+      "brain": "melee",
+      "atlas": "enemies_act_3",
+      "cell": 11,
+      "base_hp": 52,
+      "tell": "창끝과 대열 발자국.",
+      "counter": "정면 한 줄을 피하고 옆으로 돌아 대열을 깨뜨린다.",
+      "attack": "짧은 직선 창격 후 뒤 병사와 교대한다."
+    },
+    {
+      "id": "a4_e01",
+      "name": "코요테 스타크",
+      "act": 4,
+      "rank": "named",
+      "brain": "melee",
+      "atlas": "enemies_act_4",
+      "cell": 0,
+      "base_hp": 150,
+      "tell": "사격 사선과 늑대 주변의 원형 타이머.",
+      "counter": "사선을 피하고 늑대가 다가오기 전 공격해 해제한다. 독립된 선택 정예방에서 등장.",
+      "attack": "간격이 다른 영압 사격과 지연 폭발 늑대를 사용한다."
+    },
+    {
+      "id": "a4_e02",
+      "name": "바라간 루이젠번",
+      "act": 4,
+      "rank": "named",
+      "brain": "zone",
+      "atlas": "enemies_act_4",
+      "cell": 1,
+      "base_hp": 150,
+      "tell": "안개 경계와 남은 안전 통로가 명확히 보인다.",
+      "counter": "통로를 따라 이동하며 전장 봉인 장치를 활성화한다. 원작 노화 능력을 단순 약화 마법으로 단정하지 않는다.",
+      "attack": "천천히 퍼지는 레스피라 영역으로 공간을 제한한다."
+    },
+    {
+      "id": "a4_e03",
+      "name": "티아 할리벨",
+      "act": 4,
+      "rank": "named",
+      "brain": "melee",
+      "atlas": "enemies_act_4",
+      "cell": 2,
+      "base_hp": 150,
+      "tell": "직선 사선과 낮은 물결 선이 서로 다른 도형으로 나타난다.",
+      "counter": "물줄기는 옆으로, 낮은 파도는 점프로 피한다.",
+      "attack": "직선 물줄기와 바닥 파도를 차례로 사용한다."
+    },
+    {
+      "id": "a4_e04",
+      "name": "야미 리야르고",
+      "act": 4,
+      "rank": "named",
+      "brain": "melee",
+      "atlas": "enemies_act_4",
+      "cell": 3,
+      "base_hp": 150,
+      "tell": "주먹 위치의 큰 원 두 개와 광선 직선.",
+      "counter": "강타가 지나간 자리를 이용하고 가면이 낮아졌을 때 공격한다.",
+      "attack": "연속 내려찍기와 한 번의 큰 세로."
+    },
+    {
+      "id": "a4_e05",
+      "name": "원더와이스 마르젤라",
+      "act": 4,
+      "rank": "named",
+      "brain": "melee",
+      "atlas": "enemies_act_4",
+      "cell": 4,
+      "base_hp": 150,
+      "tell": "착지 원과 가슴이 부푸는 자세.",
+      "counter": "도약을 피한 뒤 포효 원 밖에서 기다리고 접근한다. 불꽃 관련 원작 설정과 별개로 임의 전능 속성 면역을 만들지 않는다.",
+      "attack": "긴 도약과 가까운 원형 포효."
+    },
+    {
+      "id": "a4_e06",
+      "name": "에밀루 아파치",
+      "act": 4,
+      "rank": "named",
+      "brain": "dash",
+      "atlas": "enemies_act_4",
+      "cell": 5,
+      "base_hp": 150,
+      "tell": "뿔 방향과 바닥의 직선·반원.",
+      "counter": "옆으로 피하고 후속 공격이 끝날 때 공격한다.",
+      "attack": "직선 돌진 뒤 짧은 반원 후려치기."
+    },
+    {
+      "id": "a4_e07",
+      "name": "프란체스카 미라 로즈",
+      "act": 4,
+      "rank": "named",
+      "brain": "melee",
+      "atlas": "enemies_act_4",
+      "cell": 6,
+      "base_hp": 150,
+      "tell": "어깨가 번갈아 들리고 마지막 원이 표시된다.",
+      "counter": "연타 뒤 내려찍기까지 확인하고 반격한다.",
+      "attack": "양팔 연타와 느린 한 번의 내려찍기."
+    },
+    {
+      "id": "a4_e08",
+      "name": "시안 선순",
+      "act": 4,
+      "rank": "named",
+      "brain": "melee",
+      "atlas": "enemies_act_4",
+      "cell": 7,
+      "base_hp": 150,
+      "tell": "엄폐 경계와 찌를 방향의 좁은 선.",
+      "counter": "엄폐 반대쪽으로 접근하거나 공격 두 번으로 엄폐를 해제한다.",
+      "attack": "작은 엄폐 영역을 만들고 그 옆에서 찌른다."
+    },
+    {
+      "id": "a4_e09",
+      "name": "아욘",
+      "act": 4,
+      "rank": "named",
+      "brain": "melee",
+      "atlas": "enemies_act_4",
+      "cell": 8,
+      "base_hp": 150,
+      "tell": "각 공격 전에 착지 원·부채꼴·넓은 원이 차례 표시된다.",
+      "counter": "이전 공격이 끝난 공간으로 이동하고 마지막 강타 뒤 머리를 공격한다.",
+      "attack": "큰 도약, 팔 휘두르기, 몸통 강타의 느린 3연계."
+    },
+    {
+      "id": "a4_e10",
+      "name": "샤를로테 쿨혼",
+      "act": 4,
+      "rank": "named",
+      "brain": "melee",
+      "atlas": "enemies_act_4",
+      "cell": 9,
+      "base_hp": 150,
+      "tell": "꽃잎이 펼쳐지는 원과 닫히는 고리.",
+      "counter": "꽃잎이 닫히기 전에 이탈한다. 갇혀도 외곽 꽃잎을 일반 공격으로 깨고 나온다.",
+      "attack": "장미 모양 구속 구역을 만들고 그 안을 압박한다."
+    },
+    {
+      "id": "a4_e11",
+      "name": "아란칼·세로 지원병",
+      "act": 4,
+      "rank": "regular",
+      "brain": "zone",
+      "atlas": "enemies_act_4",
+      "cell": 10,
+      "base_hp": 52,
+      "tell": "넓은 직선 사선과 1.3초 손바닥 충전.",
+      "counter": "사선 밖으로 이동해 방어가 약한 옆을 공격한다.",
+      "attack": "긴 충전 후 세로 한 번, 이후 긴 재충전."
+    },
+    {
+      "id": "a4_e12",
+      "name": "엑세키아스·근위병",
+      "act": 4,
+      "rank": "regular",
+      "brain": "guard",
+      "atlas": "enemies_act_4",
+      "cell": 11,
+      "base_hp": 52,
+      "tell": "정면 반원과 뒤쪽 작은 반원이 순서 표시된다.",
+      "counter": "즉시 뒤로만 돌아가지 말고 반격 뒤 열리는 측면을 공격한다.",
+      "attack": "정면을 막고 뒤로 한 번 베어 견제한다."
+    },
+    {
+      "id": "a5_e01",
+      "name": "킬게 오피",
+      "act": 5,
+      "rank": "named",
+      "brain": "zone",
+      "atlas": "enemies_act_5",
+      "cell": 0,
+      "base_hp": 150,
+      "tell": "바닥 사각 격자가 1.2초 차오른다.",
+      "counter": "닫히기 전 벗어나거나 빛나는 격자 한 면을 일반 공격으로 깨고 나온다.",
+      "attack": "영자 격자를 만들어 좁은 구역을 잠깐 가둔다."
+    },
+    {
+      "id": "a5_e02",
+      "name": "에스 노트",
+      "act": 5,
+      "rank": "named",
+      "brain": "zone",
+      "atlas": "enemies_act_5",
+      "cell": 1,
+      "base_hp": 150,
+      "tell": "가시의 직선과 중첩 고리가 보인다.",
+      "counter": "사선을 피하고 상태가 쌓이면 안정 발판에서 짧게 해제한다. 조작 반전·장시간 정지는 쓰지 않는다.",
+      "attack": "느린 가시 투사체로 짧은 공포 중첩을 남긴다."
+    },
+    {
+      "id": "a5_e03",
+      "name": "밤비에타 바스터바인",
+      "act": 5,
+      "rank": "named",
+      "brain": "ranged",
+      "atlas": "enemies_act_5",
+      "cell": 2,
+      "base_hp": 150,
+      "tell": "폭발 지점의 원이 두 단계로 차오른다.",
+      "counter": "첫 폭발이 끝난 자리로 이동한다. 색과 함께 차오르는 모양으로 예고한다.",
+      "attack": "영자가 닿은 지점을 지연 폭발물로 바꾼다."
+    },
+    {
+      "id": "a5_e04",
+      "name": "버즈비",
+      "act": 5,
+      "rank": "named",
+      "brain": "ranged",
+      "atlas": "enemies_act_5",
+      "cell": 3,
+      "base_hp": 150,
+      "tell": "펼친 손가락 수와 바닥 도형이 공격 폭을 보여 준다.",
+      "counter": "직선은 측면, 부채꼴은 바깥으로 피한 뒤 손을 거두는 동안 공격한다.",
+      "attack": "버너 핑거의 직선과 얕은 부채꼴 화염을 쓴다."
+    },
+    {
+      "id": "a5_e05",
+      "name": "창 두",
+      "act": 5,
+      "rank": "named",
+      "brain": "guard",
+      "atlas": "enemies_act_5",
+      "cell": 4,
+      "base_hp": 150,
+      "tell": "몸의 방어 문양과 뒤로 젖힌 팔.",
+      "counter": "방어 시간에 무작정 연타하지 않고 휘두르기 뒤 강공격으로 그로기를 누적한다.",
+      "attack": "잠깐 단단해진 뒤 발톱을 크게 휘두른다."
+    },
+    {
+      "id": "a5_e06",
+      "name": "BG9",
+      "act": 5,
+      "rank": "named",
+      "brain": "melee",
+      "atlas": "enemies_act_5",
+      "cell": 5,
+      "base_hp": 150,
+      "tell": "총구 고정과 서로 다른 두 점선.",
+      "counter": "지나간 사선으로 이동하고 냉각 중 본체를 공격한다.",
+      "attack": "지면 사격 후 고정된 두 사선에 중화기를 쏜다."
+    },
+    {
+      "id": "a5_e07",
+      "name": "마스크 드 마스큘린",
+      "act": 5,
+      "rank": "named",
+      "brain": "melee",
+      "atlas": "enemies_act_5",
+      "cell": 6,
+      "base_hp": 150,
+      "tell": "큰 몸 동작과 응원 중인 지원체의 고리.",
+      "counter": "돌진을 피하고 응원 중단 기회를 노린다. 지원체는 한 조우의 구성요소로 별도 도감 종수에 중복 계산하지 않는다.",
+      "attack": "주먹 돌진과 내려찍기. 제임스의 응원 뒤 다음 한 번이 강화된다."
+    },
+    {
+      "id": "a5_e08",
+      "name": "캔디스 캐트닙",
+      "act": 5,
+      "rank": "named",
+      "brain": "melee",
+      "atlas": "enemies_act_5",
+      "cell": 7,
+      "base_hp": 150,
+      "tell": "선은 점선→실선, 낙뢰는 원형으로 구분된다.",
+      "counter": "마지막 예고가 확정된 뒤 이동한다. 표시 밖으로 판정이 퍼지지 않는다.",
+      "attack": "고정된 두 사선과 한 원형 낙뢰를 번갈아 사용한다."
+    },
+    {
+      "id": "a5_e09",
+      "name": "그레미 투뮤",
+      "act": 5,
+      "rank": "named",
+      "brain": "melee",
+      "atlas": "enemies_act_5",
+      "cell": 8,
+      "base_hp": 150,
+      "tell": "생길 물체의 투명 윤곽이 1.4초 먼저 나타난다.",
+      "counter": "윤곽을 보고 열린 경로를 선택한다. 즉사나 예고 없는 현실 개변은 쓰지 않는 게임용 각색.",
+      "attack": "암석 기둥·수면·작은 낙하물 중 두 종류를 순서대로 구현한다."
+    },
+    {
+      "id": "a5_e10",
+      "name": "아스킨 나크 르 바르",
+      "act": 5,
+      "rank": "named",
+      "brain": "zone",
+      "atlas": "enemies_act_5",
+      "cell": 9,
+      "base_hp": 150,
+      "tell": "영역의 경계와 최근 공격 유형 표식이 보인다.",
+      "counter": "영역 밖으로 이동하고 기본 공격·강공격·스킬을 섞는다. 캐릭터 고유 속성 때문에 공략이 막히지 않는다.",
+      "attack": "작은 위험 영역을 남기고 같은 공격 반복을 잠깐 견딘다."
+    },
+    {
+      "id": "a5_e11",
+      "name": "졸다트·영자궁병",
+      "act": 5,
+      "rank": "regular",
+      "brain": "melee",
+      "atlas": "enemies_act_5",
+      "cell": 10,
+      "base_hp": 52,
+      "tell": "궁의 충전과 바닥 세 점 사선.",
+      "counter": "깊이 방향으로 피하고 재장전 중 접근한다.",
+      "attack": "간격이 있는 화살 세 발을 직선 발사한다."
+    },
+    {
+      "id": "a5_e12",
+      "name": "졸다트·근접병",
+      "act": 5,
+      "rank": "regular",
+      "brain": "zone",
+      "atlas": "enemies_act_5",
+      "cell": 11,
+      "base_hp": 52,
+      "tell": "직선 발자국과 작은 검 궤적.",
+      "counter": "돌진을 옆으로 피한 뒤 기본 연계로 처리한다.",
+      "attack": "짧은 돌진과 한 번의 베기."
+    },
+    {
+      "id": "a1_mid_shrieker",
+      "name": "슈리커",
+      "act": 1,
+      "rank": "midboss",
+      "brain": "boss",
+      "atlas": "",
+      "cell": -1,
+      "base_hp": 280,
+      "tell": "사역체와 지면 원이 1초 동안 부풀어 오른다.",
+      "counter": "연쇄 기폭을 피하면 날개가 접혀 4초 그로기.",
+      "attack": "폭발 사역체"
+    },
+    {
+      "id": "a1_boss_grand_fisher",
+      "name": "그랜드 피셔",
+      "act": 1,
+      "rank": "boss",
+      "brain": "boss",
+      "atlas": "",
+      "cell": -1,
+      "base_hp": 400,
+      "tell": "한쪽 어깨가 올라가고 부채꼴 예고가 0.9초 보인다.",
+      "counter": "실체를 가려내거나 마지막 도약을 피하면 가면이 근접 높이까지 낮아진다.",
+      "attack": "거대 발톱"
+    },
+    {
+      "id": "a2_mid_shawlong",
+      "name": "샤우롱 쿠팡",
+      "act": 2,
+      "rank": "midboss",
+      "brain": "boss",
+      "atlas": "",
+      "cell": -1,
+      "base_hp": 280,
+      "tell": "검이 세워지고 직선 예고가 0.8초 표시된다.",
+      "counter": "교차 절단 뒤 양팔을 다시 펼치는 동안 4초 공격 기회.",
+      "attack": "긴 사선 베기"
+    },
+    {
+      "id": "a2_boss_grimmjow",
+      "name": "그림죠 재거잭",
+      "act": 2,
+      "rank": "boss",
+      "brain": "boss",
+      "atlas": "",
+      "cell": -1,
+      "base_hp": 400,
+      "tell": "도착점 두 곳에 발자국이 순서대로 나타난다.",
+      "counter": "큰 도약이나 데스가론이 끝난 뒤 짧은 지상전 빈틈. 근접 접근 경로를 남긴다.",
+      "attack": "소니도 연타"
+    },
+    {
+      "id": "a3_mid_nnoitra",
+      "name": "노이트라 질가",
+      "act": 3,
+      "rank": "midboss",
+      "brain": "boss",
+      "atlas": "",
+      "cell": -1,
+      "base_hp": 280,
+      "tell": "무기를 뒤로 젖히고 넓은 반원 예고.",
+      "counter": "내려찍기 뒤 무기가 박히는 동안 공격. 특정 속성만 통하는 갑옷은 사용하지 않는다.",
+      "attack": "초승달 쓸기"
+    },
+    {
+      "id": "a3_boss_ulquiorra",
+      "name": "우르키오라 시파",
+      "act": 3,
+      "rank": "boss",
+      "brain": "boss",
+      "atlas": "",
+      "cell": -1,
+      "base_hp": 400,
+      "tell": "검을 들고 좁은 직선 예고가 0.8초 보인다.",
+      "counter": "큰 창 투척 후 착지하는 순간이 각성기 사용 기회.",
+      "attack": "차가운 간격"
+    },
+    {
+      "id": "a4_mid_gin",
+      "name": "이치마루 긴",
+      "act": 4,
+      "rank": "midboss",
+      "brain": "boss",
+      "atlas": "",
+      "cell": -1,
+      "base_hp": 280,
+      "tell": "손목이 멈추고 가는 직선 예고가 0.85초 보인다.",
+      "counter": "신축을 회수하는 긴 동작 뒤 4초 빈틈. 란기쿠 조작 여부와 무관하게 진행 가능.",
+      "attack": "신축 찌르기"
+    },
+    {
+      "id": "a4_boss_aizen",
+      "name": "아이젠 소스케",
+      "act": 4,
+      "rank": "boss",
+      "brain": "boss",
+      "atlas": "",
+      "cell": -1,
+      "base_hp": 400,
+      "tell": "칼집과 검끝이 하나의 직선으로 맞춰진다.",
+      "counter": "실체를 두 번 맞히거나 흑관 준비를 끊으면 보호막이 꺼져 공격 기회.",
+      "attack": "정면 검격"
+    },
+    {
+      "id": "a5_mid_haschwalth",
+      "name": "유그람 하쉬발트",
+      "act": 5,
+      "rank": "midboss",
+      "brain": "boss",
+      "atlas": "",
+      "cell": -1,
+      "base_hp": 280,
+      "tell": "직선 검격 예고와 방패의 반원 범위.",
+      "counter": "균형 반격을 피하면 잠깐 검만 사용하여 방어 빈틈이 열린다.",
+      "attack": "균형의 검"
+    },
+    {
+      "id": "a5_boss_yhwach",
+      "name": "유하바하",
+      "act": 5,
+      "rank": "boss",
+      "brain": "boss",
+      "atlas": "",
+      "cell": -1,
+      "base_hp": 400,
+      "tell": "바닥 사선 세 개가 1초 간격으로 표시된다.",
+      "counter": "기록석을 지킨 뒤 왕의 큰 공격을 피하면 마지막 그로기. 전투 뒤 균열 봉인으로 본편 완결.",
+      "attack": "왕의 영자검"
+    }
+  ]
+}

@@ -1,0 +1,991 @@
+{
+  "acts": [
+    {
+      "act": 1,
+      "title": "미끼가 부르는 항구",
+      "levels": "1~10",
+      "region": "카라쿠라 항구와 주택가",
+      "focus": [
+        "루키아",
+        "오리히메"
+      ],
+      "theme": "익숙한 얼굴을 따라갈 것인가, 진짜 구조 신호를 찾을 것인가.",
+      "visual": "원작 현세의 주택가·강변·상가에 검은 조수가 겹친 밤. 흰 호로 가면과 구조 등불을 명확히 구분한다.",
+      "opening": "우라하라 상점에서 조사 의뢰를 받은 여섯 명은 항구의 이름 없는 구조 신호를 따라간다. 나타난 호로들은 이미 지나간 전투의 모습이다. 영해가 기억을 실제 위협으로 재현하고 있으며, 사람들의 기억도 그 안으로 새고 있다.",
+      "beats": [
+        "피시본 D와 초기 호로들을 상대하며 시민을 안전한 길로 유도한다. 과거 인물의 재등장은 기억 재현이므로 원작의 생사를 바꾸는 사건으로 설명하지 않는다.",
+        "오리히메와 관련된 애시드와이어의 기억은 전투 후 정화 장면과 짧은 선택 대사로 풀어낸다. 캐릭터의 상처를 단순 반복 사냥 보상으로 쓰지 않는다.",
+        "슈리커의 사역체 함정을 끊어 구조 신호가 퍼지는 경로를 찾는다. 날아 있는 적도 내려오는 순간을 노리게 해 점프·회피·공중 공격을 가르친다.",
+        "그랜드 피셔의 의사 미끼를 가려내고 첫 균열을 봉인한다. 돌아온 기억 속에서 흰 제복의 침입자와 가르간타의 흔적이 드러난다."
+      ],
+      "revelation": "원작의 여러 시점이 영해에서 겹치고 있다. 서로 다른 세력이 새 동맹을 맺은 것이 아니라 각 전투의 기억이 다른 통로를 점유한다.",
+      "closing_dialogue": [
+        [
+          "오리히메",
+          "똑같은 목소리여도, 그 사람이 여기 있다는 뜻은 아니에요."
+        ],
+        [
+          "루키아",
+          "미끼에 답하지 마. 지금 구할 사람부터 찾는다."
+        ],
+        [
+          "우라하라",
+          "돌아오시면 기록을 같이 보죠. 다음 문은 꽤 시끄러울 겁니다."
+        ]
+      ],
+      "mechanic": "호로의 단순 예고 → 슈리커의 설치물 → 그랜드 피셔의 실체 구분 순서. 귀환 후 우라하라 대화가 임무 완료 상태로 바뀐다.",
+      "midboss_id": "a1_mid_shrieker",
+      "boss_id": "a1_boss_grand_fisher",
+      "reward": "첫 기억 조각, 아란칼 침입 좌표, 허브의 장비 정비와 보상 수령.",
+      "next": "우라하라가 조류 나침반에서 가르간타의 흔적을 분리한다.",
+      "dungeons": [
+        {
+          "number": 1,
+          "title": "강변의 첫 가면",
+          "objective": "피난로를 확보하고 초기 호로의 기억을 정화한다.",
+          "enemy_ids": [
+            "a1_e07",
+            "a1_e08",
+            "a1_e01"
+          ],
+          "encounter_id": null,
+          "wave_enemy_ids": [
+            "a1_e07",
+            "a1_e08"
+          ],
+          "named_encounters": [
+            {
+              "enemy_id": "a1_e01",
+              "room": "독립 조우방 1",
+              "repeatable_in_story": false
+            }
+          ],
+          "encounter_rule": "네임드는 각자의 방에서 스크립트로 등장. wave_enemy_ids만 일반 증원에 사용한다."
+        },
+        {
+          "number": 2,
+          "title": "되풀이된 주택가",
+          "objective": "애시드와이어·헥사포더스 기억과 민간 구조를 분리해 해결한다.",
+          "enemy_ids": [
+            "a1_e09",
+            "a1_e10",
+            "a1_e02",
+            "a1_e03"
+          ],
+          "encounter_id": null,
+          "wave_enemy_ids": [
+            "a1_e09",
+            "a1_e10"
+          ],
+          "named_encounters": [
+            {
+              "enemy_id": "a1_e02",
+              "room": "독립 조우방 1",
+              "repeatable_in_story": false
+            },
+            {
+              "enemy_id": "a1_e03",
+              "room": "독립 조우방 2",
+              "repeatable_in_story": false
+            }
+          ],
+          "encounter_rule": "네임드는 각자의 방에서 스크립트로 등장. wave_enemy_ids만 일반 증원에 사용한다."
+        },
+        {
+          "number": 3,
+          "title": "슈리커의 함정길",
+          "objective": "사역체를 제거하고 슈리커를 제압한다.",
+          "enemy_ids": [
+            "a1_e11",
+            "a1_e12"
+          ],
+          "encounter_id": "a1_mid_shrieker",
+          "wave_enemy_ids": [
+            "a1_e11",
+            "a1_e12"
+          ],
+          "named_encounters": [],
+          "encounter_rule": "네임드는 각자의 방에서 스크립트로 등장. wave_enemy_ids만 일반 증원에 사용한다."
+        },
+        {
+          "number": 4,
+          "title": "닫힌 상가와 씨앗",
+          "objective": "씨앗 구역을 정리하고 넘 샹들리에의 기록을 봉인한다.",
+          "enemy_ids": [
+            "a1_e07",
+            "a1_e08",
+            "a1_e04"
+          ],
+          "encounter_id": null,
+          "wave_enemy_ids": [
+            "a1_e07",
+            "a1_e08"
+          ],
+          "named_encounters": [
+            {
+              "enemy_id": "a1_e04",
+              "room": "독립 조우방 1",
+              "repeatable_in_story": false
+            }
+          ],
+          "encounter_rule": "네임드는 각자의 방에서 스크립트로 등장. wave_enemy_ids만 일반 증원에 사용한다."
+        },
+        {
+          "number": 5,
+          "title": "비 오는 등대",
+          "objective": "큰 호로의 발자국을 따라 미끼의 본체를 추적한다.",
+          "enemy_ids": [
+            "a1_e09",
+            "a1_e10",
+            "a1_e05",
+            "a1_e06"
+          ],
+          "encounter_id": null,
+          "wave_enemy_ids": [
+            "a1_e09",
+            "a1_e10"
+          ],
+          "named_encounters": [
+            {
+              "enemy_id": "a1_e05",
+              "room": "독립 조우방 1",
+              "repeatable_in_story": false
+            },
+            {
+              "enemy_id": "a1_e06",
+              "room": "독립 조우방 2",
+              "repeatable_in_story": false
+            }
+          ],
+          "encounter_rule": "네임드는 각자의 방에서 스크립트로 등장. wave_enemy_ids만 일반 증원에 사용한다."
+        },
+        {
+          "number": 6,
+          "title": "그랜드 피셔의 미끼",
+          "objective": "실체를 찾아 그랜드 피셔의 재현과 첫 균열을 봉인한다.",
+          "enemy_ids": [
+            "a1_e11",
+            "a1_e12"
+          ],
+          "encounter_id": "a1_boss_grand_fisher",
+          "wave_enemy_ids": [
+            "a1_e11",
+            "a1_e12"
+          ],
+          "named_encounters": [],
+          "encounter_rule": "네임드는 각자의 방에서 스크립트로 등장. wave_enemy_ids만 일반 증원에 사용한다."
+        }
+      ],
+      "story_flow_source": "data/story_flow.json"
+    },
+    {
+      "act": 2,
+      "title": "아란칼의 야습",
+      "levels": "11~20",
+      "region": "카라쿠라 야간 시가지와 가르간타",
+      "focus": [
+        "루키아",
+        "우노하나"
+      ],
+      "theme": "전투의 속도보다 공격을 고를 판단이 먼저다.",
+      "visual": "익숙한 시가지에 검은 가르간타가 열리고 흰 아란칼 제복과 푸른 세로가 대비된다.",
+      "opening": "다음 균열은 그림죠와 프라시온의 현세 침입을 재현한다. 적들은 이름과 얼굴뿐 아니라 소니도와 발라, 귀인의 특징까지 되살아난다. 루키아는 성급하게 상대를 따라가지 말고 공격이 끝나는 지점을 보라고 조언한다.",
+      "beats": [
+        "에드라드·일폴트·나킴·디 로이를 각각 정해진 방에서 만나 돌진·중량·기습의 차이를 익힌다. 일반 방에서는 아란칼 병과와 호로가 웨이브를 구성한다.",
+        "샤우롱은 긴 사선과 교차 절단으로 깊이 이동을 시험한다. 해방 전후 자세의 차이가 공격 폭을 알리는 단서가 된다.",
+        "가르간타 관문의 로리·메노리·데모우라·아이스링거 기록을 지나며 다음 무대의 외형을 확인한다. 네임드는 서로 다른 방과 이벤트로 나눈다.",
+        "그림죠와의 전투는 근접 압박에서 판테라의 도약·발톱으로 이어진다. 큰 빈틈에 강공격·띄우기·스킬 연계를 선택하게 한다."
+      ],
+      "revelation": "침입자의 흔적은 라스 노체스의 기록층으로 이어진다. 그림죠와 다른 에스파다의 재현은 각자의 전투 기억을 따르며 하나의 잡몹 부대로 행동하지 않는다.",
+      "closing_dialogue": [
+        [
+          "요루이치",
+          "빠르다고 전부 따라갈 필요는 없어."
+        ],
+        [
+          "소이폰",
+          "끝나는 위치를 읽으면 됩니다. 표적은 그다음입니다."
+        ],
+        [
+          "그림죠의 재현",
+          "피할 줄만 아는 상대는 재미없는데!"
+        ]
+      ],
+      "mechanic": "소니도의 도착 예고, 고정 사선 발라, 귀인 단계 전환. 허브 수련장에서 강공격·회피 반격을 다시 확인할 수 있다.",
+      "midboss_id": "a2_mid_shawlong",
+      "boss_id": "a2_boss_grimmjow",
+      "reward": "둘째 기억 조각, 라스 노체스 진입 좌표, 스킬 강화 선택.",
+      "next": "쿠카쿠와 우라하라의 지원 대화 뒤 가르간타 전초로 이동한다.",
+      "dungeons": [
+        {
+          "number": 1,
+          "title": "찢어진 야간 순찰로",
+          "objective": "일반 아란칼과 중량 정예의 공격을 구분한다.",
+          "enemy_ids": [
+            "a2_e09",
+            "a2_e10",
+            "a2_e01",
+            "a2_e02"
+          ],
+          "encounter_id": null,
+          "wave_enemy_ids": [
+            "a2_e09",
+            "a2_e10"
+          ],
+          "named_encounters": [
+            {
+              "enemy_id": "a2_e01",
+              "room": "독립 조우방 1",
+              "repeatable_in_story": false
+            },
+            {
+              "enemy_id": "a2_e02",
+              "room": "독립 조우방 2",
+              "repeatable_in_story": false
+            }
+          ],
+          "encounter_rule": "네임드는 각자의 방에서 스크립트로 등장. wave_enemy_ids만 일반 증원에 사용한다."
+        },
+        {
+          "number": 2,
+          "title": "프라시온의 거리",
+          "objective": "나킴과 디 로이의 고정 조우를 통과한다.",
+          "enemy_ids": [
+            "a2_e11",
+            "a2_e12",
+            "a2_e03",
+            "a2_e04"
+          ],
+          "encounter_id": null,
+          "wave_enemy_ids": [
+            "a2_e11",
+            "a2_e12"
+          ],
+          "named_encounters": [
+            {
+              "enemy_id": "a2_e03",
+              "room": "독립 조우방 1",
+              "repeatable_in_story": false
+            },
+            {
+              "enemy_id": "a2_e04",
+              "room": "독립 조우방 2",
+              "repeatable_in_story": false
+            }
+          ],
+          "encounter_rule": "네임드는 각자의 방에서 스크립트로 등장. wave_enemy_ids만 일반 증원에 사용한다."
+        },
+        {
+          "number": 3,
+          "title": "샤우롱의 교차선",
+          "objective": "샤우롱의 교차 절단을 피하고 통로를 연다.",
+          "enemy_ids": [
+            "a2_e09",
+            "a2_e10"
+          ],
+          "encounter_id": "a2_mid_shawlong",
+          "wave_enemy_ids": [
+            "a2_e09",
+            "a2_e10"
+          ],
+          "named_encounters": [],
+          "encounter_rule": "네임드는 각자의 방에서 스크립트로 등장. wave_enemy_ids만 일반 증원에 사용한다."
+        },
+        {
+          "number": 4,
+          "title": "닫힌 가르간타 관문",
+          "objective": "로리와 메노리의 다른 견제 패턴을 해결한다.",
+          "enemy_ids": [
+            "a2_e11",
+            "a2_e12",
+            "a2_e05",
+            "a2_e06"
+          ],
+          "encounter_id": null,
+          "wave_enemy_ids": [
+            "a2_e11",
+            "a2_e12"
+          ],
+          "named_encounters": [
+            {
+              "enemy_id": "a2_e05",
+              "room": "독립 조우방 1",
+              "repeatable_in_story": false
+            },
+            {
+              "enemy_id": "a2_e06",
+              "room": "독립 조우방 2",
+              "repeatable_in_story": false
+            }
+          ],
+          "encounter_rule": "네임드는 각자의 방에서 스크립트로 등장. wave_enemy_ids만 일반 증원에 사용한다."
+        },
+        {
+          "number": 5,
+          "title": "두 관문 수호자",
+          "objective": "데모우라·아이스링거의 방을 각각 돌파한다.",
+          "enemy_ids": [
+            "a2_e09",
+            "a2_e10",
+            "a2_e07",
+            "a2_e08"
+          ],
+          "encounter_id": null,
+          "wave_enemy_ids": [
+            "a2_e09",
+            "a2_e10"
+          ],
+          "named_encounters": [
+            {
+              "enemy_id": "a2_e07",
+              "room": "독립 조우방 1",
+              "repeatable_in_story": false
+            },
+            {
+              "enemy_id": "a2_e08",
+              "room": "독립 조우방 2",
+              "repeatable_in_story": false
+            }
+          ],
+          "encounter_rule": "네임드는 각자의 방에서 스크립트로 등장. wave_enemy_ids만 일반 증원에 사용한다."
+        },
+        {
+          "number": 6,
+          "title": "그림죠의 결투",
+          "objective": "판테라 전환을 견디고 그림죠의 재현을 봉인한다.",
+          "enemy_ids": [
+            "a2_e11",
+            "a2_e12"
+          ],
+          "encounter_id": "a2_boss_grimmjow",
+          "wave_enemy_ids": [
+            "a2_e11",
+            "a2_e12"
+          ],
+          "named_encounters": [],
+          "encounter_rule": "네임드는 각자의 방에서 스크립트로 등장. wave_enemy_ids만 일반 증원에 사용한다."
+        }
+      ],
+      "story_flow_source": "data/story_flow.json"
+    },
+    {
+      "act": 3,
+      "title": "라스 노체스의 공허",
+      "levels": "21~30",
+      "region": "웨코문드 백사막과 라스 노체스",
+      "focus": [
+        "란기쿠",
+        "오리히메"
+      ],
+      "theme": "잊히지 않는 마음이 빈 세계를 건넌다.",
+      "visual": "검은 하늘 아래 흰 모래와 라스 노체스의 긴 회랑. 엑세키아스의 해골 가면과 에스파다별 방이 대비된다.",
+      "opening": "사막에 묻힌 목소리는 일상의 기억이다. 조사대는 잔류 기억을 수집해 원래 주인에게 돌려주려 한다. 라스 노체스 안에서는 과거의 수호자들이 각자의 전장을 재현한다.",
+      "beats": [
+        "도르도니·치루치·간텐바인의 전용 조우에서 발차기·왕복 무기·주먹 연계를 구분한다. 선택 강적은 본선과 분리된 방으로 안내한다.",
+        "노이트라는 긴 무기와 단단한 방어로 연타 습관을 흔든다. 귀인 후 여러 팔의 순서를 보고 피해야 마지막 빈틈을 얻는다.",
+        "루드본의 병력, 아로니로의 기억, 조마리의 표식, 자엘아폴로의 분석이 각기 다른 방의 규칙이 된다. 정예와 일반병의 역할을 섞지 않는다.",
+        "우르키오라는 기본형에서 무르시엘라고와 두 번째 해방으로 전환한다. 체공이 끝나는 확실한 지상 공격 기회를 주어 여섯 캐릭터 모두 공략하게 한다."
+      ],
+      "revelation": "라스 노체스 기록층의 가장 깊은 곳에 아이젠의 경화수월이 겹쳐 있다. 원래의 기억과 왜곡된 환영을 구분할 기록 장치가 필요해진다.",
+      "closing_dialogue": [
+        [
+          "란기쿠",
+          "여기에도 돌아가겠다는 약속이 남아 있네."
+        ],
+        [
+          "오리히메",
+          "빈 곳처럼 보여도, 아무것도 없었던 건 아니에요."
+        ],
+        [
+          "루키아",
+          "흩어지기 전에 기록함에 담아. 우리가 돌려줄 차례야."
+        ]
+      ],
+      "mechanic": "네임드 전용 방, 소환 상한, 표식 해제, 긴 무기 간격. 각성기는 처음부터 보유하고 이 액트에서 강화한다. 우르키오라의 착지 그로기에서 강화된 각성기를 활용하도록 유도한다.",
+      "midboss_id": "a3_mid_nnoitra",
+      "boss_id": "a3_boss_ulquiorra",
+      "reward": "셋째 기억 조각, 캐릭터별 각성기 강화, 환영을 대조할 원본 기록.",
+      "next": "원본 기록을 우라하라에게 전달하면 가짜 카라쿠라 전장의 입구가 열린다.",
+      "dungeons": [
+        {
+          "number": 1,
+          "title": "백사막의 세 관문",
+          "objective": "프리바론 전용 방과 일반 전투 경로를 구분해 전진한다.",
+          "enemy_ids": [
+            "a3_e11",
+            "a3_e12",
+            "a3_e01",
+            "a3_e02"
+          ],
+          "encounter_id": null,
+          "wave_enemy_ids": [
+            "a3_e11",
+            "a3_e12"
+          ],
+          "named_encounters": [
+            {
+              "enemy_id": "a3_e01",
+              "room": "독립 조우방 1",
+              "repeatable_in_story": false
+            },
+            {
+              "enemy_id": "a3_e02",
+              "room": "독립 조우방 2",
+              "repeatable_in_story": false
+            }
+          ],
+          "encounter_rule": "네임드는 각자의 방에서 스크립트로 등장. wave_enemy_ids만 일반 증원에 사용한다."
+        },
+        {
+          "number": 2,
+          "title": "무너진 회랑의 호위",
+          "objective": "간텐바인·테슬러의 조우를 각각 통과한다.",
+          "enemy_ids": [
+            "a3_e11",
+            "a3_e12",
+            "a3_e03",
+            "a3_e04"
+          ],
+          "encounter_id": null,
+          "wave_enemy_ids": [
+            "a3_e11",
+            "a3_e12"
+          ],
+          "named_encounters": [
+            {
+              "enemy_id": "a3_e03",
+              "room": "독립 조우방 1",
+              "repeatable_in_story": false
+            },
+            {
+              "enemy_id": "a3_e04",
+              "room": "독립 조우방 2",
+              "repeatable_in_story": false
+            }
+          ],
+          "encounter_rule": "네임드는 각자의 방에서 스크립트로 등장. wave_enemy_ids만 일반 증원에 사용한다."
+        },
+        {
+          "number": 3,
+          "title": "노이트라의 초승달",
+          "objective": "다완 연격 뒤 노이트라의 방어를 깨뜨린다.",
+          "enemy_ids": [
+            "a3_e11",
+            "a3_e12"
+          ],
+          "encounter_id": "a3_mid_nnoitra",
+          "wave_enemy_ids": [
+            "a3_e11",
+            "a3_e12"
+          ],
+          "named_encounters": [],
+          "encounter_rule": "네임드는 각자의 방에서 스크립트로 등장. wave_enemy_ids만 일반 증원에 사용한다."
+        },
+        {
+          "number": 4,
+          "title": "엑세키아스 기록고",
+          "objective": "루드본의 소환과 아로니로·조마리 기록의 봉인을 푼다.",
+          "enemy_ids": [
+            "a3_e11",
+            "a3_e12",
+            "a3_e05",
+            "a3_e06",
+            "a3_e07"
+          ],
+          "encounter_id": null,
+          "wave_enemy_ids": [
+            "a3_e11",
+            "a3_e12"
+          ],
+          "named_encounters": [
+            {
+              "enemy_id": "a3_e05",
+              "room": "독립 조우방 1",
+              "repeatable_in_story": false
+            },
+            {
+              "enemy_id": "a3_e06",
+              "room": "독립 조우방 2",
+              "repeatable_in_story": false
+            },
+            {
+              "enemy_id": "a3_e07",
+              "room": "독립 조우방 3",
+              "repeatable_in_story": false
+            }
+          ],
+          "encounter_rule": "네임드는 각자의 방에서 스크립트로 등장. wave_enemy_ids만 일반 증원에 사용한다."
+        },
+        {
+          "number": 5,
+          "title": "분석실과 측면 정원",
+          "objective": "자엘아폴로·핀돌·지오의 별도 방을 정리한다.",
+          "enemy_ids": [
+            "a3_e11",
+            "a3_e12",
+            "a3_e08",
+            "a3_e09",
+            "a3_e10"
+          ],
+          "encounter_id": null,
+          "wave_enemy_ids": [
+            "a3_e11",
+            "a3_e12"
+          ],
+          "named_encounters": [
+            {
+              "enemy_id": "a3_e08",
+              "room": "독립 조우방 1",
+              "repeatable_in_story": false
+            },
+            {
+              "enemy_id": "a3_e09",
+              "room": "독립 조우방 2",
+              "repeatable_in_story": false
+            },
+            {
+              "enemy_id": "a3_e10",
+              "room": "독립 조우방 3",
+              "repeatable_in_story": false
+            }
+          ],
+          "encounter_rule": "네임드는 각자의 방에서 스크립트로 등장. wave_enemy_ids만 일반 증원에 사용한다."
+        },
+        {
+          "number": 6,
+          "title": "우르키오라의 천개",
+          "objective": "세 단계 전환을 돌파해 우르키오라 기록층을 봉인한다.",
+          "enemy_ids": [
+            "a3_e11",
+            "a3_e12"
+          ],
+          "encounter_id": "a3_boss_ulquiorra",
+          "wave_enemy_ids": [
+            "a3_e11",
+            "a3_e12"
+          ],
+          "named_encounters": [],
+          "encounter_rule": "네임드는 각자의 방에서 스크립트로 등장. wave_enemy_ids만 일반 증원에 사용한다."
+        }
+      ],
+      "story_flow_source": "data/story_flow.json"
+    },
+    {
+      "act": 4,
+      "title": "경화수월의 전장",
+      "levels": "31~40",
+      "region": "가짜 카라쿠라 전투 기록",
+      "focus": [
+        "요루이치",
+        "소이폰"
+      ],
+      "theme": "보이는 것을 의심하되 동료의 신호는 놓치지 않는다.",
+      "visual": "원작 가짜 카라쿠라의 도로·기둥·상공을 바탕으로, 물결의 연결선과 환영 균열을 공략 표식으로 추가한다.",
+      "opening": "도시는 익숙하지만 같은 거리로 돌아오면 표지판의 이름이 달라져 있다. 원본 기록과 대조하지 않으면 길도 적의 위치도 믿기 어렵다. 요루이치와 소이폰은 서로 다른 통로에서 같은 신호를 맞춘다.",
+      "beats": [
+        "스타크·바라간·할리벨 같은 강자는 선택 강적 또는 정해진 전용 방에서 등장한다. 일반 웨이브에 여러 에스파다를 무작위로 섞지 않는다.",
+        "긴의 신축하는 검을 상대하며 짧아 보이는 무기와 긴 공격 사선의 차이를 배운다. 란기쿠와 긴의 관련 대사는 별도 짧은 장면으로 제공한다.",
+        "트레스 베스티아와 아욘, 야미와 원더와이스의 전투 기억이 각각 다른 위협을 만든다. 기억 장치를 지키면 환영을 대조할 수 있는 시간이 늘어난다.",
+        "아이젠전은 검과 귀도, 경화수월, 강한 영압의 세 단계다. 게임 전장에 한정된 물결 연결 표식으로 실체를 읽고 큰 공격 뒤 빈틈을 잡는다."
+      ],
+      "revelation": "환영층을 걷어낸 뒤 남은 것은 퀸시의 문장이다. 마지막 균열이 미래의 전투 기록을 끌어와 지금까지의 봉인을 되돌리려 한다.",
+      "closing_dialogue": [
+        [
+          "요루이치",
+          "환영은 걷혔는데 연결은 남아 있어. 저 그림자 통로를 기록하자."
+        ],
+        [
+          "소이폰",
+          "퀸시의 문장을 확인했습니다. 우라하라에게 원본과 함께 전달하겠습니다."
+        ],
+        [
+          "우노하나",
+          "다음 출정은 보고와 치료가 끝난 뒤입니다. 모두 돌아가죠."
+        ]
+      ],
+      "mechanic": "원작 능력의 정체성과 전용 모션을 유지하되 실체 식별과 상태이상 해제는 공략 가능한 규칙으로 각색. 환영이 실제 HUD나 키 설정을 흉내 내지 않는다.",
+      "midboss_id": "a4_mid_gin",
+      "boss_id": "a4_boss_aizen",
+      "reward": "넷째 기억 조각, 각성 강화 선택, 마지막 왕성의 좌표.",
+      "next": "마을에서 마지막 출정 대화와 정비를 마치면 퀸시 기록층으로 이동한다.",
+      "dungeons": [
+        {
+          "number": 1,
+          "title": "첫 번째 가짜 교차로",
+          "objective": "일반 아란칼 전선을 정리하고 선택 강적 방의 위치를 확인한다.",
+          "enemy_ids": [
+            "a4_e11",
+            "a4_e12",
+            "a4_e01",
+            "a4_e02"
+          ],
+          "encounter_id": null,
+          "wave_enemy_ids": [
+            "a4_e11",
+            "a4_e12"
+          ],
+          "named_encounters": [
+            {
+              "enemy_id": "a4_e01",
+              "room": "독립 조우방 1",
+              "repeatable_in_story": false
+            },
+            {
+              "enemy_id": "a4_e02",
+              "room": "독립 조우방 2",
+              "repeatable_in_story": false
+            }
+          ],
+          "encounter_rule": "네임드는 각자의 방에서 스크립트로 등장. wave_enemy_ids만 일반 증원에 사용한다."
+        },
+        {
+          "number": 2,
+          "title": "정지한 수로의 강적",
+          "objective": "할리벨과 야미의 전용 조우를 통과한다.",
+          "enemy_ids": [
+            "a4_e11",
+            "a4_e12",
+            "a4_e03",
+            "a4_e04"
+          ],
+          "encounter_id": null,
+          "wave_enemy_ids": [
+            "a4_e11",
+            "a4_e12"
+          ],
+          "named_encounters": [
+            {
+              "enemy_id": "a4_e03",
+              "room": "독립 조우방 1",
+              "repeatable_in_story": false
+            },
+            {
+              "enemy_id": "a4_e04",
+              "room": "독립 조우방 2",
+              "repeatable_in_story": false
+            }
+          ],
+          "encounter_rule": "네임드는 각자의 방에서 스크립트로 등장. wave_enemy_ids만 일반 증원에 사용한다."
+        },
+        {
+          "number": 3,
+          "title": "이치마루 긴의 사선",
+          "objective": "신쟁의 길이를 읽고 긴의 통로를 연다.",
+          "enemy_ids": [
+            "a4_e11",
+            "a4_e12"
+          ],
+          "encounter_id": "a4_mid_gin",
+          "wave_enemy_ids": [
+            "a4_e11",
+            "a4_e12"
+          ],
+          "named_encounters": [],
+          "encounter_rule": "네임드는 각자의 방에서 스크립트로 등장. wave_enemy_ids만 일반 증원에 사용한다."
+        },
+        {
+          "number": 4,
+          "title": "트레스 베스티아의 기억",
+          "objective": "프라시온·아욘의 각각 다른 모션을 읽는다.",
+          "enemy_ids": [
+            "a4_e11",
+            "a4_e12",
+            "a4_e05",
+            "a4_e06",
+            "a4_e07"
+          ],
+          "encounter_id": null,
+          "wave_enemy_ids": [
+            "a4_e11",
+            "a4_e12"
+          ],
+          "named_encounters": [
+            {
+              "enemy_id": "a4_e05",
+              "room": "독립 조우방 1",
+              "repeatable_in_story": false
+            },
+            {
+              "enemy_id": "a4_e06",
+              "room": "독립 조우방 2",
+              "repeatable_in_story": false
+            },
+            {
+              "enemy_id": "a4_e07",
+              "room": "독립 조우방 3",
+              "repeatable_in_story": false
+            }
+          ],
+          "encounter_rule": "네임드는 각자의 방에서 스크립트로 등장. wave_enemy_ids만 일반 증원에 사용한다."
+        },
+        {
+          "number": 5,
+          "title": "폭주한 영압의 광장",
+          "objective": "원더와이스·샤를로테 전용 방과 기록 장치를 정리한다.",
+          "enemy_ids": [
+            "a4_e11",
+            "a4_e12",
+            "a4_e08",
+            "a4_e09",
+            "a4_e10"
+          ],
+          "encounter_id": null,
+          "wave_enemy_ids": [
+            "a4_e11",
+            "a4_e12"
+          ],
+          "named_encounters": [
+            {
+              "enemy_id": "a4_e08",
+              "room": "독립 조우방 1",
+              "repeatable_in_story": false
+            },
+            {
+              "enemy_id": "a4_e09",
+              "room": "독립 조우방 2",
+              "repeatable_in_story": false
+            },
+            {
+              "enemy_id": "a4_e10",
+              "room": "독립 조우방 3",
+              "repeatable_in_story": false
+            }
+          ],
+          "encounter_rule": "네임드는 각자의 방에서 스크립트로 등장. wave_enemy_ids만 일반 증원에 사용한다."
+        },
+        {
+          "number": 6,
+          "title": "아이젠의 거울 도시",
+          "objective": "실체를 대조해 아이젠의 환영층을 봉인한다.",
+          "enemy_ids": [
+            "a4_e11",
+            "a4_e12"
+          ],
+          "encounter_id": "a4_boss_aizen",
+          "wave_enemy_ids": [
+            "a4_e11",
+            "a4_e12"
+          ],
+          "named_encounters": [],
+          "encounter_rule": "네임드는 각자의 방에서 스크립트로 등장. wave_enemy_ids만 일반 증원에 사용한다."
+        }
+      ],
+      "midboss_dialogue": [
+        [
+          "란기쿠",
+          "돌아볼 말이 남았다면, 이번엔 눈을 피하지 마."
+        ],
+        [
+          "긴의 재현",
+          "그런 눈으로 보면, 웃고 넘기기도 어렵겠네."
+        ]
+      ],
+      "story_flow_source": "data/story_flow.json"
+    },
+    {
+      "act": 5,
+      "title": "미래를 잠그는 왕",
+      "levels": "41~50",
+      "region": "반덴라이히와 영해의 마지막 왕성",
+      "focus": [
+        "여섯 조사대 전원"
+      ],
+      "theme": "선택할 미래를 되돌려 놓는다.",
+      "visual": "흰 퀸시 군복과 푸른 영자 문양, 그림자 통로와 왕성 회랑. 미래 경로의 점선·실선으로 예고를 구분한다.",
+      "opening": "마지막 기록층에서는 퀸시의 병력과 슈테른릿터가 각자의 권능으로 길을 막는다. 기록함에 모은 이름들이 서로의 존재를 붙잡아 준다. 우라하라는 왕의 힘 자체를 지우는 대신 이 전장과 균열의 연결을 끊으라고 조언한다.",
+      "beats": [
+        "킬게의 감옥·에스 노트의 공포·밤비에타의 폭발·버즈비의 화염을 서로 다른 방에서 상대한다. 졸다트가 일반 전투를 맡고 네임드의 등장은 고정한다.",
+        "하쉬발트는 저울과 방패로 공격을 되돌리는 위험을 보여 준다. 자동 반사로 억울하게 죽지 않도록 되돌림을 예고 공격으로 풀어낸다.",
+        "창 두·BG9·마스크·캔디스·그레미·아스킨은 상태 변화·지원체·지형·영역의 다양한 시험을 담당한다. 지원체와 변신은 새 원작 인물 수로 부풀리지 않는다.",
+        "유하바하전은 왕의 검, 겹친 미래, 마지막 기록실로 이어진다. 점선으로 가능한 미래를 보이고 공격 전에 실선으로 확정해 읽고 피할 수 있게 한다."
+      ],
+      "revelation": "이 전장의 공략 장치는 원작 권능의 보편적인 약점이 아니다. 여섯 명이 회수한 이름과 원본 기록으로 균열의 재현 기능만 봉인할 수 있다.",
+      "closing_dialogue": [
+        [
+          "유하바하의 재현",
+          "그 선택조차 이미 보았다고 한다면?"
+        ],
+        [
+          "오리히메",
+          "그럼에도, 이름을 부르는 건 우리가 할 일이에요."
+        ],
+        [
+          "루키아",
+          "기록함을 열어. 돌아갈 곳은 우리가 기억하고 있다."
+        ],
+        [
+          "우노하나",
+          "이번에는 모두 살아서 돌아갑시다."
+        ]
+      ],
+      "mechanic": "이전 액트에서 배운 지형·직선·고리·지원체를 두 가지씩 조합. 입력 반전·예고 없는 즉사·특정 캐릭터 필수 궁극기는 제외한다.",
+      "midboss_id": "a5_mid_haschwalth",
+      "boss_id": "a5_boss_yhwach",
+      "reward": "다섯째 기억 조각, 본편 완결과 마을 후일담, 전투 재현·선택 강적 모드.",
+      "next": "다섯 균열이 닫히고 이름이 돌아온 카라쿠라에서 동료와 NPC의 후일담 대화를 볼 수 있다.",
+      "dungeons": [
+        {
+          "number": 1,
+          "title": "그림자의 진입로",
+          "objective": "졸다트 전선을 정리하고 킬게·에스 노트의 전용 방을 통과한다.",
+          "enemy_ids": [
+            "a5_e11",
+            "a5_e12",
+            "a5_e01",
+            "a5_e02"
+          ],
+          "encounter_id": null,
+          "wave_enemy_ids": [
+            "a5_e11",
+            "a5_e12"
+          ],
+          "named_encounters": [
+            {
+              "enemy_id": "a5_e01",
+              "room": "독립 조우방 1",
+              "repeatable_in_story": false
+            },
+            {
+              "enemy_id": "a5_e02",
+              "room": "독립 조우방 2",
+              "repeatable_in_story": false
+            }
+          ],
+          "encounter_rule": "네임드는 각자의 방에서 스크립트로 등장. wave_enemy_ids만 일반 증원에 사용한다."
+        },
+        {
+          "number": 2,
+          "title": "슈테른릿터의 전선",
+          "objective": "폭발과 화염 구역을 구분해 전진한다.",
+          "enemy_ids": [
+            "a5_e11",
+            "a5_e12",
+            "a5_e03",
+            "a5_e04"
+          ],
+          "encounter_id": null,
+          "wave_enemy_ids": [
+            "a5_e11",
+            "a5_e12"
+          ],
+          "named_encounters": [
+            {
+              "enemy_id": "a5_e03",
+              "room": "독립 조우방 1",
+              "repeatable_in_story": false
+            },
+            {
+              "enemy_id": "a5_e04",
+              "room": "독립 조우방 2",
+              "repeatable_in_story": false
+            }
+          ],
+          "encounter_rule": "네임드는 각자의 방에서 스크립트로 등장. wave_enemy_ids만 일반 증원에 사용한다."
+        },
+        {
+          "number": 3,
+          "title": "하쉬발트의 저울",
+          "objective": "더 밸런스의 되돌림을 피하고 왕문을 연다.",
+          "enemy_ids": [
+            "a5_e11",
+            "a5_e12"
+          ],
+          "encounter_id": "a5_mid_haschwalth",
+          "wave_enemy_ids": [
+            "a5_e11",
+            "a5_e12"
+          ],
+          "named_encounters": [],
+          "encounter_rule": "네임드는 각자의 방에서 스크립트로 등장. wave_enemy_ids만 일반 증원에 사용한다."
+        },
+        {
+          "number": 4,
+          "title": "공명하는 왕성 회랑",
+          "objective": "창 두·BG9·마스크의 별도 조우를 해결한다.",
+          "enemy_ids": [
+            "a5_e11",
+            "a5_e12",
+            "a5_e05",
+            "a5_e06",
+            "a5_e07"
+          ],
+          "encounter_id": null,
+          "wave_enemy_ids": [
+            "a5_e11",
+            "a5_e12"
+          ],
+          "named_encounters": [
+            {
+              "enemy_id": "a5_e05",
+              "room": "독립 조우방 1",
+              "repeatable_in_story": false
+            },
+            {
+              "enemy_id": "a5_e06",
+              "room": "독립 조우방 2",
+              "repeatable_in_story": false
+            },
+            {
+              "enemy_id": "a5_e07",
+              "room": "독립 조우방 3",
+              "repeatable_in_story": false
+            }
+          ],
+          "encounter_rule": "네임드는 각자의 방에서 스크립트로 등장. wave_enemy_ids만 일반 증원에 사용한다."
+        },
+        {
+          "number": 5,
+          "title": "가능한 미래의 정원",
+          "objective": "캔디스·그레미·아스킨의 서로 다른 전장을 통과한다.",
+          "enemy_ids": [
+            "a5_e11",
+            "a5_e12",
+            "a5_e08",
+            "a5_e09",
+            "a5_e10"
+          ],
+          "encounter_id": null,
+          "wave_enemy_ids": [
+            "a5_e11",
+            "a5_e12"
+          ],
+          "named_encounters": [
+            {
+              "enemy_id": "a5_e08",
+              "room": "독립 조우방 1",
+              "repeatable_in_story": false
+            },
+            {
+              "enemy_id": "a5_e09",
+              "room": "독립 조우방 2",
+              "repeatable_in_story": false
+            },
+            {
+              "enemy_id": "a5_e10",
+              "room": "독립 조우방 3",
+              "repeatable_in_story": false
+            }
+          ],
+          "encounter_rule": "네임드는 각자의 방에서 스크립트로 등장. wave_enemy_ids만 일반 증원에 사용한다."
+        },
+        {
+          "number": 6,
+          "title": "유하바하의 마지막 기록",
+          "objective": "기록 장치를 지키고 유하바하의 재현과 마지막 균열을 봉인한다.",
+          "enemy_ids": [
+            "a5_e11",
+            "a5_e12"
+          ],
+          "encounter_id": "a5_boss_yhwach",
+          "wave_enemy_ids": [
+            "a5_e11",
+            "a5_e12"
+          ],
+          "named_encounters": [],
+          "encounter_rule": "네임드는 각자의 방에서 스크립트로 등장. wave_enemy_ids만 일반 증원에 사용한다."
+        }
+      ],
+      "story_flow_source": "data/story_flow.json"
+    }
+  ]
+}

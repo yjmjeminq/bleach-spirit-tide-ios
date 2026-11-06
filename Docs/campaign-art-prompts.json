@@ -1,0 +1,141 @@
+{
+  "tool": "built-in image_gen",
+  "atlas_note": "Each atlas contains 12 named Sprite regions. Unity consumes grid regions directly without modifying the generated PNG.",
+  "prompts": [
+    {
+      "id": "enemies_act_1",
+      "transparent": true,
+      "columns": 3,
+      "rows": 4,
+      "enemy_ids": [
+        "a1_e01",
+        "a1_e02",
+        "a1_e03",
+        "a1_e04",
+        "a1_e05",
+        "a1_e06",
+        "a1_e07",
+        "a1_e08",
+        "a1_e09",
+        "a1_e10",
+        "a1_e11",
+        "a1_e12"
+      ],
+      "prompt": "Use case: stylized-concept. Asset type: transparent 2D anime action RPG enemy sprite atlas. Create ONE production atlas containing exactly 12 isolated full-body BLEACH enemy character cutouts. Layout: an EXACT uniform grid of THREE columns by FOUR rows, no gaps between the invisible equal-sized cells, portrait canvas. Each subject is centered inside its assigned cell with 12 percent clear transparent padding on all edges; the full head, weapons and feet fit in that cell. Every subject faces slightly left in a readable fighting idle pose. Clean inked anime cel shading, recognizable canon faces, masks, outfits and weapons. Canon named characters are their original BLEACH designs, not new original villains. Faction troops follow the described standard uniform or Hollow anatomy. No bikini changes to enemies; preserve original enemy clothing. Monsters retain monster proportions; humanoids have natural adult proportions. True transparent alpha background across the whole sheet, no scenery, no cast shadows, no floor, no text, no labels, no grid lines, no borders, no logos. Keep silhouettes separate without touching other cells. Exact cell order, top row to bottom, left to right:\nCell 1 (row 1, column 1): 피시본 D. Identity and silhouette: 물고기 뼈를 닮은 큰 흰 가면과 우람한 팔을 가진 초기 호로.\nCell 2 (row 1, column 2): 애시드와이어. Identity and silhouette: 긴 뱀 같은 하체와 흰 가면, 머리카락이 남은 호로의 실루엣.\nCell 3 (row 1, column 3): 헥사포더스. Identity and silhouette: 여러 다리와 거대한 가면을 가진 낮은 짐승형 호로.\nCell 4 (row 2, column 1): 넘 샹들리에. Identity and silhouette: 거꾸로 늘어진 촉수와 꽃·샹들리에처럼 퍼지는 몸의 호로.\nCell 5 (row 2, column 2): 벌보스 G. Identity and silhouette: 커다란 가면과 부풀어 오른 거체가 눈에 띄는 초기 호로.\nCell 6 (row 2, column 3): 메타스타시아. Identity and silhouette: 머리 주변의 촉수와 사족형 몸체가 특징인 실험 호로.\nCell 7 (row 3, column 1): 메노스 그랑데·길리안. Identity and silhouette: 검은 장막 같은 긴 몸과 작은 다리, 흰 긴 가면의 거대 호로.\nCell 8 (row 3, column 2): 호로·근접형. Identity and silhouette: 원작 호로의 흰 가면·검은 구멍·짐승형 몸을 따르는 일반형.\nCell 9 (row 3, column 3): 호로·비행형. Identity and silhouette: 날개와 긴 흰 가면을 가진 일반 호로 병과.\nCell 10 (row 4, column 1): 호로·돌진형. Identity and silhouette: 낮고 굵은 네 다리와 큰 뿔 모양 가면의 일반 호로.\nCell 11 (row 4, column 2): 호로·촉수형. Identity and silhouette: 촉수 팔과 납작한 흰 가면의 일반 호로.\nCell 12 (row 4, column 3): 호로·영탄형. Identity and silhouette: 가면의 입 부분이 길게 열린 일반 호로."
+    },
+    {
+      "id": "enemies_act_2",
+      "transparent": true,
+      "columns": 3,
+      "rows": 4,
+      "enemy_ids": [
+        "a2_e01",
+        "a2_e02",
+        "a2_e03",
+        "a2_e04",
+        "a2_e05",
+        "a2_e06",
+        "a2_e07",
+        "a2_e08",
+        "a2_e09",
+        "a2_e10",
+        "a2_e11",
+        "a2_e12"
+      ],
+      "prompt": "Use case: stylized-concept. Asset type: transparent 2D anime action RPG enemy sprite atlas. Create ONE production atlas containing exactly 12 isolated full-body BLEACH enemy character cutouts. Layout: an EXACT uniform grid of THREE columns by FOUR rows, no gaps between the invisible equal-sized cells, portrait canvas. Each subject is centered inside its assigned cell with 12 percent clear transparent padding on all edges; the full head, weapons and feet fit in that cell. Every subject faces slightly left in a readable fighting idle pose. Clean inked anime cel shading, recognizable canon faces, masks, outfits and weapons. Canon named characters are their original BLEACH designs, not new original villains. Faction troops follow the described standard uniform or Hollow anatomy. No bikini changes to enemies; preserve original enemy clothing. Monsters retain monster proportions; humanoids have natural adult proportions. True transparent alpha background across the whole sheet, no scenery, no cast shadows, no floor, no text, no labels, no grid lines, no borders, no logos. Keep silhouettes separate without touching other cells. Exact cell order, top row to bottom, left to right:\nCell 1 (row 1, column 1): 에드라드 리오네스. Identity and silhouette: 붉은 머리와 넓은 체격, 해방 시 커지는 팔이 특징인 아란칼.\nCell 2 (row 1, column 2): 일폴트 그란츠. Identity and silhouette: 긴 금발의 아란칼. 해방 후 황소를 연상시키는 형태.\nCell 3 (row 1, column 3): 나킴 그린디나. Identity and silhouette: 큰 체격과 흰 아란칼 복장이 눈에 띄는 인물.\nCell 4 (row 2, column 1): 디 로이 링커. Identity and silhouette: 길게 기운 머리 장식과 가면 잔재, 마른 체형의 아란칼.\nCell 5 (row 2, column 2): 로리 아이번. Identity and silhouette: 검은 양갈래 머리와 얼굴의 가면 잔재, 원작 아란칼 복장.\nCell 6 (row 2, column 3): 메노리 말리아. Identity and silhouette: 짧은 밝은 머리와 흰 아란칼 복장, 작은 가면 조각.\nCell 7 (row 3, column 1): 데모우라 조드. Identity and silhouette: 우람한 몸집과 커다란 흰 가면 잔재를 가진 관문 아란칼.\nCell 8 (row 3, column 2): 아이스링거 웨르나르. Identity and silhouette: 길쭉한 가면·머리 형태와 영탄 사격이 특징인 관문 아란칼.\nCell 9 (row 3, column 3): 아란칼·검사. Identity and silhouette: 흰 아란칼 제복, 가면 조각과 검을 공통 요소로 쓰는 병과.\nCell 10 (row 4, column 1): 아란칼·창수. Identity and silhouette: 흰 제복과 긴 창 모양 영자 무기를 쓰는 게임용 병과.\nCell 11 (row 4, column 2): 아란칼·발라 사수. Identity and silhouette: 가면 조각과 손의 영압 충전을 강조한 일반 아란칼.\nCell 12 (row 4, column 3): 아쥬커스급 호로. Identity and silhouette: 원작 메노스 계급을 바탕으로 한 소수의 짐승형 정예."
+    },
+    {
+      "id": "enemies_act_3",
+      "transparent": true,
+      "columns": 3,
+      "rows": 4,
+      "enemy_ids": [
+        "a3_e01",
+        "a3_e02",
+        "a3_e03",
+        "a3_e04",
+        "a3_e05",
+        "a3_e06",
+        "a3_e07",
+        "a3_e08",
+        "a3_e09",
+        "a3_e10",
+        "a3_e11",
+        "a3_e12"
+      ],
+      "prompt": "Use case: stylized-concept. Asset type: transparent 2D anime action RPG enemy sprite atlas. Create ONE production atlas containing exactly 12 isolated full-body BLEACH enemy character cutouts. Layout: an EXACT uniform grid of THREE columns by FOUR rows, no gaps between the invisible equal-sized cells, portrait canvas. Each subject is centered inside its assigned cell with 12 percent clear transparent padding on all edges; the full head, weapons and feet fit in that cell. Every subject faces slightly left in a readable fighting idle pose. Clean inked anime cel shading, recognizable canon faces, masks, outfits and weapons. Canon named characters are their original BLEACH designs, not new original villains. Faction troops follow the described standard uniform or Hollow anatomy. No bikini changes to enemies; preserve original enemy clothing. Monsters retain monster proportions; humanoids have natural adult proportions. True transparent alpha background across the whole sheet, no scenery, no cast shadows, no floor, no text, no labels, no grid lines, no borders, no logos. Keep silhouettes separate without touching other cells. Exact cell order, top row to bottom, left to right:\nCell 1 (row 1, column 1): 도르도니 알렉산드로 델 소캇치오. Identity and silhouette: 콧수염과 올린 검은 머리, 발차기 자세의 프리바론 에스파다.\nCell 2 (row 1, column 2): 치루치 선더위치. Identity and silhouette: 보라색 머리와 독특한 흰 복장, 요요형 무기의 프리바론 에스파다.\nCell 3 (row 1, column 3): 간텐바인 모스케다. Identity and silhouette: 큰 머리 모양과 주먹 무기가 특징인 프리바론 에스파다.\nCell 4 (row 2, column 1): 테슬러 린도크루츠. Identity and silhouette: 금발과 안대를 가진 아란칼. 해방 시 커지는 야수형 체격.\nCell 5 (row 2, column 2): 루드본 첼루트. Identity and silhouette: 사슴 뿔을 닮은 가면과 흰 제복, 해방 시 나무 같은 형상.\nCell 6 (row 2, column 3): 아로니로 아루루에리. Identity and silhouette: 유리 용기 안의 두 머리와 긴 의식복이 특징인 에스파다.\nCell 7 (row 3, column 1): 조마리 루루. Identity and silhouette: 머리와 몸의 눈 모티브, 빠른 이동이 특징인 에스파다.\nCell 8 (row 3, column 2): 자엘아폴로 그란츠. Identity and silhouette: 분홍 머리와 안경처럼 보이는 가면 잔재의 에스파다.\nCell 9 (row 3, column 3): 핀돌 캐리어스. Identity and silhouette: 가면을 쪼개 힘을 조절하는 모습과 갑각형 해방이 특징.\nCell 10 (row 4, column 1): 지오 베가. Identity and silhouette: 짙은 머리와 날렵한 체형, 호랑이를 닮은 해방 모티브.\nCell 11 (row 4, column 2): 엑세키아스·검병. Identity and silhouette: 원작의 해골 가면 부대 외형을 따르는 흰 검병.\nCell 12 (row 4, column 3): 엑세키아스·창병. Identity and silhouette: 해골 가면과 긴 창을 쓰는 부대 기반 게임용 병과."
+    },
+    {
+      "id": "enemies_act_4",
+      "transparent": true,
+      "columns": 3,
+      "rows": 4,
+      "enemy_ids": [
+        "a4_e01",
+        "a4_e02",
+        "a4_e03",
+        "a4_e04",
+        "a4_e05",
+        "a4_e06",
+        "a4_e07",
+        "a4_e08",
+        "a4_e09",
+        "a4_e10",
+        "a4_e11",
+        "a4_e12"
+      ],
+      "prompt": "Use case: stylized-concept. Asset type: transparent 2D anime action RPG enemy sprite atlas. Create ONE production atlas containing exactly 12 isolated full-body BLEACH enemy character cutouts. Layout: an EXACT uniform grid of THREE columns by FOUR rows, no gaps between the invisible equal-sized cells, portrait canvas. Each subject is centered inside its assigned cell with 12 percent clear transparent padding on all edges; the full head, weapons and feet fit in that cell. Every subject faces slightly left in a readable fighting idle pose. Clean inked anime cel shading, recognizable canon faces, masks, outfits and weapons. Canon named characters are their original BLEACH designs, not new original villains. Faction troops follow the described standard uniform or Hollow anatomy. No bikini changes to enemies; preserve original enemy clothing. Monsters retain monster proportions; humanoids have natural adult proportions. True transparent alpha background across the whole sheet, no scenery, no cast shadows, no floor, no text, no labels, no grid lines, no borders, no logos. Keep silhouettes separate without touching other cells. Exact cell order, top row to bottom, left to right:\nCell 1 (row 1, column 1): 코요테 스타크. Identity and silhouette: 긴 갈색 머리와 수염, 느슨한 흰 복장. 해방 시 쌍권총 모티브.\nCell 2 (row 1, column 2): 바라간 루이젠번. Identity and silhouette: 왕관·도끼·해골 왕의 해방 실루엣이 특징인 에스파다.\nCell 3 (row 1, column 3): 티아 할리벨. Identity and silhouette: 금발과 얼굴 아래 가면 잔재, 해방 후 검과 물의 모티브.\nCell 4 (row 2, column 1): 야미 리야르고. Identity and silhouette: 거대한 체격과 붉은 문양, 해방 후 더 커지는 아란칼.\nCell 5 (row 2, column 2): 원더와이스 마르젤라. Identity and silhouette: 밝은 머리와 눈 주변의 가면 잔재를 가진 특수 아란칼.\nCell 6 (row 2, column 3): 에밀루 아파치. Identity and silhouette: 짧은 어두운 머리와 뿔 모티브의 가면 잔재, 할리벨의 프라시온.\nCell 7 (row 3, column 1): 프란체스카 미라 로즈. Identity and silhouette: 긴 짙은 머리와 사자 모티브, 큰 체격의 프라시온.\nCell 8 (row 3, column 2): 시안 선순. Identity and silhouette: 긴 검은 머리와 뱀 모티브, 긴 소매의 프라시온.\nCell 9 (row 3, column 3): 아욘. Identity and silhouette: 트레스 베스티아가 만들어 내는 거대한 키메라 호로.\nCell 10 (row 4, column 1): 샤를로테 쿨혼. Identity and silhouette: 큰 체격과 긴 머리, 화려한 해방 실루엣의 아란칼.\nCell 11 (row 4, column 2): 아란칼·세로 지원병. Identity and silhouette: 흰 제복과 팔의 큰 영압 충전을 강조한 부대 병과.\nCell 12 (row 4, column 3): 엑세키아스·근위병. Identity and silhouette: 해골 가면과 두꺼운 흰 장갑의 부대 기반 병과."
+    },
+    {
+      "id": "enemies_act_5",
+      "transparent": true,
+      "columns": 3,
+      "rows": 4,
+      "enemy_ids": [
+        "a5_e01",
+        "a5_e02",
+        "a5_e03",
+        "a5_e04",
+        "a5_e05",
+        "a5_e06",
+        "a5_e07",
+        "a5_e08",
+        "a5_e09",
+        "a5_e10",
+        "a5_e11",
+        "a5_e12"
+      ],
+      "prompt": "Use case: stylized-concept. Asset type: transparent 2D anime action RPG enemy sprite atlas. Create ONE production atlas containing exactly 12 isolated full-body BLEACH enemy character cutouts. Layout: an EXACT uniform grid of THREE columns by FOUR rows, no gaps between the invisible equal-sized cells, portrait canvas. Each subject is centered inside its assigned cell with 12 percent clear transparent padding on all edges; the full head, weapons and feet fit in that cell. Every subject faces slightly left in a readable fighting idle pose. Clean inked anime cel shading, recognizable canon faces, masks, outfits and weapons. Canon named characters are their original BLEACH designs, not new original villains. Faction troops follow the described standard uniform or Hollow anatomy. No bikini changes to enemies; preserve original enemy clothing. Monsters retain monster proportions; humanoids have natural adult proportions. True transparent alpha background across the whole sheet, no scenery, no cast shadows, no floor, no text, no labels, no grid lines, no borders, no logos. Keep silhouettes separate without touching other cells. Exact cell order, top row to bottom, left to right:\nCell 1 (row 1, column 1): 킬게 오피. Identity and silhouette: 둥근 안경과 흰 군복, 모자와 검을 지닌 퀸시.\nCell 2 (row 1, column 2): 에스 노트. Identity and silhouette: 긴 검은 머리와 마스크, 흰 군복의 슈테른릿터.\nCell 3 (row 1, column 3): 밤비에타 바스터바인. Identity and silhouette: 긴 어두운 머리와 군모, 흰 퀸시 제복.\nCell 4 (row 2, column 1): 버즈비. Identity and silhouette: 모히칸 머리와 닭 모양 장식, 손가락 화염이 특징.\nCell 5 (row 2, column 2): 창 두. Identity and silhouette: 검은 머리와 발톱형 무기, 철을 연상시키는 방어 자세.\nCell 6 (row 2, column 3): BG9. Identity and silhouette: 기계 같은 가면과 외형, 중화기·촉수를 사용하는 퀸시.\nCell 7 (row 3, column 1): 마스크 드 마스큘린. Identity and silhouette: 별 모양 가면과 레슬러 같은 체격. 제임스는 패턴 지원체.\nCell 8 (row 3, column 2): 캔디스 캐트닙. Identity and silhouette: 긴 번개빛 머리와 흰 퀸시 제복의 슈테른릿터.\nCell 9 (row 3, column 3): 그레미 투뮤. Identity and silhouette: 밝은 머리와 후드가 있는 퀸시 복장, 무심한 자세.\nCell 10 (row 4, column 1): 아스킨 나크 르 바르. Identity and silhouette: 검은 머리와 긴 앞머리, 느슨한 태도의 퀸시.\nCell 11 (row 4, column 2): 졸다트·영자궁병. Identity and silhouette: 원작 퀸시 일반병의 흰 군복과 얼굴을 가린 복장, 영자궁.\nCell 12 (row 4, column 3): 졸다트·근접병. Identity and silhouette: 흰 제복과 영자 근접 무기를 쓰는 일반병 기반 게임용 병과."
+    },
+    {
+      "id": "town",
+      "transparent": false,
+      "prompt": "Use case: stylized-concept. Asset type: wide 2D belt-scrolling action RPG environment background, BLEACH fan-game setting. Scene: Karakura, the exterior of Urahara's modest Japanese candy shop, wooden shopfront and striped awning, warm lanterns, quiet night street, a few potted plants, no people. Composition: camera at a low slightly elevated side-on angle suitable for a DNF-style brawler, wide horizontal environment, a continuous flat walkable ground plane across the lower 45 percent, background architecture concentrated in the upper half. Ground is spacious and almost empty so sprites and attack warnings can be composited on it. Clean detailed anime background painting, cel-shaded edges, restrained lighting, atmospheric distant layers. No people, no enemies, no UI, no text or lettering, no logos, no watermarks. Landscape 16:9 framing. No foreground objects obstruct the fighting lane."
+    },
+    {
+      "id": "battle_act_1",
+      "transparent": false,
+      "prompt": "Use case: stylized-concept. Asset type: wide 2D belt-scrolling action RPG environment background, BLEACH fan-game setting. Scene: Karakura harbor and riverbank at night, distant Japanese houses, harbor cranes and calm black water reflecting teal spirit lights, a far lighthouse. Composition: camera at a low slightly elevated side-on angle suitable for a DNF-style brawler, wide horizontal environment, a continuous flat walkable ground plane across the lower 45 percent, background architecture concentrated in the upper half. Ground is spacious and almost empty so sprites and attack warnings can be composited on it. Clean detailed anime background painting, cel-shaded edges, restrained lighting, atmospheric distant layers. No people, no enemies, no UI, no text or lettering, no logos, no watermarks. Landscape 16:9 framing. No foreground objects obstruct the fighting lane."
+    },
+    {
+      "id": "battle_act_2",
+      "transparent": false,
+      "prompt": "Use case: stylized-concept. Asset type: wide 2D belt-scrolling action RPG environment background, BLEACH fan-game setting. Scene: Karakura residential and shopping street under a moonlit indigo sky, utility poles and rooftops, a distant black Garganta裂 opening in the sky, blue spirit light. Composition: camera at a low slightly elevated side-on angle suitable for a DNF-style brawler, wide horizontal environment, a continuous flat walkable ground plane across the lower 45 percent, background architecture concentrated in the upper half. Ground is spacious and almost empty so sprites and attack warnings can be composited on it. Clean detailed anime background painting, cel-shaded edges, restrained lighting, atmospheric distant layers. No people, no enemies, no UI, no text or lettering, no logos, no watermarks. Landscape 16:9 framing. No foreground objects obstruct the fighting lane."
+    },
+    {
+      "id": "battle_act_3",
+      "transparent": false,
+      "prompt": "Use case: stylized-concept. Asset type: wide 2D belt-scrolling action RPG environment background, BLEACH fan-game setting. Scene: Hueco Mundo outside and inside Las Noches, bleached white sand, black night sky, enormous white palace columns and arches, cool violet shadows, a distant crescent moon. Composition: camera at a low slightly elevated side-on angle suitable for a DNF-style brawler, wide horizontal environment, a continuous flat walkable ground plane across the lower 45 percent, background architecture concentrated in the upper half. Ground is spacious and almost empty so sprites and attack warnings can be composited on it. Clean detailed anime background painting, cel-shaded edges, restrained lighting, atmospheric distant layers. No people, no enemies, no UI, no text or lettering, no logos, no watermarks. Landscape 16:9 framing. No foreground objects obstruct the fighting lane."
+    },
+    {
+      "id": "battle_act_4",
+      "transparent": false,
+      "prompt": "Use case: stylized-concept. Asset type: wide 2D belt-scrolling action RPG environment background, BLEACH fan-game setting. Scene: Fake Karakura battle ground, familiar Japanese urban buildings and broad road damaged by spirit battles, monumental columns and subtle mirrored cracks in the sky, sunset ash and gold. Composition: camera at a low slightly elevated side-on angle suitable for a DNF-style brawler, wide horizontal environment, a continuous flat walkable ground plane across the lower 45 percent, background architecture concentrated in the upper half. Ground is spacious and almost empty so sprites and attack warnings can be composited on it. Clean detailed anime background painting, cel-shaded edges, restrained lighting, atmospheric distant layers. No people, no enemies, no UI, no text or lettering, no logos, no watermarks. Landscape 16:9 framing. No foreground objects obstruct the fighting lane."
+    },
+    {
+      "id": "battle_act_5",
+      "transparent": false,
+      "prompt": "Use case: stylized-concept. Asset type: wide 2D belt-scrolling action RPG environment background, BLEACH fan-game setting. Scene: Wandenreich Quincy palace, immense austere white stone halls, tall blue-lit windows, silver and blue geometric architecture, shadow portals, cool royal atmosphere. Composition: camera at a low slightly elevated side-on angle suitable for a DNF-style brawler, wide horizontal environment, a continuous flat walkable ground plane across the lower 45 percent, background architecture concentrated in the upper half. Ground is spacious and almost empty so sprites and attack warnings can be composited on it. Clean detailed anime background painting, cel-shaded edges, restrained lighting, atmospheric distant layers. No people, no enemies, no UI, no text or lettering, no logos, no watermarks. Landscape 16:9 framing. No foreground objects obstruct the fighting lane."
+    }
+  ]
+}
