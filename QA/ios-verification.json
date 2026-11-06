@@ -1,12 +1,12 @@
 {
   "passed": true,
-  "ipa": "SpiritTide-iPhone-unsigned-v0.8.0.ipa",
-  "bytes": 46737399,
-  "sha256": "fdc0940e972b7193b0b7f6ed61e89cf50d21c3ce420f680a053eb06b816be540",
+  "ipa": "SpiritTide-iPhone-unsigned-v0.9.0.ipa",
+  "bytes": 50192326,
+  "sha256": "c30fb253902203c748c9b10b6cfc9811bcf12f7f4cd31e5ab57c0acc12f4b8c0",
   "app": {
     "bundleIdentifier": "com.yjmjemin.bleachspirittide",
-    "version": "0.8.0",
-    "build": "3",
+    "version": "0.9.0",
+    "build": "4",
     "minimumIOS": "17.0",
     "mainExecutable": {
       "bytes": 67568,
@@ -21,8 +21,8 @@
       ]
     },
     "unityFramework": {
-      "bytes": 65752784,
-      "sha256": "5c0f4919409f7506bf1ac16ee3151794552ec38582fdc46cbd03320ab9475f44",
+      "bytes": 65760640,
+      "sha256": "1a4abf8183780b2227db9ad48e883ebe14781e7fd2f492c9a21015e71a3746ce",
       "slices": [
         {
           "architecture": "arm64",
@@ -33,7 +33,7 @@
       ]
     },
     "gameFiles": 8,
-    "gameFilesSHA256": "19f142a2360da5be202d7b3f38dcd7fdf0ffaa412c0b4f25be166865a6c6589c",
+    "gameFilesSHA256": "e7cbc133c0b3aa9f9446f96fbcf7abaf44b4c1febe0dbd6d913b01eefca03345",
     "unsigned": true
   },
   "gameLaunched": false,

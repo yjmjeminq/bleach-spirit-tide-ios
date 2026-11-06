@@ -1,18 +1,18 @@
 {
   "passed": true,
-  "version": "0.8.0",
-  "guid": "47ee153f902c44e89d35479546301f3c",
+  "version": "0.9.0",
+  "guid": "d62acf89758b47858f02d1be04f4629d",
   "source": "Tools/prepare_dialogue.py",
   "runtime_sha256": "ad33e61ab2280e63151978b492e99bae6d763074520cbd62c5b92324986f7c93",
-  "script_sha256": "8dfbe1b61532e3d982096b4007f8e265645c187892777d961ec190c17d2fcc2d",
+  "script_sha256": "685015eadd6a143d71feab5d2814bce2e890db16923370550f201cbc24a8fe1d",
   "scenes": 184,
   "fixed_lines": 513,
   "lead_responses": 150,
   "town_replies": 105,
   "checks": {
-    "model": 3602,
-    "desktop": 13532,
-    "phone_layout": 13120
+    "model": 3693,
+    "desktop": 14625,
+    "phone_layout": 14178
   },
   "evidence": [
     "Every scene resolves for all six leads and has multiple speakers",

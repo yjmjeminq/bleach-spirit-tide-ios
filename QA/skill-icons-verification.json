@@ -1,0 +1,33 @@
+{
+  "passed": true,
+  "version": "0.9.0",
+  "guid": "d62acf89758b47858f02d1be04f4629d",
+  "painted_icons": 30,
+  "atlas_files": 6,
+  "art_manifest": "Docs/skill-icon-art-sources.json",
+  "art_sha256": {
+    "Assets/SpiritTide/Resources/SpiritTide/Art/Skills/rukia-skills-v1.png": "9e15b30b6eaf5626b717008c2d942d449b08d859120502dc8beee28522741d8f",
+    "Assets/SpiritTide/Resources/SpiritTide/Art/Skills/orihime-skills-v1.png": "40d4eed90df2ba4dd76aa786d6d119745109856caf774235d60e2c39eae7fbc6",
+    "Assets/SpiritTide/Resources/SpiritTide/Art/Skills/yoruichi-skills-v1.png": "a06a488565d153db80415281e094f67251a582df37b9ec258de2be0faf66fec9",
+    "Assets/SpiritTide/Resources/SpiritTide/Art/Skills/soifon-skills-v1.png": "c0e6d241408b6ee407a48232fb06ef50aabfe64356f4416dc368a39899960e41",
+    "Assets/SpiritTide/Resources/SpiritTide/Art/Skills/rangiku-skills-v1.png": "714fc76125aab49c04136701b9b711b54fe74e7bb52e2e619090ad5c68389b1d",
+    "Assets/SpiritTide/Resources/SpiritTide/Art/Skills/unohana-skills-v1.png": "3cf785dd018665cf8ac6d1427aad3ccade156cc87786ef0a224f9caf37150a99"
+  },
+  "mapping_sha256": "a119fdb209021e4c11eb4dd879ac92ae268f1843e736a91befbcc9cfe4a37340",
+  "evidence": [
+    "QA/92-painted-icons-0.png",
+    "QA/92-painted-icons-5.png",
+    "QA/92-painted-help-1.png",
+    "QA/93-icon-cooldown-and-spirit.png"
+  ],
+  "tested": [
+    "All thirty skill and help buttons show their own painted icon",
+    "Compact labels produce actual rendered glyphs",
+    "Icon art receives no pointer events",
+    "Radial overlay and countdown match the real cooldown",
+    "Insufficient spirit dims the art and blocks casts",
+    "Button hit areas and safe area remain valid"
+  ],
+  "scope": "Actual Windows Unity rendered icons and pointer checks; not iPhone hardware execution",
+  "physical_iphone_tested": false
+}

@@ -14408,6 +14408,370 @@
         {
             "name": "all thirty skills have authored visuals and sound",
             "passed": true
+        },
+        {
+            "name": "painted icon atlas keeps authored dimensions rukia",
+            "passed": true
+        },
+        {
+            "name": "painted icon matches the real skill rk_s1",
+            "passed": true
+        },
+        {
+            "name": "icon crop stays inside its source atlas rk_s1",
+            "passed": true
+        },
+        {
+            "name": "painted icon matches the real skill rk_s2",
+            "passed": true
+        },
+        {
+            "name": "icon crop stays inside its source atlas rk_s2",
+            "passed": true
+        },
+        {
+            "name": "neighboring icon crops do not overlap rk_s2",
+            "passed": true
+        },
+        {
+            "name": "painted icon matches the real skill rk_s3",
+            "passed": true
+        },
+        {
+            "name": "icon crop stays inside its source atlas rk_s3",
+            "passed": true
+        },
+        {
+            "name": "neighboring icon crops do not overlap rk_s3",
+            "passed": true
+        },
+        {
+            "name": "painted icon matches the real skill rk_s4",
+            "passed": true
+        },
+        {
+            "name": "icon crop stays inside its source atlas rk_s4",
+            "passed": true
+        },
+        {
+            "name": "neighboring icon crops do not overlap rk_s4",
+            "passed": true
+        },
+        {
+            "name": "painted icon matches the real skill rk_ult",
+            "passed": true
+        },
+        {
+            "name": "icon crop stays inside its source atlas rk_ult",
+            "passed": true
+        },
+        {
+            "name": "neighboring icon crops do not overlap rk_ult",
+            "passed": true
+        },
+        {
+            "name": "painted icon atlas keeps authored dimensions orihime",
+            "passed": true
+        },
+        {
+            "name": "painted icon matches the real skill oh_s1",
+            "passed": true
+        },
+        {
+            "name": "icon crop stays inside its source atlas oh_s1",
+            "passed": true
+        },
+        {
+            "name": "painted icon matches the real skill oh_s2",
+            "passed": true
+        },
+        {
+            "name": "icon crop stays inside its source atlas oh_s2",
+            "passed": true
+        },
+        {
+            "name": "neighboring icon crops do not overlap oh_s2",
+            "passed": true
+        },
+        {
+            "name": "painted icon matches the real skill oh_s3",
+            "passed": true
+        },
+        {
+            "name": "icon crop stays inside its source atlas oh_s3",
+            "passed": true
+        },
+        {
+            "name": "neighboring icon crops do not overlap oh_s3",
+            "passed": true
+        },
+        {
+            "name": "painted icon matches the real skill oh_s4",
+            "passed": true
+        },
+        {
+            "name": "icon crop stays inside its source atlas oh_s4",
+            "passed": true
+        },
+        {
+            "name": "neighboring icon crops do not overlap oh_s4",
+            "passed": true
+        },
+        {
+            "name": "painted icon matches the real skill oh_ult",
+            "passed": true
+        },
+        {
+            "name": "icon crop stays inside its source atlas oh_ult",
+            "passed": true
+        },
+        {
+            "name": "neighboring icon crops do not overlap oh_ult",
+            "passed": true
+        },
+        {
+            "name": "painted icon atlas keeps authored dimensions yoruichi",
+            "passed": true
+        },
+        {
+            "name": "painted icon matches the real skill yr_s1",
+            "passed": true
+        },
+        {
+            "name": "icon crop stays inside its source atlas yr_s1",
+            "passed": true
+        },
+        {
+            "name": "painted icon matches the real skill yr_s2",
+            "passed": true
+        },
+        {
+            "name": "icon crop stays inside its source atlas yr_s2",
+            "passed": true
+        },
+        {
+            "name": "neighboring icon crops do not overlap yr_s2",
+            "passed": true
+        },
+        {
+            "name": "painted icon matches the real skill yr_s3",
+            "passed": true
+        },
+        {
+            "name": "icon crop stays inside its source atlas yr_s3",
+            "passed": true
+        },
+        {
+            "name": "neighboring icon crops do not overlap yr_s3",
+            "passed": true
+        },
+        {
+            "name": "painted icon matches the real skill yr_s4",
+            "passed": true
+        },
+        {
+            "name": "icon crop stays inside its source atlas yr_s4",
+            "passed": true
+        },
+        {
+            "name": "neighboring icon crops do not overlap yr_s4",
+            "passed": true
+        },
+        {
+            "name": "painted icon matches the real skill yr_ult",
+            "passed": true
+        },
+        {
+            "name": "icon crop stays inside its source atlas yr_ult",
+            "passed": true
+        },
+        {
+            "name": "neighboring icon crops do not overlap yr_ult",
+            "passed": true
+        },
+        {
+            "name": "painted icon atlas keeps authored dimensions soifon",
+            "passed": true
+        },
+        {
+            "name": "painted icon matches the real skill sf_s1",
+            "passed": true
+        },
+        {
+            "name": "icon crop stays inside its source atlas sf_s1",
+            "passed": true
+        },
+        {
+            "name": "painted icon matches the real skill sf_s2",
+            "passed": true
+        },
+        {
+            "name": "icon crop stays inside its source atlas sf_s2",
+            "passed": true
+        },
+        {
+            "name": "neighboring icon crops do not overlap sf_s2",
+            "passed": true
+        },
+        {
+            "name": "painted icon matches the real skill sf_s3",
+            "passed": true
+        },
+        {
+            "name": "icon crop stays inside its source atlas sf_s3",
+            "passed": true
+        },
+        {
+            "name": "neighboring icon crops do not overlap sf_s3",
+            "passed": true
+        },
+        {
+            "name": "painted icon matches the real skill sf_s4",
+            "passed": true
+        },
+        {
+            "name": "icon crop stays inside its source atlas sf_s4",
+            "passed": true
+        },
+        {
+            "name": "neighboring icon crops do not overlap sf_s4",
+            "passed": true
+        },
+        {
+            "name": "painted icon matches the real skill sf_ult",
+            "passed": true
+        },
+        {
+            "name": "icon crop stays inside its source atlas sf_ult",
+            "passed": true
+        },
+        {
+            "name": "neighboring icon crops do not overlap sf_ult",
+            "passed": true
+        },
+        {
+            "name": "painted icon atlas keeps authored dimensions rangiku",
+            "passed": true
+        },
+        {
+            "name": "painted icon matches the real skill rg_s1",
+            "passed": true
+        },
+        {
+            "name": "icon crop stays inside its source atlas rg_s1",
+            "passed": true
+        },
+        {
+            "name": "painted icon matches the real skill rg_s2",
+            "passed": true
+        },
+        {
+            "name": "icon crop stays inside its source atlas rg_s2",
+            "passed": true
+        },
+        {
+            "name": "neighboring icon crops do not overlap rg_s2",
+            "passed": true
+        },
+        {
+            "name": "painted icon matches the real skill rg_s3",
+            "passed": true
+        },
+        {
+            "name": "icon crop stays inside its source atlas rg_s3",
+            "passed": true
+        },
+        {
+            "name": "neighboring icon crops do not overlap rg_s3",
+            "passed": true
+        },
+        {
+            "name": "painted icon matches the real skill rg_s4",
+            "passed": true
+        },
+        {
+            "name": "icon crop stays inside its source atlas rg_s4",
+            "passed": true
+        },
+        {
+            "name": "neighboring icon crops do not overlap rg_s4",
+            "passed": true
+        },
+        {
+            "name": "painted icon matches the real skill rg_ult",
+            "passed": true
+        },
+        {
+            "name": "icon crop stays inside its source atlas rg_ult",
+            "passed": true
+        },
+        {
+            "name": "neighboring icon crops do not overlap rg_ult",
+            "passed": true
+        },
+        {
+            "name": "painted icon atlas keeps authored dimensions unohana",
+            "passed": true
+        },
+        {
+            "name": "painted icon matches the real skill un_s1",
+            "passed": true
+        },
+        {
+            "name": "icon crop stays inside its source atlas un_s1",
+            "passed": true
+        },
+        {
+            "name": "painted icon matches the real skill un_s2",
+            "passed": true
+        },
+        {
+            "name": "icon crop stays inside its source atlas un_s2",
+            "passed": true
+        },
+        {
+            "name": "neighboring icon crops do not overlap un_s2",
+            "passed": true
+        },
+        {
+            "name": "painted icon matches the real skill un_s3",
+            "passed": true
+        },
+        {
+            "name": "icon crop stays inside its source atlas un_s3",
+            "passed": true
+        },
+        {
+            "name": "neighboring icon crops do not overlap un_s3",
+            "passed": true
+        },
+        {
+            "name": "painted icon matches the real skill un_s4",
+            "passed": true
+        },
+        {
+            "name": "icon crop stays inside its source atlas un_s4",
+            "passed": true
+        },
+        {
+            "name": "neighboring icon crops do not overlap un_s4",
+            "passed": true
+        },
+        {
+            "name": "painted icon matches the real skill un_ult",
+            "passed": true
+        },
+        {
+            "name": "icon crop stays inside its source atlas un_ult",
+            "passed": true
+        },
+        {
+            "name": "neighboring icon crops do not overlap un_ult",
+            "passed": true
+        },
+        {
+            "name": "all thirty playable skills have painted icons",
+            "passed": true
         }
     ],
     "scope": "Unity model/resources: six input-only complete campaigns with normal HP, real XP, loot, upgrades and manual gate approach. Native iPhone validation remains deferred.",

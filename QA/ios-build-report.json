@@ -8,13 +8,13 @@
   "ipaCreated": true,
   "export": {
     "bundleIdentifier": "com.yjmjemin.bleachspirittide",
-    "version": "0.8.0",
-    "build": "3",
+    "version": "0.9.0",
+    "build": "4",
     "gameFiles": [
       {
         "path": "Managed/Metadata/global-metadata.dat",
-        "bytes": 3698340,
-        "sha256": "d2efc87280e98429baf83800f36bd352e668f700d3604b862da0d72d1caae684"
+        "bytes": 3701276,
+        "sha256": "8cedd8ce9f4b29cc06ec15d889ef3df0c8dcf9950c0f325d50b2009347ced747"
       },
       {
         "path": "Managed/Resources/mscorlib.dll-resources.dat",
@@ -44,17 +44,17 @@
       {
         "path": "boot.config",
         "bytes": 134,
-        "sha256": "2d99dddc20bb027fe1126e96e6a9793cde03bbcc453ff9f26f5c8aa05b05f23e"
+        "sha256": "5dc60304b6d7124d387d794dde75207e03b50e378c1655a00005e15868d08a3f"
       },
       {
         "path": "data.unity3d",
-        "bytes": 25817438,
-        "sha256": "f8279ef808fb80293160783b1835e5a53ce0bd35a546603b16d38bac7a836081"
+        "bytes": 29365303,
+        "sha256": "96b21ca6225ed471ccc8d49c75eb269b6bca5b3e1f48918f482c05601fb0d952"
       }
     ],
-    "gameFilesSHA256": "19f142a2360da5be202d7b3f38dcd7fdf0ffaa412c0b4f25be166865a6c6589c",
+    "gameFilesSHA256": "e7cbc133c0b3aa9f9446f96fbcf7abaf44b4c1febe0dbd6d913b01eefca03345",
     "gameFileCount": 8,
-    "gameBytes": 31591993,
+    "gameBytes": 35142794,
     "requiredFiles": [
       {
         "path": "Unity-iPhone.xcodeproj/project.pbxproj",
@@ -66,7 +66,7 @@
       },
       {
         "path": "Info.plist",
-        "sha256": "f9151c589c7c0759e26403092ed8bfafa9496943820c63de698b33e148db6bad"
+        "sha256": "e32a50ef32db0d07d0d3d03e6a6820c12f2e54301c54962b5e6503ac52a7c5a8"
       },
       {
         "path": "Libraries/baselib.a",
@@ -118,7 +118,9 @@
       "TideSession_Step_m",
       "TideGame_DrawSkillEffects_m",
       "TideSkillFxGraphic_Thunder_m",
-      "TideSkillFxGraphic_Crimson_m"
+      "TideSkillFxGraphic_Crimson_m",
+      "TideGame_UpdateSkillIcon_m",
+      "TideSkillIcons_Get_m"
     ],
     "gameLaunched": false,
     "enteredPlayMode": false
@@ -149,15 +151,15 @@
     "CONFIGURATION_BUILD_DIR=/Users/runner/work/bleach-spirit-tide-ios/bleach-spirit-tide-ios/output/work/Products",
     "build"
   ],
-  "sourceRevision": "a419227a041d26a57680f57ea90382a050b56a96",
-  "runURL": "https://github.com/yjmjeminq/bleach-spirit-tide-ios/actions/runs/42183081438",
+  "sourceRevision": "d686417329398085eaf3dcc3f631360ee9071060",
+  "runURL": "https://github.com/yjmjeminq/bleach-spirit-tide-ios/actions/runs/42188389977",
   "buildProvider": "GitHub Actions",
-  "seconds": 262.31,
+  "seconds": 328.91,
   "buildExitCode": 0,
   "app": {
     "bundleIdentifier": "com.yjmjemin.bleachspirittide",
-    "version": "0.8.0",
-    "build": "3",
+    "version": "0.9.0",
+    "build": "4",
     "minimumIOS": "17.0",
     "mainExecutable": {
       "bytes": 67568,
@@ -172,8 +174,8 @@
       ]
     },
     "unityFramework": {
-      "bytes": 65752784,
-      "sha256": "5c0f4919409f7506bf1ac16ee3151794552ec38582fdc46cbd03320ab9475f44",
+      "bytes": 65760640,
+      "sha256": "1a4abf8183780b2227db9ad48e883ebe14781e7fd2f492c9a21015e71a3746ce",
       "slices": [
         {
           "architecture": "arm64",
@@ -184,13 +186,13 @@
       ]
     },
     "gameFiles": 8,
-    "gameFilesSHA256": "19f142a2360da5be202d7b3f38dcd7fdf0ffaa412c0b4f25be166865a6c6589c",
+    "gameFilesSHA256": "e7cbc133c0b3aa9f9446f96fbcf7abaf44b4c1febe0dbd6d913b01eefca03345",
     "unsigned": true
   },
   "ipa": {
-    "path": "/Users/runner/work/bleach-spirit-tide-ios/bleach-spirit-tide-ios/output/SpiritTide-iPhone-unsigned-v0.8.0.ipa",
-    "bytes": 46737399,
-    "sha256": "fdc0940e972b7193b0b7f6ed61e89cf50d21c3ce420f680a053eb06b816be540",
+    "path": "/Users/runner/work/bleach-spirit-tide-ios/bleach-spirit-tide-ios/output/SpiritTide-iPhone-unsigned-v0.9.0.ipa",
+    "bytes": 50192326,
+    "sha256": "c30fb253902203c748c9b10b6cfc9811bcf12f7f4cd31e5ab57c0acc12f4b8c0",
     "signed": false
   }
 }
