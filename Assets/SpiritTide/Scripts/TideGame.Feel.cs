@@ -32,7 +32,7 @@ namespace SpiritTide
             }
             for(int hero=0;hero<6;hero++){attackSounds[hero]=CombatSound(650+hero*95,.075f,false,hero+1);impactSounds[hero]=CombatSound(130+hero*17,.11f,true,hero+8);}
             heavyImpact=CombatSound(80,.18f,true,41);parrySound=CombatSound(1100,.18f,false,50);breakSound=CombatSound(70,.25f,true,60);
-            ambience=gameObject.AddComponent<AudioSource>();ambience.clip=CombatSound(75,4,false,71,true);ambience.loop=true;ambience.volume=.025f;ambience.Play();
+            ambience=gameObject.AddComponent<AudioSource>();ambience.clip=CombatSound(75,4,false,71,true);ambience.loop=true;ambience.volume=.025f;ambience.Play();BuildSkillEffects();
         }
         private AudioClip CombatSound(float hz,float length,bool impact,int seed,bool ambient=false)
         {
@@ -73,10 +73,10 @@ namespace SpiritTide
             actor.anchoredPosition+=new Vector2(Session.Facing*drive*12,Session.DodgeRemaining>0?-8:0);
             if(pose==null){actor.localRotation=Quaternion.Euler(0,0,Session.Profile.reducedEffects?0:Session.DodgeRemaining>0?-Session.Facing*14:-Session.Facing*drive*7);actor.localScale=new Vector3(Session.Facing*(1+drive*.035f),1-drive*.025f,1);}
             if(Session.DodgeRemaining>0){actor.localRotation=Quaternion.Euler(0,0,-Session.Facing*12);actor.localScale=new Vector3(Session.Facing*1.05f,.92f,1);}
-            if(Session.AttackSerial!=feelAttackSerial){feelAttackSerial=Session.AttackSerial;if(fighting){audioSource.pitch=1;audioSource.PlayOneShot(attackSounds[Session.Profile.hero],.8f);ReviewSound(attackSounds[Session.Profile.hero],.8f);}}
+            if(Session.AttackSerial!=feelAttackSerial){feelAttackSerial=Session.AttackSerial;if(fighting){audioSource.pitch=1;audioSource.PlayOneShot(CurrentCastSound(),.8f);ReviewSound(CurrentCastSound(),.8f);}}
             if(Session.PerfectEvents!=feelPerfectSerial){bool play=Session.PerfectEvents>feelPerfectSerial;feelPerfectSerial=Session.PerfectEvents;if(play&&fighting){audioSource.pitch=1;audioSource.PlayOneShot(parrySound);ReviewSound(parrySound);}}
             if(Session.PoiseBreaks!=feelBreakSerial){bool play=Session.PoiseBreaks>feelBreakSerial;feelBreakSerial=Session.PoiseBreaks;if(play&&fighting){audioSource.PlayOneShot(breakSound);ReviewSound(breakSound);}}
-            bool arc=fighting&&!defensive&&Session.ActionRemaining>0&&phase>.15f&&phase<.85f;
+            bool arc=fighting&&!defensive&&(int)Session.Action<(int)MoveKind.Skill0&&Session.ActionRemaining>0&&phase>.15f&&phase<.85f;
             weaponArc.gameObject.SetActive(arc);castBeam.gameObject.SetActive(arc&&(Session.Profile.hero==1||Session.Profile.hero==3));slash.gameObject.SetActive(false);
             Color color=HeroColors[Session.Profile.hero];color.a=Session.Profile.reducedEffects?.55f:.85f;weaponArc.color=color;weaponArc.Shape(Session.Profile.hero==1?360:Session.Profile.hero==3?65:Session.Action==MoveKind.Ultimate?300:140,Session.Action==MoveKind.Heavy?.13f:.07f,Session.Profile.hero==1?3:24);
             weaponArc.rectTransform.anchoredPosition=actor.anchoredPosition+new Vector2(Session.Facing*35,85);weaponArc.rectTransform.localScale=new Vector3(Session.Facing,1,1);weaponArc.rectTransform.localRotation=Quaternion.Euler(0,0,(phase-.5f)*-Session.Facing*90);

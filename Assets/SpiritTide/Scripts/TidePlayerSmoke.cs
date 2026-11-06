@@ -11,7 +11,7 @@ namespace SpiritTide
     public sealed partial class TidePlayerSmoke : MonoBehaviour
     {
         [Serializable] private class Row { public string name; public bool passed; }
-        [Serializable] private class Report { public bool passed; public string device, scope,version,guid; public Row[] checks; public string[] errors; }
+        [Serializable] private class Report { public bool passed; public string device, scope,version,guid,runMode; public Row[] checks; public string[] errors; }
         private readonly List<Row> rows=new List<Row>();
         private readonly List<string> errors=new List<string>();
         private readonly HashSet<string> reviewedSettings=new HashSet<string>();
@@ -74,7 +74,7 @@ namespace SpiritTide
                 if(current is IEnumerator)stack.Push((IEnumerator)current);else yield return current;
             }
             bool passed=!failed&&errors.Count==0;
-            File.WriteAllText(Path.Combine(output,"report.json"),JsonUtility.ToJson(new Report{passed=passed,version=Application.version,guid=Application.buildGUID,device=SystemInfo.graphicsDeviceType+" / "+Screen.width+"x"+Screen.height,scope="Windows live UI rendering, pointer-event simulation, menu focus, campaign loot and input-only multi-enemy victories. Not iPhone OS touch, Metal or performance validation.",checks=rows.ToArray(),errors=errors.ToArray()},true));
+            File.WriteAllText(Path.Combine(output,"report.json"),JsonUtility.ToJson(new Report{passed=passed,runMode=Array.IndexOf(Environment.GetCommandLineArgs(),"-spirit-fx-review")>=0?"skills-only":"full",version=Application.version,guid=Application.buildGUID,device=SystemInfo.graphicsDeviceType+" / "+Screen.width+"x"+Screen.height,scope="Windows live UI rendering, pointer-event simulation, menu focus, campaign loot and input-only multi-enemy victories. Not iPhone OS touch, Metal or performance validation.",checks=rows.ToArray(),errors=errors.ToArray()},true));
             Application.logMessageReceived-=Log;Application.Quit(passed?0:1);
         }
         private IEnumerator Capture(string name)
@@ -125,6 +125,7 @@ namespace SpiritTide
         private IEnumerator Checks()
         {
             yield return new WaitForSecondsRealtime(.4f);
+            if(Array.IndexOf(Environment.GetCommandLineArgs(),"-spirit-fx-review")>=0){yield return ReviewSkillEffects();yield break;}
             yield return ReviewUi();
             Check("town boot and one listener",game.Session.Mode==TideMode.Town&&FindObjectsByType<AudioListener>(FindObjectsSortMode.None).Length==1);
             yield return Capture("01-town");yield return TapUi("npc-urahara");yield return Capture("05-dialogue");yield return TapUi("choice-0");yield return ReadStory();
@@ -175,6 +176,7 @@ namespace SpiritTide
             yield return ReviewQuestGameplay();
             yield return ReviewConvenience();
             yield return ReviewTouchInput();
+            yield return ReviewSkillEffects();
             Check("player log has no errors",errors.Count==0);
         }
     }

@@ -339,7 +339,7 @@ def export(campaign):
             row=next(row for row in data["town"] if row["npc"]==npc and row["phase"]==phase and row["act"]==(5 if phase=="complete" else 1))
             town[npc]=row["text"].replace("{next}",campaign["stages"][0]["title"])
     write(DATA / "story_flow.json",flow)
-    book=["BLEACH: 영해의 균열 · 캐릭터 대화록 0.7.1", "", "전체 5액트의 결말과 선택 응답을 포함합니다.",
+    book=["BLEACH: 영해의 균열 · 캐릭터 대화록 0.8.0", "", "전체 5액트의 결말과 선택 응답을 포함합니다.",
           "게임에 표시되는 창작 대사와 같은 데이터에서 내보냈습니다. 원작 대사 인용집이 아닙니다.",
           "장면은 출정 → 대치 → 정화 후 → 귀환 보고 순서입니다. 선택한 선두만 전장에 있고 다른 동료는 통신으로 참여합니다.",
           "[선두 응답]은 여섯 문장 중 현재 선택한 캐릭터의 한 문장만 재생합니다.",
@@ -385,7 +385,7 @@ def export(campaign):
             q=next(q for q in quest_definitions if q['id']==s['quest_id']);extra+=q['index']*10+(0 if s['kind']=='side_offer' else 1+s['quest_step'] if s['kind']=='side_step' else 5+s['branch'])
         return (s["act"],{"main_accept":0,"party":900,"rescue":950,"epilogue":1000}.get(s["kind"],extra if s['kind'].startswith('side_') else s["stage"]*100+phase.get(s["kind"],0)),s["id"])
     ordered=sorted(SCENES,key=order)
-    write(ROOT / "Docs/dialogue-index.json",{"version":"0.7.1","scenes":len(SCENES),"base_lines":sum(len(s["lines"])-bool(s["responses"]) for s in SCENES),"lead_responses":sum(len(s["responses"]) for s in SCENES),"town_replies":len(data["town"]),"source":"Tools/prepare_dialogue.py + Tools/prepare_quests.py","runtime":"Assets/SpiritTide/Resources/SpiritTide/Data/dialogue.json","script":"Docs/character-dialogue-script.txt","chapters":[{"act":a,"scene_ids":[s["id"] for s in ordered if s["act"]==a]} for a in range(1,6)]})
+    write(ROOT / "Docs/dialogue-index.json",{"version":"0.8.0","scenes":len(SCENES),"base_lines":sum(len(s["lines"])-bool(s["responses"]) for s in SCENES),"lead_responses":sum(len(s["responses"]) for s in SCENES),"town_replies":len(data["town"]),"source":"Tools/prepare_dialogue.py + Tools/prepare_quests.py","runtime":"Assets/SpiritTide/Resources/SpiritTide/Data/dialogue.json","script":"Docs/character-dialogue-script.txt","chapters":[{"act":a,"scene_ids":[s["id"] for s in ordered if s["act"]==a]} for a in range(1,6)]})
     print(json.dumps({"dialogue_scenes":len(SCENES),"base_lines":sum(len(s["lines"])-bool(s["responses"]) for s in SCENES),"lead_responses":sum(len(s["responses"]) for s in SCENES),"town_replies":len(data["town"])}))
 
 

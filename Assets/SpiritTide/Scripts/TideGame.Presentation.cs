@@ -71,7 +71,7 @@ namespace SpiritTide
             actionText.rectTransform.anchorMin=actionText.rectTransform.anchorMax=Vector2.zero;
             actionText.rectTransform.anchoredPosition=new Vector2((left+right)*.5f,115);actionText.rectTransform.sizeDelta=new Vector2(Mathf.Max(420,right-left-40),36);
         }
-        private void ResetFeedback(){previousHp=Session.Hp;previousShield=Session.Shield;shownHp=Session.Hp;feedbackDamageSerial=Session.DamageEvents;playerFeedbackTime=enemyFeedbackTime=0;}
+        private void ResetFeedback(){ResetSkillEffects();feelAttackSerial=Session.AttackSerial;damageSerial=Session.DamageEvents;previousHp=Session.Hp;previousShield=Session.Shield;shownHp=Session.Hp;feedbackDamageSerial=Session.DamageEvents;playerFeedbackTime=enemyFeedbackTime=0;}
         private void UpdateFeedback(float dt)
         {
             controlsOpacity.alpha=AttackHold.Held||Joystick.Value.sqrMagnitude>.01f?Mathf.Max(.9f,Session.Profile.controlOpacity):Session.Profile.controlOpacity;

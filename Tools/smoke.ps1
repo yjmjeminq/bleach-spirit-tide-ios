@@ -1,4 +1,4 @@
-param([int]$Width = 1560, [int]$Height = 720, [switch]$PhoneLayout)
+param([int]$Width = 1560, [int]$Height = 720, [switch]$PhoneLayout, [switch]$EffectsOnly)
 $ErrorActionPreference = 'Stop'
 $bleachProjectRoot = Split-Path -Parent $PSScriptRoot
 $bleachPlayer = Join-Path $bleachProjectRoot 'Builds\Windows\SpiritTide.exe'
@@ -7,8 +7,9 @@ $bleachOutput = Join-Path $bleachProjectRoot ('BuildLogs\PlayerChecks-' + (Get-D
 New-Item -ItemType Directory -Path $bleachOutput -Force | Out-Null
 $bleachArgs = @('-screen-fullscreen','0','-screen-width',$Width,'-screen-height',$Height,'-logFile',('"' + (Join-Path $bleachOutput 'player.log') + '"'),'-spirit-smoke',('"' + $bleachOutput + '"'))
 if ($PhoneLayout) { $bleachArgs += '-spirit-phone-layout' }
+if ($EffectsOnly) { $bleachArgs += '-spirit-fx-review' }
 $bleachPlayerProcess = Start-Process -FilePath $bleachPlayer -ArgumentList $bleachArgs -WindowStyle Hidden -PassThru
-$bleachDeadline = (Get-Date).AddSeconds(300)
+$bleachDeadline = (Get-Date).AddSeconds(480)
 while (-not $bleachPlayerProcess.WaitForExit(1000) -and (Get-Date) -lt $bleachDeadline) {}
 if (-not $bleachPlayerProcess.HasExited) {
     Stop-Process -Id $bleachPlayerProcess.Id -ErrorAction SilentlyContinue

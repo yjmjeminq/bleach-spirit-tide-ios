@@ -1,6 +1,8 @@
-BLEACH: 영해의 균열 · Unity 캠페인 검증본 0.7.1
+BLEACH: 영해의 균열 · Unity 캠페인 검증본 0.8.0
 
 Unity **6000.3.27f1** 프로젝트입니다. 루키아·오리히메·요루이치·소이폰·란기쿠·우노하나 여섯 인물로 5개 액트, 30개 던전, 114개 전투방을 진행합니다. Windows 실행본과 iPhone 15 Pro용 iOS 17 이상 가로 화면 빌드를 제공합니다. iPhone 빌드는 Unity IL2CPP → Xcode ARM64 → unsigned IPA 순서로 제작하며 iLoader에서 서명·설치합니다. 실제 아이폰 설치·플레이 검증과 파일·화면 검증은 구분합니다.
+
+0.8.0에서는 여섯 캐릭터의 기술 30개에 전용 이펙트와 효과음을 추가했습니다. 루키아의 눈꽃·얼음 기둥, 오리히메의 꽃잎 결계, 요루이치의 번개·질주, 소이폰의 침·나비 표식·영자포, 란기쿠의 재 칼날·소용돌이, 우노하나의 치유 문양·진홍색 검격으로 구분합니다. 각성기는 여섯 종류의 마무리 연출을 사용합니다. GPU에 그리는 코드 기반 효과이며 원본 PNG는 수정하지 않습니다. 실제 보호막·재구름·표식·반격 태세와 연동하며 효과 줄이기, 일시정지·귀환·캐릭터 교체를 처리합니다. 자세한 목록과 렌더 검증 범위는 `Docs/skill-effects.txt`에 있습니다.
 
 0.7.1에서는 아이폰용 Xcode 내보내기, ARM64 Mac 빌드와 IPA 파일 검증을 추가했습니다. 원본 PNG를 바꾸지 않고 iOS 전용 ASTC 압축을 적용하며, 서로 다른 포인터 ID로 이동과 공격의 동시 입력·손가락별 해제·메뉴 진입 시 입력 초기화를 검사합니다. 아이폰 15 Pro의 3배 화면에서 44포인트 이상의 조작 버튼인지도 확인합니다. 제작 방법과 검증 한계는 `Docs/ios-build.txt`에 있습니다.
 
@@ -104,7 +106,3 @@ python Tools/package_release.py
 기존 성인 평행세계 비키니 v2 캐릭터 6장과 보스 10장은 원본 해시를 유지합니다. 0.3의 적 아틀라스 5장과 거점·액트 배경 6장에 더해, 0.4에서 전투 배경 10장·NPC 시트 1장·동작 시트 2장을 built-in image_gen으로 생성했습니다. 오리히메·우노하나는 선택한 키프레임을 사용하며 나머지 네 인물은 기존 그림과 코드 모션을 사용합니다. 일부 동작 생성과 우노하나 시트 정리 요청은 이미지 도구 안전 심사에서 거절되어 재시도나 다른 서비스로 우회하지 않았습니다. 원본 PNG 픽셀을 수정하지 않고 Unity의 크롭 메타데이터·피벗·선택 프레임으로 경계를 정리했습니다. 모든 인물과 적의 연속 애니메이션, 최종 외형 통일, 제작용 사운드·효과는 후속 작업입니다.
 
 이번 의뢰 검토는 `Docs/quest-review.txt`, 이전 대화 검토는 `Docs/dialogue-review.txt`, 이야기·맵·전투 검토는 `Docs/experience-review.md`, 캠페인 설계는 `Docs/campaign-review.md`에 있습니다. 이미지 프롬프트·해시·셀 매핑은 `Docs/experience-art-sources.json`, `Docs/campaign-art-sources.json`, `Docs/art-sources.json`에 있습니다. 원작 자료는 `Docs/canon-sources.json`, 폰트 라이선스는 `Assets/SpiritTide/Resources/SpiritTide/UI/Pretendard-LICENSE.txt`에 있습니다. 이전 0.1·0.2·0.3·0.4·0.5·0.6 배포 ZIP은 `Artifacts/`에 별도로 보존합니다.
-
-아이폰 시험판 다운로드: https://github.com/yjmjeminq/bleach-spirit-tide-ios/releases/tag/v0.7.1-ios.1
-
-IPA를 iLoader에서 서명·설치합니다. UI·IPA 검증은 QA/iphone-validation.json, 설치 안내는 릴리스의 SpiritTide-iPhone-install.txt에 있습니다. 실제 아이폰 설치·플레이는 별도 확인이 필요합니다.

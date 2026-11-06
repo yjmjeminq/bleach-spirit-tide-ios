@@ -15,11 +15,11 @@ import sys
 
 ROOT=Path(__file__).resolve().parents[1]
 REPO='yjmjeminq/bleach-spirit-tide-ios'
-VERSION='0.7.1'
-TAG='v0.7.1-ios.1'
-STAGE=ROOT/'Builds/PublicSource-v0.7.1'
+VERSION='0.8.0'
+TAG='v0.8.0-ios.1'
+STAGE=ROOT/'Builds/PublicSource-v0.8.0'
 STATE=ROOT/'.runtime/ios-build-state.json'
-ARCHIVE=ROOT/'Artifacts/SpiritTide-ios-export-v0.7.1.zip'
+ARCHIVE=ROOT/'Artifacts/SpiritTide-ios-export-v0.8.0.zip'
 ENV=dict(os.environ,GIT_TERMINAL_PROMPT='0',GCM_INTERACTIVE='never')
 
 
@@ -49,7 +49,9 @@ def prepare():
         assert not git('status','--porcelain'),'Preserve uncommitted source stage changes.'
     metadata=json.loads(Path(str(ARCHIVE)+'.json').read_text())
     assert sha(ARCHIVE)==metadata['sha256'] and metadata['export']['version']==VERSION
-    STAGE.mkdir(parents=True,exist_ok=True)
+    if not STAGE.exists():
+        run(['git','clone','--depth','1','https://github.com/'+REPO+'.git',str(STAGE)])
+    assert (STAGE/'.git').is_dir()
     for folder in ['Assets','Packages','ProjectSettings','Tools','Docs','.github']:
         shutil.copytree(ROOT/folder,STAGE/folder,dirs_exist_ok=True,ignore=shutil.ignore_patterns('__pycache__','*.pyc'))
     for name in ['README.md','.gitignore']:shutil.copy2(ROOT/name,STAGE/name)
@@ -88,14 +90,14 @@ def publish():
     if not (STAGE/'.git').exists():git('init','--initial-branch=main')
     git('config','user.name','yjmjeminq');git('config','user.email','yjmjeminq@users.noreply.github.com')
     if git('status','--porcelain'):
-        git('add','--all');git('commit','-m','Add verified Spirit Tide 0.7.1 iPhone source and touch input checks')
+        git('add','--all');git('commit','-m','Add verified Spirit Tide 0.8.0 iPhone source and touch input checks')
     revision=git('rev-parse','HEAD')
     if not git('remote'):git('remote','add','origin','https://github.com/'+REPO+'.git')
     assert git('remote','get-url','origin')=='https://github.com/'+REPO+'.git'
     git('push','-u','origin','main')
     notes=ROOT/'.runtime/ios-release-notes.md'
-    notes.write_text('BLEACH: 영해의 균열 0.7.1 iPhone 시험판\n\niPhone 15 Pro · iOS 17 이상 · 가로 화면 · ARM64 · Metal.\n6개 캐릭터, 5액트, 30던전, 114방.\n\nSpiritTide-iPhone-unsigned-v0.7.1.ipa를 iLoader에서 서명·설치하세요.\n컴파일과 패키지 검증을 수행하며 실제 아이폰 설치·플레이는 별도 확인이 필요합니다.\n',encoding='utf-8')
-    gh('release','create',TAG,ARCHIVE,'--repo',REPO,'--target',revision,'--title','Spirit Tide 0.7.1 iPhone test','--notes-file',notes,'--prerelease')
+    notes.write_text('BLEACH: 영해의 균열 0.8.0 iPhone 시험판\n\niPhone 15 Pro · iOS 17 이상 · 가로 화면 · ARM64 · Metal.\n6개 캐릭터, 5액트, 30던전, 114방.\n\nSpiritTide-iPhone-unsigned-v0.8.0.ipa를 iLoader에서 서명·설치하세요.\n컴파일과 패키지 검증을 수행하며 실제 아이폰 설치·플레이는 별도 확인이 필요합니다.\n',encoding='utf-8')
+    gh('release','create',TAG,ARCHIVE,'--repo',REPO,'--target',revision,'--title','Spirit Tide 0.8.0 iPhone test','--notes-file',notes,'--prerelease')
     state.update(revision=revision,status='published');write(state)
     gh('workflow','run','ios-build.yml','--repo',REPO,'--ref','main','-f','source_tag='+TAG,'-f','source_sha256='+state['sourceSHA256'])
     state['status']='dispatched';write(state)

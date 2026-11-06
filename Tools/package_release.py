@@ -25,7 +25,7 @@ def digest(path):
 def latest_player(size, after, build):
     for path in sorted((ROOT / "BuildLogs").glob("PlayerChecks-*/report.json"), key=lambda p: p.stat().st_mtime, reverse=True):
         data = read(path)
-        if path.stat().st_mtime >= after and data["device"].endswith(size) and data["passed"] and data.get("version")==build["version"] and data.get("guid","").replace("-","").lower()==build["guid"].replace("-","").lower():
+        if data.get("runMode","full")=="full" and path.stat().st_mtime >= after and data["device"].endswith(size) and data["passed"] and data.get("version")==build["version"] and data.get("guid","").replace("-","").lower()==build["guid"].replace("-","").lower():
             assert not data["errors"] and all(row["passed"] for row in data["checks"])
             return path, data
     raise RuntimeError("No current-build passing player report for " + size)
@@ -91,6 +91,15 @@ def main():
             assert "iPhone 15 Pro touch controls meet 44 point targets at native 3x scale" in names
         for required in ["town menu opens a service hub", "forge back restores filter sort page and selected gear", "scene list jumps directly to the selected conversation", "quest map highlights its exact destination", "destination primary enters the exact historical dungeon", "previous story line is restored without running completion", "route explains a target behind the current saved room", "automatic hints match the current input layout"]:
             assert required in names, required
+    for report in [desktop,phone]:
+        names={row['name'] for row in report['checks'] if row['passed']}
+        assert 'all thirty distinct playable skills rendered' in names
+        assert sum(name.startswith('real skill cast selects its own effect ') for name in names)==30
+    skill_fx=read(phone_path.parent/'skill-effects-review.json')
+    skill_media=read(phone_path.parent/'skill-effects-review-encoded.json')
+    assert skill_fx['passed'] and skill_fx['cast_skills']==30 and skill_fx['guid']==build['guid']
+    assert skill_media['guid']==build['guid'] and skill_media['decode_passed'] and skill_media['frames']==432
+    assert digest(phone_path.parent/'skill-effects-review.mp4')==skill_media['movie_sha256']
     for scene in dialogue["scenes"]:
         assert "[" + scene["id"] + "]" in script
         for line in scene["lines"]:
@@ -120,6 +129,19 @@ def main():
         shutil.copy2(shot, qa / shot.name)
     for shot in phone_path.parent.glob("8*.png"):
         shutil.copy2(shot, qa / shot.name)
+    for shot in phone_path.parent.glob('9*.png'):
+        shutil.copy2(shot,qa/shot.name)
+    shutil.copy2(phone_path.parent/'skill-effects-review.mp4',qa/'skill-effects.mp4')
+    shutil.copy2(phone_path.parent/'skill-effects-review.wav',qa/'skill-effects.wav')
+    write(qa/'skill-effects-media.json',skill_media)
+    fx_sources=['Assets/SpiritTide/Scripts/TideSkillFx.cs','Assets/SpiritTide/Scripts/TideSkillFxGraphic.cs','Assets/SpiritTide/Scripts/TideSkillFxGraphic.Heroes.cs','Assets/SpiritTide/Scripts/TideGame.SkillFx.cs','Assets/SpiritTide/Resources/SpiritTide/Vfx/SkillGlow.shader']
+    write(qa/'skill-effects-verification.json',{
+        'passed':True,'version':build['version'],'guid':build['guid'],'cast_skills_per_layout':30,'hero_motifs':6,'skill_sounds':30,
+        'peak_vertices':skill_fx['peak_vertices'],'pool_capacity':skill_fx['pool_capacity'],
+        'source_sha256':{path:digest(ROOT/path) for path in fx_sources},'catalog':read(ROOT/'Docs/skill-effects-index.json'),
+        'tested':['Thirty real button-triggered casts per layout','Dedicated geometry and sound for every skill','Actual shield, cloud, stance and marked-target state','Nonblocking bounded meshes','Pool reuse and tail cleanup','Reduced effects for all six ultimates','Frozen effect clocks while paused','All six hero ultimates in the timed native showcase'],
+        'scope':skill_fx['scope'],'media_scope':skill_media['scope'],'physical_iphone_tested':False
+    })
     shutil.copy2(phone_path.parent / "combat-review.mp4", qa / "experience-combat.mp4")
     shutil.copy2(phone_path.parent / "combat-review.wav", qa / "experience-combat.wav")
     write(qa / "experience-combat.json", media)
@@ -144,8 +166,9 @@ def main():
         "review_video_scope": media["scope"] + "; " + media["audio_scope"],
         "pending": ["finished coherent sprite animation for all heroes and enemies", "production VFX and audio", "native iPhone touch and Metal/performance checks"],
         "ipa_deferred": False,
+        "skill_effects": {"dedicated_skills":30,"hero_motifs":6,"sounds":30,"showcase_frames":432,"showcase_fps":30,"scope":"Unity mesh effects and synthesized game sounds; not iPhone hardware performance"},
     }
-    ios_report=ROOT/"Artifacts"/("SpiritTide-ios-package-verification.json")
+    ios_report=ROOT/"Artifacts"/("SpiritTide-ios-package-verification-v"+build["version"]+".json")
     if ios_report.exists():
         ios=read(ios_report);ipa=ROOT/"Artifacts"/ios["ipa"]
         assert ios["passed"] and ios["app"]["version"]==build["version"] and digest(ipa)==ios["sha256"]
@@ -155,8 +178,8 @@ def main():
         assert export["passed"] and export["version"]==build["version"]
         summary["ios"]={"version":ios["app"]["version"],"build":ios["app"]["build"],"minimum_ios":ios["app"]["minimumIOS"],"ipa":ipa.name,"bytes":ipa.stat().st_size,"sha256":ios["sha256"],"unsigned":True,"physical_iphone_tested":False,"source_revision":state["revision"],"run_url":state["runURL"],"unity_export_guid":export["guid"]}
         shutil.copy2(ios_report,qa/"ios-verification.json")
-        shutil.copy2(ROOT/"Artifacts/SpiritTide-ios-build-report.json",qa/"ios-build-report.json")
-        shutil.copy2(ROOT/"Artifacts/SpiritTide-ios-input-verification.json",qa/"ios-input-verification.json")
+        shutil.copy2(ROOT/"Artifacts"/("SpiritTide-ios-build-report-v"+build["version"]+".json"),qa/"ios-build-report.json")
+        shutil.copy2(ROOT/"Artifacts"/("SpiritTide-ios-input-verification-v"+build["version"]+".json"),qa/"ios-input-verification.json")
         shutil.copy2(ROOT/"BuildLogs/ios-export.json",qa/"ios-export.json")
     write(qa / "verification.json", summary)
     dialogue_qa = {

@@ -114,7 +114,7 @@ namespace SpiritTide
             UpdateFeedback(SmokeMode&&ReviewStepping?1f/30:Time.unscaledDeltaTime);
             audioSource.volume=Session.Profile.soundEnabled?.13f:0;
             if (damageSerial != Session.DamageEvents)
-            { damageSerial = Session.DamageEvents; if (audioSource != null) PlayImpactSound(); }
+            { bool landed=Session.DamageEvents>damageSerial;damageSerial = Session.DamageEvents; if (landed&&audioSource != null) PlayImpactSound(); }
         }
         private void ReadKeyboard()
         {
