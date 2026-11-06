@@ -105,6 +105,7 @@ namespace SpiritTide
         private void BuildMissions()
         {
             mapAct=Mathf.Clamp(mapAct,1,5);MenuTitle("균열 지도 · Act "+mapAct,TideStory.Data.acts[mapAct-1].title);
+            Button("mission-guide","출정 준비",panel,new Vector2(.5f,.5f),new Vector2(300,230),new Vector2(240,84),()=>OpenJourney(1)).GetComponentInChildren<Text>().fontSize=24;
             for(int i=1;i<=5;i++){int a=i;Button("map-act-"+a,"Act "+a,panel,new Vector2(.5f,.5f),new Vector2((i-3)*185,94),new Vector2(168,84),()=>{mapAct=a;Refresh();},a==mapAct);}
             for(int n=1;n<=6;n++)
             {
@@ -172,9 +173,11 @@ namespace SpiritTide
         {
             MenuTitle(Session.IsCampaign?"던전 정화 · "+Session.Dungeon.title:"보스 전투 재현 완료");
             Label(Session.IsCampaign?"등급 "+Session.ClearRank+" · 최고 "+Session.ChainPeak+" HIT · 받은 피해 "+Mathf.CeilToInt(Session.DungeonDamageTaken)+"\n"+Session.LastReward:"수련 기록 · 조사와 보상에 영향을 주지 않습니다.",panel,new Vector2(.5f,.5f),new Vector2(0,125),new Vector2(950,126),21,gold);
-            Label(Session.IsCampaign?TideStory.DungeonOutcome(Session.Dungeon,Session.Profile):"공격 예고와 기술 연계를 확인했습니다. 다음에는 다른 동료로 도전해 보세요.",panel,new Vector2(.5f,.5f),new Vector2(0,-45),new Vector2(950,180),24);
+            bool midpoint=Session.IsCampaign&&!Session.IsReplay&&Session.Dungeon.number==3;
+            Label(Session.IsCampaign?midpoint?TideJourney.Data.chapters[Session.Dungeon.act-1].midpoint:TideStory.DungeonOutcome(Session.Dungeon,Session.Profile):"공격 예고와 기술 연계를 확인했습니다. 다음에는 다른 동료로 도전해 보세요.",panel,new Vector2(.5f,.5f),new Vector2(0,midpoint?-7:-45),new Vector2(950,midpoint?120:180),24);
+            AddResultBreather();
             bool next=Session.IsCampaign&&!Session.IsReplay&&Session.Quest==QuestState.Active;
-            Button("next-dungeon",next?"다음 던전":Session.Quest==QuestState.Ready?"마을로 돌아가 보고":"마을로",panel,new Vector2(.5f,.5f),new Vector2(-240,-214),new Vector2(420,84),()=>{if(next){Session.ReturnTown();StartBattle(false);}else ReturnTown();},true);
+            Button("next-dungeon",next?"다음 · "+TideJourney.Current(Session.Profile).title:Session.Quest==QuestState.Ready?"마을로 돌아가 보고":"마을로",panel,new Vector2(.5f,.5f),new Vector2(-240,-214),new Vector2(420,84),()=>{if(next){Session.ReturnTown();StartBattle(false);}else ReturnTown();},true).GetComponentInChildren<Text>().fontSize=22;
             Button("result-gear","전리품 확인",panel,new Vector2(.5f,.5f),new Vector2(240,-214),new Vector2(420,84),()=>{ReturnTown();SelectLoot(Session.LastGearUid);OpenMenu(TideMode.Inventory);});
         }
     }

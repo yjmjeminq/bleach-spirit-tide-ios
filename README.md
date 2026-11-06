@@ -1,6 +1,8 @@
-BLEACH: 영해의 균열 · Unity 캠페인 검증본 0.9.0
+BLEACH: 영해의 균열 · Unity 캠페인 검증본 0.10.0
 
 Unity **6000.3.27f1** 프로젝트입니다. 루키아·오리히메·요루이치·소이폰·란기쿠·우노하나 여섯 인물로 5개 액트, 30개 던전, 114개 전투방을 진행합니다. Windows 실행본과 iPhone 15 Pro용 iOS 17 이상 가로 화면 빌드를 제공합니다. iPhone 빌드는 Unity IL2CPP → Xcode ARM64 → unsigned IPA 순서로 제작하며 iLoader에서 서명·설치합니다. 실제 아이폰 설치·플레이 검증과 파일·화면 검증은 구분합니다.
+
+0.10.0에서는 던파·FF14의 공식 자료와 현재 게임을 비교해 복귀·정비·실패·이야기 전환을 보완했습니다. 빠른 메뉴의 ‘이야기 · 전투 준비’에서 현재 사건의 이유, 실제로 확인한 최근 단서와 다음 행동을 읽습니다. 출정 지도와 패배 화면에서도 준비를 열고 이전 화면으로 돌아갑니다. 실제로 만난 보스 10명의 패턴 연습은 보상·소모품·본편 진행을 바꾸지 않으며 무료 회복을 사용합니다. 패배 안내는 실제 마지막 피격의 적과 예고를 보여 줍니다. 중간보스 뒤에는 바로 진행하거나 현재 동료의 장면을 읽고 정비할 수 있습니다. 중간보스 정화 5장면과 액트 보고 4장면에 13문장을 더해 증거와 다음 조사를 연결했습니다. 비교 판단과 완료 기준은 `Docs/rpg-flow-review.txt`, 공식 출처는 `Docs/rpg-reference-sources.json`, 실제 검사는 `QA/rpg-flow-verification.json`에 있습니다.
 
 0.9.0에서는 기술 30개에 전용 그림 아이콘을 연결했습니다. 여섯 캐릭터의 아이콘 시트 6장을 built-in image_gen으로 생성했고, 원본 PNG를 유지한 채 Unity에서 각 기술의 영역을 읽습니다. 전투 버튼과 기술 도움말에 같은 그림을 표시합니다. 짧은 기술명, 원형 재사용 진행 표시, 남은 시간 숫자, 영압 부족 시 그림의 밝기와 설명을 함께 표시합니다. 원본과 프롬프트·해시는 `Docs/skill-icon-art-sources.json`에 있습니다.
 
@@ -110,4 +112,4 @@ python Tools/package_release.py
 
 이번 의뢰 검토는 `Docs/quest-review.txt`, 이전 대화 검토는 `Docs/dialogue-review.txt`, 이야기·맵·전투 검토는 `Docs/experience-review.md`, 캠페인 설계는 `Docs/campaign-review.md`에 있습니다. 이미지 프롬프트·해시·셀 매핑은 `Docs/experience-art-sources.json`, `Docs/campaign-art-sources.json`, `Docs/art-sources.json`에 있습니다. 원작 자료는 `Docs/canon-sources.json`, 폰트 라이선스는 `Assets/SpiritTide/Resources/SpiritTide/UI/Pretendard-LICENSE.txt`에 있습니다. 이전 0.1·0.2·0.3·0.4·0.5·0.6 배포 ZIP은 `Artifacts/`에 별도로 보존합니다.
 
-현재 iPhone 시험판: [0.9.0 IPA](https://github.com/yjmjeminq/bleach-spirit-tide-ios/releases/download/v0.9.0-ios.1/SpiritTide-iPhone-unsigned-v0.9.0.ipa). 그림 아이콘 검사 결과는 `QA/skill-icons-verification.json`, 적용 화면은 `QA/92-painted-icons-0.png`와 `QA/93-icon-cooldown-and-spirit.png`에 있습니다.
+현재 iPhone 시험판: [0.10.0 IPA](https://github.com/yjmjeminq/bleach-spirit-tide-ios/releases/download/v0.10.0-ios.1/SpiritTide-iPhone-unsigned-v0.10.0.ipa). 그림 아이콘 검사 결과는 `QA/skill-icons-verification.json`, 적용 화면은 `QA/92-painted-icons-0.png`와 `QA/93-icon-cooldown-and-spirit.png`에 있습니다.

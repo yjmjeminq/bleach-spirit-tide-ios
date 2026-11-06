@@ -21,8 +21,8 @@ import uuid
 import zipfile
 
 BUNDLE = 'com.yjmjemin.bleachspirittide'
-VERSION, BUILD = '0.9.0', '4'
-IPA_NAME = 'SpiritTide-iPhone-unsigned-v0.9.0.ipa'
+VERSION, BUILD = '0.10.0', '5'
+IPA_NAME = 'SpiritTide-iPhone-unsigned-v0.10.0.ipa'
 ROOT = Path(__file__).resolve().parents[1]
 
 
@@ -97,7 +97,7 @@ def inspect_export(project):
     require('deploy_$HOST_ARCH' in text and '--platform=iOS' in text, 'Missing native IL2CPP build phase')
     generated = list((project / 'Il2CppOutputProject/Source/il2cppOutput').glob('Assembly-CSharp*.cpp'))
     require(generated, 'Missing generated game C++')
-    markers = ['TideGame_ApplySafeArea_m', 'TideJoystick_OnPointerDown_m', 'TideHold_OnPointerDown_m', 'TideGame_BuildHome_m', 'TideGame_GoToSideObjective_m', 'TideSession_Step_m', 'TideGame_DrawSkillEffects_m', 'TideSkillFxGraphic_Thunder_m', 'TideSkillFxGraphic_Crimson_m', 'TideGame_UpdateSkillIcon_m', 'TideSkillIcons_Get_m']
+    markers = ['TideGame_ApplySafeArea_m', 'TideJoystick_OnPointerDown_m', 'TideHold_OnPointerDown_m', 'TideGame_BuildHome_m', 'TideGame_GoToSideObjective_m', 'TideSession_Step_m', 'TideGame_DrawSkillEffects_m', 'TideSkillFxGraphic_Thunder_m', 'TideSkillFxGraphic_Crimson_m', 'TideGame_UpdateSkillIcon_m', 'TideSkillIcons_Get_m', 'TideGame_BuildJourney_m', 'TideSession_BeginBossPractice_m']
     found = set()
     for path in generated:
         code = path.read_text(encoding='utf-8')

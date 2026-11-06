@@ -19,7 +19,8 @@ namespace SpiritTide
             MenuTitle("빠른 메뉴");
             Button("help","도움말",panel,new Vector2(.5f,.5f),new Vector2(370,230),new Vector2(84,84),ShowHelp).GetComponentInChildren<Text>().fontSize=20;
             string next=Session.CampaignFinished?"완료한 이야기 다시 읽기":Session.Quest==QuestState.Available?"우라하라에게 이번 의뢰 듣기":Session.Quest==QuestState.Ready?"우라하라에게 귀환 보고":"조사 계속 · "+TideCampaign.Dungeon(Session.Profile.campaignAct,Session.Profile.campaignStage).title;
-            Button("home-primary",next,panel,new Vector2(.5f,.5f),new Vector2(0,112),new Vector2(950,84),ContinueObjective,true);
+            Button("home-primary",next,panel,new Vector2(.5f,.5f),new Vector2(-165,112),new Vector2(620,84),ContinueObjective,true);
+            Button("home-guide","이야기 · 전투 준비",panel,new Vector2(.5f,.5f),new Vector2(325,112),new Vector2(310,84),()=>OpenJourney()).GetComponentInChildren<Text>().fontSize=24;
             string[] ids={"home-quests","home-gear","home-map","home-journal","home-shop","home-settings"};
             string[] names={"의뢰 수첩","장비 비교 · 강화","출정 지도","조사 기록 · 대화록","회복 영자 보급","보기 · 조작 설정"};
             System.Action[] actions={()=>OpenQuestBook(),()=>OpenMenu(TideMode.Inventory),()=>OpenMenu(TideMode.Missions),OpenJournal,()=>OpenMenu(TideMode.Shop),()=>OpenMenu(TideMode.Settings)};

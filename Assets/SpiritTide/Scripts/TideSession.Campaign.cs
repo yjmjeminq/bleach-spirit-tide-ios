@@ -21,6 +21,11 @@ namespace SpiritTide
             else {Profile.campaignAct++;Profile.campaignStage=1;Profile.roomCheckpoint=0;Profile.quest=(int)QuestState.Available;Profile.claimed=false;}
             TideCatalog.Sanitize(Profile);PersistentChange();Changed("Act "+LastActReported+" 보고 완료 · "+reward+" 골드");return true;
         }
+        public bool BeginBossPractice(int index)
+        {
+            if(!TideJourney.BossKnown(Profile,index)||InBattle&&Mode!=TideMode.Defeat&&Mode!=TideMode.Result&&Mode!=TideMode.Journey)return false;
+            return BeginBattle(false,index);
+        }
         public bool BeginBattle(bool training,int bossOverride=0)
         {
             IsCampaign=false;Dungeon=null;BossIndex=Mathf.Clamp(bossOverride<0?0:bossOverride,0,9);
@@ -41,6 +46,7 @@ namespace SpiritTide
         }
         private void StartBattleState(bool training)
         {
+            LastDamageFoe=LastDamageCue=null;
             InBattle=true;IsTraining=training;IsReplay=!IsCampaign&&!training;IsPaused=false;RoomCleared=false;Mode=training?TideMode.Training:TideMode.Combat;
             TrainingAttacks=training&&HasPerfectTrainingObjective();
             Hp=MaxHp;Mp=100;Shield=0;ResetFightFeel();WardActive=EnvironmentWarning=false;reinforcementOffset=0;X=-3;Y=Z=JumpSpeed=0;Facing=1;hurtInvulnerability=0;PerfectRemaining=ReflectRemaining=DodgeRemaining=0;CounterStance=false;

@@ -125,6 +125,17 @@ CLEARS = [
     ],
 ]
 
+# Midpoint consequences are heard before the player chooses whether to rest.
+# Each one names the evidence already found and the next practical investigation.
+for act,extra in enumerate([
+ [(O,"등대 쪽 소리만 믿으면 또 같은 곳으로 끌려가요."),(R,"그래. 상가의 씨앗을 거두고, 흔들리지 않는 등불을 직접 확인하자.")],
+ [(Y,"소이폰, 놈을 찾은 것과 돌아올 길을 찾은 건 다르다."),(S,"…예. 왕복 좌표부터 남기겠습니다. 이번에는 함께 돌아오겠습니다.")],
+ [(O,"겹쳐 쓰인 이름을 먼저 나눌게요. 누구 것도 지워지지 않게요."),(U,"네. 원본을 서둘러 떼기보다, 그 이름들이 놓인 자리를 함께 보죠.")],
+ [(M,"조금만 여기 있다 갈게요. 다음 표지는… 같이 봐 줘요.")],
+ [(U,"돌아오는 길에도 우리 발자국을 남겨 두죠."),(S,"남아 있는 귀환 표지를 확인하고 회랑으로 이동하겠습니다.")],
+]):
+    CLEARS[act][2].extend(extra)
+
 PROFILES = [
     {"id": IDS[0], "name": R, "voice": "짧고 또렷하게 말한다. 가까운 동료에게는 담백한 반말, 윗사람에게는 존대를 쓴다. 걱정은 행동 제안으로 드러낸다.", "avoid": "모든 문장을 명령이나 임무 보고로 끝내지 않는다. 오리히메의 경험을 대신 결론내리지 않는다."},
     {"id": IDS[1], "name": O, "voice": "부드러운 존대. 먼저 관찰한 감각을 말한 뒤 자기 의지를 붙인다. 겁과 망설임이 있어도 구조와 귀환에 능동적으로 참여한다.", "avoid": "매번 동의만 하거나 보호받기만 하지 않는다. 긴장된 장면에 갑작스러운 농담을 넣지 않는다."},
@@ -200,6 +211,10 @@ def add_remaining(campaign):
       [(B,"이 문장은 퀸시 기록층의 것이다. 봉인한 통로에 다시 닿아 있다."),(R,"닫은 길이 다시 열렸던 이유가 그쪽에 있었군요."),(H,"예. 이번에는 돌아오게 만드는 연결까지 끊어야 합니다. 마지막 좌표는 곧 잡힐 겁니다."),(U,"그 전에 모두 치료받으세요. 마지막이라고 아픈 곳을 숨기지는 마시고요."),(M,"알겠어요. 오늘은 저도 얌전히 기다릴게요.")],
       [(H,"다섯 균열 모두 응답이 없습니다. 돌려드린 이름도, 여섯 분의 귀환도 확인했습니다."),(R,"그럼 정말 끝난 거군."),(O,"네. 밖에서도 다들 제 이름으로 대답하고 있어요."),(Y,"소이폰, 너도 이제 앉거라. 문은 더 안 열린다."),(S,"…예. 잠깐만 쉬겠습니다."),(M,"잠깐이 아니라 오늘은 끝! 우노하나 대장님도 차 드실 거죠?"),(U,"물론이죠. 모두 계실 때 마시는 차를 기다렸습니다.")],
     ]
+    reports[0].insert(3,(R,"구조 신호와 미끼를 나눠 적어 두겠습니다. 다음 길에서도 같은 이름을 놓치지 않도록요."))
+    reports[1].insert(2,(O,"제가 아는 길도 지금과 다를 수 있어요. 표지가 다르면 거기서 멈춰 같이 확인해 주세요."))
+    reports[2].insert(4,(R,"원본은 정답을 대신 골라 주지 않는다. 서로 다르게 보인 지점부터 말하자."))
+    reports[3].insert(3,(S,"귀환 표지도 그대로 남겨 두겠습니다. 마지막 연결을 끊은 뒤 모두 이쪽으로 돌아오도록요."))
     for a,pairs in enumerate(reports,1):
         add(f"a{a}_report",a,6,"report","귀환 보고" if a<5 else "여섯 사람의 귀환","우라하라 상점",pairs)
 
@@ -385,7 +400,7 @@ def export(campaign):
             q=next(q for q in quest_definitions if q['id']==s['quest_id']);extra+=q['index']*10+(0 if s['kind']=='side_offer' else 1+s['quest_step'] if s['kind']=='side_step' else 5+s['branch'])
         return (s["act"],{"main_accept":0,"party":900,"rescue":950,"epilogue":1000}.get(s["kind"],extra if s['kind'].startswith('side_') else s["stage"]*100+phase.get(s["kind"],0)),s["id"])
     ordered=sorted(SCENES,key=order)
-    write(ROOT / "Docs/dialogue-index.json",{"version":"0.9.0","scenes":len(SCENES),"base_lines":sum(len(s["lines"])-bool(s["responses"]) for s in SCENES),"lead_responses":sum(len(s["responses"]) for s in SCENES),"town_replies":len(data["town"]),"source":"Tools/prepare_dialogue.py + Tools/prepare_quests.py","runtime":"Assets/SpiritTide/Resources/SpiritTide/Data/dialogue.json","script":"Docs/character-dialogue-script.txt","chapters":[{"act":a,"scene_ids":[s["id"] for s in ordered if s["act"]==a]} for a in range(1,6)]})
+    write(ROOT / "Docs/dialogue-index.json",{"version":"0.10.0","scenes":len(SCENES),"base_lines":sum(len(s["lines"])-bool(s["responses"]) for s in SCENES),"lead_responses":sum(len(s["responses"]) for s in SCENES),"town_replies":len(data["town"]),"source":"Tools/prepare_dialogue.py + Tools/prepare_quests.py","runtime":"Assets/SpiritTide/Resources/SpiritTide/Data/dialogue.json","script":"Docs/character-dialogue-script.txt","chapters":[{"act":a,"scene_ids":[s["id"] for s in ordered if s["act"]==a]} for a in range(1,6)]})
     print(json.dumps({"dialogue_scenes":len(SCENES),"base_lines":sum(len(s["lines"])-bool(s["responses"]) for s in SCENES),"lead_responses":sum(len(s["responses"]) for s in SCENES),"town_replies":len(data["town"])}))
 
 

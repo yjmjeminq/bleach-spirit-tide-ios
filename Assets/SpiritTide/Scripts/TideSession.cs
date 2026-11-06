@@ -45,6 +45,8 @@ namespace SpiritTide
         public bool IsFighting=>!IsPaused&&(Mode==TideMode.Combat||Mode==TideMode.Training);
         public bool IsCharging=>charging;
         public float HeavyProgress=>charging?Mathf.Clamp01(heavyCharge/.8f):0;
+        public string LastDamageFoe {get;private set;}
+        public string LastDamageCue {get;private set;}
         public string EnemyId=>Target.Def?.id??"a1_mid_shrieker";
         public string EnemyName=>Target.Def?.name??"기록";
         public float EnemyX {get=>Target.X;set=>Target.X=value;}
@@ -76,7 +78,7 @@ namespace SpiritTide
             foreach(var e in Enemies)e.Mark=0;Array.Clear(CloudTime,0,2);Array.Clear(Cooldowns,0,5);Revision++;return true;
         }
         public bool BuyPotion(){if(InBattle||Profile.potions>=5||Profile.gold<80)return false;Profile.gold-=80;Profile.potions++;PersistentChange();Changed("회복 영자 1개 구매 · 80 골드");return true;}
-        public bool UsePotion(){if(!IsFighting||IsTraining||Hp>=MaxHp||Profile.potions<=0)return false;Profile.potions--;Hp=Mathf.Min(MaxHp,Hp+45+Profile.level*2);PersistentChange();Changed("회복 영자로 체력을 회복했습니다.");return true;}
+        public bool UsePotion(){if(!IsFighting||IsTraining||Hp>=MaxHp||IsCampaign&&Profile.potions<=0)return false;if(IsCampaign){Profile.potions--;PersistentChange();}Hp=Mathf.Min(MaxHp,Hp+45+Profile.level*2);Changed(IsCampaign?"회복 영자로 체력을 회복했습니다.":"연습용 회복 · 소모품은 유지됩니다.");return true;}
         public void ReturnTown()
         {
             InBattle=IsTraining=IsPaused=IsCampaign=false;RoomCleared=false;Mode=TideMode.Town;Hp=MaxHp;Mp=100;Shield=0;X=-3;Y=Z=JumpSpeed=DodgeRemaining=0;
@@ -86,6 +88,7 @@ namespace SpiritTide
         {
             if(InBattle)
             {
+                if(mode==TideMode.Journey&&(Mode==TideMode.Defeat||Mode==TideMode.Result)){SuspendInput();Mode=mode;Revision++;return true;}
                 if(mode!=TideMode.Pause&&mode!=TideMode.Settings&&mode!=TideMode.Help&&mode!=TideMode.ConfirmRetreat)return false;
                 if(!IsFighting&&!IsPaused)return false;if(!IsPaused)pausedFrom=Mode;IsPaused=true;
             }
@@ -204,7 +207,7 @@ namespace SpiritTide
             if(DodgeRemaining>0&&DodgeElapsed>=.05f&&DodgeElapsed<=.26f){PerfectRemaining=.4f;PerfectEvents++;QuestCombatEvent("perfect");Changed("정밀 회피 · 지금 공격하면 반격");return;}
             if(ReflectRemaining>0&&source!=null){ReflectRemaining=0;Damage(source,Profile.hero==5?40:32,true);if(IsFighting)Changed("반격 성공");return;}
             float absorbed=Mathf.Min(Shield,amount);Shield-=absorbed;amount-=absorbed;Hp=Mathf.Max(IsTraining?1:0,Hp-amount);hurtInvulnerability=.35f;
-            if(amount>0){DungeonDamageTaken+=amount;HurtSerial++;ChainHits=0;ComboRemaining=0;}
+            if(amount>0){LastDamageFoe=source?.Def?.id??"";LastDamageCue=source?.Cue??"바닥의 환경 예고를 벗어나거나 영압 장치를 해제하세요.";DungeonDamageTaken+=amount;HurtSerial++;ChainHits=0;ComboRemaining=0;}
             if(amount>0)Changed("피격 · 겹친 예고를 피해 빈틈을 노리세요.");
             if(Hp<=0){Mode=TideMode.Defeat;foreach(var e in Enemies)e.Telegraph=false;ClearAction();Changed("재도전은 마지막으로 정화한 방 뒤에서 이어집니다.");}
         }

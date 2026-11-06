@@ -197,8 +197,8 @@ namespace SpiritTide
             enemyFill.fillAmount=Session.EnemyHp/Mathf.Max(1,Session.EnemyMaxHp);
             actionText.text=Session.IsCharging?"강공격 준비 "+Mathf.RoundToInt(Session.HeavyProgress*100)+"%":Session.ActionRemaining>0?Session.ActionName:Session.PerfectRemaining>0?"반격 기회":"";
             statusText.text=Session.Status;
-            Buttons["potion"].GetComponentInChildren<Text>().text="회복 +"+(45+Session.Profile.level*2)+"\n"+Session.Profile.potions+"개"+(ShowKeyboardHints?" · V":"");
-            Buttons["potion"].interactable=Session.IsFighting&&!Session.IsTraining&&Session.Hp<Session.MaxHp&&Session.Profile.potions>0;
+            Buttons["potion"].GetComponentInChildren<Text>().text="회복 +"+(45+Session.Profile.level*2)+"\n"+(Session.IsCampaign?Session.Profile.potions+"개":"연습용 · 무료")+(ShowKeyboardHints?" · V":"");
+            Buttons["potion"].interactable=Session.IsFighting&&!Session.IsTraining&&Session.Hp<Session.MaxHp&&(!Session.IsCampaign||Session.Profile.potions>0);
             if(Session.Mode==TideMode.Town)Buttons["interact"].GetComponentInChildren<Text>().text="대화 · "+new[]{"우라하라","텟사이","콘","뱌쿠야","쿠카쿠"}[NearestNpcIndex()];
             if(Session.Mode==TideMode.Town)Say(Buttons["objective"].GetComponentInChildren<Text>(),Session.CampaignFinished?"함께 돌아온 여섯 사람\n마을의 이야기와 지나온 길":TideQuests.Main(Session.Profile.campaignAct).title+"\n"+(Session.Quest==QuestState.Available?"우라하라에게 부탁 듣기":Session.Quest==QuestState.Ready?"우라하라에게 귀환 보고":TideCampaign.Dungeon(Session.Profile.campaignAct,Session.Profile.campaignStage).title));
             Say(Buttons["quest-log"].GetComponentInChildren<Text>(),"의뢰 수첩"+(ShowKeyboardHints?" · Q":""));
@@ -302,6 +302,7 @@ namespace SpiritTide
             switch(Session.Mode)
             {
                 case TideMode.Home:BuildHome();break;
+                case TideMode.Journey:BuildJourney();break;
                 case TideMode.Inventory:BuildGear(false);break;
                 case TideMode.Forge:BuildGear(true);break;
                 case TideMode.Journal:BuildJournal();break;
@@ -333,10 +334,7 @@ namespace SpiritTide
                     Button("cancel-retreat","취소 · 일시정지로",panel,new Vector2(.5f,.5f),new Vector2(-190,-190),new Vector2(330,88),NavigateBack,true);
                     Button("confirm-retreat","마을로 귀환",panel,new Vector2(.5f,.5f),new Vector2(190,-190),new Vector2(330,88),ReturnTown);break;
                 case TideMode.Result:BuildCampaignResult();break;
-                case TideMode.Defeat:
-                    MenuTitle("다시 도전할 수 있습니다","이미 정화한 기록은 남습니다. 현재 전장의 시작부터 재개합니다.");
-                    Button("retry","현재 기록 재도전",panel,new Vector2(.5f,.5f),new Vector2(-190,-135),new Vector2(340,88),()=>StartBattle(false),true);
-                    Button("back","마을로",panel,new Vector2(.5f,.5f),new Vector2(190,-135),new Vector2(300,88),ReturnTown);break;
+                case TideMode.Defeat:BuildDefeat();break;
             }
         }
     }

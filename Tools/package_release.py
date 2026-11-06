@@ -109,6 +109,18 @@ def main():
     icon_art=read(ROOT/'Docs/skill-icon-art-sources.json')
     assert icon_art['atlas_files']==6 and icon_art['logical_icons']==30
     for row in icon_art['files']:assert digest(ROOT/row['path'])==row['sha256']
+    for report in [desktop,phone]:
+        names={row['name'] for row in report['checks'] if row['passed']}
+        assert 'journey reviewed forty one story contexts ten practices and five rests' in names
+        assert 'live defeat names the real incoming attack' in names
+        assert 'preparation back preserves the defeated checkpoint and clock' in names
+        assert 'preparation opens the owned upgrade without changing inventory' in names
+        assert 'gear comparison returns to the same preparation tab' in names
+        assert 'recommended gear equips only after the explicit button' in names
+        assert sum(name.startswith('live practice victory preserves rewards and progress ') for name in names)==10
+        assert sum(name.startswith('midpoint rest connects a real companion scene and keeps rewards ') for name in names)==5
+    journey=read(phone_path.parent/'journey-review.json')
+    assert journey['passed'] and journey['guid']==build['guid'] and journey['story_contexts']==41 and journey['boss_practices']==10 and journey['midpoint_rests']==5
     for scene in dialogue["scenes"]:
         assert "[" + scene["id"] + "]" in script
         for line in scene["lines"]:
@@ -159,6 +171,17 @@ def main():
         'tested':['All thirty skill and help buttons show their own painted icon','Compact labels produce actual rendered glyphs','Icon art receives no pointer events','Radial overlay and countdown match the real cooldown','Insufficient spirit dims the art and blocks casts','Button hit areas and safe area remain valid'],
         'scope':icon_review['scope'],'physical_iphone_tested':False
     })
+    journey_sources=['Assets/SpiritTide/Scripts/TideJourney.cs','Assets/SpiritTide/Scripts/TideGame.Journey.cs','Assets/SpiritTide/Scripts/TideSession.cs','Assets/SpiritTide/Scripts/TideSession.Campaign.cs','Assets/SpiritTide/Resources/SpiritTide/Data/journey.json','Tools/prepare_dialogue.py']
+    write(qa/'rpg-flow-verification.json',{
+        'passed':True,'version':build['version'],'guid':build['guid'],
+        'story_contexts_per_layout':41,'boss_practices_per_layout':10,'midpoint_rests_per_layout':5,
+        'revised_story_scenes':9,'added_story_lines':13,'dialogue_base_lines':dialogue_index['base_lines'],
+        'source_sha256':{path:digest(ROOT/path) for path in journey_sources},
+        'references':read(ROOT/'Docs/rpg-reference-sources.json'),
+        'tested':['Evidence-only spoiler-aware recap and current checkpoint','Read-only preparation and correct menu return','Unencountered bosses locked in UI and session API','Ten real selected boss practice victories without rewards or resource writes','Actual incoming attack recorded on defeat','Defeat preparation preserves clock and checkpoint','Five voluntary companion rests keep rewards and open town preparation','All 184 dialogue scenes and six leads at maximum story font'],
+        'evidence':['QA/94-journey-act4.png','QA/95-preparation.png','QA/96-boss-lesson.png','QA/97-midpoint-rest.png','QA/98-defeat-advice.png'],
+        'scope':journey['scope'],'physical_iphone_tested':False
+    })
     shutil.copy2(phone_path.parent / "combat-review.mp4", qa / "experience-combat.mp4")
     shutil.copy2(phone_path.parent / "combat-review.wav", qa / "experience-combat.wav")
     write(qa / "experience-combat.json", media)
@@ -183,6 +206,7 @@ def main():
         "review_video_scope": media["scope"] + "; " + media["audio_scope"],
         "pending": ["finished coherent sprite animation for all heroes and enemies", "production VFX and audio", "native iPhone touch and Metal/performance checks"],
         "ipa_deferred": False,
+        "rpg_flow": {"story_contexts_per_layout":41,"boss_practices_per_layout":10,"midpoint_rests_per_layout":5,"revised_story_scenes":9,"added_story_lines":13,"recap_spoiler_gated":True,"practice_resources_preserved":True},
         "skill_icons": {"painted_icons":30,"atlas_files":6,"tool":"built-in image_gen","radial_cooldowns":True,"icon_help":True},
         "skill_effects": {"dedicated_skills":30,"hero_motifs":6,"sounds":30,"showcase_frames":432,"showcase_fps":30,"scope":"Unity mesh effects and synthesized game sounds; not iPhone hardware performance"},
     }

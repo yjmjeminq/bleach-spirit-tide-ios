@@ -10,6 +10,7 @@ namespace SpiritTide
         private sealed class NavFrame
         {
             public TideMode mode;public string npc,selected,owner,quest,routeTitle;
+            public int journeyTab,journeyBoss;
             public int questAct,mainStep,mapAct,gearPage,gearSelection,gearFilter,gearSort,journalAct,journalPage,scene,line,indexPage,indexFilter,routeAct,routeStage,routeRoom;
             public bool side,dialogues,index;
         }
@@ -20,7 +21,7 @@ namespace SpiritTide
         {
             GameObject selected=EventSystem.current!=null?EventSystem.current.currentSelectedGameObject:null;
             navigation.Push(new NavFrame{mode=Session.Mode,npc=dialogueNpc,selected=selected!=null?selected.name:null,
-                questAct=questAct,mainStep=mainStep,owner=questOwner,quest=questSelected,side=questSide,
+                journeyTab=journeyTab,journeyBoss=journeyBoss,questAct=questAct,mainStep=mainStep,owner=questOwner,quest=questSelected,side=questSide,
                 mapAct=mapAct,gearPage=gearPage,gearSelection=gearSelection,gearFilter=gearFilter,gearSort=gearSort,
                 journalAct=journalAct,journalPage=journalPage,scene=dialogueScene,line=dialogueLine,dialogues=journalDialogue,
                 index=archiveIndex,indexPage=archivePage,indexFilter=archiveFilter,routeAct=routeAct,routeStage=routeStage,routeRoom=routeRoom,routeTitle=routeTitle});
@@ -40,7 +41,7 @@ namespace SpiritTide
             if(navigation.Count>0)
             {
                 NavFrame previous=navigation.Pop();dialogueNpc=previous.npc;pendingFocus=previous.selected;
-                questAct=previous.questAct;mainStep=previous.mainStep;questOwner=previous.owner;questSelected=previous.quest;questSide=previous.side;
+                journeyTab=previous.journeyTab;journeyBoss=previous.journeyBoss;questAct=previous.questAct;mainStep=previous.mainStep;questOwner=previous.owner;questSelected=previous.quest;questSide=previous.side;
                 mapAct=previous.mapAct;gearPage=previous.gearPage;gearSelection=previous.gearSelection;gearFilter=previous.gearFilter;gearSort=previous.gearSort;
                 journalAct=previous.journalAct;journalPage=previous.journalPage;dialogueScene=previous.scene;dialogueLine=previous.line;journalDialogue=previous.dialogues;
                 archiveIndex=previous.index;archivePage=previous.indexPage;archiveFilter=previous.indexFilter;

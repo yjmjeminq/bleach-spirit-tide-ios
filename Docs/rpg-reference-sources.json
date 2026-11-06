@@ -1,0 +1,25 @@
+{
+  "reviewed_at": "2026-11-06",
+  "baseline_version": "0.9.0",
+  "new_version": "0.10.0",
+  "sources": [
+    {
+      "game": "Dungeon Fighter Online",
+      "title": "Scenario Dungeon",
+      "url": "https://www.dfoneople.com/news/updates/406/Dungeon-Update/Scenario-Dungeon",
+      "used_for": "Quest context and named next destination"
+    },
+    {
+      "game": "Dungeon Fighter Online",
+      "title": "Additional Changes",
+      "url": "https://www.dfoneople.com/news/updates/4057/Additional-Changes",
+      "used_for": "Training room access to content; reward-free encounter gating is our own design"
+    },
+    {
+      "game": "Final Fantasy XIV",
+      "title": "Navigating the Game Screen",
+      "url": "https://eu.finalfantasyxiv.com/game_manual/view/",
+      "used_for": "Main scenario and objective navigation; evidence recap is our own design"
+    }
+  ]
+}
