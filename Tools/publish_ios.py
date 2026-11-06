@@ -34,7 +34,7 @@ def run(args,cwd=ROOT):
 
 
 def gh(*args):return run([sys.executable,'-X','utf8',str(ROOT/'Tools/Cloud-GitCredential.py'),*map(str,args)])
-def git(*args):return run(['git',*args],STAGE)
+def git(*args):return run(['git','-c','credential.https://github.com.helper=','-c','credential.https://github.com.helper=manager-core','-c','credential.username=yjmjeminq',*args],STAGE)
 
 
 def write(value):
@@ -43,18 +43,21 @@ def write(value):
 
 
 def prepare():
-    assert not STAGE.exists(),'Inspect an existing source stage before trying again.'
+    if STAGE.exists():
+        previous=json.loads(STATE.read_text())
+        assert previous['repository']==REPO and previous['status']=='prepared' and (STAGE/'.git').is_dir()
+        assert not git('status','--porcelain'),'Preserve uncommitted source stage changes.'
     metadata=json.loads(Path(str(ARCHIVE)+'.json').read_text())
     assert sha(ARCHIVE)==metadata['sha256'] and metadata['export']['version']==VERSION
-    STAGE.mkdir(parents=True)
+    STAGE.mkdir(parents=True,exist_ok=True)
     for folder in ['Assets','Packages','ProjectSettings','Tools','Docs','.github']:
-        shutil.copytree(ROOT/folder,STAGE/folder,ignore=shutil.ignore_patterns('__pycache__','*.pyc'))
+        shutil.copytree(ROOT/folder,STAGE/folder,dirs_exist_ok=True,ignore=shutil.ignore_patterns('__pycache__','*.pyc'))
     for name in ['README.md','.gitignore']:shutil.copy2(ROOT/name,STAGE/name)
     forbidden={'Library','Temp','Obj','Logs','UserSettings','Builds','BuildLogs','Artifacts','.runtime','ReferenceArchive'}
     patterns=[rb'\b(?:gh[pousr]_[A-Za-z0-9]{30,}|github_pat_[A-Za-z0-9_]{30,})\b',rb'-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----',rb'\b(?:AKIA|ASIA)[A-Z0-9]{16}\b',rb'\bsk-(?:proj-|svcacct-)?[A-Za-z0-9_-]{30,}\b',rb'https://[^\s/@]{1,100}:[^\s/@]+@']
     rows=[]
     for path in sorted(STAGE.rglob('*')):
-        if not path.is_file():continue
+        if not path.is_file() or ".git" in path.relative_to(STAGE).parts:continue
         name=path.relative_to(STAGE).as_posix()
         assert not any(part in forbidden for part in path.relative_to(STAGE).parts),name
         assert path.suffix.lower() not in {'.p12','.pfx','.pem','.key','.mobileprovision','.ipa','.zip'},name
@@ -76,11 +79,20 @@ def publish():
     assert sha(ARCHIVE)==state['sourceSHA256']
     assert gh('api','user','--jq','.login')=='yjmjeminq'
     # A dedicated new repository preserves every existing game repository.
-    gh('repo','create',REPO,'--public','--description','BLEACH Spirit Tide Unity source and iLoader iPhone test builds')
-    assert json.loads(gh('repo','view',REPO,'--json','visibility'))['visibility']=='PUBLIC'
-    git('init','--initial-branch=main');git('config','user.name','yjmjeminq');git('config','user.email','yjmjeminq@users.noreply.github.com')
-    git('add','--all');git('commit','-m','Add Spirit Tide 0.7.1 iPhone source and verified export workflow')
-    revision=git('rev-parse','HEAD');git('remote','add','origin','https://github.com/'+REPO+'.git');git('push','-u','origin','main')
+    try:
+        remote=json.loads(gh('repo','view',REPO,'--json','nameWithOwner,visibility,description'))
+    except RuntimeError:
+        gh('repo','create',REPO,'--public','--description','BLEACH Spirit Tide Unity source and iLoader iPhone test builds')
+        remote=json.loads(gh('repo','view',REPO,'--json','nameWithOwner,visibility,description'))
+    assert remote['nameWithOwner']==REPO and remote['visibility']=='PUBLIC' and remote['description']=='BLEACH Spirit Tide Unity source and iLoader iPhone test builds'
+    if not (STAGE/'.git').exists():git('init','--initial-branch=main')
+    git('config','user.name','yjmjeminq');git('config','user.email','yjmjeminq@users.noreply.github.com')
+    if git('status','--porcelain'):
+        git('add','--all');git('commit','-m','Add verified Spirit Tide 0.7.1 iPhone source and touch input checks')
+    revision=git('rev-parse','HEAD')
+    if not git('remote'):git('remote','add','origin','https://github.com/'+REPO+'.git')
+    assert git('remote','get-url','origin')=='https://github.com/'+REPO+'.git'
+    git('push','-u','origin','main')
     notes=ROOT/'.runtime/ios-release-notes.md'
     notes.write_text('BLEACH: 영해의 균열 0.7.1 iPhone 시험판\n\niPhone 15 Pro · iOS 17 이상 · 가로 화면 · ARM64 · Metal.\n6개 캐릭터, 5액트, 30던전, 114방.\n\nSpiritTide-iPhone-unsigned-v0.7.1.ipa를 iLoader에서 서명·설치하세요.\n컴파일과 패키지 검증을 수행하며 실제 아이폰 설치·플레이는 별도 확인이 필요합니다.\n',encoding='utf-8')
     gh('release','create',TAG,ARCHIVE,'--repo',REPO,'--target',revision,'--title','Spirit Tide 0.7.1 iPhone test','--notes-file',notes,'--prerelease')

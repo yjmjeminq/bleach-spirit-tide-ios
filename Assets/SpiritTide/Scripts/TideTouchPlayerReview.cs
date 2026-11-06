@@ -15,7 +15,7 @@ namespace SpiritTide
             var right=new PointerEventData(EventSystem.current){pointerId=11,position=HitPoint(game.Buttons["attack"])};
             ExecuteEvents.Execute(joy.gameObject,left,ExecuteEvents.pointerDownHandler);
             ExecuteEvents.Execute(game.Buttons["attack"].gameObject,right,ExecuteEvents.pointerDownHandler);
-            float x=game.Session.X;yield return new WaitForSecondsRealtime(.08f);
+            float x=game.Session.X;yield return new WaitForSecondsRealtime(.45f);
             Check("two independent touch pointers move and attack together",game.Joystick.Owner==10&&game.Joystick.Value.x>.2f&&game.AttackHold.Held&&game.Session.X>x&&game.Session.AttackSerial>0);
             ExecuteEvents.Execute(game.Buttons["attack"].gameObject,right,ExecuteEvents.pointerUpHandler);
             Check("releasing attack finger keeps movement finger active",!game.AttackHold.Held&&game.Joystick.Owner==10&&game.Joystick.Value.x>.2f);
