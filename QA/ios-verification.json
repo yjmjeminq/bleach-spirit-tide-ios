@@ -1,0 +1,43 @@
+{
+  "passed": true,
+  "ipa": "SpiritTide-iPhone-unsigned-v0.7.1.ipa",
+  "bytes": 46695148,
+  "sha256": "5924898dbdf5e4bfb1ef45b03e93a0c7dd0ca43f6ac2578870cd209c9a26e7ee",
+  "app": {
+    "bundleIdentifier": "com.yjmjemin.bleachspirittide",
+    "version": "0.7.1",
+    "build": "2",
+    "minimumIOS": "17.0",
+    "mainExecutable": {
+      "bytes": 67568,
+      "sha256": "d37b16ca80da8d466776312bf3112fedb94e980a8e2dc435b232a7ebbbd61f39",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "platform": "iOS-device",
+          "filetype": 2,
+          "signed": false
+        }
+      ]
+    },
+    "unityFramework": {
+      "bytes": 65660792,
+      "sha256": "dc0fff64ee7b11d147af1aa02e9f766ff376ba0a76a7b56849bd20dfeacf417d",
+      "slices": [
+        {
+          "architecture": "arm64",
+          "platform": "iOS-device",
+          "filetype": 6,
+          "signed": false
+        }
+      ]
+    },
+    "gameFiles": 8,
+    "gameFilesSHA256": "dd75eddaad52d8804edd353eba7d020cb28b1c1c2c9ae16fb17dad6f817fab6a",
+    "unsigned": true
+  },
+  "gameLaunched": false,
+  "enteredPlayMode": false,
+  "deviceLaunched": false,
+  "limitation": "Package validation does not establish installation or gameplay on a physical iPhone."
+}

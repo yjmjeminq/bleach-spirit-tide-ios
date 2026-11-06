@@ -85,6 +85,10 @@ def main():
         assert "all fifteen side quests completed through live controls" in names
         assert "live main and side investigation appear together" in names
         assert "main field completion opens route and saves checkpoint" in names
+        for check in ["two independent touch pointers move and attack together", "releasing attack finger keeps movement finger active", "another finger cannot release the owned joystick", "opening a modal releases all held touch pointers", "touch pause freezes position and combat clock", "resuming does not revive a released touch"]:
+            assert check in names,check
+        if report['device'].endswith('2556x1179'):
+            assert "iPhone 15 Pro touch controls meet 44 point targets at native 3x scale" in names
         for required in ["town menu opens a service hub", "forge back restores filter sort page and selected gear", "scene list jumps directly to the selected conversation", "quest map highlights its exact destination", "destination primary enters the exact historical dungeon", "previous story line is restored without running completion", "route explains a target behind the current saved room", "automatic hints match the current input layout"]:
             assert required in names, required
     for scene in dialogue["scenes"]:
@@ -141,6 +145,19 @@ def main():
         "pending": ["finished coherent sprite animation for all heroes and enemies", "production VFX and audio", "native iPhone touch and Metal/performance checks"],
         "ipa_deferred": False,
     }
+    ios_report=ROOT/"Artifacts"/("SpiritTide-ios-package-verification.json")
+    if ios_report.exists():
+        ios=read(ios_report);ipa=ROOT/"Artifacts"/ios["ipa"]
+        assert ios["passed"] and ios["app"]["version"]==build["version"] and digest(ipa)==ios["sha256"]
+        assert ios["app"]["unsigned"] and not ios["deviceLaunched"]
+        state=read(ROOT/".runtime/ios-build-state.json")
+        export=read(ROOT/"BuildLogs/ios-export.json")
+        assert export["passed"] and export["version"]==build["version"]
+        summary["ios"]={"version":ios["app"]["version"],"build":ios["app"]["build"],"minimum_ios":ios["app"]["minimumIOS"],"ipa":ipa.name,"bytes":ipa.stat().st_size,"sha256":ios["sha256"],"unsigned":True,"physical_iphone_tested":False,"source_revision":state["revision"],"run_url":state["runURL"],"unity_export_guid":export["guid"]}
+        shutil.copy2(ios_report,qa/"ios-verification.json")
+        shutil.copy2(ROOT/"Artifacts/SpiritTide-ios-build-report.json",qa/"ios-build-report.json")
+        shutil.copy2(ROOT/"Artifacts/SpiritTide-ios-input-verification.json",qa/"ios-input-verification.json")
+        shutil.copy2(ROOT/"BuildLogs/ios-export.json",qa/"ios-export.json")
     write(qa / "verification.json", summary)
     dialogue_qa = {
         "passed": True, "version": build["version"], "guid": build["guid"],
@@ -159,7 +176,7 @@ def main():
     })
     ui_evidence={}
     for layout,report in [("desktop",desktop),("phone_layout",phone)]:
-        ui_evidence[layout]=[row["name"] for row in report["checks"] if any(term in row["name"] for term in ["service hub", "restores home", "filter", "gear comparison", "forge back", "auto equips", "scene list", "scene index", "quest map", "map back", "previewing a route", "story line", "destination primary", "ward route", "route explains", "hint", "truthful indicator", "new loot"]) ]
+        ui_evidence[layout]=[row["name"] for row in report["checks"] if any(term in row["name"] for term in ["service hub", "restores home", "filter", "gear comparison", "forge back", "auto equips", "scene list", "scene index", "quest map", "map back", "previewing a route", "story line", "destination primary", "ward route", "route explains", "hint", "truthful indicator", "new loot", "touch", "finger", "44 point"]) ]
     write(qa/"ui-verification.json",{
         "passed":True,"version":build["version"],"guid":build["guid"],"managed_sha256":build["managed_sha256"],
         "checks":ui_evidence,"evidence":["QA/80-home.png","QA/81-gear-comparison.png","QA/82-dialogue-scene-list.png","QA/83-quest-destination.png","QA/84-story-previous.png","QA/85-touch-controls.png"],
@@ -199,7 +216,7 @@ def main():
     source = artifacts / ("SpiritTide-Unity-"+build["version"]+".zip")
     windows = artifacts / ("SpiritTide-Windows-"+build["version"]+".zip")
     source_files = [(ROOT / "README.md", "bleach-spirit-tide-unity/README.md")]
-    for folder in ["Assets", "Packages", "ProjectSettings", "Tools", "Docs", "QA"]:
+    for folder in ["Assets", "Packages", "ProjectSettings", "Tools", "Docs", "QA", ".github"]:
         for path in (ROOT / folder).rglob("*"):
             if path.is_file() and "__pycache__" not in path.parts and path.suffix != ".pyc":
                 source_files.append((path, "bleach-spirit-tide-unity/" + path.relative_to(ROOT).as_posix()))
@@ -220,7 +237,9 @@ def main():
     windows_files.append((quest_script_path,"SpiritTide-Windows/quest-script.txt"))
     windows_files.append((qa / "verification.json", "SpiritTide-Windows/verification.json"))
     make_zip(windows, windows_files)
-    release = {"files": [{"name": p.name, "bytes": p.stat().st_size, "sha256": digest(p)} for p in [source, windows]], "qa": summary}
+    outputs=[source,windows]
+    if "ios" in summary:outputs.append(ROOT/"Artifacts"/summary["ios"]["ipa"])
+    release = {"files": [{"name": p.name, "bytes": p.stat().st_size, "sha256": digest(p)} for p in outputs], "qa": summary}
     write(artifacts / "release.json", release)
     write(artifacts / ("release-"+build["version"]+".json"),release)
     print(json.dumps({"model_checks": summary["model_checks"], "player_checks": [summary["desktop_checks"], summary["phone_layout_checks"]], "artifacts": [{"name": p.name, "bytes": p.stat().st_size} for p in [source, windows]]}))

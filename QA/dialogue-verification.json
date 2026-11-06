@@ -1,0 +1,31 @@
+{
+  "passed": true,
+  "version": "0.7.1",
+  "guid": "e80ff370dbc24add8535cc2fc6c466cf",
+  "source": "Tools/prepare_dialogue.py",
+  "runtime_sha256": "ad33e61ab2280e63151978b492e99bae6d763074520cbd62c5b92324986f7c93",
+  "script_sha256": "ac85b5967806e35c69515d20c00c2a43e8208f919d9f39de2ec64f9f2d7580c4",
+  "scenes": 184,
+  "fixed_lines": 513,
+  "lead_responses": 150,
+  "town_replies": 105,
+  "checks": {
+    "model": 3510,
+    "desktop": 11622,
+    "phone_layout": 11383
+  },
+  "evidence": [
+    "Every scene resolves for all six leads and has multiple speakers",
+    "All 1104 resolved scene variants fit maximum story and archive fonts",
+    "Native campaign records all 85 main scenes",
+    "Real optional conversations for all 30 act/hero combinations",
+    "121 completed core scenes and sixty played side scenes navigated in archive",
+    "First-view lead survives character switch and storage reload",
+    "Old ending saves restore 116 main/companion/epilogue scenes without inventing side progress",
+    "Unplayed acts and unchosen personal outcomes stay hidden",
+    "Archive reads do not change rewards or progress",
+    "Abandon skip and duplicate-click behavior verified",
+    "Script book contains every authored runtime line and response"
+  ],
+  "scope": "Original Korean writing and Windows live UI/pointer checks at two resolutions. No voice acting or iPhone device execution."
+}

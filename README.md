@@ -104,3 +104,7 @@ python Tools/package_release.py
 기존 성인 평행세계 비키니 v2 캐릭터 6장과 보스 10장은 원본 해시를 유지합니다. 0.3의 적 아틀라스 5장과 거점·액트 배경 6장에 더해, 0.4에서 전투 배경 10장·NPC 시트 1장·동작 시트 2장을 built-in image_gen으로 생성했습니다. 오리히메·우노하나는 선택한 키프레임을 사용하며 나머지 네 인물은 기존 그림과 코드 모션을 사용합니다. 일부 동작 생성과 우노하나 시트 정리 요청은 이미지 도구 안전 심사에서 거절되어 재시도나 다른 서비스로 우회하지 않았습니다. 원본 PNG 픽셀을 수정하지 않고 Unity의 크롭 메타데이터·피벗·선택 프레임으로 경계를 정리했습니다. 모든 인물과 적의 연속 애니메이션, 최종 외형 통일, 제작용 사운드·효과는 후속 작업입니다.
 
 이번 의뢰 검토는 `Docs/quest-review.txt`, 이전 대화 검토는 `Docs/dialogue-review.txt`, 이야기·맵·전투 검토는 `Docs/experience-review.md`, 캠페인 설계는 `Docs/campaign-review.md`에 있습니다. 이미지 프롬프트·해시·셀 매핑은 `Docs/experience-art-sources.json`, `Docs/campaign-art-sources.json`, `Docs/art-sources.json`에 있습니다. 원작 자료는 `Docs/canon-sources.json`, 폰트 라이선스는 `Assets/SpiritTide/Resources/SpiritTide/UI/Pretendard-LICENSE.txt`에 있습니다. 이전 0.1·0.2·0.3·0.4·0.5·0.6 배포 ZIP은 `Artifacts/`에 별도로 보존합니다.
+
+아이폰 시험판 다운로드: https://github.com/yjmjeminq/bleach-spirit-tide-ios/releases/tag/v0.7.1-ios.1
+
+IPA를 iLoader에서 서명·설치합니다. UI·IPA 검증은 QA/iphone-validation.json, 설치 안내는 릴리스의 SpiritTide-iPhone-install.txt에 있습니다. 실제 아이폰 설치·플레이는 별도 확인이 필요합니다.

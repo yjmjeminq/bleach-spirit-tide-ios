@@ -1,0 +1,27 @@
+{
+  "passed": true,
+  "version": "0.7.1",
+  "guid": "e80ff370dbc24add8535cc2fc6c466cf",
+  "runtime_sha256": "533b42d88003fe1c596ba6681d2926682d90f22a9eb9a4a3699aad6c13a5427b",
+  "script_sha256": "a873540ba83c1b1aad212ff44ac314ced6b5843128e75f967ed47d5ed7ea794a",
+  "main_chapters": 5,
+  "main_dungeon_stages": 30,
+  "required_field_investigations": 5,
+  "optional_quests": 15,
+  "optional_steps": 30,
+  "report_outcomes": 18,
+  "evidence": [
+    "Six normal-health full campaigns include mandatory field investigations",
+    "Main gates and checkpoints cannot skip unexamined clues",
+    "All eighteen side outcomes exercised with real objectives and one-time rewards in model",
+    "All fifteen side quests accepted performed and reported with live controls per layout",
+    "Actual training cancel and perfect dodge against real attack telegraphs",
+    "Main and side objectives coexist in an ongoing Act 2 fixture",
+    "Optional action cannot satisfy main evidence; mandatory action does not claim optional reward",
+    "Optional catch-up leaves main completion and first-clear bits unchanged",
+    "Chosen aftermath appears in NPC conversation and town memory",
+    "Checksum reload preserves quest step report choice and payout flag",
+    "All sixty played side conversations available in archive"
+  ],
+  "scope": "Windows pointer and rendering checks at two resolutions; normal campaign plus endgame catch-up and ongoing-campaign fixtures. Not iPhone hardware validation."
+}
