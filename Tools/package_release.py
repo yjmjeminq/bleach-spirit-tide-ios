@@ -45,7 +45,7 @@ def main():
     assert build["passed"] and build["errors"] == 0 and model["passed"]
     assert all(row["passed"] for row in model["checks"])
     for path in (ROOT / "Assets").rglob("*"):
-        if path.is_file() and path.suffix in {".cs", ".json", ".unity", ".png", ".otf"}:
+        if path.is_file() and path.suffix in {".cs", ".json", ".unity", ".png", ".otf", ".shader", ".mat"}:
             assert path.stat().st_mtime <= build_path.stat().st_mtime, "Rebuild changed runtime source: " + str(path)
     managed=ROOT/"Builds"/"Windows"/"SpiritTide_Data"/"Managed"/"Assembly-CSharp.dll"
     assert digest(managed)==build["managed_sha256"]

@@ -14040,6 +14040,374 @@
         {
             "name": "old ending gets main evidence but no invented side completions",
             "passed": true
+        },
+        {
+            "name": "skill glow shader is present and has no compiler errors",
+            "passed": true
+        },
+        {
+            "name": "effect maps to the real playable skill rk_s1",
+            "passed": true
+        },
+        {
+            "name": "skill has a dedicated visual motif rk_s1",
+            "passed": true
+        },
+        {
+            "name": "dedicated skill sound is audible distinct and unclipped rk_s1",
+            "passed": true
+        },
+        {
+            "name": "effect maps to the real playable skill rk_s2",
+            "passed": true
+        },
+        {
+            "name": "skill has a dedicated visual motif rk_s2",
+            "passed": true
+        },
+        {
+            "name": "dedicated skill sound is audible distinct and unclipped rk_s2",
+            "passed": true
+        },
+        {
+            "name": "effect maps to the real playable skill rk_s3",
+            "passed": true
+        },
+        {
+            "name": "skill has a dedicated visual motif rk_s3",
+            "passed": true
+        },
+        {
+            "name": "dedicated skill sound is audible distinct and unclipped rk_s3",
+            "passed": true
+        },
+        {
+            "name": "effect maps to the real playable skill rk_s4",
+            "passed": true
+        },
+        {
+            "name": "skill has a dedicated visual motif rk_s4",
+            "passed": true
+        },
+        {
+            "name": "dedicated skill sound is audible distinct and unclipped rk_s4",
+            "passed": true
+        },
+        {
+            "name": "effect maps to the real playable skill rk_ult",
+            "passed": true
+        },
+        {
+            "name": "skill has a dedicated visual motif rk_ult",
+            "passed": true
+        },
+        {
+            "name": "dedicated skill sound is audible distinct and unclipped rk_ult",
+            "passed": true
+        },
+        {
+            "name": "effect maps to the real playable skill oh_s1",
+            "passed": true
+        },
+        {
+            "name": "skill has a dedicated visual motif oh_s1",
+            "passed": true
+        },
+        {
+            "name": "dedicated skill sound is audible distinct and unclipped oh_s1",
+            "passed": true
+        },
+        {
+            "name": "effect maps to the real playable skill oh_s2",
+            "passed": true
+        },
+        {
+            "name": "skill has a dedicated visual motif oh_s2",
+            "passed": true
+        },
+        {
+            "name": "dedicated skill sound is audible distinct and unclipped oh_s2",
+            "passed": true
+        },
+        {
+            "name": "effect maps to the real playable skill oh_s3",
+            "passed": true
+        },
+        {
+            "name": "skill has a dedicated visual motif oh_s3",
+            "passed": true
+        },
+        {
+            "name": "dedicated skill sound is audible distinct and unclipped oh_s3",
+            "passed": true
+        },
+        {
+            "name": "effect maps to the real playable skill oh_s4",
+            "passed": true
+        },
+        {
+            "name": "skill has a dedicated visual motif oh_s4",
+            "passed": true
+        },
+        {
+            "name": "dedicated skill sound is audible distinct and unclipped oh_s4",
+            "passed": true
+        },
+        {
+            "name": "effect maps to the real playable skill oh_ult",
+            "passed": true
+        },
+        {
+            "name": "skill has a dedicated visual motif oh_ult",
+            "passed": true
+        },
+        {
+            "name": "dedicated skill sound is audible distinct and unclipped oh_ult",
+            "passed": true
+        },
+        {
+            "name": "effect maps to the real playable skill yr_s1",
+            "passed": true
+        },
+        {
+            "name": "skill has a dedicated visual motif yr_s1",
+            "passed": true
+        },
+        {
+            "name": "dedicated skill sound is audible distinct and unclipped yr_s1",
+            "passed": true
+        },
+        {
+            "name": "effect maps to the real playable skill yr_s2",
+            "passed": true
+        },
+        {
+            "name": "skill has a dedicated visual motif yr_s2",
+            "passed": true
+        },
+        {
+            "name": "dedicated skill sound is audible distinct and unclipped yr_s2",
+            "passed": true
+        },
+        {
+            "name": "effect maps to the real playable skill yr_s3",
+            "passed": true
+        },
+        {
+            "name": "skill has a dedicated visual motif yr_s3",
+            "passed": true
+        },
+        {
+            "name": "dedicated skill sound is audible distinct and unclipped yr_s3",
+            "passed": true
+        },
+        {
+            "name": "effect maps to the real playable skill yr_s4",
+            "passed": true
+        },
+        {
+            "name": "skill has a dedicated visual motif yr_s4",
+            "passed": true
+        },
+        {
+            "name": "dedicated skill sound is audible distinct and unclipped yr_s4",
+            "passed": true
+        },
+        {
+            "name": "effect maps to the real playable skill yr_ult",
+            "passed": true
+        },
+        {
+            "name": "skill has a dedicated visual motif yr_ult",
+            "passed": true
+        },
+        {
+            "name": "dedicated skill sound is audible distinct and unclipped yr_ult",
+            "passed": true
+        },
+        {
+            "name": "effect maps to the real playable skill sf_s1",
+            "passed": true
+        },
+        {
+            "name": "skill has a dedicated visual motif sf_s1",
+            "passed": true
+        },
+        {
+            "name": "dedicated skill sound is audible distinct and unclipped sf_s1",
+            "passed": true
+        },
+        {
+            "name": "effect maps to the real playable skill sf_s2",
+            "passed": true
+        },
+        {
+            "name": "skill has a dedicated visual motif sf_s2",
+            "passed": true
+        },
+        {
+            "name": "dedicated skill sound is audible distinct and unclipped sf_s2",
+            "passed": true
+        },
+        {
+            "name": "effect maps to the real playable skill sf_s3",
+            "passed": true
+        },
+        {
+            "name": "skill has a dedicated visual motif sf_s3",
+            "passed": true
+        },
+        {
+            "name": "dedicated skill sound is audible distinct and unclipped sf_s3",
+            "passed": true
+        },
+        {
+            "name": "effect maps to the real playable skill sf_s4",
+            "passed": true
+        },
+        {
+            "name": "skill has a dedicated visual motif sf_s4",
+            "passed": true
+        },
+        {
+            "name": "dedicated skill sound is audible distinct and unclipped sf_s4",
+            "passed": true
+        },
+        {
+            "name": "effect maps to the real playable skill sf_ult",
+            "passed": true
+        },
+        {
+            "name": "skill has a dedicated visual motif sf_ult",
+            "passed": true
+        },
+        {
+            "name": "dedicated skill sound is audible distinct and unclipped sf_ult",
+            "passed": true
+        },
+        {
+            "name": "effect maps to the real playable skill rg_s1",
+            "passed": true
+        },
+        {
+            "name": "skill has a dedicated visual motif rg_s1",
+            "passed": true
+        },
+        {
+            "name": "dedicated skill sound is audible distinct and unclipped rg_s1",
+            "passed": true
+        },
+        {
+            "name": "effect maps to the real playable skill rg_s2",
+            "passed": true
+        },
+        {
+            "name": "skill has a dedicated visual motif rg_s2",
+            "passed": true
+        },
+        {
+            "name": "dedicated skill sound is audible distinct and unclipped rg_s2",
+            "passed": true
+        },
+        {
+            "name": "effect maps to the real playable skill rg_s3",
+            "passed": true
+        },
+        {
+            "name": "skill has a dedicated visual motif rg_s3",
+            "passed": true
+        },
+        {
+            "name": "dedicated skill sound is audible distinct and unclipped rg_s3",
+            "passed": true
+        },
+        {
+            "name": "effect maps to the real playable skill rg_s4",
+            "passed": true
+        },
+        {
+            "name": "skill has a dedicated visual motif rg_s4",
+            "passed": true
+        },
+        {
+            "name": "dedicated skill sound is audible distinct and unclipped rg_s4",
+            "passed": true
+        },
+        {
+            "name": "effect maps to the real playable skill rg_ult",
+            "passed": true
+        },
+        {
+            "name": "skill has a dedicated visual motif rg_ult",
+            "passed": true
+        },
+        {
+            "name": "dedicated skill sound is audible distinct and unclipped rg_ult",
+            "passed": true
+        },
+        {
+            "name": "effect maps to the real playable skill un_s1",
+            "passed": true
+        },
+        {
+            "name": "skill has a dedicated visual motif un_s1",
+            "passed": true
+        },
+        {
+            "name": "dedicated skill sound is audible distinct and unclipped un_s1",
+            "passed": true
+        },
+        {
+            "name": "effect maps to the real playable skill un_s2",
+            "passed": true
+        },
+        {
+            "name": "skill has a dedicated visual motif un_s2",
+            "passed": true
+        },
+        {
+            "name": "dedicated skill sound is audible distinct and unclipped un_s2",
+            "passed": true
+        },
+        {
+            "name": "effect maps to the real playable skill un_s3",
+            "passed": true
+        },
+        {
+            "name": "skill has a dedicated visual motif un_s3",
+            "passed": true
+        },
+        {
+            "name": "dedicated skill sound is audible distinct and unclipped un_s3",
+            "passed": true
+        },
+        {
+            "name": "effect maps to the real playable skill un_s4",
+            "passed": true
+        },
+        {
+            "name": "skill has a dedicated visual motif un_s4",
+            "passed": true
+        },
+        {
+            "name": "dedicated skill sound is audible distinct and unclipped un_s4",
+            "passed": true
+        },
+        {
+            "name": "effect maps to the real playable skill un_ult",
+            "passed": true
+        },
+        {
+            "name": "skill has a dedicated visual motif un_ult",
+            "passed": true
+        },
+        {
+            "name": "dedicated skill sound is audible distinct and unclipped un_ult",
+            "passed": true
+        },
+        {
+            "name": "all thirty skills have authored visuals and sound",
+            "passed": true
         }
     ],
     "scope": "Unity model/resources: six input-only complete campaigns with normal HP, real XP, loot, upgrades and manual gate approach. Native iPhone validation remains deferred.",

@@ -1,0 +1,16 @@
+{
+  "fps": 30,
+  "frames": 432,
+  "sound_cues": 12,
+  "scope": "Fixed-step Unity skill showcase with synthesized game cue audio, not an iPhone recording or FPS measurement",
+  "version": "0.8.0",
+  "guid": "47ee153f902c44e89d35479546301f3c",
+  "device": "Direct3D11 / 2556x1179",
+  "report": "BuildLogs/PlayerChecks-20261106-164548269/report.json",
+  "movie_sha256": "11a912a478d1dbc60d9e1c6c481cf6481be3d97bfe05e10dd9ab93a7c5c7cfe1",
+  "wav_sha256": "526c0aedee200a3cbd34506d0fafdefc74f97d803af9585ed0d94cb712d5e546",
+  "audio_seconds": 14.7,
+  "audio_rms": 0.041048,
+  "audio_scope": "The same in-game effect clips mixed at their replay cue times; not hardware audio capture.",
+  "decode_passed": true
+}

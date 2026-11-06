@@ -1,12 +1,12 @@
 {
     "passed": true,
     "unity": "6000.3.27f1",
-    "version": "0.7.1",
-    "guid": "e80ff370dbc24add8535cc2fc6c466cf",
+    "version": "0.8.0",
+    "guid": "47ee153f902c44e89d35479546301f3c",
     "target": "Windows64",
     "output": "C:\\jeminFolder\\자체개발\\bleach-spirit-tide-unity\\Builds\\Windows\\SpiritTide.exe",
-    "managed_sha256": "65f1fc9ea8978debabd2af3cb0036fb8632fd5658f51370760e8087140dac0ca",
-    "bytes": 255077990,
+    "managed_sha256": "635c00467a89cdfc766a740af513e856474f4a2c260d438512468043d70f3378",
+    "bytes": 255112278,
     "errors": 0,
     "warnings": 0
 }

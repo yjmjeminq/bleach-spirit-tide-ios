@@ -1,9 +1,9 @@
 {
   "passed": true,
-  "version": "0.7.1",
-  "guid": "e80ff370dbc24add8535cc2fc6c466cf",
+  "version": "0.8.0",
+  "guid": "47ee153f902c44e89d35479546301f3c",
   "runtime_sha256": "533b42d88003fe1c596ba6681d2926682d90f22a9eb9a4a3699aad6c13a5427b",
-  "script_sha256": "a873540ba83c1b1aad212ff44ac314ced6b5843128e75f967ed47d5ed7ea794a",
+  "script_sha256": "c90ff6ba01e4d6e57b57fa0bcd65f0ed9eb08a403d6cbf26a8f999a7ba716818",
   "main_chapters": 5,
   "main_dungeon_stages": 30,
   "required_field_investigations": 5,

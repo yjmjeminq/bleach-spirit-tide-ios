@@ -1,0 +1,277 @@
+{
+  "passed": true,
+  "version": "0.8.0",
+  "guid": "47ee153f902c44e89d35479546301f3c",
+  "cast_skills_per_layout": 30,
+  "hero_motifs": 6,
+  "skill_sounds": 30,
+  "peak_vertices": 3328,
+  "pool_capacity": 6,
+  "source_sha256": {
+    "Assets/SpiritTide/Scripts/TideSkillFx.cs": "7fa52d6ddc2b08afaffb749832188345e70ca1af72a094832a22d5f3a9958052",
+    "Assets/SpiritTide/Scripts/TideSkillFxGraphic.cs": "bfcc6c0f6e038830305e83c3ca17deb4d8a8445f24b8304f316ea74633615ca8",
+    "Assets/SpiritTide/Scripts/TideSkillFxGraphic.Heroes.cs": "03708c108036063b92968385dc3823c0f1a5efc69da8a3269006dac129c8c73e",
+    "Assets/SpiritTide/Scripts/TideGame.SkillFx.cs": "ea48e0cbefab5be70ba492b618d857286472ac629e9904838a2e89fea16139ce",
+    "Assets/SpiritTide/Resources/SpiritTide/Vfx/SkillGlow.shader": "009273749f45eb13f5c05972741f1467b849c94eb0f347a831b59833916f4f55"
+  },
+  "catalog": {
+    "version": "0.8.0",
+    "effects": [
+      {
+        "hero": "rukia",
+        "hero_name": "쿠치키 루키아",
+        "slot": 0,
+        "id": "rk_s1",
+        "name": "설백일섬",
+        "motif": "frost-twin-crescents"
+      },
+      {
+        "hero": "rukia",
+        "hero_name": "쿠치키 루키아",
+        "slot": 1,
+        "id": "rk_s2",
+        "name": "빙결진",
+        "motif": "snowflake-seal"
+      },
+      {
+        "hero": "rukia",
+        "hero_name": "쿠치키 루키아",
+        "slot": 2,
+        "id": "rk_s3",
+        "name": "서리걸음",
+        "motif": "ice-footfall-trail"
+      },
+      {
+        "hero": "rukia",
+        "hero_name": "쿠치키 루키아",
+        "slot": 3,
+        "id": "rk_s4",
+        "name": "백련빙주",
+        "motif": "three-crystal-pillars"
+      },
+      {
+        "hero": "rukia",
+        "hero_name": "쿠치키 루키아",
+        "slot": 4,
+        "id": "rk_ult",
+        "name": "빙설해방·백하",
+        "motif": "winter-crown"
+      },
+      {
+        "hero": "orihime",
+        "hero_name": "이노우에 오리히메",
+        "slot": 0,
+        "id": "oh_s1",
+        "name": "삼천결순",
+        "motif": "three-petal-barrier"
+      },
+      {
+        "hero": "orihime",
+        "hero_name": "이노우에 오리히메",
+        "slot": 1,
+        "id": "oh_s2",
+        "name": "쌍천귀순",
+        "motif": "paired-healing-flowers"
+      },
+      {
+        "hero": "orihime",
+        "hero_name": "이노우에 오리히메",
+        "slot": 2,
+        "id": "oh_s3",
+        "name": "고천참순",
+        "motif": "petal-lance"
+      },
+      {
+        "hero": "orihime",
+        "hero_name": "이노우에 오리히메",
+        "slot": 3,
+        "id": "oh_s4",
+        "name": "사천항순",
+        "motif": "four-petal-counter"
+      },
+      {
+        "hero": "orihime",
+        "hero_name": "이노우에 오리히메",
+        "slot": 4,
+        "id": "oh_ult",
+        "name": "육화공명",
+        "motif": "six-flower-sanctuary"
+      },
+      {
+        "hero": "yoruichi",
+        "hero_name": "시호인 요루이치",
+        "slot": 0,
+        "id": "yr_s1",
+        "name": "뇌보연각",
+        "motif": "thunder-double-kick"
+      },
+      {
+        "hero": "yoruichi",
+        "hero_name": "시호인 요루이치",
+        "slot": 1,
+        "id": "yr_s2",
+        "name": "낙뢰장",
+        "motif": "lightning-impact"
+      },
+      {
+        "hero": "yoruichi",
+        "hero_name": "시호인 요루이치",
+        "slot": 2,
+        "id": "yr_s3",
+        "name": "순홍질주",
+        "motif": "three-lightning-dashes"
+      },
+      {
+        "hero": "yoruichi",
+        "hero_name": "시호인 요루이치",
+        "slot": 3,
+        "id": "yr_s4",
+        "name": "흑묘반격",
+        "motif": "black-cat-evasion"
+      },
+      {
+        "hero": "yoruichi",
+        "hero_name": "시호인 요루이치",
+        "slot": 4,
+        "id": "yr_ult",
+        "name": "뇌신연무",
+        "motif": "thunder-god-descent"
+      },
+      {
+        "hero": "soifon",
+        "hero_name": "소이폰",
+        "slot": 0,
+        "id": "sf_s1",
+        "name": "일침",
+        "motif": "wasp-needle"
+      },
+      {
+        "hero": "soifon",
+        "hero_name": "소이폰",
+        "slot": 1,
+        "id": "sf_s2",
+        "name": "추적순보",
+        "motif": "winged-afterimage"
+      },
+      {
+        "hero": "soifon",
+        "hero_name": "소이폰",
+        "slot": 2,
+        "id": "sf_s3",
+        "name": "독침연격",
+        "motif": "five-sting-volley"
+      },
+      {
+        "hero": "soifon",
+        "hero_name": "소이폰",
+        "slot": 3,
+        "id": "sf_s4",
+        "name": "봉익일섬",
+        "motif": "butterfly-seal-burst"
+      },
+      {
+        "hero": "soifon",
+        "hero_name": "소이폰",
+        "slot": 4,
+        "id": "sf_ult",
+        "name": "작봉뇌공탄",
+        "motif": "hornet-cannon"
+      },
+      {
+        "hero": "rangiku",
+        "hero_name": "마츠모토 란기쿠",
+        "slot": 0,
+        "id": "rg_s1",
+        "name": "회묘산개",
+        "motif": "ash-blade-fan"
+      },
+      {
+        "hero": "rangiku",
+        "hero_name": "마츠모토 란기쿠",
+        "slot": 1,
+        "id": "rg_s2",
+        "name": "재안개",
+        "motif": "drifting-ash-garden"
+      },
+      {
+        "hero": "rangiku",
+        "hero_name": "마츠모토 란기쿠",
+        "slot": 2,
+        "id": "rg_s3",
+        "name": "분진인력",
+        "motif": "inward-blade-vortex"
+      },
+      {
+        "hero": "rangiku",
+        "hero_name": "마츠모토 란기쿠",
+        "slot": 3,
+        "id": "rg_s4",
+        "name": "회묘폭류",
+        "motif": "ash-chain-detonation"
+      },
+      {
+        "hero": "rangiku",
+        "hero_name": "마츠모토 란기쿠",
+        "slot": 4,
+        "id": "rg_ult",
+        "name": "은회폭풍",
+        "motif": "silver-ash-cyclone"
+      },
+      {
+        "hero": "unohana",
+        "hero_name": "우노하나 레츠",
+        "slot": 0,
+        "id": "un_s1",
+        "name": "회복의 원",
+        "motif": "healing-water-sigil"
+      },
+      {
+        "hero": "unohana",
+        "hero_name": "우노하나 레츠",
+        "slot": 1,
+        "id": "un_s2",
+        "name": "정적일섬",
+        "motif": "silent-crimson-cleave"
+      },
+      {
+        "hero": "unohana",
+        "hero_name": "우노하나 레츠",
+        "slot": 2,
+        "id": "un_s3",
+        "name": "검연반격",
+        "motif": "crossed-counter-blades"
+      },
+      {
+        "hero": "unohana",
+        "hero_name": "우노하나 레츠",
+        "slot": 3,
+        "id": "un_s4",
+        "name": "유상전환",
+        "motif": "twin-stance-lotus"
+      },
+      {
+        "hero": "unohana",
+        "hero_name": "우노하나 레츠",
+        "slot": 4,
+        "id": "un_ult",
+        "name": "검연·진홍원",
+        "motif": "crimson-sword-domain"
+      }
+    ],
+    "method": "Runtime generated Unity meshes and skill-specific synthesized game sounds",
+    "png_originals_edited": false
+  },
+  "tested": [
+    "Thirty real button-triggered casts per layout",
+    "Dedicated geometry and sound for every skill",
+    "Actual shield, cloud, stance and marked-target state",
+    "Nonblocking bounded meshes",
+    "Pool reuse and tail cleanup",
+    "Reduced effects for all six ultimates",
+    "Frozen effect clocks while paused",
+    "All six hero ultimates in the timed native showcase"
+  ],
+  "scope": "Windows actual Unity mesh rendering and input events; not iPhone GPU performance",
+  "media_scope": "Fixed-step Unity skill showcase with synthesized game cue audio, not an iPhone recording or FPS measurement",
+  "physical_iphone_tested": false
+}

@@ -1,14 +1,14 @@
 {
   "passed": true,
   "unity": "6000.3.27f1",
-  "version": "0.7.1",
-  "build_guid": "e80ff370dbc24add8535cc2fc6c466cf",
-  "managed_sha256": "65f1fc9ea8978debabd2af3cb0036fb8632fd5658f51370760e8087140dac0ca",
+  "version": "0.8.0",
+  "build_guid": "47ee153f902c44e89d35479546301f3c",
+  "managed_sha256": "635c00467a89cdfc766a740af513e856474f4a2c260d438512468043d70f3378",
   "build_errors": 0,
   "build_warnings": 0,
-  "model_checks": 3510,
-  "desktop_checks": 11622,
-  "phone_layout_checks": 11383,
+  "model_checks": 3602,
+  "desktop_checks": 13532,
+  "phone_layout_checks": 13120,
   "full_health_model_dungeons": 180,
   "full_health_model_rooms": 684,
   "playable_dungeons": 30,
@@ -80,17 +80,25 @@
     "native iPhone touch and Metal/performance checks"
   ],
   "ipa_deferred": false,
+  "skill_effects": {
+    "dedicated_skills": 30,
+    "hero_motifs": 6,
+    "sounds": 30,
+    "showcase_frames": 432,
+    "showcase_fps": 30,
+    "scope": "Unity mesh effects and synthesized game sounds; not iPhone hardware performance"
+  },
   "ios": {
-    "version": "0.7.1",
-    "build": "2",
+    "version": "0.8.0",
+    "build": "3",
     "minimum_ios": "17.0",
-    "ipa": "SpiritTide-iPhone-unsigned-v0.7.1.ipa",
-    "bytes": 46695148,
-    "sha256": "5924898dbdf5e4bfb1ef45b03e93a0c7dd0ca43f6ac2578870cd209c9a26e7ee",
+    "ipa": "SpiritTide-iPhone-unsigned-v0.8.0.ipa",
+    "bytes": 46737399,
+    "sha256": "fdc0940e972b7193b0b7f6ed61e89cf50d21c3ce420f680a053eb06b816be540",
     "unsigned": true,
     "physical_iphone_tested": false,
-    "source_revision": "a99fda0b89fe3fbc5864fbd74aa9a576b3d6857c",
-    "run_url": "https://github.com/yjmjeminq/bleach-spirit-tide-ios/actions/runs/42177241949",
-    "unity_export_guid": "771cf2399a144f8e89e3367ae03e0df7"
+    "source_revision": "a419227a041d26a57680f57ea90382a050b56a96",
+    "run_url": "https://github.com/yjmjeminq/bleach-spirit-tide-ios/actions/runs/42183081438",
+    "unity_export_guid": "9dee4000286249dbb9bbb4c3d29d4d64"
   }
 }
