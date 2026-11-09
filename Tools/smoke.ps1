@@ -3,7 +3,7 @@ $ErrorActionPreference = 'Stop'
 $bleachProjectRoot = Split-Path -Parent $PSScriptRoot
 $bleachPlayer = Join-Path $bleachProjectRoot 'Builds\Windows\SpiritTide.exe'
 if (-not (Test-Path -LiteralPath $bleachPlayer)) { throw 'Run Tools/build.ps1 first.' }
-$bleachOutput = Join-Path $bleachProjectRoot ('BuildLogs\PlayerChecks-' + (Get-Date -Format 'yyyyMMdd-HHmmssfff'))
+$bleachOutput = Join-Path $bleachProjectRoot ('BuildLogs\PlayerChecks-' + (Get-Date -Format 'yyyyMMdd-HHmmssfff') + '-' + $PID)
 New-Item -ItemType Directory -Path $bleachOutput -Force | Out-Null
 $bleachArgs = @('-screen-fullscreen','0','-screen-width',$Width,'-screen-height',$Height,'-logFile',('"' + (Join-Path $bleachOutput 'player.log') + '"'),'-spirit-smoke',('"' + $bleachOutput + '"'))
 if ($PhoneLayout) { $bleachArgs += '-spirit-phone-layout' }

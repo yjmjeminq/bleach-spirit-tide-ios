@@ -37,7 +37,10 @@ namespace SpiritTide
         public void NavigateBack()
         {
             ResetInput();
-            if(Session.Mode==TideMode.Story||Session.Mode==TideMode.Result||Session.Mode==TideMode.Defeat){ReturnTown();return;}
+            if(Session.Mode==TideMode.Story){CancelStory();return;}
+            if(Session.Mode==TideMode.Title)return;
+            if(Session.Mode==TideMode.ChooseLead){SetOpeningMode(TideMode.Title);return;}
+            if(Session.Mode==TideMode.Result||Session.Mode==TideMode.Defeat){ReturnTown();return;}
             if(navigation.Count>0)
             {
                 NavFrame previous=navigation.Pop();dialogueNpc=previous.npc;pendingFocus=previous.selected;
@@ -66,7 +69,7 @@ namespace SpiritTide
         {
             if(Session.IsMovingMode)return false;
             if(Input.GetKeyDown(KeyCode.Escape)){NavigateBack();return true;}
-            if(Input.GetKeyDown(KeyCode.H)&&Session.Mode!=TideMode.Story&&Session.Mode!=TideMode.Result&&Session.Mode!=TideMode.Defeat){if(Session.Mode==TideMode.Help)NavigateBack();else ShowHelp();return true;}
+            if(Input.GetKeyDown(KeyCode.H)&&Session.Mode!=TideMode.Story&&Session.Mode!=TideMode.Result&&Session.Mode!=TideMode.Defeat&&Session.Mode!=TideMode.Title&&Session.Mode!=TideMode.ChooseLead){if(Session.Mode==TideMode.Help)NavigateBack();else ShowHelp();return true;}
             if(Input.GetKeyDown(KeyCode.Tab))CycleMenuFocus(Input.GetKey(KeyCode.LeftShift)||Input.GetKey(KeyCode.RightShift));
             else if(Input.GetKeyDown(KeyCode.RightArrow))MoveMenuFocus(Vector2.right);
             else if(Input.GetKeyDown(KeyCode.LeftArrow))MoveMenuFocus(Vector2.left);
@@ -110,6 +113,8 @@ namespace SpiritTide
                 switch(Session.Mode)
                 {
                     case TideMode.Dialogue:case TideMode.Story:preferred="choice-0";break;
+                    case TideMode.Title:preferred="title-start";break;
+                    case TideMode.ChooseLead:preferred="lead-begin";break;
                     case TideMode.Home:preferred="home-primary";break;
                     case TideMode.Inventory:preferred="equip";break;
                     case TideMode.Forge:preferred="upgrade";break;

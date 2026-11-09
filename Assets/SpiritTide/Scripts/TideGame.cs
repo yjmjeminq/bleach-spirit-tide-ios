@@ -36,8 +36,8 @@ namespace SpiritTide
         private StoryLine[] storyLines;
         private int storyPage;
         public int StoryPage => storyPage;
-        private Action storyFinish;
-        private string storyEndLabel;
+        private Action storyFinish, storyCancel;
+        private string storyEndLabel, storyCancelLabel;
         private string storyRecordId;
         private int storyHero;
         private int storyEpoch;
@@ -66,6 +66,7 @@ namespace SpiritTide
             savePath = SmokeMode ? Path.Combine(smokeOutput, "qa-profile.json") : Path.Combine(Application.persistentDataPath, "SpiritTide", "profile-v1.json");
             TideProfile profile = SmokeMode ? new TideProfile() : TideStorage.Load(savePath, out lastSaveNotice);
             Session = new TideSession(profile);
+            Session.Mode = TideMode.Title;
             font = Resources.Load<Font>("SpiritTide/UI/Pretendard-Regular");
             bold = Resources.Load<Font>("SpiritTide/UI/Pretendard-SemiBold");
             if (font == null || bold == null) throw new InvalidOperationException("Bundled Korean fonts are missing.");
@@ -135,7 +136,7 @@ namespace SpiritTide
                 return;
             }
             if (!Session.IsFighting) return;
-            if(Input.GetKeyDown(KeyCode.E)){if(Session.NearInteraction){Session.InteractWorld();Persist();}else if(Session.RoomCleared)AdvanceRoom();return;}
+            if(Input.GetKeyDown(KeyCode.E)){if(Session.NearInteraction)InteractField();else if(Session.RoomCleared)AdvanceRoom();return;}
             if (Input.GetKeyDown(KeyCode.Z)){blockHeldAttackUntilRelease=false;Session.Request(Input.GetKey(KeyCode.UpArrow) ? MoveKind.Launcher : MoveKind.Basic);}
             if (Input.GetKeyDown(KeyCode.X)) Session.BeginHeavy();
             if (Input.GetKeyUp(KeyCode.X)) Session.ReleaseHeavy();
@@ -195,31 +196,32 @@ namespace SpiritTide
         {
             if(!replay&&Session.Quest!=QuestState.Active){Session.Status="이번 액트 의뢰를 먼저 확인하세요.";return;}
             var dungeon=TideCampaign.Dungeon(act,number);
-            ShowStory(TideStory.BeforeDungeon(dungeon,Session.Profile,replay),()=>BeginDungeonNow(act,number,replay),"출정",
-                !replay&&Session.Profile.roomCheckpoint==0?TideDialogue.DungeonId(dungeon,"entry"):null);
+            string id=TideDialogue.DungeonId(dungeon,"entry");
+            bool newEntry=!replay&&Session.Profile.roomCheckpoint==0&&TideDialogue.Seen(Session.Profile,id)==null;
+            if(newEntry&&(number==1||number==3||number==6))
+                ShowDialogueScene(id,()=>BeginDungeonNow(act,number,replay),"현장으로",cancelLabel:"출정 취소");
+            else if(BeginDungeonNow(act,number,replay)&&newEntry)
+                StartFieldScene(id);
         }
-        private void BeginDungeonNow(int act,int number,bool replay)
+        private bool BeginDungeonNow(int act,int number,bool replay)
         {
             navigation.Clear();ResetInput();
-            if(Session.BeginDungeon(act,number,replay)){ResetFeedback();Persist();Refresh();}
-            else ReturnTown();
+            if(!Session.BeginDungeon(act,number,replay)){ReturnTown();return false;}
+            PrepareFieldStory();
+            ResetFeedback();Persist();Refresh();return true;
         }
         private void BeginPractice(bool training,int boss)
         {
             navigation.Clear();ResetInput();Session.BeginBattle(training,boss);ResetFeedback();Refresh();
         }
-        private void ShowStory(StoryLine[] lines,Action finish,string finalLabel,string recordId=null)
+        private void ShowDialogueScene(string id,Action finish,string finalLabel="마을로",Action cancel=null,string cancelLabel="거점으로")
         {
-            if(lines==null||lines.Length==0){finish();return;}
-            ResetInput();Session.ClearAction();storyLines=lines;storyPage=0;storyFinish=finish;storyEndLabel=finalLabel;
-            storyRecordId=recordId;storyHero=Session.Profile.hero;
+            ResetInput();Session.ClearAction();
+            storyLines=TideDialogue.Lines(id,Session.Profile.hero);
+            storyPage=0;storyFinish=finish;storyEndLabel=finalLabel;storyCancel=cancel??ReturnTown;storyCancelLabel=cancelLabel;
+            storyRecordId=id;storyHero=Session.Profile.hero;
             storyEpoch++;navigation.Clear();
-            Session.Status="기록 대화 · 계속을 눌러 확인하세요.";
             Session.Mode=TideMode.Story;Session.Revision++;Refresh();
-        }
-        private void ShowDialogueScene(string id,Action finish,string finalLabel="마을로")
-        {
-            ShowStory(TideDialogue.Lines(id,Session.Profile.hero),finish,finalLabel,id);
         }
         private void AdvanceStory(int expectedPage)
         {
@@ -229,13 +231,25 @@ namespace SpiritTide
         private void FinishStory()
         {
             if(Session.Mode!=TideMode.Story||storyFinish==null)return;
-            Action finish=storyFinish;storyFinish=null;
-            if(storyRecordId!=null){TideDialogue.Remember(Session.Profile,storyRecordId,storyHero);storyRecordId=null;Persist();}
+            Action finish=storyFinish;
+            TideDialogue.Remember(Session.Profile,storyRecordId,storyHero);
+            ClearStory();
             finish();
+        }
+        private void CancelStory()
+        {
+            if(Session.Mode!=TideMode.Story||storyCancel==null)return;
+            Action cancel=storyCancel;
+            ClearStory();
+            cancel();
+        }
+        private void ClearStory()
+        {
+            storyFinish=null;storyCancel=null;storyLines=null;storyRecordId=null;
         }
         public void ReturnTown()
         {
-            storyFinish=null;storyLines=null;storyRecordId=null;
+            ClearStory();
             navigation.Clear();
             ResetInput(); Session.ReturnTown(); Persist(); Refresh();
         }

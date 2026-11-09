@@ -44,8 +44,10 @@ def main():
     build, model = read(build_path), read(ROOT / "BuildLogs" / "model-validation.json")
     assert build["passed"] and build["errors"] == 0 and model["passed"]
     assert all(row["passed"] for row in model["checks"])
+    # Both player build targets recreate this boot scene from TideBuilder.cs.
+    generated_scene = ROOT / "Assets/SpiritTide/Scenes/Karakura.unity"
     for path in (ROOT / "Assets").rglob("*"):
-        if path.is_file() and path.suffix in {".cs", ".json", ".unity", ".png", ".otf", ".shader", ".mat"}:
+        if path != generated_scene and path.is_file() and path.suffix in {".cs", ".json", ".unity", ".png", ".otf", ".shader", ".mat"}:
             assert path.stat().st_mtime <= build_path.stat().st_mtime, "Rebuild changed runtime source: " + str(path)
     managed=ROOT/"Builds"/"Windows"/"SpiritTide_Data"/"Managed"/"Assembly-CSharp.dll"
     assert digest(managed)==build["managed_sha256"]
@@ -67,7 +69,31 @@ def main():
     dialogue, dialogue_index = read(dialogue_path), read(ROOT / "Docs/dialogue-index.json")
     script_path = ROOT / "Docs/character-dialogue-script.txt"
     script = script_path.read_text(encoding="utf-8")
-    assert dialogue_index["version"] == build["version"] and len(dialogue["scenes"]) == 184 and len(dialogue["town"]) == 105
+    scene_count = len(dialogue["scenes"])
+    assert dialogue_index["version"] == build["version"] and scene_count == 189 and len(dialogue["town"]) == 105
+    opening_checks = [
+        "fresh player boots at title without an active quest",
+        "new story opens the six-lead selection",
+        "finishing prologue enters the actual first fight without a town menu",
+        "paused field dialogue hides and keeps its timing",
+        "resuming returns to the same field dialogue",
+        "continue opens town without replaying the opening or rewriting progress",
+        "continuing a saved room does not replay a departure scene",
+        "canceling report keeps the saved act ready",
+        "final report naturally leads to the original caller's epilogue",
+        "unfinished epilogue is available on continue",
+        "epilogue is remembered without repeating the final reward",
+        "all completed main companion and actual rescue scenes are navigable",
+    ]
+    for report in (desktop, phone):
+        passed_names = {row["name"] for row in report["checks"] if row["passed"]}
+        assert all(name in passed_names for name in opening_checks)
+        assert all("opening lead answers the incident in character " + str(hero) in passed_names for hero in range(6))
+        assert all("boss result opens report directly without awarding it early " + str(act) in passed_names for act in range(1,6))
+        assert sum(name.startswith("routine departure keeps live controls ") for name in passed_names) == 14
+        assert sum(name.startswith("ordinary clear gives immediate results ") for name in passed_names) == 20
+        assert "rescued spirit answers on the field without blocking combat" in passed_names
+        assert all("lantern scene follows the real rescue without pausing in act " + str(act) in passed_names for act in range(2,6))
     quest_path = ROOT / "Assets/SpiritTide/Resources/SpiritTide/Data/quests.json"
     quests=read(quest_path);quest_script_path=ROOT/"Docs/quest-script.txt";quest_script=quest_script_path.read_text(encoding="utf-8")
     assert len(quests["main"])==5 and len(quests["side"])==15 and sum(len(q["steps"]) for q in quests["side"])==30
@@ -164,6 +190,17 @@ def main():
     shutil.copy2(phone_path, qa / "player-phone-layout.json")
     for filename in ["01-town.png","03-combat.png","06-equipment.png","07-departure.png","22-large-training.png","30-map-locked.png","31-room-clear.png","33-first-loot.png","35-forge.png","36-forged.png","40-act3-boss6.png","40-act4-boss6.png","40-act5-boss6.png","40-future-preview.png","40-future-locked.png","42-act5-report.png","43-ending-town.png","44-journal.png","45-replay-map.png","46-replay-result.png"]:
         shutil.copy2(phone_path.parent / filename, qa / filename)
+    opening_shots = sorted([*phone_path.parent.glob("00-story-*.png"), *phone_path.parent.glob("42-*.png")])
+    for shot in opening_shots:
+        shutil.copy2(shot, qa / shot.name)
+    write(qa / "story-opening-verification.json", {
+        "passed": True, "version": build["version"], "guid": build["guid"],
+        "checks": opening_checks, "title_leads": 6, "direct_routine_transitions_reviewed": 14,
+        "ordinary_results": 20, "field_rescues": 5, "act_reports": 5,
+        "screens": {shot.name: digest(shot) for shot in opening_shots},
+        "story_data_sha256": digest(dialogue_path), "physical_iphone_tested": False,
+        "scope": "Windows live UI and input tests at desktop and iPhone 15 Pro landscape layout.",
+    })
     for shot in phone_path.parent.glob("5*.png"):
         shutil.copy2(shot, qa / shot.name)
     for shot in phone_path.parent.glob("6*.png"):
@@ -205,7 +242,7 @@ def main():
         'revised_story_scenes':9,'added_story_lines':13,'dialogue_base_lines':dialogue_index['base_lines'],
         'source_sha256':{path:digest(ROOT/path) for path in journey_sources},
         'references':read(ROOT/'Docs/rpg-reference-sources.json'),
-        'tested':['Evidence-only spoiler-aware recap and current checkpoint','Read-only preparation and correct menu return','Unencountered bosses locked in UI and session API','Ten real selected boss practice victories without rewards or resource writes','Actual incoming attack recorded on defeat','Defeat preparation preserves clock and checkpoint','Five voluntary companion rests keep rewards and open town preparation','All 184 dialogue scenes and six leads at maximum story font'],
+        'tested':['Evidence-only spoiler-aware recap and current checkpoint','Read-only preparation and correct menu return','Unencountered bosses locked in UI and session API','Ten real selected boss practice victories without rewards or resource writes','Actual incoming attack recorded on defeat','Defeat preparation preserves clock and checkpoint','Five voluntary companion rests keep rewards and open town preparation',f'All {scene_count} dialogue scenes and six leads at maximum story font'],
         'evidence':['QA/94-journey-act4.png','QA/95-preparation.png','QA/96-boss-lesson.png','QA/97-midpoint-rest.png','QA/98-defeat-advice.png'],
         'scope':journey['scope'],'physical_iphone_tested':False
     })
@@ -220,16 +257,16 @@ def main():
         "causal_dungeon_briefings":30,"hero_act_voice_sets":30,"localized_clues":11,"encounter_scenes":10,
         "town_npcs":5,"formations":6,"environment_types":5,"ambush_rooms":10,
         "maximum_font_npc_dialogues_per_layout":600,"combat_review_frames":media["frames"],"combat_review_sound_cues":media["sound_cues"],
-        "dialogue_scenes":184,"main_story_scenes":85,"companion_scenes":30,"rescue_scenes":5,"epilogues":1,"side_quest_scenes":63,
+        "dialogue_scenes":scene_count,"main_story_scenes":85,"companion_scenes":30,"rescue_scenes":5,"field_rescue_scenes":5,"epilogues":1,"side_quest_scenes":63,
         "main_chapter_quests":5,"main_investigations":5,"side_quests":15,"side_objectives":30,"side_report_outcomes":18,
         "dialogue_base_lines":dialogue_index["base_lines"],"dialogue_lead_responses":dialogue_index["lead_responses"],"town_reply_states":105,
-        "maximum_font_resolved_scene_variants_per_layout":1104,
+        "maximum_font_resolved_scene_variants_per_layout":scene_count*6,
         "story_act_links_reviewed":5,
         "tested":["six input-only normal-health campaigns","one native five-act campaign per layout","70 reachable foe IDs","troop and named separation","room gate and saved checkpoint","defeat and retry","one-time reports and loot","reduced replay rewards","real XP and gear upgrades","legacy saves and corrupt backup recovery","30 skill explanations","UI pointer targets and text bounds","future preview and lock visuals","all 15 combat settings rendered","10 boss introductions and resolutions","600 maximum-font NPC conversations per layout","all 30 journal pages","visible town NPC raycast","optional rescue reward and replay recovery","environment warning and real ward deactivation","skill cancel, hit stop, knockback, launch and poise break","Ulquiorra three-phase behavior","fixed-step input replay with effect-audio cues"],
         "player_sha256": digest(ROOT / "Builds" / "Windows" / "SpiritTide.exe"),
         "render_scope": "Live uGUI canvas rendered through the Unity camera to a texture; pointer-event simulation in Windows Direct3D11.",
         "phone_scope": "2556x1179 landscape with example safe-area insets. Not an iPhone OS/device run.",
-        "implemented": "Five main chapter quests with mandatory field evidence, fifteen original two-step optional quests and eighteen personal report outcomes; 184 dialogue scenes and a gated archive, NPC requests, tracked goals, memory board and real training attacks. Fifteen combat backdrops and hit stop/cancel/juggle/poise mechanics. Six source-preserving articulated heroes with planted-foot locomotion and continuous combat poses; seven continuous motion families for seventy original foe images.",
+        "implemented": f"Playable title and opening, field dialogue, five main chapter quests, fifteen optional quests and eighteen personal report outcomes. {scene_count} dialogue scenes and a gated archive, NPC requests, tracked goals, memory board and real training attacks. Fifteen combat backdrops and hit stop/cancel/juggle/poise mechanics. Six source-preserving articulated heroes with planted-foot locomotion and continuous combat poses; seven continuous motion families for seventy original foe images.",
         "review_video_scope": media["scope"] + "; " + media["audio_scope"],
         "pending": ["production VFX and audio", "native iPhone touch and Metal/performance checks"],
         "ipa_deferred": False,
@@ -255,9 +292,9 @@ def main():
     dialogue_qa = {
         "passed": True, "version": build["version"], "guid": build["guid"],
         "source": "Tools/prepare_dialogue.py", "runtime_sha256": digest(dialogue_path), "script_sha256": digest(script_path),
-        "scenes": 184, "fixed_lines": dialogue_index["base_lines"], "lead_responses": dialogue_index["lead_responses"], "town_replies": 105,
+        "scenes": scene_count, "fixed_lines": dialogue_index["base_lines"], "lead_responses": dialogue_index["lead_responses"], "town_replies": 105,
         "checks": {"model":len(model["checks"]),"desktop":len(desktop["checks"]),"phone_layout":len(phone["checks"])},
-        "evidence": ["Every scene resolves for all six leads and has multiple speakers", "All 1104 resolved scene variants fit maximum story and archive fonts", "Native campaign records all 85 main scenes", "Real optional conversations for all 30 act/hero combinations", "121 completed core scenes and sixty played side scenes navigated in archive", "First-view lead survives character switch and storage reload", "Old ending saves restore 116 main/companion/epilogue scenes without inventing side progress", "Unplayed acts and unchosen personal outcomes stay hidden", "Archive reads do not change rewards or progress", "Abandon skip and duplicate-click behavior verified", "Script book contains every authored runtime line and response"],
+        "evidence": ["Every scene resolves for all six leads and has multiple speakers", f"All {scene_count*6} resolved scene variants fit maximum story and archive fonts", "Native campaign records all 85 main scenes", "Real optional conversations for all 30 act/hero combinations", "126 completed core scenes and sixty played side scenes navigated in archive", "First-view lead survives character switch and storage reload", "Old ending saves restore 116 main/companion/epilogue scenes without inventing side progress", "Unplayed acts and unchosen personal outcomes stay hidden", "Archive reads do not change rewards or progress", "Abandon skip and duplicate-click behavior verified", "Script book contains every authored runtime line and response"],
         "scope": "Original Korean writing and Windows live UI/pointer checks at two resolutions. No voice acting or iPhone device execution.",
     }
     write(qa / "dialogue-verification.json",dialogue_qa)

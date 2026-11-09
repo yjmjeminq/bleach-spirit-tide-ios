@@ -24,7 +24,7 @@ namespace SpiritTide
             var asset=Resources.Load<TextAsset>("SpiritTide/Data/dialogue");
             if(asset==null)throw new InvalidOperationException("Dialogue data missing.");
             Data=JsonUtility.FromJson<TideDialogueData>(asset.text);
-            if(Data==null||Data.schema!=1||Data.scenes==null||Data.scenes.Length!=184||Data.town==null||Data.town.Length!=105)
+            if(Data==null||Data.schema!=1||Data.scenes==null||Data.scenes.Length!=189||Data.town==null||Data.town.Length!=105)
                 throw new InvalidOperationException("Incomplete dialogue data.");
             scenes.Clear();
             foreach(var scene in Data.scenes)
@@ -86,6 +86,7 @@ namespace SpiritTide
                 case "report":return reported;
                 case "epilogue":return p.claimed;
                 case "rescue":return (p.rescueReports&actBit)!=0;
+                case "field_echo":return (p.rescuedDungeons&dungeonBit)!=0;
                 case "clear":return cleared;
                 case "intro":
                     var dungeon=TideCampaign.Dungeon(scene.act,scene.stage);int bit=TideExperience.EncounterBit(dungeon.rooms[dungeon.rooms.Length-1].foes[0]);
@@ -97,6 +98,7 @@ namespace SpiritTide
         private static int Order(TideDialogueScene s)
         {
             if(s.kind=="main_accept")return 0;
+            if(s.kind=="field_echo")return s.stage*100+5;
             if(s.kind=="main_step")return s.stage*100+15;
             if(s.kind.StartsWith("side_")){var q=TideQuests.Find(s.quest_id);return 1100+(q==null?0:q.index*10)+(s.kind=="side_offer"?0:s.kind=="side_step"?1+s.quest_step:5+s.branch);}
             if(s.kind=="epilogue")return 1000;

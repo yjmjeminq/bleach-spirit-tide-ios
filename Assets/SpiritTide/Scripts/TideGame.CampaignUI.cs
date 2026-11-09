@@ -79,7 +79,7 @@ namespace SpiritTide
             Buttons["gate"].gameObject.SetActive(Session.IsFighting&&Session.IsCampaign&&Session.RoomCleared);Buttons["gate"].interactable=Session.AtGate&&Session.GateReady;
             Buttons["gate"].GetComponentInChildren<Text>().text=Session.MainInvestigationPending?"남은 표지 살피기"+(ShowKeyboardHints?" · E":""):Session.AtGate?"다음 방"+(ShowKeyboardHints?" · E":""):"오른쪽 출구로 이동 →";
             Buttons["target-next"].gameObject.SetActive(Session.IsFighting&&Session.AliveCount>1);
-            progressText.gameObject.SetActive(battle);Say(progressText,Session.IsCampaign?"Act "+Session.Dungeon.act+" · "+Session.Dungeon.number+"구역 / "+(Session.RoomIndex+1)+"방 / "+Session.Dungeon.rooms.Length+" · 남은 적 "+Session.AliveCount:Session.IsTraining?"수련 · 조작과 기술을 자유롭게 확인":"보스 기록 재현 · 진행 보상 없음");
+            progressText.gameObject.SetActive(battle);Say(progressText,OpeningHint()??(Session.IsCampaign?"Act "+Session.Dungeon.act+" · "+Session.Dungeon.number+"구역 / "+(Session.RoomIndex+1)+"방 / "+Session.Dungeon.rooms.Length+" · 남은 적 "+Session.AliveCount:Session.IsTraining?"수련 · 조작과 기술을 자유롭게 확인":"보스 기록 재현 · 진행 보상 없음"));
             questText.gameObject.SetActive(false);
             beaconView.gameObject.SetActive(false);lureView.gameObject.SetActive(Session.IsFighting&&Session.LureActive);lureView.anchoredPosition=Project(Session.WarningPosition.x,Session.WarningPosition.y)+new Vector2(0,90);
             warningText.gameObject.SetActive(Session.IsFighting&&(Session.Telegraph||Session.BodyExposed));
@@ -177,10 +177,18 @@ namespace SpiritTide
             MenuTitle(Session.IsCampaign?"던전 정화 · "+Session.Dungeon.title:"보스 전투 재현 완료");
             Label(Session.IsCampaign?"등급 "+Session.ClearRank+" · 최고 "+Session.ChainPeak+" HIT · 받은 피해 "+Mathf.CeilToInt(Session.DungeonDamageTaken)+"\n"+Session.LastReward:"수련 기록 · 조사와 보상에 영향을 주지 않습니다.",panel,new Vector2(.5f,.5f),new Vector2(0,125),new Vector2(950,126),21,gold);
             bool midpoint=Session.IsCampaign&&!Session.IsReplay&&Session.Dungeon.number==3;
-            Label(Session.IsCampaign?midpoint?TideJourney.Data.chapters[Session.Dungeon.act-1].midpoint:TideStory.DungeonOutcome(Session.Dungeon,Session.Profile):"공격 예고와 기술 연계를 확인했습니다. 다음에는 다른 동료로 도전해 보세요.",panel,new Vector2(.5f,.5f),new Vector2(0,midpoint?-7:-45),new Vector2(950,midpoint?120:180),24);
+            bool fieldResult=Session.IsCampaign&&!Session.IsReplay&&Session.Dungeon.number!=3&&Session.Dungeon.number!=6;
+            Label(Session.IsCampaign?midpoint?TideJourney.Data.chapters[Session.Dungeon.act-1].midpoint:TideStory.DungeonOutcome(Session.Dungeon,Session.Profile):"공격 예고와 기술 연계를 확인했습니다. 다음에는 다른 동료로 도전해 보세요.",panel,new Vector2(.5f,.5f),new Vector2(0,midpoint||fieldResult?-7:-45),new Vector2(950,midpoint||fieldResult?120:180),24);
             AddResultBreather();
+            if(fieldResult)
+                Button("result-story","현장 대화",panel,new Vector2(.5f,.5f),new Vector2(0,-121),new Vector2(270,84),ReadResultStory);
             bool next=Session.IsCampaign&&!Session.IsReplay&&Session.Quest==QuestState.Active;
-            Button("next-dungeon",next?"다음 · "+TideJourney.Current(Session.Profile).title:Session.Quest==QuestState.Ready?"마을로 돌아가 보고":"마을로",panel,new Vector2(.5f,.5f),new Vector2(-240,-214),new Vector2(420,84),()=>{if(next){Session.ReturnTown();StartBattle(false);}else ReturnTown();},true).GetComponentInChildren<Text>().fontSize=22;
+            bool report=Session.IsCampaign&&!Session.IsReplay&&Session.Quest==QuestState.Ready;
+            Button("next-dungeon",next?"다음 · "+TideJourney.Current(Session.Profile).title:report?"귀환 보고":"마을로",panel,new Vector2(.5f,.5f),new Vector2(-240,-214),new Vector2(420,84),()=>{
+                if(next){Session.ReturnTown();StartBattle(false);}
+                else if(report){Session.ReturnTown();BeginActReport();}
+                else ReturnTown();
+            },true).GetComponentInChildren<Text>().fontSize=22;
             Button("result-gear","전리품 확인",panel,new Vector2(.5f,.5f),new Vector2(240,-214),new Vector2(420,84),()=>{ReturnTown();SelectLoot(Session.LastGearUid);OpenMenu(TideMode.Inventory);});
         }
     }

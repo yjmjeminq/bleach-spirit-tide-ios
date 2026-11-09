@@ -16,8 +16,9 @@ namespace SpiritTide
             TideMode restore=Session.Mode;bool intro=restore==TideMode.Combat,outro=restore==TideMode.Result;
             if(!intro&&!outro)return false;
             int bit=Session.Room.kind=="boss"?TideExperience.EncounterBit(Session.Room.foes[0]):0;
+            if(bit==0)return false;
             string sceneId=TideDialogue.DungeonId(Session.Dungeon,intro?"intro":"clear");
-            if(intro&&(bit==0||(Session.Profile.seenIntros&bit)!=0)||outro&&TideDialogue.Seen(Session.Profile,sceneId)!=null)return false;
+            if(intro&&(Session.Profile.seenIntros&bit)!=0||outro&&TideDialogue.Seen(Session.Profile,sceneId)!=null)return false;
             string previousStatus=Session.Status;
             ShowDialogueScene(sceneId,()=>{
                 if(intro)Session.Profile.seenIntros|=bit;else if(bit!=0)Session.Profile.seenOutros|=bit;
@@ -42,7 +43,7 @@ namespace SpiritTide
             foreach(var value in new[]{wardFigure,echoFigure})value.transform.SetSiblingIndex(actorLayer.GetSiblingIndex());
             environmentArea=Picture("EnvironmentTell",world,Vector2.zero,Vector2.zero,new Vector2(100,30),new Color(.25f,.8f,1,.3f));environmentArea.transform.SetSiblingIndex(actorLayer.GetSiblingIndex());
             environmentSecond=Picture("EnvironmentPreview",world,Vector2.zero,Vector2.zero,new Vector2(100,30),new Color(.35f,.65f,1,.14f));environmentSecond.transform.SetSiblingIndex(actorLayer.GetSiblingIndex());
-            Button("field-interact","",safe,Vector2.zero,new Vector2(140,445),new Vector2(220,84),()=>{Session.InteractWorld();Persist();Refresh();},true);Buttons["field-interact"].transform.SetSiblingIndex(menuRoot.transform.GetSiblingIndex());
+            Button("field-interact","",safe,Vector2.zero,new Vector2(140,445),new Vector2(220,84),InteractField,true);Buttons["field-interact"].transform.SetSiblingIndex(menuRoot.transform.GetSiblingIndex());
             for(int i=0;i<roomMarkers.Length;i++){roomMarkers[i]=Picture("RoomMarker-"+i,safe,new Vector2(.5f,1),new Vector2((i-3.5f)*14,-156),new Vector2(10,4),muted);roomMarkers[i].transform.SetSiblingIndex(menuRoot.transform.GetSiblingIndex());}
         }
         private void DrawExperienceWorld()
@@ -61,7 +62,9 @@ namespace SpiritTide
             townProgress.gameObject.SetActive(town);Say(townProgress,"귀환 기록 · 봉인 "+restored+" / 5\n정령 안내 "+rescues+" / 30");
             Say(wardLabel,"영압 장치"+(ShowKeyboardHints?" · E":""));Say(echoLabel,"정령의 귀환 등불"+(ShowKeyboardHints?" · E":""));
             bool ward=Session.IsFighting&&Session.IsCampaign&&Session.WardActive&&!Session.RoomCleared,echo=Session.IsFighting&&Session.EchoAvailable;
-            wardFigure.gameObject.SetActive(ward);wardLabel.gameObject.SetActive(ward);echoFigure.gameObject.SetActive(echo);echoLabel.gameObject.SetActive(echo);
+            wardFigure.gameObject.SetActive(ward);wardLabel.gameObject.SetActive(ward);
+            echoFigure.gameObject.SetActive(echo||FirstLanternInSight);echoLabel.gameObject.SetActive(echo);
+            echoFigure.color=echo?new Color(.6f,1,.85f):new Color(.6f,1,.85f,.62f);
             wardFigure.rectTransform.anchoredPosition=Project(Session.WardPosition.x,Session.WardPosition.y)+new Vector2(0,45);wardLabel.rectTransform.anchoredPosition=wardFigure.rectTransform.anchoredPosition+new Vector2(0,67);
             echoFigure.rectTransform.anchoredPosition=Project(Session.EchoX,0)+new Vector2(0,48);echoLabel.rectTransform.anchoredPosition=echoFigure.rectTransform.anchoredPosition+new Vector2(0,72);
             Buttons["field-interact"].gameObject.SetActive(ward||echo||Session.IsFighting&&Session.QuestPointCount>0);Buttons["field-interact"].interactable=Session.NearInteraction;

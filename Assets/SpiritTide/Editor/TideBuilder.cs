@@ -82,12 +82,12 @@ namespace SpiritTide.EditorTools
                 var texture=AssetImporter.GetAtPath(path) as TextureImporter;texture.textureType=TextureImporterType.Default;texture.npotScale=TextureImporterNPOTScale.None;
                 texture.alphaIsTransparency=true;texture.mipmapEnabled=true;texture.filterMode=FilterMode.Trilinear;texture.anisoLevel=2;texture.isReadable=false;texture.wrapMode=TextureWrapMode.Clamp;texture.maxTextureSize=2048;texture.textureCompression=TextureImporterCompression.Uncompressed;PhoneTexture(texture);texture.SaveAndReimport();
             }
-            PlayerSettings.bundleVersion="0.11.0";
+            PlayerSettings.bundleVersion="0.12.0";
             PlayerSettings.SetApplicationIdentifier(NamedBuildTarget.Standalone,"com.yjmjemin.bleachspirittide");
             PlayerSettings.SetApplicationIdentifier(NamedBuildTarget.iOS,"com.yjmjemin.bleachspirittide");
             PlayerSettings.SetScriptingBackend(NamedBuildTarget.Standalone,ScriptingImplementation.Mono2x);
             PlayerSettings.SetScriptingBackend(NamedBuildTarget.iOS,ScriptingImplementation.IL2CPP);
-            PlayerSettings.iOS.targetOSVersionString="17.0";PlayerSettings.iOS.buildNumber="7";
+            PlayerSettings.iOS.targetOSVersionString="17.0";PlayerSettings.iOS.buildNumber="8";
             PlayerSettings.iOS.targetDevice=iOSTargetDevice.iPhoneOnly;
             PlayerSettings.defaultInterfaceOrientation=UIOrientation.AutoRotation;
             PlayerSettings.allowedAutorotateToLandscapeLeft=true;PlayerSettings.allowedAutorotateToLandscapeRight=true;

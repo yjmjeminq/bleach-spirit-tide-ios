@@ -1,8 +1,8 @@
 {
-  "version": "0.11.0",
-  "scenes": 184,
-  "base_lines": 526,
-  "lead_responses": 150,
+  "version": "0.12.0",
+  "scenes": 189,
+  "base_lines": 497,
+  "lead_responses": 156,
   "town_replies": 105,
   "source": "Tools/prepare_dialogue.py + Tools/prepare_quests.py",
   "runtime": "Assets/SpiritTide/Resources/SpiritTide/Data/dialogue.json",
@@ -13,6 +13,7 @@
       "scene_ids": [
         "main_a1_accept",
         "a1_d1_entry",
+        "a1_d1_answer",
         "a1_d1_clear",
         "a1_d2_entry",
         "a1_d2_clear",
@@ -55,6 +56,7 @@
       "scene_ids": [
         "main_a2_accept",
         "a2_d1_entry",
+        "a2_d1_answer",
         "a2_d1_clear",
         "a2_d2_entry",
         "a2_d2_clear",
@@ -96,6 +98,7 @@
       "scene_ids": [
         "main_a3_accept",
         "a3_d1_entry",
+        "a3_d1_answer",
         "a3_d1_clear",
         "a3_d2_entry",
         "a3_d2_clear",
@@ -138,6 +141,7 @@
       "scene_ids": [
         "main_a4_accept",
         "a4_d1_entry",
+        "a4_d1_answer",
         "a4_d1_clear",
         "a4_d2_entry",
         "a4_d2_clear",
@@ -180,6 +184,7 @@
       "scene_ids": [
         "main_a5_accept",
         "a5_d1_entry",
+        "a5_d1_answer",
         "a5_d1_clear",
         "a5_d2_entry",
         "a5_d2_clear",

@@ -129,6 +129,7 @@ namespace SpiritTide
             if(Array.IndexOf(Environment.GetCommandLineArgs(),"-spirit-icons-review")>=0){yield return ReviewSkillIcons();yield break;}
             if(Array.IndexOf(Environment.GetCommandLineArgs(),"-spirit-journey-review")>=0){yield return ReviewJourney();yield break;}
             if(Array.IndexOf(Environment.GetCommandLineArgs(),"-spirit-motion-review")>=0){yield return ReviewNaturalMotion();yield break;}
+            yield return ReviewOpening();
             yield return ReviewUi();
             Check("town boot and one listener",game.Session.Mode==TideMode.Town&&FindObjectsByType<AudioListener>(FindObjectsSortMode.None).Length==1);
             yield return Capture("01-town");yield return TapUi("npc-urahara");yield return Capture("05-dialogue");yield return TapUi("choice-0");yield return ReadStory();
@@ -143,8 +144,11 @@ namespace SpiritTide
             int frame=0;while(!game.Session.RoomCleared&&game.Session.IsFighting&&frame++<12000){for(int i=0;i<60&&!game.Session.RoomCleared;i++)DriveNativeTick();yield return null;}
             Check("room exit opens with saved checkpoint",game.Session.RoomCleared&&game.Session.Profile.roomCheckpoint==1);yield return Capture("31-room-clear");
             while(!game.Session.NearInteraction){game.Session.Step(.05f,new Vector2(Mathf.Sign(game.Session.EchoX-game.Session.X),0),false);yield return null;}yield return TapUi("field-interact");Check("field rescue is a real one-time interaction",(game.Session.Profile.rescuedDungeons&1)!=0&&!game.Session.EchoAvailable);yield return Capture("51-rescue");
+            Check("rescued spirit answers on the field without blocking combat",
+                game.Session.IsFighting&&VisibleText(TideDialogue.Lines("a1_d1_answer",game.Session.Profile.hero)[0].text)
+                &&TideDialogue.Seen(game.Session.Profile,"a1_d1_answer")!=null);
             while(!game.Session.AtGate){game.Session.Step(.05f,Vector2.right,false);yield return null;}yield return null;yield return TapUi("gate");Check("touch gate enters next room",game.Session.RoomIndex==1);yield return Capture("32-next-room");
-            yield return FightDungeon();yield return Capture("33-first-loot");yield return TapUi("result-gear");yield return Capture("34-loot-inventory");Check("new loot is selected on its visible page",game.Buttons["gear-0"].GetComponentInChildren<Text>().text.Contains(TideProgress.Gear(game.Session.Profile,game.Session.LastGearUid).name));yield return TapUi("equip");yield return TapUi("forge");yield return Capture("35-forge");int gold=game.Session.Profile.gold;yield return TapUi("upgrade");Check("native forge spends real reward resources",game.Session.Profile.gold<gold);yield return Capture("36-forged");LeaveToTown();
+            yield return FightDungeon();yield return Capture("33-first-loot");yield return ReviewResultConversation();yield return TapUi("result-gear");yield return Capture("34-loot-inventory");Check("new loot is selected on its visible page",game.Buttons["gear-0"].GetComponentInChildren<Text>().text.Contains(TideProgress.Gear(game.Session.Profile,game.Session.LastGearUid).name));yield return TapUi("equip");yield return TapUi("forge");yield return Capture("35-forge");int gold=game.Session.Profile.gold;yield return TapUi("upgrade");Check("native forge spends real reward resources",game.Session.Profile.gold<gold);yield return Capture("36-forged");LeaveToTown();
             for(int act=1;act<=5;act++)
             {
                 if(act>1){yield return TapUi("npc-urahara");yield return TapUi("choice-0");yield return ReadStory();}
@@ -153,6 +157,7 @@ namespace SpiritTide
                 {
                     TideCombatDriver.Prepare(game.Session);yield return TapUi("npc-kukaku");yield return TapUi("choice-0");Check("town departure map follows current act "+act+" / "+n,VisibleText("균열 지도 · Act "+act));yield return TapUi("depart");yield return ReadStory();
                     if(reviewedSettings.Add(game.Session.Dungeon.background))yield return Capture("50-scene-"+game.Session.Dungeon.background);
+                    if(n==1)yield return ReviewFirstLantern(act);
                     if(n==3||n==6)
                     {
                         // Reach the final encounter with normal combat, then capture the actual boss.
@@ -166,11 +171,42 @@ namespace SpiritTide
                             yield return null;Check("future lock changes the visible cue",game.Session.Target.FutureLocked&&VisibleText("확정된 미래"));yield return Capture("40-future-locked");
                         }
                     }
-                    yield return FightDungeon();if(n==6)yield return Capture("41-act"+act+"-loot");yield return TapUi("next-dungeon");
-                    if(n<6){yield return ReadStory();game.ReturnTown();}
+                    yield return FightDungeon();
+                    if(n==6){yield return Capture("41-act"+act+"-loot");break;}
+                    if(n!=3)yield return ReviewResultConversation();
+                    yield return TapUi("next-dungeon");
+                    if(n+1==2||n+1==4||n+1==5)
+                        Check("routine departure keeps live controls "+act+" / "+(n+1),game.Session.IsFighting&&game.Session.Dungeon.number==n+1);
+                    yield return ReadStory();game.ReturnTown();
                 }
-                yield return TapUi("npc-urahara");Button report=game.Buttons["choice-0"];int before=game.Session.Profile.gold;report.onClick.Invoke();report.onClick.Invoke();
-                Check("report once unlocks next act "+act,game.Session.Profile.gold==before+250+(act-1)*100&&game.Session.Profile.reportedActs==((1<<act)-1));yield return Capture("42-act"+act+"-report");yield return ReadStory();
+                int before=game.Session.Profile.gold;
+                yield return TapUi("next-dungeon");
+                Check("boss result opens report directly without awarding it early "+act,
+                    game.Session.Mode==TideMode.Story&&game.Session.Quest==QuestState.Ready&&game.Session.Profile.gold==before);
+                yield return Capture("42-act"+act+"-report");
+                if(act==1)
+                {
+                    yield return TapUi("choice-2");
+                    var resumed=TideStorage.Load(Path.Combine(output,"qa-profile.json"),out _);
+                    Check("canceling report keeps the saved act ready",game.Session.Mode==TideMode.Town&&resumed.campaignAct==1
+                        &&resumed.quest==(int)QuestState.Ready&&resumed.gold==before&&TideDialogue.Seen(resumed,"a1_report")==null);
+                    yield return TapUi("npc-urahara");yield return TapUi("choice-0");
+                }
+                var reportLines=TideDialogue.Lines("a"+act+"_report",game.Session.Profile.hero);
+                for(int page=1;page<reportLines.Length;page++)yield return TapUi("choice-0");
+                Button report=game.Buttons["choice-0"];report.onClick.Invoke();report.onClick.Invoke();yield return null;
+                Check("report once unlocks next act "+act,game.Session.Profile.gold==before+250+(act-1)*100&&game.Session.Profile.reportedActs==((1<<act)-1));
+                if(act==5)
+                {
+                    Check("final report naturally leads to the original caller's epilogue",
+                        game.Session.Mode==TideMode.Story&&VisibleText(TideDialogue.Scene("a5_epilogue").title));
+                    yield return TapUi("choice-2");
+                    game.Session.Mode=TideMode.Title;game.Session.Revision++;yield return null;
+                    Check("unfinished epilogue is available on continue",VisibleText("후일담 이어보기"));
+                    yield return TapUi("title-start");yield return Capture("42-ending-epilogue");yield return ReadStory();
+                    Check("epilogue is remembered without repeating the final reward",
+                        game.Session.Profile.gold==before+650&&TideDialogue.Seen(game.Session.Profile,"a5_epilogue")!=null);
+                }
             }
             Check("native five-act campaign complete",game.Session.CampaignFinished&&game.Session.Profile.clearedDungeons==TideProgress.AllDungeons);yield return Capture("43-ending-town");
             yield return TapUi("npc-byakuya");yield return TapUi("choice-0");yield return Capture("44-journal");LeaveToTown();yield return TapUi("npc-kukaku");yield return TapUi("choice-0");yield return TapUi("map-act-1");yield return Capture("45-replay-map");yield return TapUi("dungeon-1");yield return ReadStory();Check("replay distinct from new progress",game.Session.IsReplay);yield return FightDungeon();Check("replay cannot duplicate first loot",game.Session.LastGearUid==0);yield return Capture("46-replay-result");game.ReturnTown();

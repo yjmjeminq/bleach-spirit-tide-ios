@@ -144,7 +144,9 @@ namespace SpiritTide
                     ()=>Session.Request((MoveKind)((int)MoveKind.Skill0+slot)),i==4);
                 skillLabels[i]=skillButtons[i].GetComponentInChildren<Text>();skillLabels[i].fontSize=22;
             }
-            menuRoot=Stretch("Menus",safe).gameObject;MakeModalShade(menuRoot);panel=Node("MenuCard",menuRoot.transform,new Vector2(.5f,.5f),new Vector2(0,-15),new Vector2(1060,560));
+            menuRoot=Stretch("Menus",safe).gameObject;MakeModalShade(menuRoot);
+            openingBackdrop=SceneBackground("OpeningBackdrop",menuRoot.transform,"act1_river_v1");
+            panel=Node("MenuCard",menuRoot.transform,new Vector2(.5f,.5f),new Vector2(0,-15),new Vector2(1060,560));
             Image panelBackground=panel.gameObject.AddComponent<Image>();panelBackground.color=new Color(.08f,.16f,.19f,.99f);panelBackground.raycastTarget=true;
             dialogueRoot=Stretch("Dialogue",safe).gameObject;
             MakeModalShade(dialogueRoot);
@@ -174,6 +176,10 @@ namespace SpiritTide
             Buttons["potion"].gameObject.SetActive(fighting&&!Session.IsTraining);
             bool overlay=!town&&!fighting&&Session.Mode!=TideMode.Dialogue&&Session.Mode!=TideMode.Story;
             menuRoot.SetActive(overlay);dialogueRoot.SetActive(Session.Mode==TideMode.Dialogue||Session.Mode==TideMode.Story);
+            bool front=Session.Mode==TideMode.Title||Session.Mode==TideMode.ChooseLead;
+            openingBackdrop.gameObject.SetActive(front);
+            openingBackdrop.color=Session.Mode==TideMode.Title?new Color(.52f,.64f,.76f):new Color(.35f,.46f,.56f);
+            panel.GetComponent<Image>().color=Session.Mode==TideMode.Title?Color.clear:new Color(.08f,.16f,.19f,front?.9f:.99f);
             Buttons["pause"].gameObject.SetActive(town||fighting);
             if(overlay)BuildMenu();
             if(Session.Mode==TideMode.Dialogue)BuildDialogue();
@@ -196,7 +202,7 @@ namespace SpiritTide
             enemyText.text=(Session.Target.Def?.id=="a3_boss_ulquiorra"?"["+Session.Target.Phase+" / 3단계] ":"")+(Session.IsTraining?"수련용 기록 · ":"")+Session.EnemyName+"  "+Mathf.CeilToInt(Session.EnemyHp)+" / "+Mathf.CeilToInt(Session.EnemyMaxHp)+(Session.Target.Def!=null&&Session.Target.Def.IsBoss?" · 자세 "+Mathf.CeilToInt(Session.Target.Poise):"");
             enemyFill.fillAmount=Session.EnemyHp/Mathf.Max(1,Session.EnemyMaxHp);
             actionText.text=Session.IsCharging?"강공격 준비 "+Mathf.RoundToInt(Session.HeavyProgress*100)+"%":Session.ActionRemaining>0?Session.ActionName:Session.PerfectRemaining>0?"반격 기회":"";
-            statusText.text=Session.Status;
+            Say(statusText,FieldStatus());
             Buttons["potion"].GetComponentInChildren<Text>().text="회복 +"+(45+Session.Profile.level*2)+"\n"+(Session.IsCampaign?Session.Profile.potions+"개":"연습용 · 무료")+(ShowKeyboardHints?" · V":"");
             Buttons["potion"].interactable=Session.IsFighting&&!Session.IsTraining&&Session.Hp<Session.MaxHp&&(!Session.IsCampaign||Session.Profile.potions>0);
             if(Session.Mode==TideMode.Town)Buttons["interact"].GetComponentInChildren<Text>().text="대화 · "+new[]{"우라하라","텟사이","콘","뱌쿠야","쿠카쿠"}[NearestNpcIndex()];
@@ -244,22 +250,6 @@ namespace SpiritTide
             body.alignment=TextAnchor.UpperLeft;
             for(int i=0;i<labels.Length;i++){int n=i;Button("choice-"+i,labels[i],r,new Vector2(.5f,.5f),new Vector2((i-(labels.Length-1)*.5f)*320,-177),new Vector2(304,88),()=>{actions[n]();Refresh();});}
         }
-        private void BuildStory()
-        {
-            int page=storyPage,epoch=storyEpoch;StoryLine line=storyLines[page];bool last=page==storyLines.Length-1;
-            string speaker=line.speaker;
-            bool remote=Session.InBattle;
-            if(storyRecordId!=null){string kind=TideDialogue.Scene(storyRecordId).kind;remote=remote||kind=="entry"||kind=="intro"||kind=="clear";}
-            if(remote)for(int hero=0;hero<6;hero++)if(hero!=Session.Profile.hero&&speaker==TideStory.HeroName(hero))speaker+=" · 동료 통신";
-            if(storyRecordId!=null){var scene=TideDialogue.Scene(storyRecordId);if(scene.kind.StartsWith("side_")&&(scene.act<Session.Profile.campaignAct||Session.Profile.claimed))speaker="지난 부탁 · "+speaker;}
-            Action advance=()=>{if(epoch==storyEpoch)AdvanceStory(page);};Action skip=()=>{if(epoch==storyEpoch)FinishStory();};
-            if(last)Dialogue(speaker+" · "+(page+1)+" / "+storyLines.Length,line.text,new[]{storyEndLabel,"마을로"},new Action[]{advance,ReturnTown});
-            else Dialogue(speaker+" · "+(page+1)+" / "+storyLines.Length,line.text,new[]{"계속","장면 건너뛰기","마을로"},new Action[]{advance,skip,ReturnTown});
-            Button("story-previous","이전 문장",currentDialogueCard,new Vector2(.5f,.5f),new Vector2(300,188),new Vector2(190,84),()=>{
-                if(epoch!=storyEpoch||Session.Mode!=TideMode.Story||storyPage!=page||page<=0)return;
-                storyPage--;Session.Revision++;Refresh();
-            }).interactable=page>0;
-        }
         private void BuildDialogue()
         {
             Action close=NavigateBack;
@@ -269,7 +259,7 @@ namespace SpiritTide
                 if(Session.Quest==QuestState.Available)Dialogue("우라하라",text,
                     new[]{"의뢰를 받는다","보급품을 본다","나중에 이야기한다"},new Action[]{ReceiveMainQuest,()=>OpenMenu(TideMode.Shop),close});
                 else if(Session.Quest==QuestState.Ready)Dialogue("우라하라",text,
-                    new[]{"보고 · "+(250+(Session.Profile.campaignAct-1)*100)+" 골드","잠시 뒤 보고한다"},new Action[]{()=>{if(Session.ClaimReward()){Persist();ShowDialogueScene("a"+Session.LastActReported+"_report",ReturnTown);}},close});
+                    new[]{"가져온 단서를 보여 준다","잠시 뒤 보고한다"},new Action[]{BeginActReport,close});
                 else if(Session.Quest==QuestState.Completed)Dialogue("우라하라",text,
                     new[]{"귀환 후 이야기","보급품을 본다","대화를 마친다"},new Action[]{()=>ShowDialogueScene("a5_epilogue",ReturnTown),()=>OpenMenu(TideMode.Shop),close});
                 else Dialogue("우라하라",text,
@@ -301,6 +291,8 @@ namespace SpiritTide
         {
             switch(Session.Mode)
             {
+                case TideMode.Title:BuildTitle();break;
+                case TideMode.ChooseLead:BuildLeadSelection();break;
                 case TideMode.Home:BuildHome();break;
                 case TideMode.Journey:BuildJourney();break;
                 case TideMode.Inventory:BuildGear(false);break;

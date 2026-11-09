@@ -47,12 +47,15 @@ namespace SpiritTide
             yield return ReadStory();Check("destination primary enters the exact historical dungeon",game.Session.IsCampaign&&game.Session.IsReplay&&game.Session.Dungeon.act==1&&game.Session.Dungeon.number==1);game.ReturnTown();
 
             game.Session.AcceptSideQuest("side_a1_2");var ward=TideQuests.Find("side_a1_2");yield return OpenSideCard(ward);yield return TapUi("side-go");yield return TapUi("depart");
+            Check("ward route prefers an accessible current dungeon",game.Session.Dungeon.number==4&&!game.Session.IsReplay&&game.Session.IsFighting);game.ReturnTown();
+            string wardSave=JsonUtility.ToJson(p);
+            p.campaignStage=3;p.clearedDungeons=3;game.StartBattle(false);
             Check("first story line cannot go farther back",!game.Buttons["story-previous"].interactable);before=JsonUtility.ToJson(p);
-            var lines=TideStory.BeforeDungeon(TideCampaign.Dungeon(1,4),p,false);float clock=game.Session.Clock;
+            var lines=TideDialogue.Lines("a1_d3_entry",p.hero);float clock=game.Session.Clock;
             Check("current destination has a full multi-line briefing",lines.Length>1);
             yield return TapUi("choice-0");yield return Capture("84-story-previous");var stalePrevious=game.Buttons["story-previous"];yield return TapUi("story-previous");stalePrevious.onClick.Invoke();
             Check("previous story line is restored without running completion",game.Session.Mode==TideMode.Story&&VisibleText(lines[0].text)&&before==JsonUtility.ToJson(p)&&game.Session.Clock==clock);
-            yield return ReadStory();Check("ward route prefers an accessible current dungeon",game.Session.Dungeon.number==4&&!game.Session.IsReplay);game.ReturnTown();
+            yield return ReadStory();JsonUtility.FromJsonOverwrite(wardSave,p);game.ReturnTown();
             TideQuests.State(p,ward.id).step=1;p.roomCheckpoint=1;yield return OpenSideCard(ward);yield return TapUi("side-go");
             Check("route explains a target behind the current saved room",!game.Buttons["depart"].interactable&&!game.Buttons["dungeon-4"].interactable&&VisibleText("정화 후 재현으로 방문"));yield return Capture("83-route-checkpoint-explanation");LeaveToTown();
 

@@ -16,7 +16,7 @@ namespace SpiritTide
                 bool storyFits=true,archiveFits=true;
                 foreach(var line in TideDialogue.Lines(scene.id,hero))
                 {
-                    probe.text=line.text;probe.fontSize=35;probe.rectTransform.sizeDelta=new Vector2(980,260);storyFits&=probe.preferredHeight<=260;
+                    probe.text=line.text;probe.fontSize=40;probe.rectTransform.sizeDelta=new Vector2(704,180);storyFits&=probe.preferredHeight<=180;
                     probe.fontSize=31;probe.rectTransform.sizeDelta=new Vector2(950,112);archiveFits&=probe.preferredHeight<=112;
                 }
                 Check("all dialogue pages fit maximum story font "+scene.id+" / "+hero,storyFits);
@@ -61,7 +61,7 @@ namespace SpiritTide
                     visited++;if(index+1<scenes.Count)yield return TapUi("dialogue-scene-next");
                 }
             }
-            Check("all 121 completed main companion and original rescue scenes are navigable",visited==121);
+            Check("all completed main companion and actual rescue scenes are navigable",visited==126);
             Check("reading archive does not alter rewards progress or history",profileBefore==JsonUtility.ToJson(completed));LeaveToTown();
 
             var fresh=new TideProfile{hero=3};TideCatalog.Sanitize(fresh);JsonUtility.FromJsonOverwrite(JsonUtility.ToJson(fresh),completed);game.ReturnTown();
