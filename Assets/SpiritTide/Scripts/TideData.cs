@@ -22,7 +22,7 @@ namespace SpiritTide
     [Serializable] public class ActDef { public int act; public string title, region, midboss_id, boss_id; public DungeonDef[] dungeons; }
     [Serializable] public class ActCatalog { public ActDef[] acts; }
 
-    public enum TideMode { Town, Combat, Training, Dialogue, Inventory, Shop, Missions, Settings, Pause, Result, Defeat, Story, Help, ConfirmRetreat, Forge, Journal, Quests, Home, Journey, Title, ChooseLead }
+    public enum TideMode { Town, Combat, Training, Dialogue, Inventory, Shop, Missions, Settings, Pause, Result, Defeat, Story, Help, ConfirmRetreat, Forge, Journal, Quests, Home, Journey, Title }
     public enum QuestState { Available, Active, Ready, Completed }
     public enum MoveKind { Basic, Heavy, Launcher, Air, Counter, Skill0, Skill1, Skill2, Skill3, Ultimate }
 
@@ -41,6 +41,8 @@ namespace SpiritTide
         public int rescuedDungeons,rescueReports,seenIntros,seenOutros;
         public TideDialogueSeen[] dialogueHistory=Array.Empty<TideDialogueSeen>();
         public int questSchema,mainInvestigations;
+        public int mainEvidence,recruitedHeroes;
+        public bool classicSkills;
         public string trackedSide="";
         public TideSideQuestState[] sideQuests=Array.Empty<TideSideQuestState>();
     }

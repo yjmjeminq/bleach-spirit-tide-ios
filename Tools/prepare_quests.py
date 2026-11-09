@@ -33,13 +33,13 @@ def build(campaign):
        [('단골손님','딸애한테 전화를 걸었는데… 이름을 부르려는 순간, 그 이름만 생각이 안 났어요.'),(H,'수화기 내려놓으세요. 밖에서도 손님 목소리가 납니다. 강 쪽에서요.'),('단골손님','…제가 한 말 아니에요.')],
        [(O,'여기 불빛은 제가 멈춰도 같은 박자예요.'),(K,'그래. 그게 내가 켜 둔 등불이다. 등대에서 둘이 섞여 보이면 그 박자부터 세 봐.'),(R,'잘 보인다. 돌아올 때도 이 자리를 찾겠다.')]),
       ('문 너머에도 돌아올 길을','가르간타의 이동 경로와 왕복 좌표를 확보해, 건너간 동료가 돌아올 길을 만든다.','왕복 좌표 표지',
-       [(H,'항구에서 본 가르간타가 한동안 열릴 겁니다. 들어가기 전에 양쪽 좌표를 봐 주세요.'),(Y,'나는 지붕으로 가마. 소이폰, 아래는 부탁한다.'),(S,'요루이치 님. 먼저 가실 때는 어느 쪽인지 알려 주십시오. 이번엔 기다리게만 하지 마시고요.'),(Y,'그래. 네가 부르면 멈추마.')],
+       [(H,'지붕에서 요루이치 씨 신호가 잡혔습니다. 소이폰 씨와 확인하던 좌표가 갈라진 것 같습니다.'),(K,'닫히기 전에 창 쪽으로 가. 내가 바깥 문은 잡아 둘게.'),(R,'들어가면 두 사람부터 찾아서 돌아오는 위치를 같이 확인하겠습니다.')],
        [(S,'안쪽에서 손대도 바깥의 표지가 보입니다.'),(Y,'내 쪽도 보인다. 네가 남긴 자리에서 만나자.'),(S,'…예. 출구에서 기다리겠습니다.')]),
       ('빈 방에 남겨진 사람들','라스 노체스에서 서로 다른 이름을 보존하고, 덧씌우지 않은 원본을 회수한다.','겹쳐 쓰인 이름',
        [(O,'라스 노체스에서 나올 때는 뒤를 잘 못 봤어요. 이번에는 어디로 왔는지 제가 표시해 볼게요.'),(R,'네가 멈추는 곳에서 같이 멈추겠다. 모르는 길이 나오면 그때 물어봐.'),(O,'네. 먼저 기억나는 문부터 보여 드릴게요.')],
        [(R,'겉에 적힌 이름과 밑의 이름이 다르다. 어느 쪽을 베껴야 하지?'),(O,'둘 다요. 먼저 이 밑줄부터 읽어 주세요. 제가 적을게요.'),(U,'천천히 하세요. 두 줄 다 읽을 때까지 기다리겠습니다.')]),
       ('다르게 보이는 길을 함께','원본과 서로의 목소리를 대조해 환영의 출구를 찾고, 남은 그림자 통로를 확인한다.','서로 다른 두 표지',
-       [(M,'이 골목은 익숙한데… 아는 곳일수록 그냥 믿고 걸을까 봐.'),(H,'그럼 사본을 한 장씩 가져가세요. 기억이랑 다른 지점에서 서로 불러 보는 겁니다.'),(M,'그래. 내가 멈추면 한 번만 불러 줘.')],
+       [(H,'란기쿠 씨가 본 수로와 사본의 수로가 다릅니다. 목소리는 들리는데 아직 이쪽 표지가 보이지 않는답니다.'),(R,'사본을 하나씩 챙기자. 길이 다르면 돌아서서 같이 본 곳을 찾을 수 있게.'),(U,'그분이 먼저 대답하실 때까지, 부른 자리에서 기다리겠습니다.')],
        [(M,'난 이 간판이 왼쪽을 향한 걸로 봤어.'),(S,'제 쪽은 오른쪽입니다. 그런데 기둥 사이에는 둘 다 글자가 없습니다.'),(Y,'빈 곳을 같이 보고 있구나. 그럼 거기로 가자.')]),
       ('돌아갈 이름을 부르는 일','되돌림의 고리와 마지막 연결을 봉인하고, 여섯 동료와 되찾은 이름을 함께 돌려보낸다.','남아 있는 귀환 발자국',
        [(C,'꺼진 줄 알았는데 다시 켜졌어! 똑같은 순서로, 또.'),(H,'이미 닫은 곳까지 다시 잇고 있군요. 그 불빛이 어디에서 돌아오는지 찾아 주세요.'),(Y,'간다. 이쪽에서 부르면 밖에서도 한 번 대답해 다오.')],
@@ -51,6 +51,8 @@ def build(campaign):
                       'inspect_scene':scene(f'main_a{act}_inspect',act,4,'main_step',node,'네 번째 던전 첫 통로',inspect),
                       'inspect_title':node,'stage':4,'room':0,'x':6.1,'y':-.25,
                       'steps':[{'stage':d['number'],'title':d['title'],'goal':d['reason'],'result':d['resolution']} for d in campaign['stages'] if d['act']==act]})
+    from campaign_milestones import add_milestones
+    add_milestones(campaign,mains,scene)
 
     def add(act,slot,giver,title,summary,offer,steps,finish,afterglow,keepsake,unlock=1,choices=None,alternate=None):
         id=f'side_a{act}_{slot}';index=len(quests);names=choices or ['소식을 전한다']
@@ -59,12 +61,13 @@ def build(campaign):
              'afterglow':afterglow,'choices':names,'offer_scene':scene(id+'_offer',act,unlock,'side_offer',title+' · 부탁','마을',offer,id),
              'steps':[],'finish_scenes':[]}
         for i,step in enumerate(steps):
-            step=dict(step);pairs=step.pop('lines');step['scene']=scene(id+f'_step{i}',act,max(unlock,step['stage']),'side_step',title+' · '+str(i+1),'현장' if step['kind']=='site' else '마을·수련장',pairs,id,i)
+            step=dict(step);pairs=step.pop('lines');step['scene']=scene(id+f'_step{i}',act,max(unlock,step['stage']),'side_step',title+' · '+str(i+1),'현장' if step['stage']>0 else '마을·수련장',pairs,id,i)
             row['steps'].append(step)
         for branch,pairs in enumerate([finish]+([alternate] if alternate else [])):
             row['finish_scenes'].append(scene(id+f'_finish{branch}',act,6,'side_finish',title+' · 전한 소식','마을',pairs,id,-1,branch))
         assert len(names)==len(row['finish_scenes'])
         quests.append(row)
+        return row
 
     add(1,1,'kon','두 번 부르는 이름','강변에 떨어진 이름표와 주택가의 답장을 찾아, 기다리는 이에게 소식을 전한다.',
         [(C,'강변 쪽에서 작은 이름표가 반짝였어. 누가 계속 찾는 것 같더라고.'),(O,'제가 주택가에서도 물어볼게. 이름을 기억하는 분이 있을지 몰라.'),(C,'응. 찾으면 어떻게 전할지도 같이 생각해 줘.')],
@@ -203,21 +206,25 @@ def build(campaign):
       (10,'아까 하던 말은 여기서 듣고 있었어. 다음에도 말하고 싶으면 들려줘. 종이는 네가 맡아도 되고.','동료들 앞에서 꺼낸 말'),
     ]:
         quests[i]['choice_notes'].append(note);quests[i]['choice_keepsakes'].append(memory)
+    from campaign_requests import add_requests
+    add_requests(campaign,add)
     result={'schema':1,'main':mains,'side':quests}
-    assert len(quests)==15 and len(scenes)==73
+    assert len(quests)==45 and len(scenes)==35+sum(1+len(q['steps'])+len(q['choices']) for q in quests)
     content=json.dumps(result,ensure_ascii=False,indent=2)+'\n'
     path=DATA/'quests.json'
     if not path.is_file() or path.read_text(encoding='utf-8')!=content:path.write_text(content,encoding='utf-8')
-    book=['BLEACH: 영해의 균열 · 메인·서브 퀘스트 0.12.0','',
-          '메인 5개 챕터 · 던전 단계 30개 · 필수 현장 조사 5개 · 선택 서브퀘스트 15개.',
+    book=['BLEACH: 영해의 균열 · 메인·서브 퀘스트 0.13.0','',
+          '메인 5개 챕터 · 던전 단계 30개 · 필수 현장 조사 30개 · 선택 서브퀘스트 45개.',
           '서브퀘스트는 보상이나 엔딩의 필수 조건이 아닙니다. 지나온 지역에서도 수락하고 재현 전투로 목표를 수행할 수 있습니다.',
           '지나온 의뢰는 게임에서 ‘지난 부탁’으로 표시하며, 그때의 대화와 선택을 되짚습니다.',
-          '수련 목표는 수련장, 장치 목표는 해당 액트의 실제 장치, 현장 목표는 지정된 통로에서 수행합니다.',
+          '수련 목표는 수련장, 장치 해제와 신호·정화 목표는 지정된 통로의 실제 전투에서 수행합니다.',
           '선택지는 개인적인 소식과 보관 방법을 바꾸며 보상량은 같습니다. 아래 내용에는 결말과 모든 선택 응답이 포함됩니다.']
     for main in mains:
         a=main['act'];book.extend(['','='*50,f"ACT {a} · 주요 의뢰 · {main['title']}",main['premise'],f"현장 조사: 네 번째 던전 첫 통로 · {main['inspect_title']}"])
         for step in main['steps']:book.append(f"{step['stage']}. {step['title']} — {step['goal']}")
-        for id in [main['accept_scene'],main['inspect_scene']]:
+        for point in main['milestones']:
+            book.append(f"{point['stage']}구역 {point['room']+1}방 · {point['goal']}")
+        for id in [main['accept_scene'],main['inspect_scene']]+[p['scene'] for p in main['milestones']]:
             sc=next(s for s in scenes if s['id']==id);book.append('['+sc['title']+']')
             book.extend(l['speaker']+': '+l['text'] for l in sc['lines'])
         for q in quests:

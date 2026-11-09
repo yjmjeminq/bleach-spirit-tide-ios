@@ -75,11 +75,16 @@ namespace SpiritTide
                 sorting.Add(new KeyValuePair<float,Transform>(e.Y,v.root));DrawAreas(v,e);
             }
             sorting.Sort((a,b)=>b.Key.CompareTo(a.Key));foreach(var pair in sorting)pair.Value.SetAsLastSibling();
-            gateView.gameObject.SetActive(Session.IsFighting&&Session.IsCampaign&&Session.RoomCleared);gateView.anchoredPosition=Project(Session.GateX,0)+new Vector2(0,55);gateLabel.text="통로 정화 →\n출구로 이동";
-            Buttons["gate"].gameObject.SetActive(Session.IsFighting&&Session.IsCampaign&&Session.RoomCleared);Buttons["gate"].interactable=Session.AtGate&&Session.GateReady;
-            Buttons["gate"].GetComponentInChildren<Text>().text=Session.MainInvestigationPending?"남은 표지 살피기"+(ShowKeyboardHints?" · E":""):Session.AtGate?"다음 방"+(ShowKeyboardHints?" · E":""):"오른쪽 출구로 이동 →";
+            gateView.gameObject.SetActive(Session.IsFighting&&Session.IsCampaign&&Session.RoomCleared&&!Session.IsFieldVisit);
+            gateView.anchoredPosition=Project(Session.GateX,0)+new Vector2(0,55);gateLabel.text="통로 정화 →\n출구로 이동";
+            Buttons["gate"].gameObject.SetActive(Session.IsFighting&&Session.IsCampaign&&Session.RoomCleared);
+            Buttons["gate"].interactable=Session.IsFieldVisit||Session.AtGate&&Session.GateReady;
+            Buttons["gate"].GetComponentInChildren<Text>().text=Session.IsFieldVisit?"거점으로 귀환":
+                Session.MainInvestigationPending?"남은 조사 살피기":Session.AtGate?"다음 방"+(ShowKeyboardHints?" · E":""):"오른쪽 출구로 이동 →";
             Buttons["target-next"].gameObject.SetActive(Session.IsFighting&&Session.AliveCount>1);
-            progressText.gameObject.SetActive(battle);Say(progressText,OpeningHint()??(Session.IsCampaign?"Act "+Session.Dungeon.act+" · "+Session.Dungeon.number+"구역 / "+(Session.RoomIndex+1)+"방 / "+Session.Dungeon.rooms.Length+" · 남은 적 "+Session.AliveCount:Session.IsTraining?"수련 · 조작과 기술을 자유롭게 확인":"보스 기록 재현 · 진행 보상 없음"));
+            progressText.gameObject.SetActive(battle);
+            string waveLabel=Session.IsCampaign&&Session.Room.WaveCount>1?" · 증원 "+Session.RoomWave+"/"+Session.Room.WaveCount:"";
+            Say(progressText,OpeningHint()??(Session.IsCampaign?"Act "+Session.Dungeon.act+" · "+Session.Dungeon.number+"구역 · "+(Session.RoomIndex+1)+"/"+Session.Dungeon.rooms.Length+"방"+waveLabel+" · 적 "+Session.AliveCount:Session.IsTraining?"수련 · 조작과 기술을 자유롭게 확인":"보스 기록 재현 · 진행 보상 없음"));
             questText.gameObject.SetActive(false);
             beaconView.gameObject.SetActive(false);lureView.gameObject.SetActive(Session.IsFighting&&Session.LureActive);lureView.anchoredPosition=Project(Session.WarningPosition.x,Session.WarningPosition.y)+new Vector2(0,90);
             warningText.gameObject.SetActive(Session.IsFighting&&(Session.Telegraph||Session.BodyExposed));
@@ -121,7 +126,9 @@ namespace SpiritTide
             {
                 string note=routeStage+"구역 · "+(routeRoom+1)+"방 · "+routeTitle;
                 Label(note,panel,new Vector2(.5f,.5f),new Vector2(0,-165),new Vector2(950,32),19,gold);
-                string action=mapAct!=routeAct?"목적지 Act "+routeAct+" 보기":RouteReady()?"표시한 목적지로 출정":routeAct==Session.Profile.campaignAct&&routeStage==Session.Profile.campaignStage&&Session.Profile.roomCheckpoint>routeRoom?"정화 후 재현으로 방문":"앞 구역의 조사를 먼저 진행";
+                string action=mapAct!=routeAct?"목적지 Act "+routeAct+" 보기":RouteReady()
+                    ?routeVisit&&TideCampaign.CanVisitRoom(Session.Profile,routeAct,routeStage,routeRoom)?"지나온 방 바로 방문":"표시한 목적지로 출정"
+                    :"앞 구역의 조사를 먼저 진행";
                 Button("depart",action,panel,new Vector2(.5f,.5f),new Vector2(-260,-226),new Vector2(440,84),()=>{if(mapAct!=routeAct){mapAct=routeAct;Refresh();}else DepartRoute();},true).interactable=mapAct!=routeAct||RouteReady();
             }
             else Button("depart",Session.Quest==QuestState.Available?"이번 액트 의뢰 받기":Session.Quest==QuestState.Ready?"액트 기록 보고":"현재 조사 계속",panel,new Vector2(.5f,.5f),new Vector2(-260,-226),new Vector2(440,84),()=>{if(Session.Quest==QuestState.Available||Session.Quest==QuestState.Ready){Session.ReturnTown();Talk("urahara");}else if(!Session.CampaignFinished)DepartDungeon(Session.Profile.campaignAct,Session.Profile.campaignStage,false);},true).interactable=!Session.CampaignFinished;
@@ -182,6 +189,10 @@ namespace SpiritTide
             AddResultBreather();
             if(fieldResult)
                 Button("result-story","현장 대화",panel,new Vector2(.5f,.5f),new Vector2(0,-121),new Vector2(270,84),ReadResultStory);
+            int notices=Session.IsCampaign&&!Session.IsReplay?TideQuests.ChapterNotices(Session.Profile,Session.Dungeon.act):0;
+            if(notices>0)
+                Button("result-requests","마을의 부탁 "+notices,panel,Center,new Vector2(350,-121),new Vector2(244,84),
+                    ()=>{ReturnTown();OpenQuestBook(startWithSide:true);});
             bool next=Session.IsCampaign&&!Session.IsReplay&&Session.Quest==QuestState.Active;
             bool report=Session.IsCampaign&&!Session.IsReplay&&Session.Quest==QuestState.Ready;
             Button("next-dungeon",next?"다음 · "+TideJourney.Current(Session.Profile).title:report?"귀환 보고":"마을로",panel,new Vector2(.5f,.5f),new Vector2(-240,-214),new Vector2(420,84),()=>{

@@ -74,7 +74,7 @@ namespace SpiritTide
                 if(current is IEnumerator)stack.Push((IEnumerator)current);else yield return current;
             }
             bool passed=!failed&&errors.Count==0;
-            File.WriteAllText(Path.Combine(output,"report.json"),JsonUtility.ToJson(new Report{passed=passed,runMode=Array.IndexOf(Environment.GetCommandLineArgs(),"-spirit-fx-review")>=0?"skills-only":Array.IndexOf(Environment.GetCommandLineArgs(),"-spirit-icons-review")>=0?"icons-only":Array.IndexOf(Environment.GetCommandLineArgs(),"-spirit-journey-review")>=0?"journey-only":Array.IndexOf(Environment.GetCommandLineArgs(),"-spirit-motion-review")>=0?"motion-only":"full",version=Application.version,guid=Application.buildGUID,device=SystemInfo.graphicsDeviceType+" / "+Screen.width+"x"+Screen.height,scope="Windows live UI rendering, pointer-event simulation, menu focus, campaign loot and input-only multi-enemy victories. Not iPhone OS touch, Metal or performance validation.",checks=rows.ToArray(),errors=errors.ToArray()},true));
+            File.WriteAllText(Path.Combine(output,"report.json"),JsonUtility.ToJson(new Report{passed=passed,runMode=Array.IndexOf(Environment.GetCommandLineArgs(),"-spirit-fx-review")>=0?"skills-only":Array.IndexOf(Environment.GetCommandLineArgs(),"-spirit-icons-review")>=0?"icons-only":Array.IndexOf(Environment.GetCommandLineArgs(),"-spirit-journey-review")>=0?"journey-only":Array.IndexOf(Environment.GetCommandLineArgs(),"-spirit-motion-review")>=0?"motion-only":Array.IndexOf(Environment.GetCommandLineArgs(),"-spirit-requests-review")>=0?"requests-only":"full",version=Application.version,guid=Application.buildGUID,device=SystemInfo.graphicsDeviceType+" / "+Screen.width+"x"+Screen.height,scope="Windows live UI rendering, pointer-event simulation, menu focus, campaign loot and input-only multi-enemy victories. Not iPhone OS touch, Metal or performance validation.",checks=rows.ToArray(),errors=errors.ToArray()},true));
             Application.logMessageReceived-=Log;Application.Quit(passed?0:1);
         }
         private IEnumerator Capture(string name)
@@ -129,8 +129,18 @@ namespace SpiritTide
             if(Array.IndexOf(Environment.GetCommandLineArgs(),"-spirit-icons-review")>=0){yield return ReviewSkillIcons();yield break;}
             if(Array.IndexOf(Environment.GetCommandLineArgs(),"-spirit-journey-review")>=0){yield return ReviewJourney();yield break;}
             if(Array.IndexOf(Environment.GetCommandLineArgs(),"-spirit-motion-review")>=0){yield return ReviewNaturalMotion();yield break;}
+            if(Array.IndexOf(Environment.GetCommandLineArgs(),"-spirit-requests-review")>=0)
+            {
+                var ending=new TideProfile{campaignSchema=1,campaignAct=5,campaignStage=6,quest=3,level=29,
+                    reportedActs=31,clearedDungeons=TideProgress.AllDungeons,claimed=true};
+                TideCatalog.Sanitize(ending);JsonUtility.FromJsonOverwrite(JsonUtility.ToJson(ending),game.Session.Profile);game.ReturnTown();
+                yield return ReviewQuestGameplay();yield return ReviewConvenience();yield break;
+            }
             yield return ReviewOpening();
+            int openingRoster=game.Session.Profile.recruitedHeroes;
+            game.Session.Profile.recruitedHeroes=TideProgress.AllHeroes;game.Session.Revision++;yield return null;
             yield return ReviewUi();
+            game.Session.Profile.recruitedHeroes=openingRoster;game.Session.Revision++;yield return null;
             Check("town boot and one listener",game.Session.Mode==TideMode.Town&&FindObjectsByType<AudioListener>(FindObjectsSortMode.None).Length==1);
             yield return Capture("01-town");yield return TapUi("npc-urahara");yield return Capture("05-dialogue");yield return TapUi("choice-0");yield return ReadStory();
             Check("quest accepted from NPC",game.Session.Quest==QuestState.Active&&game.Session.Mode==TideMode.Town);
@@ -142,11 +152,12 @@ namespace SpiritTide
             game.Session.Pause();yield return null;float clock=game.Session.Clock;Click("retreat");yield return Capture("22-confirm-retreat");yield return TapUi("cancel-retreat");Check("cancel retreat preserves room and clock",game.Session.Mode==TideMode.Pause&&game.Session.Clock==clock&&game.Session.Profile.roomCheckpoint==0);yield return TapUi("resume");
             game.Session.Hp=80;yield return null;yield return TapUi("potion");Check("potion label matches actual level-scaled healing",game.Session.Hp==127&&game.Session.Profile.potions==2);
             int frame=0;while(!game.Session.RoomCleared&&game.Session.IsFighting&&frame++<12000){for(int i=0;i<60&&!game.Session.RoomCleared;i++)DriveNativeTick();yield return null;}
-            Check("room exit opens with saved checkpoint",game.Session.RoomCleared&&game.Session.Profile.roomCheckpoint==1);yield return Capture("31-room-clear");
+            Check("first room remains saved before its mandatory rescue",game.Session.RoomCleared&&game.Session.Profile.roomCheckpoint==0);yield return Capture("31-room-clear");
             while(!game.Session.NearInteraction){game.Session.Step(.05f,new Vector2(Mathf.Sign(game.Session.EchoX-game.Session.X),0),false);yield return null;}yield return TapUi("field-interact");Check("field rescue is a real one-time interaction",(game.Session.Profile.rescuedDungeons&1)!=0&&!game.Session.EchoAvailable);yield return Capture("51-rescue");
             Check("rescued spirit answers on the field without blocking combat",
                 game.Session.IsFighting&&VisibleText(TideDialogue.Lines("a1_d1_answer",game.Session.Profile.hero)[0].text)
                 &&TideDialogue.Seen(game.Session.Profile,"a1_d1_answer")!=null);
+            yield return InspectMainPoint();
             while(!game.Session.AtGate){game.Session.Step(.05f,Vector2.right,false);yield return null;}yield return null;yield return TapUi("gate");Check("touch gate enters next room",game.Session.RoomIndex==1);yield return Capture("32-next-room");
             yield return FightDungeon();yield return Capture("33-first-loot");yield return ReviewResultConversation();yield return TapUi("result-gear");yield return Capture("34-loot-inventory");Check("new loot is selected on its visible page",game.Buttons["gear-0"].GetComponentInChildren<Text>().text.Contains(TideProgress.Gear(game.Session.Profile,game.Session.LastGearUid).name));yield return TapUi("equip");yield return TapUi("forge");yield return Capture("35-forge");int gold=game.Session.Profile.gold;yield return TapUi("upgrade");Check("native forge spends real reward resources",game.Session.Profile.gold<gold);yield return Capture("36-forged");LeaveToTown();
             for(int act=1;act<=5;act++)
@@ -161,7 +172,15 @@ namespace SpiritTide
                     if(n==3||n==6)
                     {
                         // Reach the final encounter with normal combat, then capture the actual boss.
-                        int limit=0;while(game.Session.IsFighting&&game.Session.RoomIndex<game.Session.Dungeon.rooms.Length-1&&limit++<2000){for(int i=0;i<120&&game.Session.RoomIndex<game.Session.Dungeon.rooms.Length-1;i++)DriveNativeTick();yield return null;}
+                        int limit=0;
+                        while(game.Session.RoomIndex<game.Session.Dungeon.rooms.Length-1&&limit++<2000)
+                        {
+                            if(game.Session.Mode==TideMode.Story){yield return ReadStory();continue;}
+                            if(!game.Session.IsFighting)break;
+                            for(int i=0;i<120&&game.Session.IsFighting&&game.Session.RoomIndex<game.Session.Dungeon.rooms.Length-1;i++)DriveNativeTick();
+                            yield return null;
+                        }
+                        Check("reached the actual final boss room "+act+" / "+n,game.Session.Room.kind=="boss"&&game.Session.Target.Def.IsBoss);
                         if(game.Session.Mode==TideMode.Story)yield return ReadStory();game.Session.Step(.05f,Vector2.zero,false);yield return Capture("40-act"+act+"-boss"+n);
                         if(act==5&&n==6)
                         {
@@ -208,7 +227,9 @@ namespace SpiritTide
                         game.Session.Profile.gold==before+650&&TideDialogue.Seen(game.Session.Profile,"a5_epilogue")!=null);
                 }
             }
-            Check("native five-act campaign complete",game.Session.CampaignFinished&&game.Session.Profile.clearedDungeons==TideProgress.AllDungeons);yield return Capture("43-ending-town");
+            Check("native five-act campaign complete",game.Session.CampaignFinished&&game.Session.Profile.clearedDungeons==TideProgress.AllDungeons
+                &&game.Session.Profile.mainEvidence==(1<<25)-1&&game.Session.Profile.mainInvestigations==31&&game.Session.Profile.recruitedHeroes==TideProgress.AllHeroes);
+            yield return Capture("43-ending-town");
             yield return TapUi("npc-byakuya");yield return TapUi("choice-0");yield return Capture("44-journal");LeaveToTown();yield return TapUi("npc-kukaku");yield return TapUi("choice-0");yield return TapUi("map-act-1");yield return Capture("45-replay-map");yield return TapUi("dungeon-1");yield return ReadStory();Check("replay distinct from new progress",game.Session.IsReplay);yield return FightDungeon();Check("replay cannot duplicate first loot",game.Session.LastGearUid==0);yield return Capture("46-replay-result");game.ReturnTown();
             yield return ReviewExperience();
             yield return ReviewDialogueLibrary();

@@ -28,6 +28,7 @@ namespace SpiritTide
         private IEnumerator ReviewNaturalMotion()
         {
             string saved=JsonUtility.ToJson(game.Session.Profile);game.ReviewStepping=true;
+            game.Session.Profile.recruitedHeroes=TideProgress.AllHeroes;
             try
             {
                 for(int hero=0;hero<6;hero++)

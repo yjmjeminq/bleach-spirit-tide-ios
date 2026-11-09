@@ -1,4 +1,4 @@
-BLEACH: 영해의 균열 · iPhone 빌드 0.12.0
+BLEACH: 영해의 균열 · iPhone 빌드 0.13.0
 
 대상: iPhone 15 Pro, iOS 17 이상, 가로 양방향, Metal, ARM64.
 화면: Screen.safeArea 적용, 이동 패드와 공격·기술의 독립 포인터 처리, 큰 조작 버튼·대화 글자·선명도·키 안내 설정, 60fps 목표.

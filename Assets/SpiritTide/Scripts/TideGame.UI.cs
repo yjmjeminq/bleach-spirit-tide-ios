@@ -170,13 +170,18 @@ namespace SpiritTide
             Buttons["interact"].gameObject.SetActive(town);
             foreach(Button b in heroButtons)b.gameObject.SetActive(town||Session.Mode==TideMode.Training);
             for(int i=0;i<6;i++)heroButtons[i].GetComponent<Image>().color=Session.Profile.hero==i?new Color(.3f,.4f,.32f):card;
-            for(int i=0;i<6;i++)heroButtons[i].interactable=!(Session.InBattle&&!Session.IsTraining);
+            for(int i=0;i<6;i++)
+            {
+                bool joined=TideProgress.HeroJoined(Session.Profile,i);
+                heroButtons[i].interactable=joined&&!(Session.InBattle&&!Session.IsTraining);
+                Say(heroButtons[i].GetComponentInChildren<Text>(),TideStory.HeroName(i)+(joined?"":"\n미합류"));
+            }
             for(int i=0;i<5;i++)skillButtons[i].gameObject.SetActive(fighting);
             foreach(string id in new[]{"attack","heavy","jump","dodge"})Buttons[id].gameObject.SetActive(fighting);
             Buttons["potion"].gameObject.SetActive(fighting&&!Session.IsTraining);
             bool overlay=!town&&!fighting&&Session.Mode!=TideMode.Dialogue&&Session.Mode!=TideMode.Story;
             menuRoot.SetActive(overlay);dialogueRoot.SetActive(Session.Mode==TideMode.Dialogue||Session.Mode==TideMode.Story);
-            bool front=Session.Mode==TideMode.Title||Session.Mode==TideMode.ChooseLead;
+            bool front=Session.Mode==TideMode.Title;
             openingBackdrop.gameObject.SetActive(front);
             openingBackdrop.color=Session.Mode==TideMode.Title?new Color(.52f,.64f,.76f):new Color(.35f,.46f,.56f);
             panel.GetComponent<Image>().color=Session.Mode==TideMode.Title?Color.clear:new Color(.08f,.16f,.19f,front?.9f:.99f);
@@ -213,10 +218,11 @@ namespace SpiritTide
                 skillKeys[i].gameObject.SetActive(ShowKeyboardHints);
                 SkillDef skill=Session.Hero.Skill(i);float remaining=Mathf.Max(0,Session.Cooldowns[i]-Session.Clock);
                 Say(skillLabels[i],TideSkillIcons.Definition(Session.Profile.hero,i).label);UpdateSkillIcon(i,remaining);
-                Say(skillFooters[i],Session.IsTraining?"수련":remaining>0?Mathf.CeilToInt(remaining)+"초":Session.Mp<skill.spirit_cost?"영압 부족":"영압 "+skill.spirit_cost);
-                skillFooters[i].color=Session.Mp<skill.spirit_cost&&!Session.IsTraining?gold:muted;
+                bool available=Session.SkillAvailable(i);
+                Say(skillFooters[i],!available?TideProgress.LearningBadge(i):Session.IsTraining?"수련":remaining>0?Mathf.CeilToInt(remaining)+"초":Session.Mp<skill.spirit_cost?"영압 부족":"영압 "+skill.spirit_cost);
+                skillFooters[i].color=!available||Session.Mp<skill.spirit_cost&&!Session.IsTraining?gold:muted;
                 skillCooldownFills[i].fillAmount=Session.IsTraining?0:remaining/Mathf.Max(.01f,skill.cooldown_seconds);
-                skillButtons[i].interactable=Session.IsFighting&&(Session.IsTraining||(remaining<=0&&Session.Mp>=skill.spirit_cost));
+                skillButtons[i].interactable=Session.IsFighting&&available&&(Session.IsTraining||(remaining<=0&&Session.Mp>=skill.spirit_cost));
             }
         }
         private Vector2 Project(float x,float y)
@@ -292,7 +298,6 @@ namespace SpiritTide
             switch(Session.Mode)
             {
                 case TideMode.Title:BuildTitle();break;
-                case TideMode.ChooseLead:BuildLeadSelection();break;
                 case TideMode.Home:BuildHome();break;
                 case TideMode.Journey:BuildJourney();break;
                 case TideMode.Inventory:BuildGear(false);break;

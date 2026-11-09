@@ -75,7 +75,7 @@ namespace SpiritTide
         private void PersistentChange(){SaveRevision++;Revision++;}
         public bool SelectHero(int index)
         {
-            if(InBattle&&(!IsTraining||Mode!=TideMode.Training))return false;
+            if(!TideProgress.HeroJoined(Profile,index)||InBattle&&(!IsTraining||Mode!=TideMode.Training))return false;
             Profile.hero=Mathf.Clamp(index,0,5);ClearAction();Shield=0;Mp=100;ReflectRemaining=0;CounterStance=false;
             foreach(var e in Enemies)e.Mark=0;Array.Clear(CloudTime,0,2);Array.Clear(Cooldowns,0,5);Revision++;return true;
         }
@@ -84,7 +84,7 @@ namespace SpiritTide
         public void ReturnTown()
         {
             PresentationEpoch++;
-            InBattle=IsTraining=IsPaused=IsCampaign=false;RoomCleared=false;Mode=TideMode.Town;Hp=MaxHp;Mp=100;Shield=0;X=-3;Y=Z=JumpSpeed=DodgeRemaining=0;
+            InBattle=IsTraining=IsPaused=IsCampaign=IsFieldVisit=false;RoomCleared=false;Mode=TideMode.Town;Hp=MaxHp;Mp=100;Shield=0;X=-3;Y=Z=JumpSpeed=DodgeRemaining=0;
             Enemies.Clear();target=null;ClearAction();Changed(Quest==QuestState.Completed?"다섯 기록 봉인 · 모두의 이름과 귀환을 확인했습니다. 동료들과 쉬어 가세요.":Quest==QuestState.Ready?"우라하라에게 액트 기록을 보고하세요.":"마을로 귀환 · 정화한 방과 던전 기록은 유지됩니다.");
         }
         public bool OpenMenu(TideMode mode)
@@ -112,10 +112,16 @@ namespace SpiritTide
         public bool Request(MoveKind kind)
         {
             if(!IsFighting||charging||RoomCleared)return false;
+            int slot=(int)kind-(int)MoveKind.Skill0;
+            if(slot>=0&&!SkillAvailable(slot))
+            {
+                if(slot<=4)Changed(Hero.Skill(slot).name+" · "+TideProgress.SkillRequirement(slot));
+                return false;
+            }
             if(kind==MoveKind.Basic&&PerfectRemaining>0)kind=MoveKind.Counter;else if(kind==MoveKind.Basic&&Z>.15f)kind=MoveKind.Air;
             if(ActionRemaining>0&&kind>=MoveKind.Skill0&&Action<=MoveKind.Air&&hitApplied&&DamageEvents>actionDamageStart)
             {
-                int slot=(int)kind-(int)MoveKind.Skill0;if(!IsTraining&&(Cooldowns[slot]>Clock||Mp<Hero.Skill(slot).spirit_cost))return false;
+                if(!IsTraining&&(Cooldowns[slot]>Clock||Mp<Hero.Skill(slot).spirit_cost))return false;
                 ClearAction();if(!StartAction(kind))return false;CancelEvents++;QuestCombatEvent("cancel");return true;
             }
             if(ActionRemaining>0||DodgeRemaining>.06f){buffered=kind;bufferUntil=Clock+.2f;return false;}return StartAction(kind);
@@ -126,6 +132,7 @@ namespace SpiritTide
             int slot=(int)kind-(int)MoveKind.Skill0;
             if(slot>=0)
             {
+                if(!SkillAvailable(slot))return false;
                 SkillDef skill=Hero.Skill(slot);if(!IsTraining&&(Cooldowns[slot]>Clock||Mp<skill.spirit_cost)){Changed(Cooldowns[slot]>Clock?"재사용 시간 중입니다.":"영압이 부족합니다.");return false;}
                 if(!IsTraining){Mp-=skill.spirit_cost;Cooldowns[slot]=Clock+skill.cooldown_seconds;}
             }
@@ -137,6 +144,7 @@ namespace SpiritTide
             ActionName=slot>=0?Hero.Skill(slot).name:kind==MoveKind.Heavy?"집중 강공격":kind==MoveKind.Launcher?"띄우기":kind==MoveKind.Air?"공중 연계":kind==MoveKind.Counter?"정밀 회피 반격":"기본 공격 "+(Combo+1);
             if(kind==MoveKind.Counter)PerfectRemaining=0;AttackSerial++;Revision++;return true;
         }
+        public bool SkillAvailable(int slot)=>slot>=0&&slot<=4&&(IsTraining||TideProgress.SkillLearned(Profile,slot));
         public void Step(float dt,Vector2 movement,bool heldAttack)
         {
             dt=Mathf.Clamp(dt,0,.05f);if(Mode==TideMode.Town){PresentationClock+=dt;Move(dt,movement,3.4f);return;}if(!IsFighting)return;

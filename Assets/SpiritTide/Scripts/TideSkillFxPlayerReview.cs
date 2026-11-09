@@ -17,6 +17,7 @@ namespace SpiritTide
         private IEnumerator ReviewSkillEffects()
         {
             string saved=JsonUtility.ToJson(game.Session.Profile);int casts=0,peak=0;game.ReviewStepping=true;
+            game.Session.Profile.recruitedHeroes=TideProgress.AllHeroes;
             try
             {
                 for(int hero=0;hero<6;hero++)

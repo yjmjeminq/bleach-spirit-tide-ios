@@ -126,7 +126,8 @@ namespace SpiritTide
             {
                 for(int i=0;i<5;i++){int slot=i;var button=Button("help-slot-"+i,"",panel,new Vector2(.5f,.5f),new Vector2((i-2)*183,-30),new Vector2(167,84),()=>{helpSlot=slot;Refresh();},helpSlot==i);AddHelpSkillIcon(button,i);}
                 SkillDef skill=Session.Hero.Skill(helpSlot);
-                Label(skill.name+" · 영압 "+skill.spirit_cost+" · 재사용 "+skill.cooldown_seconds+"초\n"+TideUiInfo.Skill(Session.Profile.hero,helpSlot),panel,new Vector2(.5f,.5f),new Vector2(0,-130),new Vector2(950,100),27);
+                string learn=TideProgress.SkillLearned(Session.Profile,helpSlot)?"":" · "+TideProgress.SkillRequirement(helpSlot);
+                Label(skill.name+learn+" · 영압 "+skill.spirit_cost+" · 재사용 "+skill.cooldown_seconds+"초\n"+TideUiInfo.Skill(Session.Profile.hero,helpSlot),panel,new Vector2(.5f,.5f),new Vector2(0,-130),new Vector2(950,100),26);
             }
             Button("back","뒤로",panel,new Vector2(.5f,.5f),new Vector2(0,-232),new Vector2(330,84),NavigateBack);
         }

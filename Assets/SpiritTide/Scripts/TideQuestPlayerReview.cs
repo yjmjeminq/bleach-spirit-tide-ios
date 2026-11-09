@@ -9,7 +9,11 @@ namespace SpiritTide
         {
             game.ReturnTown();yield return null;if(game.Session.Mode==TideMode.Story)yield return ReadStory();
             yield return TapUi("npc-"+q.giver);if(game.Session.Mode==TideMode.Story)yield return ReadStory();
-            yield return TapUi("npc-requests");yield return TapUi("quest-act-"+q.act);yield return TapUi("side-select-"+q.id);
+            yield return TapUi("npc-requests");yield return TapUi("quest-act-"+q.act);
+            string id="side-select-"+q.id;
+            while((!game.Buttons.TryGetValue(id,out var entry)||entry==null||!entry.gameObject.activeInHierarchy)
+                &&game.Buttons["quest-next"].interactable)yield return TapUi("quest-next");
+            yield return TapUi(id);
         }
         private IEnumerator ReachQuestRoom(int room,bool clear)
         {
@@ -32,6 +36,11 @@ namespace SpiritTide
         {
             string saved=JsonUtility.ToJson(game.Session.Profile);var p=game.Session.Profile;p.uiScale=1.25f;game.ReturnTown();yield return null;
             yield return TapUi("quest-log");yield return TapUi("quest-main");yield return Capture("70-main-quest-book");LeaveToTown();
+            yield return TapUi("quest-log");yield return TapUi("quest-side");yield return TapUi("quest-act-1");yield return TapUi("quest-filter");
+            Check("expanded request list has a second page with the new filter",game.Buttons["quest-next"].interactable&&VisibleText("새 부탁"));
+            yield return TapUi("quest-next");yield return Capture("70-request-page-two");
+            yield return TapUi("side-select-side_a1_7");yield return TapUi("side-list");
+            Check("request page and filter survive a return from detail",game.Buttons["quest-prev"].interactable&&VisibleText("새 부탁"));LeaveToTown();
             int completed=0;int mainMask=p.reportedActs,clearMask=p.clearedDungeons;
             foreach(var q in TideQuests.Data.side)
             {
@@ -55,17 +64,34 @@ namespace SpiritTide
                     else
                     {
                         yield return OpenSideCard(q);yield return TapUi("side-go");Check("side route opens the correct historical act "+q.id,VisibleText("균열 지도 · Act "+q.act));
-                        int stage=step.kind=="ward"?2:step.stage;yield return TapUi("dungeon-"+stage);yield return ReadStory();
-                        yield return ReachQuestRoom(step.kind=="ward"?1:step.room,step.kind!="ward");
-                        if(step.kind=="ward")yield return MoveToQuestPoint(game.Session.WardPosition);
+                        yield return TapUi("depart");yield return ReadStory();
+                        var s=game.Session;Check("past route opens a single visited room "+q.id,s.IsFieldVisit&&s.IsFighting&&(step.stage==0?s.WardActive:s.Dungeon.number==step.stage&&s.RoomIndex==step.room));
+                        if(step.kind=="ward")
+                        {
+                            yield return MoveToQuestPoint(s.WardPosition);yield return TapUi("field-interact");
+                        }
+                        else if(step.kind=="signal")
+                        {
+                            int ticks=0;
+                            while(s.IsFighting&&!s.RoomSignalPending&&ticks<60000)
+                            {
+                                for(int i=0;i<120&&s.IsFighting&&!s.RoomSignalPending;i++,ticks++)TideCombatDriver.Tick(s,1f/60,false);
+                                yield return null;
+                            }
+                            Check("signal waits for the player's physical input "+q.id,s.RoomSignalPending&&state.step==index);
+                            yield return MoveToQuestPoint(s.SignalPosition);yield return TapUi("field-interact");
+                        }
+                        else if(step.kind=="clear")yield return ReachQuestRoom(step.room,true);
                         else
                         {
+                            yield return ReachQuestRoom(step.room,true);
                             bool found=false;TideQuestPoint point=default;
                             for(int i=0;i<game.Session.QuestPointCount;i++){var candidate=game.Session.QuestPoint(i);if(candidate.quest!=null&&candidate.quest.id==q.id){point=candidate;found=true;break;}}
                             Check("accepted quest prop exists in its actual room "+q.id,found);yield return MoveToQuestPoint(point.position);
                             if(q.index%3==0)yield return Capture("73-field-request-"+q.id+"-"+index);
+                            yield return TapUi("field-interact");
                         }
-                        yield return TapUi("field-interact");if(game.Session.Mode==TideMode.Story)yield return ReadStory();
+                        if(game.Session.Mode==TideMode.Story)yield return ReadStory();
                     }
                     game.ReturnTown();yield return null;if(game.Session.Mode==TideMode.Story)yield return ReadStory();
                     Check("touch or actual practice completes intended objective "+q.id+" / "+index,state.step==index+1);
@@ -76,9 +102,11 @@ namespace SpiritTide
                 Check("chosen report alone unlocks its dialogue "+q.id,TideDialogue.CanRead(p,TideDialogue.Scene(q.finish_scenes[choice])));
                 if(q.choices.Length>1)Check("other personal choice stays hidden "+q.id,!TideDialogue.CanRead(p,TideDialogue.Scene(q.finish_scenes[0])));
                 if(q.index%3==2)yield return Capture("74-side-complete-act"+q.act);
-                yield return TapUi("side-after");Check("NPC acknowledges actual chosen aftermath "+q.id,VisibleText(q.choice_notes[choice])&&DialogueFits());completed++;
+                Check("selected consequence is visible "+q.id,VisibleText(q.choice_notes[choice]));
+                yield return TapUi("side-after");Check("chosen report can be reread "+q.id,game.Session.Mode==TideMode.Story&&VisibleText(TideDialogue.Lines(q.finish_scenes[choice],p.hero)[0].text)&&DialogueFits());
+                yield return ReadStory();completed++;
             }
-            game.ReturnTown();yield return Capture("75-town-after-fifteen-requests");Check("all fifteen side quests completed through live controls",completed==15&&p.sideQuests.Length==15);
+            game.ReturnTown();yield return Capture("75-town-after-requests");Check("all forty-five side quests completed through live controls",completed==45&&p.sideQuests.Length==45);
             string completedRequests=JsonUtility.ToJson(p);
             var junction=new TideProfile{campaignSchema=1,questSchema=1,campaignAct=2,campaignStage=4,quest=1,level=12,reportedActs=1,clearedDungeons=511,mainInvestigations=1,uiScale=1.25f};TideCatalog.Sanitize(junction);JsonUtility.FromJsonOverwrite(JsonUtility.ToJson(junction),p);game.Session.ClearQuestNotifications();game.ReturnTown();game.Session.AcceptSideQuest("side_a2_1");var joint=TideQuests.Find("side_a2_1");
             yield return OpenSideCard(joint);yield return TapUi("side-go");yield return TapUi("dungeon-1");yield return ReadStory();yield return ReachQuestRoom(0,true);yield return MoveToQuestPoint(game.Session.QuestPoint(0).position);yield return TapUi("field-interact");yield return ReadStory();game.ReturnTown();yield return null;
@@ -101,7 +129,8 @@ namespace SpiritTide
                     if(i+1<scenes.Count)yield return TapUi("dialogue-scene-next");
                 }
             }
-            Check("all sixty played optional conversations can be reread",sideScenes==60);
+            int expected=0;foreach(var q in TideQuests.Data.side)expected+=2+q.steps.Length;
+            Check("all played optional conversations can be reread",sideScenes==expected);
             JsonUtility.FromJsonOverwrite(saved,p);game.Session.ClearQuestNotifications();game.ReturnTown();yield return null;
         }
     }

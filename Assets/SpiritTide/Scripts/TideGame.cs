@@ -187,7 +187,7 @@ namespace SpiritTide
             if(training){BeginPractice(true,0);return;}
             if(Session.Mode==TideMode.Defeat)
             {
-                if(Session.IsCampaign)BeginDungeonNow(Session.Dungeon.act,Session.Dungeon.number,Session.IsReplay);
+                if(Session.IsCampaign)BeginDungeonNow(Session.Dungeon.act,Session.Dungeon.number,Session.IsReplay,Session.IsFieldVisit?Session.RoomIndex:-1);
                 else BeginPractice(false,Session.BossIndex);return;
             }
             DepartDungeon(Session.Profile.campaignAct,Session.Profile.campaignStage,false);
@@ -203,10 +203,10 @@ namespace SpiritTide
             else if(BeginDungeonNow(act,number,replay)&&newEntry)
                 StartFieldScene(id);
         }
-        private bool BeginDungeonNow(int act,int number,bool replay)
+        private bool BeginDungeonNow(int act,int number,bool replay,int visitRoom=-1)
         {
             navigation.Clear();ResetInput();
-            if(!Session.BeginDungeon(act,number,replay)){ReturnTown();return false;}
+            if(!Session.BeginDungeon(act,number,replay,visitRoom)){ReturnTown();return false;}
             PrepareFieldStory();
             ResetFeedback();Persist();Refresh();return true;
         }

@@ -1,4 +1,4 @@
-param([int]$Width = 1560, [int]$Height = 720, [switch]$PhoneLayout, [switch]$EffectsOnly, [switch]$IconsOnly, [switch]$JourneyOnly, [switch]$MotionOnly)
+param([int]$Width = 1560, [int]$Height = 720, [switch]$PhoneLayout, [switch]$EffectsOnly, [switch]$IconsOnly, [switch]$JourneyOnly, [switch]$MotionOnly, [switch]$RequestsOnly)
 $ErrorActionPreference = 'Stop'
 $bleachProjectRoot = Split-Path -Parent $PSScriptRoot
 $bleachPlayer = Join-Path $bleachProjectRoot 'Builds\Windows\SpiritTide.exe'
@@ -11,6 +11,7 @@ if ($EffectsOnly) { $bleachArgs += '-spirit-fx-review' }
 if ($IconsOnly) { $bleachArgs += '-spirit-icons-review' }
 if ($JourneyOnly) { $bleachArgs += '-spirit-journey-review' }
 if ($MotionOnly) { $bleachArgs += '-spirit-motion-review' }
+if ($RequestsOnly) { $bleachArgs += '-spirit-requests-review' }
 $bleachPlayerProcess = Start-Process -FilePath $bleachPlayer -ArgumentList $bleachArgs -WindowStyle Hidden -PassThru
 $bleachDeadline = (Get-Date).AddSeconds(900)
 while (-not $bleachPlayerProcess.WaitForExit(1000) -and (Get-Date) -lt $bleachDeadline) {}

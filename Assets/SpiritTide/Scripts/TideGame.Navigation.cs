@@ -11,8 +11,8 @@ namespace SpiritTide
         {
             public TideMode mode;public string npc,selected,owner,quest,routeTitle;
             public int journeyTab,journeyBoss;
-            public int questAct,mainStep,mapAct,gearPage,gearSelection,gearFilter,gearSort,journalAct,journalPage,scene,line,indexPage,indexFilter,routeAct,routeStage,routeRoom;
-            public bool side,dialogues,index;
+            public int questAct,mainStep,questPage,questFilter,mapAct,gearPage,gearSelection,gearFilter,gearSort,journalAct,journalPage,scene,line,indexPage,indexFilter,routeAct,routeStage,routeRoom;
+            public bool side,dialogues,index,routeVisit;
         }
         private readonly Stack<NavFrame> navigation=new Stack<NavFrame>();
         private string pendingFocus;
@@ -22,9 +22,10 @@ namespace SpiritTide
             GameObject selected=EventSystem.current!=null?EventSystem.current.currentSelectedGameObject:null;
             navigation.Push(new NavFrame{mode=Session.Mode,npc=dialogueNpc,selected=selected!=null?selected.name:null,
                 journeyTab=journeyTab,journeyBoss=journeyBoss,questAct=questAct,mainStep=mainStep,owner=questOwner,quest=questSelected,side=questSide,
+                questPage=questPage,questFilter=questFilter,
                 mapAct=mapAct,gearPage=gearPage,gearSelection=gearSelection,gearFilter=gearFilter,gearSort=gearSort,
                 journalAct=journalAct,journalPage=journalPage,scene=dialogueScene,line=dialogueLine,dialogues=journalDialogue,
-                index=archiveIndex,indexPage=archivePage,indexFilter=archiveFilter,routeAct=routeAct,routeStage=routeStage,routeRoom=routeRoom,routeTitle=routeTitle});
+                index=archiveIndex,indexPage=archivePage,indexFilter=archiveFilter,routeAct=routeAct,routeStage=routeStage,routeRoom=routeRoom,routeTitle=routeTitle,routeVisit=routeVisit});
         }
         private void OpenMenu(TideMode mode)
         {
@@ -39,16 +40,16 @@ namespace SpiritTide
             ResetInput();
             if(Session.Mode==TideMode.Story){CancelStory();return;}
             if(Session.Mode==TideMode.Title)return;
-            if(Session.Mode==TideMode.ChooseLead){SetOpeningMode(TideMode.Title);return;}
             if(Session.Mode==TideMode.Result||Session.Mode==TideMode.Defeat){ReturnTown();return;}
             if(navigation.Count>0)
             {
                 NavFrame previous=navigation.Pop();dialogueNpc=previous.npc;pendingFocus=previous.selected;
                 journeyTab=previous.journeyTab;journeyBoss=previous.journeyBoss;questAct=previous.questAct;mainStep=previous.mainStep;questOwner=previous.owner;questSelected=previous.quest;questSide=previous.side;
+                questPage=previous.questPage;questFilter=previous.questFilter;
                 mapAct=previous.mapAct;gearPage=previous.gearPage;gearSelection=previous.gearSelection;gearFilter=previous.gearFilter;gearSort=previous.gearSort;
                 journalAct=previous.journalAct;journalPage=previous.journalPage;dialogueScene=previous.scene;dialogueLine=previous.line;journalDialogue=previous.dialogues;
                 archiveIndex=previous.index;archivePage=previous.indexPage;archiveFilter=previous.indexFilter;
-                routeAct=previous.routeAct;routeStage=previous.routeStage;routeRoom=previous.routeRoom;routeTitle=previous.routeTitle;
+                routeAct=previous.routeAct;routeStage=previous.routeStage;routeRoom=previous.routeRoom;routeTitle=previous.routeTitle;routeVisit=previous.routeVisit;
                 if(previous.mode==TideMode.Combat||previous.mode==TideMode.Training)Session.Resume();
                 else {Session.Mode=previous.mode;Session.Revision++;}
             }
@@ -69,7 +70,7 @@ namespace SpiritTide
         {
             if(Session.IsMovingMode)return false;
             if(Input.GetKeyDown(KeyCode.Escape)){NavigateBack();return true;}
-            if(Input.GetKeyDown(KeyCode.H)&&Session.Mode!=TideMode.Story&&Session.Mode!=TideMode.Result&&Session.Mode!=TideMode.Defeat&&Session.Mode!=TideMode.Title&&Session.Mode!=TideMode.ChooseLead){if(Session.Mode==TideMode.Help)NavigateBack();else ShowHelp();return true;}
+            if(Input.GetKeyDown(KeyCode.H)&&Session.Mode!=TideMode.Story&&Session.Mode!=TideMode.Result&&Session.Mode!=TideMode.Defeat&&Session.Mode!=TideMode.Title){if(Session.Mode==TideMode.Help)NavigateBack();else ShowHelp();return true;}
             if(Input.GetKeyDown(KeyCode.Tab))CycleMenuFocus(Input.GetKey(KeyCode.LeftShift)||Input.GetKey(KeyCode.RightShift));
             else if(Input.GetKeyDown(KeyCode.RightArrow))MoveMenuFocus(Vector2.right);
             else if(Input.GetKeyDown(KeyCode.LeftArrow))MoveMenuFocus(Vector2.left);
@@ -114,7 +115,6 @@ namespace SpiritTide
                 {
                     case TideMode.Dialogue:case TideMode.Story:preferred="choice-0";break;
                     case TideMode.Title:preferred="title-start";break;
-                    case TideMode.ChooseLead:preferred="lead-begin";break;
                     case TideMode.Home:preferred="home-primary";break;
                     case TideMode.Inventory:preferred="equip";break;
                     case TideMode.Forge:preferred="upgrade";break;

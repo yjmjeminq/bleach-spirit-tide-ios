@@ -12,7 +12,7 @@ namespace SpiritTide.EditorTools
             foreach(var d in TideCampaign.Data.stages)
             {
                 backgrounds.Add(d.background);check("causal reason and resolution "+d.index,!string.IsNullOrWhiteSpace(d.reason)&&!string.IsNullOrWhiteSpace(d.resolution)&&d.reason!=d.resolution);
-                foreach(var r in d.rooms){layouts.Add(r.layout);if(!string.IsNullOrEmpty(r.hazard))hazards.Add(r.hazard);check("room world rule is defined "+d.index+" / "+r.title,!string.IsNullOrEmpty(r.layout)&&(!r.ward||r.kind=="troops"));}
+                foreach(var r in d.rooms){layouts.Add(r.layout);if(!string.IsNullOrEmpty(r.hazard))hazards.Add(r.hazard);check("room world rule is defined "+d.index+" / "+r.title,!string.IsNullOrEmpty(r.layout)&&(!r.ward||r.kind=="troops"||r.kind=="mixed"));}
             }
             check("fifteen distinct combat settings, six formations, five environment rules",backgrounds.Count==15&&layouts.Count==6&&hazards.Count==5);
             for(int act=1;act<=5;act++)for(int hero=0;hero<6;hero++)foreach(int stage in new[]{1,4,6})

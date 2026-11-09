@@ -24,7 +24,7 @@ namespace SpiritTide
             }
             Destroy(probeObject);
             int main=0;foreach(var record in game.Session.Profile.dialogueHistory)if(record.id.EndsWith("_entry")||record.id.EndsWith("_intro")||record.id.EndsWith("_clear")||record.id.EndsWith("_report")||record.id.StartsWith("main_a"))main++;
-            Check("native campaign records all eighty-five main scenes",main==85);
+            Check("native campaign records all one hundred and ten main scenes",main==110);
             foreach(string npc in new[]{"urahara","tessai","kon","byakuya","kukaku"})
             {game.ReturnTown();yield return TapUi("npc-"+npc);Check("ending town reply remains readable "+npc,DialogueFits());game.NavigateBack();}
 
@@ -61,7 +61,7 @@ namespace SpiritTide
                     visited++;if(index+1<scenes.Count)yield return TapUi("dialogue-scene-next");
                 }
             }
-            Check("all completed main companion and actual rescue scenes are navigable",visited==126);
+            Check("all completed main companion and actual rescue scenes are navigable",visited==151);
             Check("reading archive does not alter rewards progress or history",profileBefore==JsonUtility.ToJson(completed));LeaveToTown();
 
             var fresh=new TideProfile{hero=3};TideCatalog.Sanitize(fresh);JsonUtility.FromJsonOverwrite(JsonUtility.ToJson(fresh),completed);game.ReturnTown();

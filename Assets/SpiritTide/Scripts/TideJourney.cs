@@ -33,7 +33,9 @@ namespace SpiritTide
             if(Finished(p))return "후일담과 남은 부탁을 읽거나 보스 기록을 연습할 수 있습니다. 본편 보고 보상은 반복되지 않습니다.";
             if((QuestState)p.quest==QuestState.Available)return "우라하라에게 ‘"+TideQuests.Main(p.campaignAct).title+"’의 부탁을 듣고 출정합니다.";
             if((QuestState)p.quest==QuestState.Ready)return "우라하라에게 이번 기록을 보고하세요. 보고를 마쳐야 다음 좌표가 확정됩니다.";
-            var d=Current(p);string lead=d.number==4&&(p.mainInvestigations&(1<<(p.campaignAct-1)))==0?"첫 통로 정화 뒤 ‘"+TideQuests.Main(p.campaignAct).inspect_title+"’를 직접 살핍니다.":"정화한 방 다음부터 이어 갑니다. 오른쪽 출구에서 다음 방을 누르세요.";
+            var d=Current(p);var point=TideQuests.NextPoint(p,p.campaignAct,d.number);
+            string lead=point==null?"정화한 방 다음부터 이어 갑니다. 오른쪽 출구에서 다음 방을 누르세요."
+                :(point.room+1)+"방 정화 뒤 · "+point.goal;
             return d.title+" · "+(p.roomCheckpoint+1)+" / "+d.rooms.Length+"방\n"+lead;
         }
         public static int BetterGear(TideProfile p)
@@ -64,7 +66,7 @@ namespace SpiritTide
         }
         public static string DefeatAdvice(TideSession s)
         {
-            string at=s.IsCampaign?s.Dungeon.title+" · "+(s.Profile.roomCheckpoint+1)+"방부터 재도전":"보스 패턴 연습 · 진행 보상 없음";
+            string at=s.IsCampaign?s.Dungeon.title+" · "+((s.IsReplay?s.RoomIndex:s.Profile.roomCheckpoint)+1)+"방부터 재도전":"보스 패턴 연습 · 진행 보상 없음";
             string cause=string.IsNullOrEmpty(s.LastDamageCue)?"바닥 예고를 확인하고 짧게 공격한 뒤 이동해 보세요.":"마지막 피격 · "+(string.IsNullOrEmpty(s.LastDamageFoe)?"환경 공격":TideCampaign.Foe(s.LastDamageFoe).name)+"\n"+s.LastDamageCue;
             return at+"\n"+cause;
         }

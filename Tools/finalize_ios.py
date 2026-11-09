@@ -1,8 +1,10 @@
 from pathlib import Path
-import hashlib,importlib.util,json,shutil,subprocess,sys
+import hashlib,json,shutil,subprocess,sys
+from IOSBuild import VERSION, IPA_NAME, verify_ipa
+from publish_ios import STATE
 
 root=Path(__file__).resolve().parents[1]
-statepath=root/'.runtime/ios-build-state.json'
+statepath=STATE
 state=json.loads(statepath.read_text())
 repo=state['repository'];tag=state['tag']
 
@@ -15,10 +17,10 @@ run=api(f'repos/{repo}/actions/runs/{state["runId"]}')
 assert run['status']=='completed' and run['conclusion']=='success', 'Mac build has not completed successfully'
 assert run['head_sha']==state['revision']
 release=api(f'repos/{repo}/releases/tags/{tag}')
-name='SpiritTide-iPhone-unsigned-v0.12.0.ipa'
+name=IPA_NAME
 asset=next(a for a in release['assets'] if a['name']==name)
 assert asset['state']=='uploaded' and asset['size']>1024*1024
-download=root/'.runtime/ios-download-v0.12.0'
+download=root/f'.runtime/ios-download-v{VERSION}'
 assert not download.exists(), 'Inspect an existing download before retrying'
 download.mkdir()
 for pattern in [name,name+'.sha256','build-report.json','input-verification.json']:
@@ -32,16 +34,15 @@ inputs=json.loads((download/'input-verification.json').read_text())
 assert build['passed'] and build['ipaCreated'] and build['runURL']==state['runURL']
 assert build['sourceRevision']==state['revision'] and build['ipa']['sha256']==sha
 assert inputs['passed'] and inputs['archiveSHA256']==state['sourceSHA256']
-spec=importlib.util.spec_from_file_location('rift_ios',root/'Tools/IOSBuild.py')
-module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
-verification=module.verify_ipa(ipa,root/'Builds/iOS-Xcode',download/'SpiritTide-ios-package-verification-v0.12.0.json')
+package_report=f'SpiritTide-ios-package-verification-v{VERSION}.json'
+verification=verify_ipa(ipa,root/'Builds/iOS-Xcode',download/package_report)
 assert verification['passed'] and verification['sha256']==sha
 assert verification['app']['gameFilesSHA256']==inputs['gameFilesSHA256']==build['app']['gameFilesSHA256']
 artifacts=root/'Artifacts'
 files={name:ipa,name+'.sha256':download/(name+'.sha256'),
-       'SpiritTide-ios-build-report-v0.12.0.json':download/'build-report.json',
-       'SpiritTide-ios-input-verification-v0.12.0.json':download/'input-verification.json',
-       'SpiritTide-ios-package-verification-v0.12.0.json':download/'SpiritTide-ios-package-verification-v0.12.0.json'}
+       f'SpiritTide-ios-build-report-v{VERSION}.json':download/'build-report.json',
+       f'SpiritTide-ios-input-verification-v{VERSION}.json':download/'input-verification.json',
+       package_report:download/package_report}
 for filename,source in files.items():
     with source.open('rb') as reader,(artifacts/filename).open('xb') as writer:shutil.copyfileobj(reader,writer)
 state.update(ipaSHA256=sha,ipaBytes=ipa.stat().st_size,ipaPath=str(artifacts/name),verified=True)

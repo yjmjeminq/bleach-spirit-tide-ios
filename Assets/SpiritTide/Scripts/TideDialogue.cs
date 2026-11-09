@@ -24,7 +24,7 @@ namespace SpiritTide
             var asset=Resources.Load<TextAsset>("SpiritTide/Data/dialogue");
             if(asset==null)throw new InvalidOperationException("Dialogue data missing.");
             Data=JsonUtility.FromJson<TideDialogueData>(asset.text);
-            if(Data==null||Data.schema!=1||Data.scenes==null||Data.scenes.Length!=189||Data.town==null||Data.town.Length!=105)
+            if(Data==null||Data.schema!=1||Data.scenes==null||Data.scenes.Length<189||Data.town==null||Data.town.Length!=105)
                 throw new InvalidOperationException("Incomplete dialogue data.");
             scenes.Clear();
             foreach(var scene in Data.scenes)
@@ -80,6 +80,7 @@ namespace SpiritTide
             {
                 case "main_accept":return reported||scene.act<p.campaignAct||(QuestState)p.quest!=QuestState.Available;
                 case "main_step":return (p.mainInvestigations&actBit)!=0;
+                case "main_checkpoint":return (p.mainEvidence&(1<<scene.quest_step))!=0;
                 case "side_offer":return TideQuests.State(p,scene.quest_id)!=null;
                 case "side_step":var stepState=TideQuests.State(p,scene.quest_id);return stepState!=null&&stepState.step>scene.quest_step;
                 case "side_finish":var finishState=TideQuests.State(p,scene.quest_id);return finishState!=null&&finishState.claimed&&finishState.choice==scene.branch;
@@ -98,8 +99,9 @@ namespace SpiritTide
         private static int Order(TideDialogueScene s)
         {
             if(s.kind=="main_accept")return 0;
-            if(s.kind=="field_echo")return s.stage*100+5;
-            if(s.kind=="main_step")return s.stage*100+15;
+            if(s.kind=="field_echo")return s.stage*100+1;
+            if(s.kind=="main_step")return s.stage*100+3;
+            if(s.kind=="main_checkpoint")return s.stage*100+4+s.quest_step%5;
             if(s.kind.StartsWith("side_")){var q=TideQuests.Find(s.quest_id);return 1100+(q==null?0:q.index*10)+(s.kind=="side_offer"?0:s.kind=="side_step"?1+s.quest_step:5+s.branch);}
             if(s.kind=="epilogue")return 1000;
             if(s.kind=="party")return 900;

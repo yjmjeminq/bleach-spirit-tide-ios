@@ -52,7 +52,7 @@ def main():
         a,n=d['act']-1,d['number']-1;d['background']=backgrounds[a][n];d['reason'],d['resolution']=beats[a][n];d['objective']=d['reason'];d['landmark']=d['title'];
         if a==2 and n==1:d['title']='무너진 회랑의 귀환로'
         d['landmark']=d['title']
-        for i,r in enumerate(d['rooms']):
+        for i,r in enumerate(room for room in d['rooms'] if not room.get('extension')):
             r['title']=r['title'].replace('무너진 회랑의 호위','무너진 회랑의 귀환로')
             r['layout']=layouts[(n+i+a)%6];r['hazard']=hazards[a] if r['kind']=='troops' and i==1 else ''
             r['echo']=i==0;r['ward']=bool(r['hazard']);r['reinforcement']=r['kind']=='troops' and i==1 and n in (1,4)
@@ -85,7 +85,8 @@ def main():
         for key,kind in [('midboss_id','mid'),('boss_id','boss')]:
             id=a[key];f=foes[id];scenes.append({'id':id,'act':a['act'],'intro':[{'speaker':f['name']+'의 기록','text':f['tell']},{'speaker':'쿠카쿠 · 통신','text':'이것은 당시 전투의 재현이다. '+f['counter']}],'outro':[{'speaker':'우라하라 · 통신','text':a['after_mid'] if kind=='mid' else a['after_boss']}]})
     write(DATA/'experience.json',{'schema':1,'clues':[{'id':k,'text':v} for k,v in clues],'voices':voices,'encounters':scenes})
-    write(DATA/'campaign.json',c);write(DATA/'story_flow.json',story)
+    from expand_campaign import expand
+    write(DATA/'campaign.json',expand(c));write(DATA/'story_flow.json',story)
     write(ROOT/'Docs/experience-audit.json',{'baseline':'0.3.0','observed_gaps':['internal clue IDs displayed in dialogue and journal','repeated scenery within each act','town services without visible NPCs','missing midboss introductions and later-act hero reactions','single-pose motion and weak impact','identical troop room pacing','some objectives did not match named encounter rooms'],'requirements':['causal reason and resolution for every dungeon','localized clues and all six voices in all five acts','visible town services and rescue follow-up','at least fifteen distinct combat environments with room layout and hazard differences','hit stop, knockback, stagger, juggle, cancel and distinct effects/audio','normal-health campaign and native UI evidence']})
     if (DATA/'dialogue.json').is_file():
         from prepare_dialogue import main as refresh_dialogue

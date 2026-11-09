@@ -12,14 +12,15 @@ import re
 import shutil
 import subprocess
 import sys
+from IOSBuild import VERSION, IPA_NAME
 
 ROOT=Path(__file__).resolve().parents[1]
 REPO='yjmjeminq/bleach-spirit-tide-ios'
-VERSION='0.12.0'
-TAG='v0.12.0-ios.1'
-STAGE=ROOT/'Builds/PublicSource-v0.12.0'
-STATE=ROOT/'.runtime/ios-build-state.json'
-ARCHIVE=ROOT/'Artifacts/SpiritTide-ios-export-v0.12.0.zip'
+TAG=f'v{VERSION}-ios.1'
+STAGE=ROOT/f'Builds/PublicSource-v{VERSION}'
+STATE=ROOT/f'.runtime/ios-build-state-v{VERSION}.json'
+AUDIT=ROOT/f'.runtime/publication-audit-v{VERSION}.json'
+ARCHIVE=ROOT/f'Artifacts/SpiritTide-ios-export-v{VERSION}.zip'
 ENV=dict(os.environ,GIT_TERMINAL_PROMPT='0',GCM_INTERACTIVE='never')
 
 
@@ -51,13 +52,16 @@ def prepare():
     assert sha(ARCHIVE)==metadata['sha256'] and metadata['export']['version']==VERSION
     if not STAGE.exists():
         clone = ['git', 'clone', '--depth', '1']
-        prior = ROOT/'Builds/PublicSource-v0.11.0'
+        prior = ROOT/'Builds/PublicSource-v0.12.0'
         if (prior/'.git').is_dir():
             clone.extend(['--reference-if-able', str(prior), '--dissociate'])
         run(clone + ['https://github.com/'+REPO+'.git', str(STAGE)])
     assert (STAGE/'.git').is_dir()
     for folder in ['Assets','Packages','ProjectSettings','Tools','Docs','.github']:
         shutil.copytree(ROOT/folder,STAGE/folder,dirs_exist_ok=True,ignore=shutil.ignore_patterns('__pycache__','*.pyc'))
+    (STAGE/'QA').mkdir(exist_ok=True)
+    for name in ['campaign-pace.json','campaign-pace-deliberate.json']:
+        shutil.copy2(ROOT/'BuildLogs'/name,STAGE/'QA'/name)
     for name in ['README.md','.gitignore']:shutil.copy2(ROOT/name,STAGE/name)
     forbidden={'Library','Temp','Obj','Logs','UserSettings','Builds','BuildLogs','Artifacts','.runtime','ReferenceArchive'}
     patterns=[rb'\b(?:gh[pousr]_[A-Za-z0-9]{30,}|github_pat_[A-Za-z0-9_]{30,})\b',rb'-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----',rb'\b(?:AKIA|ASIA)[A-Z0-9]{16}\b',rb'\bsk-(?:proj-|svcacct-)?[A-Za-z0-9_-]{30,}\b',rb'https://[^\s/@]{1,100}:[^\s/@]+@']
@@ -73,35 +77,30 @@ def prepare():
         rows.append({'path':name,'bytes':path.stat().st_size,'sha256':sha(path)})
     assert all(not p.is_symlink() for p in STAGE.rglob('*'))
     (ROOT/'.runtime').mkdir(exist_ok=True)
-    (ROOT/'.runtime/publication-audit.json').write_text(json.dumps({'passed':True,'files':rows,'personalSavesIncluded':False,'credentialsIncluded':False},indent=2),encoding='utf-8')
+    AUDIT.write_text(json.dumps({'passed':True,'files':rows,'personalSavesIncluded':False,'credentialsIncluded':False},indent=2),encoding='utf-8')
     write({'repository':REPO,'tag':TAG,'version':VERSION,'sourceSHA256':metadata['sha256'],'stage':str(STAGE),'status':'prepared'})
     print(json.dumps({'passed':True,'sourceFiles':len(rows),'sourceBytes':sum(r['bytes'] for r in rows),'sealedExportBytes':ARCHIVE.stat().st_size,'stage':str(STAGE)}))
 
 
 def publish():
     state=json.loads(STATE.read_text());assert state['status']=='prepared'
-    audit=json.loads((ROOT/'.runtime/publication-audit.json').read_text());assert audit['passed']
+    audit=json.loads(AUDIT.read_text());assert audit['passed']
     for row in audit['files']:assert sha(STAGE/row['path'])==row['sha256'],'Source changed after review'
     assert sha(ARCHIVE)==state['sourceSHA256']
     assert gh('api','user','--jq','.login')=='yjmjeminq'
-    # A dedicated new repository preserves every existing game repository.
-    try:
-        remote=json.loads(gh('repo','view',REPO,'--json','nameWithOwner,visibility,description'))
-    except RuntimeError:
-        gh('repo','create',REPO,'--public','--description','BLEACH Spirit Tide Unity source and iLoader iPhone test builds')
-        remote=json.loads(gh('repo','view',REPO,'--json','nameWithOwner,visibility,description'))
+    remote=json.loads(gh('repo','view',REPO,'--json','nameWithOwner,visibility,description'))
     assert remote['nameWithOwner']==REPO and remote['visibility']=='PUBLIC' and remote['description']=='BLEACH Spirit Tide Unity source and iLoader iPhone test builds'
     if not (STAGE/'.git').exists():git('init','--initial-branch=main')
     git('config','user.name','yjmjeminq');git('config','user.email','yjmjeminq@users.noreply.github.com')
     if git('status','--porcelain'):
-        git('add','--all');git('commit','-m','Add Spirit Tide 0.12.0 playable opening and five-act dialogue')
+        git('add','--all');git('commit','-m',f'Expand Spirit Tide {VERSION} campaign and progression')
     revision=git('rev-parse','HEAD')
     if not git('remote'):git('remote','add','origin','https://github.com/'+REPO+'.git')
     assert git('remote','get-url','origin')=='https://github.com/'+REPO+'.git'
     git('push','-u','origin','main')
-    notes=ROOT/'.runtime/ios-release-notes.md'
-    notes.write_text('BLEACH: 영해의 균열 0.12.0 iPhone 시험판\n\niPhone 15 Pro · iOS 17 이상 · 가로 화면 · ARM64 · Metal.\n6개 캐릭터, 5액트, 30던전, 114방.\n0.12.0 · 선두 선택에서 강변으로 이어지는 새 시작, 전투 중 동료 통신, 귀환 등불의 응답, 다섯 액트의 새 본편 대사와 후일담.\n\nSpiritTide-iPhone-unsigned-v0.12.0.ipa를 iLoader에서 서명·설치하세요.\n컴파일과 패키지 검증을 수행하며 실제 아이폰 설치·플레이는 별도 확인이 필요합니다.\n',encoding='utf-8')
-    gh('release','create',TAG,ARCHIVE,'--repo',REPO,'--target',revision,'--title','Spirit Tide 0.12.0 iPhone test','--notes-file',notes,'--prerelease')
+    notes=ROOT/f'.runtime/ios-release-notes-v{VERSION}.md'
+    notes.write_text(f'BLEACH: 영해의 균열 {VERSION} iPhone 시험판\n\niPhone 15 Pro · iOS 17 이상 · 가로 화면 · ARM64 · Metal.\n5액트, 던전 30개, 전투 구역 264개, 본편 현장 조사 30개, 선택 의뢰 45개.\n루키아로 시작해 동료 다섯을 구합니다. 파티 Lv. 3·5·8과 Act 3 보고로 기술을 열 수 있습니다.\n\n{IPA_NAME}를 iLoader에서 서명·설치하세요. 실제 아이폰 설치와 플레이는 기기에서 확인이 필요합니다.\n',encoding='utf-8')
+    gh('release','create',TAG,ARCHIVE,'--repo',REPO,'--target',revision,'--title',f'Spirit Tide {VERSION} iPhone test','--notes-file',notes,'--prerelease')
     state.update(revision=revision,status='published');write(state)
     gh('workflow','run','ios-build.yml','--repo',REPO,'--ref','main','-f','source_tag='+TAG,'-f','source_sha256='+state['sourceSHA256'])
     state['status']='dispatched';write(state)

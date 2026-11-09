@@ -21,7 +21,9 @@ namespace SpiritTide
         {
             TideFoeDef def=TideCampaign.Foe(id);
             var e=new TideEnemy{Uid=nextEnemyUid++,Def=def,X=2.5f+ordinal*1.25f,Y=total==1?0:(ordinal-(total-1)*.5f)*.65f,Guard=def.brain=="guard"?2:0,Timer=1.1f+ordinal*.35f};
-            e.MaxHp=def.base_hp*(1+Mathf.Max(0,stageIndex)*.11f);e.Hp=e.MaxHp;ApplyFormation(e,ordinal,total);Enemies.Add(e);return e;
+            float pressure=IsCampaign?Mathf.Max(1,Room.pressure):1;
+            e.MaxHp=def.base_hp*(1+Mathf.Max(0,stageIndex)*.11f)*pressure;
+            e.Hp=e.MaxHp;ApplyFormation(e,ordinal,total);Enemies.Add(e);return e;
         }
         private void ChooseTarget()
         {
@@ -82,6 +84,7 @@ namespace SpiritTide
                 default:return Mathf.Abs(dx)<3&&Mathf.Abs(dy)<.85f;
             }
         }
+        public bool InTelegraph(TideEnemy e)=>e.Alive&&e.Telegraph&&(AreaHits(e,e.Warning)||e.SecondArea&&AreaHits(e,e.Warning2));
         private void StepEnemy(TideEnemy e,float dt)
         {
             if(!IsFighting||e.Stun>0||e.Stagger>0||e.Lift>.05f)return;

@@ -18,7 +18,7 @@ namespace SpiritTide
         {
             skillIcons[slot].sprite=TideSkillIcons.Get(Session.Profile.hero,slot);
             bool mana=Session.Mp>=Session.Hero.Skill(slot).spirit_cost||Session.IsTraining;
-            skillIcons[slot].color=mana?Color.white:new Color(.4f,.45f,.5f,.7f);
+            skillIcons[slot].color=mana&&Session.SkillAvailable(slot)?Color.white:new Color(.4f,.45f,.5f,.7f);
             skillIconFrames[slot].color=slot==4?gold:new Color(.2f,.4f,.47f);
             Say(skillTimers[slot],!Session.IsTraining&&remaining>0?Mathf.CeilToInt(remaining).ToString():"");
         }

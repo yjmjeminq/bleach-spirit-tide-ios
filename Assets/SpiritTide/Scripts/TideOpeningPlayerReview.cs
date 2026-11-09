@@ -12,34 +12,19 @@ namespace SpiritTide
             string fresh = JsonUtility.ToJson(profile);
             Check("fresh player boots at title without an active quest", game.Session.Mode == TideMode.Title && game.Session.Quest == QuestState.Available);
             yield return Capture("00-story-title");
-            yield return TapUi("title-start");
-            Check("new story opens the six-lead selection", game.Session.Mode == TideMode.ChooseLead);
-            yield return Capture("00-story-roster");
-            yield return TapUi("lead-back");
-            Check("lead selection can return to title without a quest", game.Session.Mode == TideMode.Title && profile.dialogueHistory.Length == 0);
-            yield return TapUi("title-start");
-
             const string request = "main_a1_accept";
-            for (int hero = 0; hero < 6; hero++)
-            {
-                yield return TapUi("lead-" + hero);
-                yield return TapUi("lead-begin");
-                Check("first conversation is the live missing-name incident " + hero,
-                    game.Session.Mode == TideMode.Story && game.Session.Quest == QuestState.Available
-                    && VisibleText(TideDialogue.Lines(request, hero)[0].text));
-                if (hero == 0) yield return Capture("00-story-hook");
-                var lines = TideDialogue.Lines(request, hero);
-                for (int page = 1; page < lines.Length; page++) yield return TapUi("choice-0");
-                Check("opening lead answers the incident in character " + hero,
-                    game.Session.Profile.hero == hero && VisibleText(lines[lines.Length - 1].text) && DialogueFits());
-                yield return TapUi("choice-1");
-                Check("canceling first conversation does not accept the quest " + hero,
-                    game.Session.Mode == TideMode.ChooseLead && game.Session.Quest == QuestState.Available
-                    && TideDialogue.Seen(profile, request) == null);
-            }
+            var lines = TideDialogue.Lines(request, 0);
+            yield return TapUi("title-start");
+            Check("new story follows Rukia before any companion joins",
+                game.Session.Mode == TideMode.Story && profile.hero == 0 && profile.recruitedHeroes == 1
+                && !game.Session.SelectHero(1) && VisibleText(lines[0].text));
+            yield return Capture("00-story-hook");
+            yield return TapUi("choice-2");
+            Check("leaving prologue returns to title without accepting a quest",
+                game.Session.Mode == TideMode.Title && game.Session.Quest == QuestState.Available
+                && TideDialogue.Seen(profile, request) == null);
 
-            yield return TapUi("lead-1");
-            yield return TapUi("lead-begin");
+            yield return TapUi("title-start");
             yield return TapUi("choice-0");
             yield return TapUi("story-previous");
             Check("previous opening line keeps the request unaccepted", game.StoryPage == 0 && game.Session.Quest == QuestState.Available);
@@ -47,10 +32,13 @@ namespace SpiritTide
             Check("finishing prologue enters the actual first fight without a town menu",
                 game.Session.IsFighting && game.Session.Dungeon.index == 0 && game.Session.RoomIndex == 0
                 && game.Session.Quest == QuestState.Active && game.Session.AliveCount > 0);
+            Check("only the starter technique is castable in the first fight",
+                game.Buttons["skill-0"].interactable && !game.Buttons["skill-1"].interactable
+                && !game.Buttons["skill-4"].interactable && !game.Session.Request(MoveKind.Ultimate));
             Check("field call is visible while movement remains available",
-                VisibleText(TideDialogue.Lines("a1_d1_entry", 1)[0].text) && game.Joystick.isActiveAndEnabled);
+                VisibleText(TideDialogue.Lines("a1_d1_entry", 0)[0].text) && game.Joystick.isActiveAndEnabled);
             yield return Capture("00-story-first-fight");
-            string call = TideDialogue.Lines("a1_d1_entry", 1)[0].text;
+            string call = TideDialogue.Lines("a1_d1_entry", 0)[0].text;
             yield return TapUi("pause");
             float pausedClock = game.Session.PresentationClock;
             yield return null;
@@ -63,33 +51,61 @@ namespace SpiritTide
             yield return null;
             Check("first field movement advances the control hint", VisibleText("가까이서"));
             Check("field call does not stop the combat clock", game.Session.Clock > 0 && game.Session.X > -3);
-            var saved = TideStorage.Load(Path.Combine(output, "qa-profile.json"), out _);
-            Check("opening saves the selected hero and the actual story departure",
-                saved.hero == 1 && saved.quest == (int)QuestState.Active
-                && TideDialogue.ArchiveHero(saved, request) == 1 && TideDialogue.Seen(saved, "a1_d1_entry") != null);
-
+            var session = game.Session;
+            int limit = 0;
+            while (!session.RoomCleared && session.IsFighting && limit++ < 300)
+            {
+                for (int i = 0; i < 120 && !session.RoomCleared && session.IsFighting; i++)
+                    TideCombatDriver.Tick(session, 1f / 60, false);
+                yield return null;
+            }
+            Check("the first field rescue blocks the exit until the evidence is examined",
+                session.RoomCleared && session.MainInvestigationPending && !session.GateReady && profile.roomCheckpoint == 0);
+            yield return InspectMainPoint(true);
+            Check("Orihime joins through the rescue and the checkpoint becomes available",
+                profile.recruitedHeroes == 3 && profile.roomCheckpoint == 1 && session.GateReady && profile.hero == 0);
             game.ReturnTown();
-            saved.campaignStage = 2;
-            saved.roomCheckpoint = 1;
-            saved.clearedDungeons = 1;
-            JsonUtility.FromJsonOverwrite(JsonUtility.ToJson(saved), profile);
+            yield return TapUi("hero-1");
+            Check("only the rescued companion becomes selectable", profile.hero == 1 && !game.Buttons["hero-2"].interactable);
+
+            var saved = TideStorage.Load(Path.Combine(output, "qa-profile.json"), out _);
+            Check("recruitment and checkpoint survive checksum reload",
+                saved.hero == 1 && saved.recruitedHeroes == 3 && saved.roomCheckpoint == 1
+                && TideDialogue.ArchiveHero(saved, request) == 0 && TideDialogue.Seen(saved, "a1_d1_entry") != null);
             game.Session.Mode = TideMode.Title;
             game.Session.Revision++;
             yield return null;
             Check("returning player sees the current lead and destination", VisibleText("이어서 하기")
-                && VisibleText(TideCampaign.Dungeon(1, 2).title) && VisibleText("오리히메"));
+                && VisibleText(TideCampaign.Dungeon(1, 1).title) && VisibleText("오리히메"));
             string before = JsonUtility.ToJson(profile);
             yield return TapUi("title-start");
             Check("continue opens town without replaying the opening or rewriting progress",
                 game.Session.Mode == TideMode.Town && before == JsonUtility.ToJson(profile));
-            game.StartBattle(false);
-            yield return null;
-            Check("continuing a saved room does not replay a departure scene",
-                game.Session.IsFighting && game.Session.Dungeon.number == 2 && game.Session.RoomIndex == 1
+            game.Session.Mode = TideMode.Title;
+            game.Session.Revision++;
+            yield return Capture("00-story-resume");
+            yield return TapUi("title-resume-field");
+            Check("title resumes the exact saved room without repeating departure",
+                game.Session.IsFighting && game.Session.Dungeon.number == 1 && game.Session.RoomIndex == 1
                 && !VisibleText(call));
 
             JsonUtility.FromJsonOverwrite(fresh, profile);
             game.ReturnTown();
+        }
+
+        private IEnumerator InspectMainPoint(bool capture = false)
+        {
+            var session = game.Session;
+            Check("actual field evidence is accessible after combat", session.RoomCleared && session.MainInvestigationPending);
+            var point = session.QuestPoint(0);
+            string scene = point.evidence.scene;
+            for (int i = 0; i < 240 && Vector2.Distance(new Vector2(session.X, session.Y), point.position) > .24f; i++)
+                TideQuestDriver.MoveTo(session, point.position, .05f);
+            yield return TapUi("field-interact");
+            Check("field interaction reveals the actual scene " + scene,
+                session.Mode == TideMode.Story && VisibleText(TideDialogue.Scene(scene).title));
+            if (capture) yield return Capture("00-story-first-recruit");
+            yield return ReadStory();
         }
 
         private IEnumerator ReviewResultConversation()

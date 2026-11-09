@@ -22,7 +22,8 @@
           "hazard": "",
           "echo": true,
           "ward": false,
-          "reinforcement": false
+          "reinforcement": false,
+          "pressure": 1.0
         },
         {
           "title": "강변의 첫 가면 · 통로 2",
@@ -35,7 +36,8 @@
           "hazard": "tide",
           "echo": false,
           "ward": true,
-          "reinforcement": false
+          "reinforcement": false,
+          "pressure": 1.35
         },
         {
           "title": "독립 조우방 1",
@@ -47,14 +49,149 @@
           "hazard": "",
           "echo": false,
           "ward": false,
-          "reinforcement": false
+          "reinforcement": false,
+          "pressure": 1.5
+        },
+        {
+          "title": "둑 아래 피난로",
+          "kind": "troops",
+          "layout": "ranged",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a1_e07",
+            "a1_e08",
+            "a1_e07",
+            "a1_e08",
+            "a1_e07",
+            "a1_e08",
+            "a1_e07",
+            "a1_e08",
+            "a1_e07"
+          ],
+          "wave_sizes": [
+            3,
+            3,
+            3
+          ],
+          "wave_layouts": [
+            "ranged",
+            "flank",
+            "open"
+          ],
+          "pressure": 2.05
+        },
+        {
+          "title": "수문 뒤 대피 계단",
+          "kind": "troops",
+          "layout": "guarded",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a1_e08",
+            "a1_e07",
+            "a1_e08",
+            "a1_e07",
+            "a1_e07",
+            "a1_e08",
+            "a1_e07",
+            "a1_e08",
+            "a1_e07",
+            "a1_e08"
+          ],
+          "wave_sizes": [
+            4,
+            3,
+            3
+          ],
+          "wave_layouts": [
+            "guarded",
+            "pincer",
+            "flank"
+          ],
+          "pressure": 2.05,
+          "signal_wave": 2,
+          "signal_title": "피난로 종 울리기",
+          "signal_reply": "종소리에 가면들이 반응합니다. 피난 계단을 지키세요."
+        },
+        {
+          "title": "가면이 막은 제방",
+          "kind": "troops",
+          "layout": "open",
+          "hazard": "tide",
+          "echo": false,
+          "ward": true,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a1_e07",
+            "a1_e08",
+            "a1_e07",
+            "a1_e08",
+            "a1_e07",
+            "a1_e08",
+            "a1_e07",
+            "a1_e07",
+            "a1_e08",
+            "a1_e07"
+          ],
+          "wave_sizes": [
+            3,
+            4,
+            3
+          ],
+          "wave_layouts": [
+            "open",
+            "ranged",
+            "guarded"
+          ],
+          "pressure": 2.05
+        },
+        {
+          "title": "강변 인계 지점",
+          "kind": "mixed",
+          "layout": "flank",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a1_e08",
+            "a1_e07",
+            "a1_e07",
+            "a1_e08",
+            "a1_e07",
+            "a1_e01",
+            "a1_e07",
+            "a1_e08",
+            "a1_e07"
+          ],
+          "wave_sizes": [
+            2,
+            3,
+            4
+          ],
+          "wave_layouts": [
+            "flank",
+            "staggered",
+            "pincer"
+          ],
+          "pressure": 2.05
         }
       ],
       "xp": 120,
       "gold": 105,
       "reason": "생존자가 마지막으로 본 것은 강변의 흰 가면입니다. 먼저 피난로를 열어, 가족의 목소리가 사라진 지점을 찾습니다.",
       "resolution": "피시본의 기억을 걷어 내자 같은 구조 신호가 주택가에서 들려왔습니다. 살아 있는 사람의 신호부터 확인합니다.",
-      "landmark": "강변의 첫 가면"
+      "landmark": "강변의 첫 가면",
+      "legacy_rooms": 3
     },
     {
       "index": 1,
@@ -75,7 +212,8 @@
           "hazard": "",
           "echo": true,
           "ward": false,
-          "reinforcement": false
+          "reinforcement": false,
+          "pressure": 1.35
         },
         {
           "title": "되풀이된 주택가 · 통로 2",
@@ -89,7 +227,8 @@
           "hazard": "tide",
           "echo": false,
           "ward": true,
-          "reinforcement": true
+          "reinforcement": true,
+          "pressure": 1.35
         },
         {
           "title": "독립 조우방 1",
@@ -101,7 +240,8 @@
           "hazard": "",
           "echo": false,
           "ward": false,
-          "reinforcement": false
+          "reinforcement": false,
+          "pressure": 1.5
         },
         {
           "title": "독립 조우방 2",
@@ -113,14 +253,176 @@
           "hazard": "",
           "echo": false,
           "ward": false,
-          "reinforcement": false
+          "reinforcement": false,
+          "pressure": 1.5
+        },
+        {
+          "title": "잠긴 현관들",
+          "kind": "troops",
+          "layout": "open",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a1_e09",
+            "a1_e10",
+            "a1_e09",
+            "a1_e10",
+            "a1_e09",
+            "a1_e10",
+            "a1_e09",
+            "a1_e09",
+            "a1_e10",
+            "a1_e09"
+          ],
+          "wave_sizes": [
+            3,
+            4,
+            3
+          ],
+          "wave_layouts": [
+            "open",
+            "ranged",
+            "guarded"
+          ],
+          "pressure": 2.05
+        },
+        {
+          "title": "되울리는 골목",
+          "kind": "troops",
+          "layout": "flank",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a1_e10",
+            "a1_e09",
+            "a1_e09",
+            "a1_e10",
+            "a1_e09",
+            "a1_e10",
+            "a1_e09",
+            "a1_e10",
+            "a1_e09"
+          ],
+          "wave_sizes": [
+            2,
+            3,
+            4
+          ],
+          "wave_layouts": [
+            "flank",
+            "staggered",
+            "pincer"
+          ],
+          "pressure": 2.05,
+          "signal_wave": 2,
+          "signal_title": "피난로 종 울리기",
+          "signal_reply": "종소리에 가면들이 반응합니다. 피난 계단을 지키세요."
+        },
+        {
+          "title": "빨랫줄 사이 사잇길",
+          "kind": "troops",
+          "layout": "pincer",
+          "hazard": "tide",
+          "echo": false,
+          "ward": true,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a1_e09",
+            "a1_e10",
+            "a1_e09",
+            "a1_e10",
+            "a1_e09",
+            "a1_e10"
+          ],
+          "wave_sizes": [
+            3,
+            3
+          ],
+          "wave_layouts": [
+            "pincer",
+            "ranged"
+          ],
+          "pressure": 2.05
+        },
+        {
+          "title": "문패가 떨어진 마당",
+          "kind": "mixed",
+          "layout": "guarded",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a1_e10",
+            "a1_e09",
+            "a1_e10",
+            "a1_e09",
+            "a1_e09",
+            "a1_e10",
+            "a1_e09",
+            "a1_e03",
+            "a1_e09",
+            "a1_e10"
+          ],
+          "wave_sizes": [
+            4,
+            3,
+            3
+          ],
+          "wave_layouts": [
+            "guarded",
+            "flank",
+            "open"
+          ],
+          "pressure": 2.05
+        },
+        {
+          "title": "집으로 향하는 뒷길",
+          "kind": "troops",
+          "layout": "ranged",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a1_e09",
+            "a1_e10",
+            "a1_e09",
+            "a1_e10",
+            "a1_e09",
+            "a1_e10",
+            "a1_e09",
+            "a1_e10",
+            "a1_e09"
+          ],
+          "wave_sizes": [
+            3,
+            3,
+            3
+          ],
+          "wave_layouts": [
+            "ranged",
+            "flank",
+            "open"
+          ],
+          "pressure": 2.05
         }
       ],
       "xp": 136,
       "gold": 110,
       "reason": "강변에서 찾은 신호가 주택가를 되풀이합니다. 애시드와이어의 기억과 현재 구조자를 혼동하지 않도록 기록을 따로 남깁니다.",
       "resolution": "구조자의 이름은 지켰습니다. 집집마다 퍼진 소리의 출처가 슈리커의 사역체임을 확인했습니다.",
-      "landmark": "되풀이된 주택가"
+      "landmark": "되풀이된 주택가",
+      "legacy_rooms": 4
     },
     {
       "index": 2,
@@ -142,7 +444,8 @@
           "hazard": "",
           "echo": true,
           "ward": false,
-          "reinforcement": false
+          "reinforcement": false,
+          "pressure": 1.35
         },
         {
           "title": "슈리커의 함정길 · 통로 2",
@@ -157,7 +460,164 @@
           "hazard": "tide",
           "echo": false,
           "ward": true,
-          "reinforcement": false
+          "reinforcement": false,
+          "pressure": 1.35
+        },
+        {
+          "title": "사역체의 둥지 입구",
+          "kind": "troops",
+          "layout": "pincer",
+          "hazard": "tide",
+          "echo": false,
+          "ward": true,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a1_e11",
+            "a1_e12",
+            "a1_e11",
+            "a1_e12",
+            "a1_e11",
+            "a1_e12"
+          ],
+          "wave_sizes": [
+            3,
+            3
+          ],
+          "wave_layouts": [
+            "pincer",
+            "ranged"
+          ],
+          "pressure": 2.05
+        },
+        {
+          "title": "발소리가 하나인 길",
+          "kind": "troops",
+          "layout": "guarded",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a1_e12",
+            "a1_e11",
+            "a1_e12",
+            "a1_e11",
+            "a1_e11",
+            "a1_e12",
+            "a1_e11",
+            "a1_e12",
+            "a1_e11",
+            "a1_e12"
+          ],
+          "wave_sizes": [
+            4,
+            3,
+            3
+          ],
+          "wave_layouts": [
+            "guarded",
+            "flank",
+            "open"
+          ],
+          "pressure": 2.05,
+          "signal_wave": 2,
+          "signal_title": "피난로 종 울리기",
+          "signal_reply": "종소리에 가면들이 반응합니다. 피난 계단을 지키세요."
+        },
+        {
+          "title": "울음이 겹친 지하도",
+          "kind": "troops",
+          "layout": "ranged",
+          "hazard": "tide",
+          "echo": false,
+          "ward": true,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a1_e11",
+            "a1_e12",
+            "a1_e11",
+            "a1_e12",
+            "a1_e11",
+            "a1_e12",
+            "a1_e11",
+            "a1_e12",
+            "a1_e11"
+          ],
+          "wave_sizes": [
+            3,
+            3,
+            3
+          ],
+          "wave_layouts": [
+            "ranged",
+            "flank",
+            "open"
+          ],
+          "pressure": 2.05
+        },
+        {
+          "title": "부서진 확성 표지",
+          "kind": "troops",
+          "layout": "guarded",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a1_e12",
+            "a1_e11",
+            "a1_e12",
+            "a1_e11",
+            "a1_e11",
+            "a1_e12",
+            "a1_e11"
+          ],
+          "wave_sizes": [
+            4,
+            3
+          ],
+          "wave_layouts": [
+            "guarded",
+            "pincer"
+          ],
+          "pressure": 2.05
+        },
+        {
+          "title": "폭발 고리 바깥",
+          "kind": "troops",
+          "layout": "open",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a1_e11",
+            "a1_e12",
+            "a1_e11",
+            "a1_e12",
+            "a1_e11",
+            "a1_e12",
+            "a1_e11",
+            "a1_e11",
+            "a1_e12",
+            "a1_e11"
+          ],
+          "wave_sizes": [
+            3,
+            4,
+            3
+          ],
+          "wave_layouts": [
+            "open",
+            "ranged",
+            "guarded"
+          ],
+          "pressure": 2.05
         },
         {
           "title": "핵심 기록 · 슈리커의 함정길",
@@ -169,14 +629,16 @@
           "hazard": "",
           "echo": false,
           "ward": false,
-          "reinforcement": false
+          "reinforcement": false,
+          "pressure": 2.25
         }
       ],
       "xp": 152,
       "gold": 115,
       "reason": "사역체가 진짜 구조 신호 위에 가짜 목소리를 겹칩니다. 퍼뜨리는 쪽을 먼저 끊어 미끼의 본체를 찾습니다.",
       "resolution": "슈리커를 정화하자 신호가 등대 아래로 모였습니다. 상가에 남은 씨앗을 제거해야 안전하게 접근할 수 있습니다.",
-      "landmark": "슈리커의 함정길"
+      "landmark": "슈리커의 함정길",
+      "legacy_rooms": 3
     },
     {
       "index": 3,
@@ -199,7 +661,8 @@
           "hazard": "",
           "echo": true,
           "ward": false,
-          "reinforcement": false
+          "reinforcement": false,
+          "pressure": 1.35
         },
         {
           "title": "닫힌 상가와 씨앗 · 통로 2",
@@ -212,7 +675,8 @@
           "hazard": "tide",
           "echo": false,
           "ward": true,
-          "reinforcement": false
+          "reinforcement": false,
+          "pressure": 1.35
         },
         {
           "title": "독립 조우방 1",
@@ -224,14 +688,176 @@
           "hazard": "",
           "echo": false,
           "ward": false,
-          "reinforcement": false
+          "reinforcement": false,
+          "pressure": 1.5
+        },
+        {
+          "title": "씨앗이 파고든 바닥",
+          "kind": "troops",
+          "layout": "ranged",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a1_e07",
+            "a1_e08",
+            "a1_e07",
+            "a1_e08",
+            "a1_e07",
+            "a1_e08",
+            "a1_e07",
+            "a1_e08",
+            "a1_e07"
+          ],
+          "wave_sizes": [
+            3,
+            3,
+            3
+          ],
+          "wave_layouts": [
+            "ranged",
+            "flank",
+            "open"
+          ],
+          "pressure": 2.05
+        },
+        {
+          "title": "비어 있는 매대",
+          "kind": "troops",
+          "layout": "guarded",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a1_e08",
+            "a1_e07",
+            "a1_e08",
+            "a1_e07",
+            "a1_e07",
+            "a1_e08",
+            "a1_e07",
+            "a1_e08",
+            "a1_e07",
+            "a1_e08"
+          ],
+          "wave_sizes": [
+            4,
+            3,
+            3
+          ],
+          "wave_layouts": [
+            "guarded",
+            "pincer",
+            "flank"
+          ],
+          "pressure": 2.05,
+          "signal_wave": 2,
+          "signal_title": "피난로 종 울리기",
+          "signal_reply": "종소리에 가면들이 반응합니다. 피난 계단을 지키세요."
+        },
+        {
+          "title": "반쯤 내려온 셔터",
+          "kind": "troops",
+          "layout": "open",
+          "hazard": "tide",
+          "echo": false,
+          "ward": true,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a1_e07",
+            "a1_e08",
+            "a1_e07",
+            "a1_e08",
+            "a1_e07",
+            "a1_e08",
+            "a1_e07",
+            "a1_e07",
+            "a1_e08",
+            "a1_e07"
+          ],
+          "wave_sizes": [
+            3,
+            4,
+            3
+          ],
+          "wave_layouts": [
+            "open",
+            "ranged",
+            "guarded"
+          ],
+          "pressure": 2.05
+        },
+        {
+          "title": "상가의 비상 계단",
+          "kind": "mixed",
+          "layout": "flank",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a1_e08",
+            "a1_e07",
+            "a1_e07",
+            "a1_e08",
+            "a1_e07",
+            "a1_e04",
+            "a1_e07",
+            "a1_e08",
+            "a1_e07"
+          ],
+          "wave_sizes": [
+            2,
+            3,
+            4
+          ],
+          "wave_layouts": [
+            "flank",
+            "staggered",
+            "pincer"
+          ],
+          "pressure": 2.05
+        },
+        {
+          "title": "등불이 보이는 모퉁이",
+          "kind": "troops",
+          "layout": "pincer",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a1_e07",
+            "a1_e08",
+            "a1_e07",
+            "a1_e08",
+            "a1_e07",
+            "a1_e08"
+          ],
+          "wave_sizes": [
+            3,
+            3
+          ],
+          "wave_layouts": [
+            "pincer",
+            "ranged"
+          ],
+          "pressure": 2.05
         }
       ],
       "xp": 168,
       "gold": 120,
       "reason": "닫힌 상가의 씨앗이 등대로 가는 피난로를 막습니다. 넘 샹들리에의 재현을 봉인하고 귀환 표지를 남깁니다.",
       "resolution": "씨앗이 사라진 상가에서 등대 방향의 큰 발자국을 찾았습니다. 구조 등불은 여전히 일정하게 빛납니다.",
-      "landmark": "닫힌 상가와 씨앗"
+      "landmark": "닫힌 상가와 씨앗",
+      "legacy_rooms": 3
     },
     {
       "index": 4,
@@ -252,7 +878,8 @@
           "hazard": "",
           "echo": true,
           "ward": false,
-          "reinforcement": false
+          "reinforcement": false,
+          "pressure": 1.35
         },
         {
           "title": "비 오는 등대 · 통로 2",
@@ -266,7 +893,8 @@
           "hazard": "tide",
           "echo": false,
           "ward": true,
-          "reinforcement": true
+          "reinforcement": true,
+          "pressure": 1.35
         },
         {
           "title": "독립 조우방 1",
@@ -278,7 +906,8 @@
           "hazard": "",
           "echo": false,
           "ward": false,
-          "reinforcement": false
+          "reinforcement": false,
+          "pressure": 1.5
         },
         {
           "title": "독립 조우방 2",
@@ -290,14 +919,176 @@
           "hazard": "",
           "echo": false,
           "ward": false,
-          "reinforcement": false
+          "reinforcement": false,
+          "pressure": 1.5
+        },
+        {
+          "title": "빗물이 고인 선착장",
+          "kind": "troops",
+          "layout": "open",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a1_e09",
+            "a1_e10",
+            "a1_e09",
+            "a1_e10",
+            "a1_e09",
+            "a1_e10",
+            "a1_e09",
+            "a1_e09",
+            "a1_e10",
+            "a1_e09"
+          ],
+          "wave_sizes": [
+            3,
+            4,
+            3
+          ],
+          "wave_layouts": [
+            "open",
+            "ranged",
+            "guarded"
+          ],
+          "pressure": 2.05
+        },
+        {
+          "title": "부두 크레인 아래",
+          "kind": "troops",
+          "layout": "flank",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a1_e10",
+            "a1_e09",
+            "a1_e09",
+            "a1_e10",
+            "a1_e09",
+            "a1_e10",
+            "a1_e09",
+            "a1_e10",
+            "a1_e09"
+          ],
+          "wave_sizes": [
+            2,
+            3,
+            4
+          ],
+          "wave_layouts": [
+            "flank",
+            "staggered",
+            "pincer"
+          ],
+          "pressure": 2.05,
+          "signal_wave": 2,
+          "signal_title": "피난로 종 울리기",
+          "signal_reply": "종소리에 가면들이 반응합니다. 피난 계단을 지키세요."
+        },
+        {
+          "title": "밧줄을 삼킨 물결",
+          "kind": "troops",
+          "layout": "pincer",
+          "hazard": "tide",
+          "echo": false,
+          "ward": true,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a1_e09",
+            "a1_e10",
+            "a1_e09",
+            "a1_e10",
+            "a1_e09",
+            "a1_e10"
+          ],
+          "wave_sizes": [
+            3,
+            3
+          ],
+          "wave_layouts": [
+            "pincer",
+            "ranged"
+          ],
+          "pressure": 2.05
+        },
+        {
+          "title": "등대의 측면 다리",
+          "kind": "mixed",
+          "layout": "guarded",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a1_e10",
+            "a1_e09",
+            "a1_e10",
+            "a1_e09",
+            "a1_e09",
+            "a1_e10",
+            "a1_e09",
+            "a1_e05",
+            "a1_e09",
+            "a1_e10"
+          ],
+          "wave_sizes": [
+            4,
+            3,
+            3
+          ],
+          "wave_layouts": [
+            "guarded",
+            "flank",
+            "open"
+          ],
+          "pressure": 2.05
+        },
+        {
+          "title": "흔들리는 불빛의 뒤편",
+          "kind": "troops",
+          "layout": "ranged",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a1_e09",
+            "a1_e10",
+            "a1_e09",
+            "a1_e10",
+            "a1_e09",
+            "a1_e10",
+            "a1_e09",
+            "a1_e10",
+            "a1_e09"
+          ],
+          "wave_sizes": [
+            3,
+            3,
+            3
+          ],
+          "wave_layouts": [
+            "ranged",
+            "flank",
+            "open"
+          ],
+          "pressure": 2.05
         }
       ],
       "xp": 184,
       "gold": 125,
       "reason": "발자국은 비 오는 부두로 이어집니다. 벌보스와 메타스타시아의 기억을 분리해, 미끼가 숨은 등대 진입로를 찾습니다.",
       "resolution": "발자국 끝에서 사람 목소리를 흉내 내는 미끼를 확인했습니다. 등불과 다른 박자로 흔들리는 것이 단서입니다.",
-      "landmark": "비 오는 등대"
+      "landmark": "비 오는 등대",
+      "legacy_rooms": 4
     },
     {
       "index": 5,
@@ -319,7 +1110,8 @@
           "hazard": "",
           "echo": true,
           "ward": false,
-          "reinforcement": false
+          "reinforcement": false,
+          "pressure": 1.35
         },
         {
           "title": "그랜드 피셔의 미끼 · 통로 2",
@@ -334,7 +1126,199 @@
           "hazard": "tide",
           "echo": false,
           "ward": true,
-          "reinforcement": false
+          "reinforcement": false,
+          "pressure": 1.35
+        },
+        {
+          "title": "등대 기슭",
+          "kind": "troops",
+          "layout": "pincer",
+          "hazard": "tide",
+          "echo": false,
+          "ward": true,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a1_e11",
+            "a1_e12",
+            "a1_e11",
+            "a1_e12",
+            "a1_e11",
+            "a1_e12"
+          ],
+          "wave_sizes": [
+            3,
+            3
+          ],
+          "wave_layouts": [
+            "pincer",
+            "ranged"
+          ],
+          "pressure": 2.05
+        },
+        {
+          "title": "돌계단의 그림자",
+          "kind": "troops",
+          "layout": "guarded",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a1_e12",
+            "a1_e11",
+            "a1_e12",
+            "a1_e11",
+            "a1_e11",
+            "a1_e12",
+            "a1_e11",
+            "a1_e12",
+            "a1_e11",
+            "a1_e12"
+          ],
+          "wave_sizes": [
+            4,
+            3,
+            3
+          ],
+          "wave_layouts": [
+            "guarded",
+            "flank",
+            "open"
+          ],
+          "pressure": 2.05,
+          "signal_wave": 2,
+          "signal_title": "피난로 종 울리기",
+          "signal_reply": "종소리에 가면들이 반응합니다. 피난 계단을 지키세요."
+        },
+        {
+          "title": "먼저 부르는 소리",
+          "kind": "troops",
+          "layout": "ranged",
+          "hazard": "tide",
+          "echo": false,
+          "ward": true,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a1_e11",
+            "a1_e12",
+            "a1_e11",
+            "a1_e12",
+            "a1_e11",
+            "a1_e12",
+            "a1_e11",
+            "a1_e12",
+            "a1_e11"
+          ],
+          "wave_sizes": [
+            3,
+            3,
+            3
+          ],
+          "wave_layouts": [
+            "ranged",
+            "flank",
+            "open"
+          ],
+          "pressure": 2.05
+        },
+        {
+          "title": "부러진 난간 너머",
+          "kind": "troops",
+          "layout": "guarded",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a1_e12",
+            "a1_e11",
+            "a1_e12",
+            "a1_e11",
+            "a1_e11",
+            "a1_e12",
+            "a1_e11"
+          ],
+          "wave_sizes": [
+            4,
+            3
+          ],
+          "wave_layouts": [
+            "guarded",
+            "pincer"
+          ],
+          "pressure": 2.05
+        },
+        {
+          "title": "제자리에 남은 불빛",
+          "kind": "troops",
+          "layout": "open",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a1_e11",
+            "a1_e12",
+            "a1_e11",
+            "a1_e12",
+            "a1_e11",
+            "a1_e12",
+            "a1_e11",
+            "a1_e11",
+            "a1_e12",
+            "a1_e11"
+          ],
+          "wave_sizes": [
+            3,
+            4,
+            3
+          ],
+          "wave_layouts": [
+            "open",
+            "ranged",
+            "guarded"
+          ],
+          "pressure": 2.05,
+          "signal_wave": 2,
+          "signal_title": "피난로 종 울리기",
+          "signal_reply": "종소리에 가면들이 반응합니다. 피난 계단을 지키세요."
+        },
+        {
+          "title": "미끼가 닿은 바닥",
+          "kind": "troops",
+          "layout": "flank",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a1_e12",
+            "a1_e11",
+            "a1_e11",
+            "a1_e12",
+            "a1_e11",
+            "a1_e12",
+            "a1_e11",
+            "a1_e12",
+            "a1_e11"
+          ],
+          "wave_sizes": [
+            2,
+            3,
+            4
+          ],
+          "wave_layouts": [
+            "flank",
+            "staggered",
+            "pincer"
+          ],
+          "pressure": 2.05
         },
         {
           "title": "핵심 기록 · 그랜드 피셔의 미끼",
@@ -346,14 +1330,16 @@
           "hazard": "",
           "echo": false,
           "ward": false,
-          "reinforcement": false
+          "reinforcement": false,
+          "pressure": 2.65
         }
       ],
       "xp": 200,
       "gold": 130,
       "reason": "그랜드 피셔의 미끼와 구조 등불을 구분했습니다. 미끼를 거둔 뒤 드러나는 본체와 첫 균열의 연결을 끊습니다.",
       "resolution": "첫 균열이 닫혔습니다. 회수한 이름은 기록함에 보존했고, 검은 틈의 흔적을 마을에서 대조할 차례입니다.",
-      "landmark": "그랜드 피셔의 미끼"
+      "landmark": "그랜드 피셔의 미끼",
+      "legacy_rooms": 3
     },
     {
       "index": 6,
@@ -374,7 +1360,8 @@
           "hazard": "",
           "echo": true,
           "ward": false,
-          "reinforcement": false
+          "reinforcement": false,
+          "pressure": 1.35
         },
         {
           "title": "찢어진 야간 순찰로 · 통로 2",
@@ -388,7 +1375,8 @@
           "hazard": "rubble",
           "echo": false,
           "ward": true,
-          "reinforcement": false
+          "reinforcement": false,
+          "pressure": 1.35
         },
         {
           "title": "독립 조우방 1",
@@ -400,7 +1388,8 @@
           "hazard": "",
           "echo": false,
           "ward": false,
-          "reinforcement": false
+          "reinforcement": false,
+          "pressure": 1.5
         },
         {
           "title": "독립 조우방 2",
@@ -412,14 +1401,139 @@
           "hazard": "",
           "echo": false,
           "ward": false,
-          "reinforcement": false
+          "reinforcement": false,
+          "pressure": 1.5
+        },
+        {
+          "title": "지붕 끝의 낮은 창",
+          "kind": "troops",
+          "layout": "guarded",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a2_e09",
+            "a2_e10",
+            "a2_e09",
+            "a2_e10",
+            "a2_e10",
+            "a2_e09",
+            "a2_e10"
+          ],
+          "wave_sizes": [
+            4,
+            3
+          ],
+          "wave_layouts": [
+            "guarded",
+            "pincer"
+          ],
+          "pressure": 2.17
+        },
+        {
+          "title": "반쯤 찢긴 순찰표",
+          "kind": "troops",
+          "layout": "open",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a2_e10",
+            "a2_e09",
+            "a2_e10",
+            "a2_e09",
+            "a2_e10",
+            "a2_e09",
+            "a2_e10",
+            "a2_e10",
+            "a2_e09",
+            "a2_e10"
+          ],
+          "wave_sizes": [
+            3,
+            4,
+            3
+          ],
+          "wave_layouts": [
+            "open",
+            "ranged",
+            "guarded"
+          ],
+          "pressure": 2.17,
+          "signal_wave": 2,
+          "signal_title": "왕복 표지 고정",
+          "signal_reply": "반대편 표지를 확인했습니다. 관문을 붙잡으려는 적이 옵니다."
+        },
+        {
+          "title": "두 거리 사이 옥상",
+          "kind": "troops",
+          "layout": "flank",
+          "hazard": "rubble",
+          "echo": false,
+          "ward": true,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a2_e09",
+            "a2_e10",
+            "a2_e10",
+            "a2_e09",
+            "a2_e10",
+            "a2_e09",
+            "a2_e10",
+            "a2_e09",
+            "a2_e10"
+          ],
+          "wave_sizes": [
+            2,
+            3,
+            4
+          ],
+          "wave_layouts": [
+            "flank",
+            "staggered",
+            "pincer"
+          ],
+          "pressure": 2.17
+        },
+        {
+          "title": "순보 흔적이 끊긴 굴뚝",
+          "kind": "mixed",
+          "layout": "pincer",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a2_e10",
+            "a2_e09",
+            "a2_e10",
+            "a2_e02",
+            "a2_e10",
+            "a2_e09"
+          ],
+          "wave_sizes": [
+            3,
+            3
+          ],
+          "wave_layouts": [
+            "pincer",
+            "ranged"
+          ],
+          "pressure": 2.17
         }
       ],
       "xp": 216,
       "gold": 125,
       "reason": "항구의 검은 틈이 야간 순찰로에 겹칩니다. 에드라드와 일폴트의 기억이 남긴 진입 방향부터 확인합니다.",
       "resolution": "서로 다른 습격 기록이 같은 지붕 위 길로 모입니다. 프라시온의 발자국을 더 따라갑니다.",
-      "landmark": "찢어진 야간 순찰로"
+      "landmark": "찢어진 야간 순찰로",
+      "legacy_rooms": 4
     },
     {
       "index": 7,
@@ -441,7 +1555,8 @@
           "hazard": "",
           "echo": true,
           "ward": false,
-          "reinforcement": false
+          "reinforcement": false,
+          "pressure": 1.35
         },
         {
           "title": "프라시온의 거리 · 통로 2",
@@ -456,7 +1571,8 @@
           "hazard": "rubble",
           "echo": false,
           "ward": true,
-          "reinforcement": true
+          "reinforcement": true,
+          "pressure": 1.35
         },
         {
           "title": "독립 조우방 1",
@@ -468,7 +1584,8 @@
           "hazard": "",
           "echo": false,
           "ward": false,
-          "reinforcement": false
+          "reinforcement": false,
+          "pressure": 1.5
         },
         {
           "title": "독립 조우방 2",
@@ -480,14 +1597,176 @@
           "hazard": "",
           "echo": false,
           "ward": false,
-          "reinforcement": false
+          "reinforcement": false,
+          "pressure": 1.5
+        },
+        {
+          "title": "가로등의 흔들림",
+          "kind": "troops",
+          "layout": "flank",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a2_e11",
+            "a2_e12",
+            "a2_e12",
+            "a2_e11",
+            "a2_e12",
+            "a2_e11",
+            "a2_e12",
+            "a2_e11",
+            "a2_e12"
+          ],
+          "wave_sizes": [
+            2,
+            3,
+            4
+          ],
+          "wave_layouts": [
+            "flank",
+            "staggered",
+            "pincer"
+          ],
+          "pressure": 2.17
+        },
+        {
+          "title": "나킴이 남긴 발판",
+          "kind": "troops",
+          "layout": "pincer",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a2_e12",
+            "a2_e11",
+            "a2_e12",
+            "a2_e11",
+            "a2_e12",
+            "a2_e11",
+            "a2_e12",
+            "a2_e11",
+            "a2_e12"
+          ],
+          "wave_sizes": [
+            3,
+            3,
+            3
+          ],
+          "wave_layouts": [
+            "pincer",
+            "ranged",
+            "flank"
+          ],
+          "pressure": 2.17,
+          "signal_wave": 2,
+          "signal_title": "왕복 표지 고정",
+          "signal_reply": "반대편 표지를 확인했습니다. 관문을 붙잡으려는 적이 옵니다."
+        },
+        {
+          "title": "디 로이의 좁은 골목",
+          "kind": "troops",
+          "layout": "guarded",
+          "hazard": "rubble",
+          "echo": false,
+          "ward": true,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a2_e11",
+            "a2_e12",
+            "a2_e11",
+            "a2_e12",
+            "a2_e12",
+            "a2_e11",
+            "a2_e12",
+            "a2_e11",
+            "a2_e12",
+            "a2_e11"
+          ],
+          "wave_sizes": [
+            4,
+            3,
+            3
+          ],
+          "wave_layouts": [
+            "guarded",
+            "flank",
+            "open"
+          ],
+          "pressure": 2.17
+        },
+        {
+          "title": "짧은 자국이 겹친 지붕",
+          "kind": "mixed",
+          "layout": "ranged",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a2_e12",
+            "a2_e11",
+            "a2_e12",
+            "a2_e11",
+            "a2_e12",
+            "a2_e11",
+            "a2_e03",
+            "a2_e11",
+            "a2_e12"
+          ],
+          "wave_sizes": [
+            3,
+            3,
+            3
+          ],
+          "wave_layouts": [
+            "ranged",
+            "flank",
+            "open"
+          ],
+          "pressure": 2.17
+        },
+        {
+          "title": "교차로로 통하는 계단",
+          "kind": "troops",
+          "layout": "guarded",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a2_e11",
+            "a2_e12",
+            "a2_e11",
+            "a2_e12",
+            "a2_e12",
+            "a2_e11",
+            "a2_e12"
+          ],
+          "wave_sizes": [
+            4,
+            3
+          ],
+          "wave_layouts": [
+            "guarded",
+            "pincer"
+          ],
+          "pressure": 2.17
         }
       ],
       "xp": 232,
       "gold": 130,
       "reason": "나킴과 디 로이의 조우 지점에는 소니도의 잔향이 남아 있습니다. 누가 통로의 방향을 바꾸는지 알아냅니다.",
       "resolution": "잔향의 간격이 샤우롱의 정찰 경로와 일치합니다. 교차선이 시작되는 지점으로 이동합니다.",
-      "landmark": "프라시온의 거리"
+      "landmark": "프라시온의 거리",
+      "legacy_rooms": 4
     },
     {
       "index": 8,
@@ -510,7 +1789,8 @@
           "hazard": "",
           "echo": true,
           "ward": false,
-          "reinforcement": false
+          "reinforcement": false,
+          "pressure": 1.35
         },
         {
           "title": "샤우롱의 교차선 · 통로 2",
@@ -523,7 +1803,169 @@
           "hazard": "rubble",
           "echo": false,
           "ward": true,
-          "reinforcement": false
+          "reinforcement": false,
+          "pressure": 1.35
+        },
+        {
+          "title": "교차선 바깥 지붕",
+          "kind": "troops",
+          "layout": "guarded",
+          "hazard": "rubble",
+          "echo": false,
+          "ward": true,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a2_e09",
+            "a2_e10",
+            "a2_e09",
+            "a2_e10",
+            "a2_e10",
+            "a2_e09",
+            "a2_e10",
+            "a2_e09",
+            "a2_e10",
+            "a2_e09"
+          ],
+          "wave_sizes": [
+            4,
+            3,
+            3
+          ],
+          "wave_layouts": [
+            "guarded",
+            "flank",
+            "open"
+          ],
+          "pressure": 2.17
+        },
+        {
+          "title": "낡은 정찰 매듭",
+          "kind": "troops",
+          "layout": "ranged",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a2_e10",
+            "a2_e09",
+            "a2_e10",
+            "a2_e09",
+            "a2_e10",
+            "a2_e09",
+            "a2_e10",
+            "a2_e09",
+            "a2_e10"
+          ],
+          "wave_sizes": [
+            3,
+            3,
+            3
+          ],
+          "wave_layouts": [
+            "ranged",
+            "flank",
+            "open"
+          ],
+          "pressure": 2.17,
+          "signal_wave": 2,
+          "signal_title": "왕복 표지 고정",
+          "signal_reply": "반대편 표지를 확인했습니다. 관문을 붙잡으려는 적이 옵니다."
+        },
+        {
+          "title": "무전이 돌아온 거리",
+          "kind": "troops",
+          "layout": "guarded",
+          "hazard": "rubble",
+          "echo": false,
+          "ward": true,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a2_e09",
+            "a2_e10",
+            "a2_e09",
+            "a2_e10",
+            "a2_e10",
+            "a2_e09",
+            "a2_e10"
+          ],
+          "wave_sizes": [
+            4,
+            3
+          ],
+          "wave_layouts": [
+            "guarded",
+            "pincer"
+          ],
+          "pressure": 2.17
+        },
+        {
+          "title": "샤우롱의 앞쪽 횡단로",
+          "kind": "troops",
+          "layout": "open",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a2_e10",
+            "a2_e09",
+            "a2_e10",
+            "a2_e09",
+            "a2_e10",
+            "a2_e09",
+            "a2_e10",
+            "a2_e10",
+            "a2_e09",
+            "a2_e10"
+          ],
+          "wave_sizes": [
+            3,
+            4,
+            3
+          ],
+          "wave_layouts": [
+            "open",
+            "ranged",
+            "guarded"
+          ],
+          "pressure": 2.17
+        },
+        {
+          "title": "가르간타를 향하는 선",
+          "kind": "troops",
+          "layout": "flank",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a2_e09",
+            "a2_e10",
+            "a2_e10",
+            "a2_e09",
+            "a2_e10",
+            "a2_e09",
+            "a2_e10",
+            "a2_e09",
+            "a2_e10"
+          ],
+          "wave_sizes": [
+            2,
+            3,
+            4
+          ],
+          "wave_layouts": [
+            "flank",
+            "staggered",
+            "pincer"
+          ],
+          "pressure": 2.17
         },
         {
           "title": "핵심 기록 · 샤우롱의 교차선",
@@ -535,14 +1977,16 @@
           "hazard": "",
           "echo": false,
           "ward": false,
-          "reinforcement": false
+          "reinforcement": false,
+          "pressure": 2.25
         }
       ],
       "xp": 248,
       "gold": 135,
       "reason": "샤우롱의 교차 절단이 정찰 경로를 가립니다. 사선 사이의 빈틈으로 접근해 통로의 끝을 확인합니다.",
       "resolution": "정찰 경로 끝에서 그림죠의 영압을 찾았습니다. 닫힌 가르간타를 안정시킬 두 관문을 찾아야 합니다.",
-      "landmark": "샤우롱의 교차선"
+      "landmark": "샤우롱의 교차선",
+      "legacy_rooms": 3
     },
     {
       "index": 9,
@@ -563,7 +2007,8 @@
           "hazard": "",
           "echo": true,
           "ward": false,
-          "reinforcement": false
+          "reinforcement": false,
+          "pressure": 1.35
         },
         {
           "title": "닫힌 가르간타 관문 · 통로 2",
@@ -577,7 +2022,8 @@
           "hazard": "rubble",
           "echo": false,
           "ward": true,
-          "reinforcement": false
+          "reinforcement": false,
+          "pressure": 1.35
         },
         {
           "title": "독립 조우방 1",
@@ -589,7 +2035,8 @@
           "hazard": "",
           "echo": false,
           "ward": false,
-          "reinforcement": false
+          "reinforcement": false,
+          "pressure": 1.5
         },
         {
           "title": "독립 조우방 2",
@@ -601,14 +2048,172 @@
           "hazard": "",
           "echo": false,
           "ward": false,
-          "reinforcement": false
+          "reinforcement": false,
+          "pressure": 1.5
+        },
+        {
+          "title": "관문의 바깥 지지대",
+          "kind": "troops",
+          "layout": "guarded",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a2_e11",
+            "a2_e12",
+            "a2_e11",
+            "a2_e12",
+            "a2_e12",
+            "a2_e11",
+            "a2_e12"
+          ],
+          "wave_sizes": [
+            4,
+            3
+          ],
+          "wave_layouts": [
+            "guarded",
+            "pincer"
+          ],
+          "pressure": 2.17
+        },
+        {
+          "title": "경계가 밀려오는 틈",
+          "kind": "troops",
+          "layout": "open",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a2_e12",
+            "a2_e11",
+            "a2_e12",
+            "a2_e11",
+            "a2_e12",
+            "a2_e11",
+            "a2_e12",
+            "a2_e12",
+            "a2_e11",
+            "a2_e12"
+          ],
+          "wave_sizes": [
+            3,
+            4,
+            3
+          ],
+          "wave_layouts": [
+            "open",
+            "ranged",
+            "guarded"
+          ],
+          "pressure": 2.17,
+          "signal_wave": 2,
+          "signal_title": "왕복 표지 고정",
+          "signal_reply": "반대편 표지를 확인했습니다. 관문을 붙잡으려는 적이 옵니다."
+        },
+        {
+          "title": "두 사람의 그림자",
+          "kind": "troops",
+          "layout": "flank",
+          "hazard": "rubble",
+          "echo": false,
+          "ward": true,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a2_e11",
+            "a2_e12",
+            "a2_e12",
+            "a2_e11",
+            "a2_e12",
+            "a2_e11",
+            "a2_e12",
+            "a2_e11",
+            "a2_e12"
+          ],
+          "wave_sizes": [
+            2,
+            3,
+            4
+          ],
+          "wave_layouts": [
+            "flank",
+            "staggered",
+            "pincer"
+          ],
+          "pressure": 2.17
+        },
+        {
+          "title": "돌아올 좌표의 빈 칸",
+          "kind": "mixed",
+          "layout": "pincer",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a2_e12",
+            "a2_e11",
+            "a2_e12",
+            "a2_e05",
+            "a2_e12",
+            "a2_e11"
+          ],
+          "wave_sizes": [
+            3,
+            3
+          ],
+          "wave_layouts": [
+            "pincer",
+            "ranged"
+          ],
+          "pressure": 2.17
+        },
+        {
+          "title": "마주 보는 문지방",
+          "kind": "troops",
+          "layout": "guarded",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a2_e11",
+            "a2_e12",
+            "a2_e11",
+            "a2_e12",
+            "a2_e12",
+            "a2_e11",
+            "a2_e12",
+            "a2_e11",
+            "a2_e12",
+            "a2_e11"
+          ],
+          "wave_sizes": [
+            4,
+            3,
+            3
+          ],
+          "wave_layouts": [
+            "guarded",
+            "flank",
+            "open"
+          ],
+          "pressure": 2.17
         }
       ],
       "xp": 264,
       "gold": 140,
       "reason": "로리와 메노리의 기억이 가르간타 관문을 붙잡습니다. 서로 다른 견제를 끊고 경계를 통과합니다.",
       "resolution": "가르간타 안쪽에는 두 감시 기록이 남아 있습니다. 통로가 무너지기 전에 각각의 방을 정리합니다.",
-      "landmark": "닫힌 가르간타 관문"
+      "landmark": "닫힌 가르간타 관문",
+      "legacy_rooms": 4
     },
     {
       "index": 10,
@@ -630,7 +2235,8 @@
           "hazard": "",
           "echo": true,
           "ward": false,
-          "reinforcement": false
+          "reinforcement": false,
+          "pressure": 1.35
         },
         {
           "title": "두 관문 수호자 · 통로 2",
@@ -645,7 +2251,8 @@
           "hazard": "rubble",
           "echo": false,
           "ward": true,
-          "reinforcement": true
+          "reinforcement": true,
+          "pressure": 1.35
         },
         {
           "title": "독립 조우방 1",
@@ -657,7 +2264,8 @@
           "hazard": "",
           "echo": false,
           "ward": false,
-          "reinforcement": false
+          "reinforcement": false,
+          "pressure": 1.5
         },
         {
           "title": "독립 조우방 2",
@@ -669,14 +2277,176 @@
           "hazard": "",
           "echo": false,
           "ward": false,
-          "reinforcement": false
+          "reinforcement": false,
+          "pressure": 1.5
+        },
+        {
+          "title": "아이스링거의 견제선",
+          "kind": "troops",
+          "layout": "flank",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a2_e09",
+            "a2_e10",
+            "a2_e10",
+            "a2_e09",
+            "a2_e10",
+            "a2_e09",
+            "a2_e10",
+            "a2_e09",
+            "a2_e10"
+          ],
+          "wave_sizes": [
+            2,
+            3,
+            4
+          ],
+          "wave_layouts": [
+            "flank",
+            "staggered",
+            "pincer"
+          ],
+          "pressure": 2.17
+        },
+        {
+          "title": "데모우라 뒤의 경첩",
+          "kind": "troops",
+          "layout": "pincer",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a2_e10",
+            "a2_e09",
+            "a2_e10",
+            "a2_e09",
+            "a2_e10",
+            "a2_e09",
+            "a2_e10",
+            "a2_e09",
+            "a2_e10"
+          ],
+          "wave_sizes": [
+            3,
+            3,
+            3
+          ],
+          "wave_layouts": [
+            "pincer",
+            "ranged",
+            "flank"
+          ],
+          "pressure": 2.17,
+          "signal_wave": 2,
+          "signal_title": "왕복 표지 고정",
+          "signal_reply": "반대편 표지를 확인했습니다. 관문을 붙잡으려는 적이 옵니다."
+        },
+        {
+          "title": "문을 받친 영압 돌",
+          "kind": "troops",
+          "layout": "guarded",
+          "hazard": "rubble",
+          "echo": false,
+          "ward": true,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a2_e09",
+            "a2_e10",
+            "a2_e09",
+            "a2_e10",
+            "a2_e10",
+            "a2_e09",
+            "a2_e10",
+            "a2_e09",
+            "a2_e10",
+            "a2_e09"
+          ],
+          "wave_sizes": [
+            4,
+            3,
+            3
+          ],
+          "wave_layouts": [
+            "guarded",
+            "flank",
+            "open"
+          ],
+          "pressure": 2.17
+        },
+        {
+          "title": "들어올 때의 시점",
+          "kind": "mixed",
+          "layout": "ranged",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a2_e10",
+            "a2_e09",
+            "a2_e10",
+            "a2_e09",
+            "a2_e10",
+            "a2_e09",
+            "a2_e08",
+            "a2_e09",
+            "a2_e10"
+          ],
+          "wave_sizes": [
+            3,
+            3,
+            3
+          ],
+          "wave_layouts": [
+            "ranged",
+            "flank",
+            "open"
+          ],
+          "pressure": 2.17
+        },
+        {
+          "title": "왕복 신호가 만나는 자리",
+          "kind": "troops",
+          "layout": "guarded",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a2_e09",
+            "a2_e10",
+            "a2_e09",
+            "a2_e10",
+            "a2_e10",
+            "a2_e09",
+            "a2_e10"
+          ],
+          "wave_sizes": [
+            4,
+            3
+          ],
+          "wave_layouts": [
+            "guarded",
+            "pincer"
+          ],
+          "pressure": 2.17
         }
       ],
       "xp": 280,
       "gold": 145,
       "reason": "데모우라와 아이스링거는 별도 관문을 지킵니다. 넓은 공격과 원거리 견제를 나누어 읽고 돌아갈 길을 확보합니다.",
       "resolution": "왕복 좌표가 고정됐습니다. 이제 통로를 붙잡은 그림죠의 기록에 접근할 수 있습니다.",
-      "landmark": "두 관문 수호자"
+      "landmark": "두 관문 수호자",
+      "legacy_rooms": 4
     },
     {
       "index": 11,
@@ -699,7 +2469,8 @@
           "hazard": "",
           "echo": true,
           "ward": false,
-          "reinforcement": false
+          "reinforcement": false,
+          "pressure": 1.35
         },
         {
           "title": "그림죠의 결투 · 통로 2",
@@ -712,7 +2483,199 @@
           "hazard": "rubble",
           "echo": false,
           "ward": true,
-          "reinforcement": false
+          "reinforcement": false,
+          "pressure": 1.35
+        },
+        {
+          "title": "문이 울리는 통로",
+          "kind": "troops",
+          "layout": "guarded",
+          "hazard": "rubble",
+          "echo": false,
+          "ward": true,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a2_e11",
+            "a2_e12",
+            "a2_e11",
+            "a2_e12",
+            "a2_e12",
+            "a2_e11",
+            "a2_e12",
+            "a2_e11",
+            "a2_e12",
+            "a2_e11"
+          ],
+          "wave_sizes": [
+            4,
+            3,
+            3
+          ],
+          "wave_layouts": [
+            "guarded",
+            "flank",
+            "open"
+          ],
+          "pressure": 2.17
+        },
+        {
+          "title": "허공에 남은 발톱",
+          "kind": "troops",
+          "layout": "ranged",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a2_e12",
+            "a2_e11",
+            "a2_e12",
+            "a2_e11",
+            "a2_e12",
+            "a2_e11",
+            "a2_e12",
+            "a2_e11",
+            "a2_e12"
+          ],
+          "wave_sizes": [
+            3,
+            3,
+            3
+          ],
+          "wave_layouts": [
+            "ranged",
+            "flank",
+            "open"
+          ],
+          "pressure": 2.17,
+          "signal_wave": 2,
+          "signal_title": "왕복 표지 고정",
+          "signal_reply": "반대편 표지를 확인했습니다. 관문을 붙잡으려는 적이 옵니다."
+        },
+        {
+          "title": "돌진이 꺾이는 발판",
+          "kind": "troops",
+          "layout": "guarded",
+          "hazard": "rubble",
+          "echo": false,
+          "ward": true,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a2_e11",
+            "a2_e12",
+            "a2_e11",
+            "a2_e12",
+            "a2_e12",
+            "a2_e11",
+            "a2_e12"
+          ],
+          "wave_sizes": [
+            4,
+            3
+          ],
+          "wave_layouts": [
+            "guarded",
+            "pincer"
+          ],
+          "pressure": 2.17
+        },
+        {
+          "title": "가르간타의 바깥 매듭",
+          "kind": "troops",
+          "layout": "open",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a2_e12",
+            "a2_e11",
+            "a2_e12",
+            "a2_e11",
+            "a2_e12",
+            "a2_e11",
+            "a2_e12",
+            "a2_e12",
+            "a2_e11",
+            "a2_e12"
+          ],
+          "wave_sizes": [
+            3,
+            4,
+            3
+          ],
+          "wave_layouts": [
+            "open",
+            "ranged",
+            "guarded"
+          ],
+          "pressure": 2.17
+        },
+        {
+          "title": "흔들리지 않는 좌표",
+          "kind": "troops",
+          "layout": "flank",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a2_e11",
+            "a2_e12",
+            "a2_e12",
+            "a2_e11",
+            "a2_e12",
+            "a2_e11",
+            "a2_e12",
+            "a2_e11",
+            "a2_e12"
+          ],
+          "wave_sizes": [
+            2,
+            3,
+            4
+          ],
+          "wave_layouts": [
+            "flank",
+            "staggered",
+            "pincer"
+          ],
+          "pressure": 2.17,
+          "signal_wave": 2,
+          "signal_title": "왕복 표지 고정",
+          "signal_reply": "반대편 표지를 확인했습니다. 관문을 붙잡으려는 적이 옵니다."
+        },
+        {
+          "title": "그림죠의 착지선",
+          "kind": "troops",
+          "layout": "pincer",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a2_e12",
+            "a2_e11",
+            "a2_e12",
+            "a2_e11",
+            "a2_e12",
+            "a2_e11"
+          ],
+          "wave_sizes": [
+            3,
+            3
+          ],
+          "wave_layouts": [
+            "pincer",
+            "ranged"
+          ],
+          "pressure": 2.17
         },
         {
           "title": "핵심 기록 · 그림죠의 결투",
@@ -724,14 +2687,16 @@
           "hazard": "",
           "echo": false,
           "ward": false,
-          "reinforcement": false
+          "reinforcement": false,
+          "pressure": 2.65
         }
       ],
       "xp": 296,
       "gold": 150,
       "reason": "그림죠의 재현이 통로를 고정하고 있습니다. 도약의 착지와 돌진이 멈추는 순간을 노려 기록을 분리합니다.",
       "resolution": "그림죠의 기록 뒤에서 라스 노체스의 좌표가 남았습니다. 마을에서 좌표를 확인한 뒤 다음 층으로 갑니다.",
-      "landmark": "그림죠의 결투"
+      "landmark": "그림죠의 결투",
+      "legacy_rooms": 3
     },
     {
       "index": 12,
@@ -753,7 +2718,8 @@
           "hazard": "",
           "echo": true,
           "ward": false,
-          "reinforcement": false
+          "reinforcement": false,
+          "pressure": 1.35
         },
         {
           "title": "백사막의 세 관문 · 통로 2",
@@ -768,7 +2734,8 @@
           "hazard": "wind",
           "echo": false,
           "ward": true,
-          "reinforcement": false
+          "reinforcement": false,
+          "pressure": 1.35
         },
         {
           "title": "독립 조우방 1",
@@ -780,7 +2747,8 @@
           "hazard": "",
           "echo": false,
           "ward": false,
-          "reinforcement": false
+          "reinforcement": false,
+          "pressure": 1.5
         },
         {
           "title": "독립 조우방 2",
@@ -792,14 +2760,144 @@
           "hazard": "",
           "echo": false,
           "ward": false,
-          "reinforcement": false
+          "reinforcement": false,
+          "pressure": 1.5
+        },
+        {
+          "title": "발자국이 되감기는 둔덕",
+          "kind": "troops",
+          "layout": "open",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a3_e11",
+            "a3_e12",
+            "a3_e11",
+            "a3_e12",
+            "a3_e11",
+            "a3_e12",
+            "a3_e11",
+            "a3_e11",
+            "a3_e12",
+            "a3_e11"
+          ],
+          "wave_sizes": [
+            3,
+            4,
+            3
+          ],
+          "wave_layouts": [
+            "open",
+            "ranged",
+            "guarded"
+          ],
+          "pressure": 2.29
+        },
+        {
+          "title": "도르도니의 바람목",
+          "kind": "troops",
+          "layout": "flank",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a3_e12",
+            "a3_e11",
+            "a3_e11",
+            "a3_e12",
+            "a3_e11",
+            "a3_e12",
+            "a3_e11",
+            "a3_e12",
+            "a3_e11"
+          ],
+          "wave_sizes": [
+            2,
+            3,
+            4
+          ],
+          "wave_layouts": [
+            "flank",
+            "staggered",
+            "pincer"
+          ],
+          "pressure": 2.29,
+          "signal_wave": 2,
+          "signal_title": "회랑 불빛 잇기",
+          "signal_reply": "빛이 이어집니다. 등불 쪽으로 모이는 적을 막아 주세요."
+        },
+        {
+          "title": "치루치가 긁은 돌기둥",
+          "kind": "troops",
+          "layout": "pincer",
+          "hazard": "wind",
+          "echo": false,
+          "ward": true,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a3_e11",
+            "a3_e12",
+            "a3_e11",
+            "a3_e12",
+            "a3_e11",
+            "a3_e12"
+          ],
+          "wave_sizes": [
+            3,
+            3
+          ],
+          "wave_layouts": [
+            "pincer",
+            "ranged"
+          ],
+          "pressure": 2.29
+        },
+        {
+          "title": "바람이 닿지 않는 문",
+          "kind": "mixed",
+          "layout": "guarded",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a3_e12",
+            "a3_e11",
+            "a3_e12",
+            "a3_e11",
+            "a3_e11",
+            "a3_e12",
+            "a3_e11",
+            "a3_e01",
+            "a3_e11",
+            "a3_e12"
+          ],
+          "wave_sizes": [
+            4,
+            3,
+            3
+          ],
+          "wave_layouts": [
+            "guarded",
+            "flank",
+            "open"
+          ],
+          "pressure": 2.29
         }
       ],
       "xp": 312,
       "gold": 145,
       "reason": "라스 노체스 좌표는 맞지만 사막의 표지가 반복됩니다. 도르도니와 치루치의 기억을 정화해 실제 관문의 방향을 찾습니다.",
       "resolution": "관문의 좌표가 이어졌습니다. 무너진 회랑에서 돌아갈 표지가 끊긴 곳을 확인합니다.",
-      "landmark": "백사막의 세 관문"
+      "landmark": "백사막의 세 관문",
+      "legacy_rooms": 4
     },
     {
       "index": 13,
@@ -822,7 +2920,8 @@
           "hazard": "",
           "echo": true,
           "ward": false,
-          "reinforcement": false
+          "reinforcement": false,
+          "pressure": 1.35
         },
         {
           "title": "무너진 회랑의 귀환로 · 통로 2",
@@ -835,7 +2934,8 @@
           "hazard": "wind",
           "echo": false,
           "ward": true,
-          "reinforcement": true
+          "reinforcement": true,
+          "pressure": 1.35
         },
         {
           "title": "독립 조우방 1",
@@ -847,7 +2947,8 @@
           "hazard": "",
           "echo": false,
           "ward": false,
-          "reinforcement": false
+          "reinforcement": false,
+          "pressure": 1.5
         },
         {
           "title": "독립 조우방 2",
@@ -859,14 +2960,172 @@
           "hazard": "",
           "echo": false,
           "ward": false,
-          "reinforcement": false
+          "reinforcement": false,
+          "pressure": 1.5
+        },
+        {
+          "title": "무너진 회랑의 안쪽",
+          "kind": "troops",
+          "layout": "pincer",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a3_e11",
+            "a3_e12",
+            "a3_e11",
+            "a3_e12",
+            "a3_e11",
+            "a3_e12"
+          ],
+          "wave_sizes": [
+            3,
+            3
+          ],
+          "wave_layouts": [
+            "pincer",
+            "ranged"
+          ],
+          "pressure": 2.29
+        },
+        {
+          "title": "붕대가 걸린 난간",
+          "kind": "troops",
+          "layout": "guarded",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a3_e12",
+            "a3_e11",
+            "a3_e12",
+            "a3_e11",
+            "a3_e11",
+            "a3_e12",
+            "a3_e11",
+            "a3_e12",
+            "a3_e11",
+            "a3_e12"
+          ],
+          "wave_sizes": [
+            4,
+            3,
+            3
+          ],
+          "wave_layouts": [
+            "guarded",
+            "flank",
+            "open"
+          ],
+          "pressure": 2.29,
+          "signal_wave": 2,
+          "signal_title": "회랑 불빛 잇기",
+          "signal_reply": "빛이 이어집니다. 등불 쪽으로 모이는 적을 막아 주세요."
+        },
+        {
+          "title": "잔해 밑의 좁은 길",
+          "kind": "troops",
+          "layout": "ranged",
+          "hazard": "wind",
+          "echo": false,
+          "ward": true,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a3_e11",
+            "a3_e12",
+            "a3_e11",
+            "a3_e12",
+            "a3_e11",
+            "a3_e12",
+            "a3_e11",
+            "a3_e12",
+            "a3_e11"
+          ],
+          "wave_sizes": [
+            3,
+            3,
+            3
+          ],
+          "wave_layouts": [
+            "ranged",
+            "flank",
+            "open"
+          ],
+          "pressure": 2.29
+        },
+        {
+          "title": "부상자 대기소",
+          "kind": "mixed",
+          "layout": "guarded",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a3_e12",
+            "a3_e11",
+            "a3_e12",
+            "a3_e11",
+            "a3_e04",
+            "a3_e12",
+            "a3_e11"
+          ],
+          "wave_sizes": [
+            4,
+            3
+          ],
+          "wave_layouts": [
+            "guarded",
+            "pincer"
+          ],
+          "pressure": 2.29
+        },
+        {
+          "title": "회랑 밖 들것 인계점",
+          "kind": "troops",
+          "layout": "open",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a3_e11",
+            "a3_e12",
+            "a3_e11",
+            "a3_e12",
+            "a3_e11",
+            "a3_e12",
+            "a3_e11",
+            "a3_e11",
+            "a3_e12",
+            "a3_e11"
+          ],
+          "wave_sizes": [
+            3,
+            4,
+            3
+          ],
+          "wave_layouts": [
+            "open",
+            "ranged",
+            "guarded"
+          ],
+          "pressure": 2.29
         }
       ],
       "xp": 328,
       "gold": 150,
       "reason": "간텐바인과 테슬러의 기억이 회랑을 막습니다. 길 잃은 정령에게 귀환로를 남기고 원본 신호를 따라갑니다.",
       "resolution": "회랑 아래의 낫 자국이 노이트라의 기록으로 이어집니다. 마지막 연격까지 확인할 수 있는 공간을 확보합니다.",
-      "landmark": "무너진 회랑의 귀환로"
+      "landmark": "무너진 회랑의 귀환로",
+      "legacy_rooms": 4
     },
     {
       "index": 14,
@@ -887,7 +3146,8 @@
           "hazard": "",
           "echo": true,
           "ward": false,
-          "reinforcement": false
+          "reinforcement": false,
+          "pressure": 1.35
         },
         {
           "title": "노이트라의 초승달 · 통로 2",
@@ -901,7 +3161,168 @@
           "hazard": "wind",
           "echo": false,
           "ward": true,
-          "reinforcement": false
+          "reinforcement": false,
+          "pressure": 1.35
+        },
+        {
+          "title": "낫에 패인 모래",
+          "kind": "troops",
+          "layout": "ranged",
+          "hazard": "wind",
+          "echo": false,
+          "ward": true,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a3_e11",
+            "a3_e12",
+            "a3_e11",
+            "a3_e12",
+            "a3_e11",
+            "a3_e12",
+            "a3_e11",
+            "a3_e12",
+            "a3_e11"
+          ],
+          "wave_sizes": [
+            3,
+            3,
+            3
+          ],
+          "wave_layouts": [
+            "ranged",
+            "flank",
+            "open"
+          ],
+          "pressure": 2.29
+        },
+        {
+          "title": "테슬러가 지나간 통로",
+          "kind": "troops",
+          "layout": "guarded",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a3_e12",
+            "a3_e11",
+            "a3_e12",
+            "a3_e11",
+            "a3_e11",
+            "a3_e12",
+            "a3_e11",
+            "a3_e12",
+            "a3_e11",
+            "a3_e12"
+          ],
+          "wave_sizes": [
+            4,
+            3,
+            3
+          ],
+          "wave_layouts": [
+            "guarded",
+            "pincer",
+            "flank"
+          ],
+          "pressure": 2.29,
+          "signal_wave": 2,
+          "signal_title": "회랑 불빛 잇기",
+          "signal_reply": "빛이 이어집니다. 등불 쪽으로 모이는 적을 막아 주세요."
+        },
+        {
+          "title": "회랑 아래의 끊긴 등불",
+          "kind": "troops",
+          "layout": "open",
+          "hazard": "wind",
+          "echo": false,
+          "ward": true,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a3_e11",
+            "a3_e12",
+            "a3_e11",
+            "a3_e12",
+            "a3_e11",
+            "a3_e12",
+            "a3_e11",
+            "a3_e11",
+            "a3_e12",
+            "a3_e11"
+          ],
+          "wave_sizes": [
+            3,
+            4,
+            3
+          ],
+          "wave_layouts": [
+            "open",
+            "ranged",
+            "guarded"
+          ],
+          "pressure": 2.29
+        },
+        {
+          "title": "초승달 아래 빈터",
+          "kind": "troops",
+          "layout": "flank",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a3_e12",
+            "a3_e11",
+            "a3_e11",
+            "a3_e12",
+            "a3_e11",
+            "a3_e12",
+            "a3_e11",
+            "a3_e12",
+            "a3_e11"
+          ],
+          "wave_sizes": [
+            2,
+            3,
+            4
+          ],
+          "wave_layouts": [
+            "flank",
+            "staggered",
+            "pincer"
+          ],
+          "pressure": 2.29
+        },
+        {
+          "title": "낫자루 밑 표식",
+          "kind": "troops",
+          "layout": "pincer",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a3_e11",
+            "a3_e12",
+            "a3_e11",
+            "a3_e12",
+            "a3_e11",
+            "a3_e12"
+          ],
+          "wave_sizes": [
+            3,
+            3
+          ],
+          "wave_layouts": [
+            "pincer",
+            "ranged"
+          ],
+          "pressure": 2.29
         },
         {
           "title": "핵심 기록 · 노이트라의 초승달",
@@ -913,14 +3334,16 @@
           "hazard": "",
           "echo": false,
           "ward": false,
-          "reinforcement": false
+          "reinforcement": false,
+          "pressure": 2.25
         }
       ],
       "xp": 344,
       "gold": 155,
       "reason": "노이트라의 연격은 기록을 붙잡는 표식 주위를 돕니다. 연격의 끝을 버텨 표식의 위치를 확인합니다.",
       "resolution": "원본을 붙드는 표식을 찾았습니다. 기록고와 분석실의 왜곡을 정리해야 표식을 안전하게 회수할 수 있습니다.",
-      "landmark": "노이트라의 초승달"
+      "landmark": "노이트라의 초승달",
+      "legacy_rooms": 3
     },
     {
       "index": 15,
@@ -942,7 +3365,8 @@
           "hazard": "",
           "echo": true,
           "ward": false,
-          "reinforcement": false
+          "reinforcement": false,
+          "pressure": 1.35
         },
         {
           "title": "엑세키아스 기록고 · 통로 2",
@@ -957,7 +3381,8 @@
           "hazard": "wind",
           "echo": false,
           "ward": true,
-          "reinforcement": false
+          "reinforcement": false,
+          "pressure": 1.35
         },
         {
           "title": "독립 조우방 1",
@@ -969,7 +3394,8 @@
           "hazard": "",
           "echo": false,
           "ward": false,
-          "reinforcement": false
+          "reinforcement": false,
+          "pressure": 1.5
         },
         {
           "title": "독립 조우방 2",
@@ -981,7 +3407,8 @@
           "hazard": "",
           "echo": false,
           "ward": false,
-          "reinforcement": false
+          "reinforcement": false,
+          "pressure": 1.5
         },
         {
           "title": "독립 조우방 3",
@@ -993,14 +3420,176 @@
           "hazard": "",
           "echo": false,
           "ward": false,
-          "reinforcement": false
+          "reinforcement": false,
+          "pressure": 1.5
+        },
+        {
+          "title": "먼지가 눌린 서가",
+          "kind": "troops",
+          "layout": "open",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a3_e11",
+            "a3_e12",
+            "a3_e11",
+            "a3_e12",
+            "a3_e11",
+            "a3_e12",
+            "a3_e11",
+            "a3_e11",
+            "a3_e12",
+            "a3_e11"
+          ],
+          "wave_sizes": [
+            3,
+            4,
+            3
+          ],
+          "wave_layouts": [
+            "open",
+            "ranged",
+            "guarded"
+          ],
+          "pressure": 2.29
+        },
+        {
+          "title": "덮여 쓴 장부",
+          "kind": "troops",
+          "layout": "flank",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a3_e12",
+            "a3_e11",
+            "a3_e11",
+            "a3_e12",
+            "a3_e11",
+            "a3_e12",
+            "a3_e11",
+            "a3_e12",
+            "a3_e11"
+          ],
+          "wave_sizes": [
+            2,
+            3,
+            4
+          ],
+          "wave_layouts": [
+            "flank",
+            "staggered",
+            "pincer"
+          ],
+          "pressure": 2.29,
+          "signal_wave": 2,
+          "signal_title": "회랑 불빛 잇기",
+          "signal_reply": "빛이 이어집니다. 등불 쪽으로 모이는 적을 막아 주세요."
+        },
+        {
+          "title": "아로니로의 빈 이름칸",
+          "kind": "troops",
+          "layout": "pincer",
+          "hazard": "wind",
+          "echo": false,
+          "ward": true,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a3_e11",
+            "a3_e12",
+            "a3_e11",
+            "a3_e12",
+            "a3_e11",
+            "a3_e12"
+          ],
+          "wave_sizes": [
+            3,
+            3
+          ],
+          "wave_layouts": [
+            "pincer",
+            "ranged"
+          ],
+          "pressure": 2.29
+        },
+        {
+          "title": "조마리의 관측 틈",
+          "kind": "mixed",
+          "layout": "guarded",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a3_e12",
+            "a3_e11",
+            "a3_e12",
+            "a3_e11",
+            "a3_e11",
+            "a3_e12",
+            "a3_e11",
+            "a3_e06",
+            "a3_e11",
+            "a3_e12"
+          ],
+          "wave_sizes": [
+            4,
+            3,
+            3
+          ],
+          "wave_layouts": [
+            "guarded",
+            "flank",
+            "open"
+          ],
+          "pressure": 2.29
+        },
+        {
+          "title": "분석실로 가는 책등",
+          "kind": "troops",
+          "layout": "ranged",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a3_e11",
+            "a3_e12",
+            "a3_e11",
+            "a3_e12",
+            "a3_e11",
+            "a3_e12",
+            "a3_e11",
+            "a3_e12",
+            "a3_e11"
+          ],
+          "wave_sizes": [
+            3,
+            3,
+            3
+          ],
+          "wave_layouts": [
+            "ranged",
+            "flank",
+            "open"
+          ],
+          "pressure": 2.29
         }
       ],
       "xp": 360,
       "gold": 160,
       "reason": "기록고에는 루드본·아로니로·조마리의 기억이 별도 방으로 겹칩니다. 각 방의 표지를 대조해 가짜 연결을 걷어 냅니다.",
       "resolution": "기록고의 표지가 분석실을 가리킵니다. 서로 다른 이름을 한 기록으로 합치지 않고 보존합니다.",
-      "landmark": "엑세키아스 기록고"
+      "landmark": "엑세키아스 기록고",
+      "legacy_rooms": 5
     },
     {
       "index": 16,
@@ -1023,7 +3612,8 @@
           "hazard": "",
           "echo": true,
           "ward": false,
-          "reinforcement": false
+          "reinforcement": false,
+          "pressure": 1.35
         },
         {
           "title": "분석실과 측면 정원 · 통로 2",
@@ -1036,7 +3626,8 @@
           "hazard": "wind",
           "echo": false,
           "ward": true,
-          "reinforcement": true
+          "reinforcement": true,
+          "pressure": 1.35
         },
         {
           "title": "독립 조우방 1",
@@ -1048,7 +3639,8 @@
           "hazard": "",
           "echo": false,
           "ward": false,
-          "reinforcement": false
+          "reinforcement": false,
+          "pressure": 1.5
         },
         {
           "title": "독립 조우방 2",
@@ -1060,7 +3652,8 @@
           "hazard": "",
           "echo": false,
           "ward": false,
-          "reinforcement": false
+          "reinforcement": false,
+          "pressure": 1.5
         },
         {
           "title": "독립 조우방 3",
@@ -1072,14 +3665,172 @@
           "hazard": "",
           "echo": false,
           "ward": false,
-          "reinforcement": false
+          "reinforcement": false,
+          "pressure": 1.5
+        },
+        {
+          "title": "분석실의 측면 관찰대",
+          "kind": "troops",
+          "layout": "pincer",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a3_e11",
+            "a3_e12",
+            "a3_e11",
+            "a3_e12",
+            "a3_e11",
+            "a3_e12"
+          ],
+          "wave_sizes": [
+            3,
+            3
+          ],
+          "wave_layouts": [
+            "pincer",
+            "ranged"
+          ],
+          "pressure": 2.29
+        },
+        {
+          "title": "핀돌의 끊긴 파동",
+          "kind": "troops",
+          "layout": "guarded",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a3_e12",
+            "a3_e11",
+            "a3_e12",
+            "a3_e11",
+            "a3_e11",
+            "a3_e12",
+            "a3_e11",
+            "a3_e12",
+            "a3_e11",
+            "a3_e12"
+          ],
+          "wave_sizes": [
+            4,
+            3,
+            3
+          ],
+          "wave_layouts": [
+            "guarded",
+            "flank",
+            "open"
+          ],
+          "pressure": 2.29,
+          "signal_wave": 2,
+          "signal_title": "회랑 불빛 잇기",
+          "signal_reply": "빛이 이어집니다. 등불 쪽으로 모이는 적을 막아 주세요."
+        },
+        {
+          "title": "지오가 뛰어든 낮은 담",
+          "kind": "troops",
+          "layout": "ranged",
+          "hazard": "wind",
+          "echo": false,
+          "ward": true,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a3_e11",
+            "a3_e12",
+            "a3_e11",
+            "a3_e12",
+            "a3_e11",
+            "a3_e12",
+            "a3_e11",
+            "a3_e12",
+            "a3_e11"
+          ],
+          "wave_sizes": [
+            3,
+            3,
+            3
+          ],
+          "wave_layouts": [
+            "ranged",
+            "flank",
+            "open"
+          ],
+          "pressure": 2.29
+        },
+        {
+          "title": "겹쳐 뜬 영압 측정판",
+          "kind": "mixed",
+          "layout": "guarded",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a3_e12",
+            "a3_e11",
+            "a3_e12",
+            "a3_e11",
+            "a3_e10",
+            "a3_e12",
+            "a3_e11"
+          ],
+          "wave_sizes": [
+            4,
+            3
+          ],
+          "wave_layouts": [
+            "guarded",
+            "pincer"
+          ],
+          "pressure": 2.29
+        },
+        {
+          "title": "천개로 가는 발판",
+          "kind": "troops",
+          "layout": "open",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a3_e11",
+            "a3_e12",
+            "a3_e11",
+            "a3_e12",
+            "a3_e11",
+            "a3_e12",
+            "a3_e11",
+            "a3_e11",
+            "a3_e12",
+            "a3_e11"
+          ],
+          "wave_sizes": [
+            3,
+            4,
+            3
+          ],
+          "wave_layouts": [
+            "open",
+            "ranged",
+            "guarded"
+          ],
+          "pressure": 2.29
         }
       ],
       "xp": 376,
       "gold": 165,
       "reason": "분석실과 정원에 남은 자엘아폴로·핀돌·지오의 기억을 정리합니다. 원본에 덧씌운 관측 흔적을 제거합니다.",
       "resolution": "덧씌운 흔적이 사라지자 천개 위의 기록실이 드러났습니다. 우르키오라의 기록 아래에 원본이 있습니다.",
-      "landmark": "분석실과 측면 정원"
+      "landmark": "분석실과 측면 정원",
+      "legacy_rooms": 5
     },
     {
       "index": 17,
@@ -1100,7 +3851,8 @@
           "hazard": "",
           "echo": true,
           "ward": false,
-          "reinforcement": false
+          "reinforcement": false,
+          "pressure": 1.35
         },
         {
           "title": "우르키오라의 천개 · 통로 2",
@@ -1114,7 +3866,209 @@
           "hazard": "wind",
           "echo": false,
           "ward": true,
-          "reinforcement": false
+          "reinforcement": false,
+          "pressure": 1.35
+        },
+        {
+          "title": "천개 아래 그림자",
+          "kind": "troops",
+          "layout": "ranged",
+          "hazard": "wind",
+          "echo": false,
+          "ward": true,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a3_e11",
+            "a3_e12",
+            "a3_e11",
+            "a3_e12",
+            "a3_e11",
+            "a3_e12",
+            "a3_e11",
+            "a3_e12",
+            "a3_e11"
+          ],
+          "wave_sizes": [
+            3,
+            3,
+            3
+          ],
+          "wave_layouts": [
+            "ranged",
+            "flank",
+            "open"
+          ],
+          "pressure": 2.29
+        },
+        {
+          "title": "유리 없는 창",
+          "kind": "troops",
+          "layout": "guarded",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a3_e12",
+            "a3_e11",
+            "a3_e12",
+            "a3_e11",
+            "a3_e11",
+            "a3_e12",
+            "a3_e11",
+            "a3_e12",
+            "a3_e11",
+            "a3_e12"
+          ],
+          "wave_sizes": [
+            4,
+            3,
+            3
+          ],
+          "wave_layouts": [
+            "guarded",
+            "pincer",
+            "flank"
+          ],
+          "pressure": 2.29,
+          "signal_wave": 2,
+          "signal_title": "회랑 불빛 잇기",
+          "signal_reply": "빛이 이어집니다. 등불 쪽으로 모이는 적을 막아 주세요."
+        },
+        {
+          "title": "빛의 창이 지난 자리",
+          "kind": "troops",
+          "layout": "open",
+          "hazard": "wind",
+          "echo": false,
+          "ward": true,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a3_e11",
+            "a3_e12",
+            "a3_e11",
+            "a3_e12",
+            "a3_e11",
+            "a3_e12",
+            "a3_e11",
+            "a3_e11",
+            "a3_e12",
+            "a3_e11"
+          ],
+          "wave_sizes": [
+            3,
+            4,
+            3
+          ],
+          "wave_layouts": [
+            "open",
+            "ranged",
+            "guarded"
+          ],
+          "pressure": 2.29
+        },
+        {
+          "title": "사본을 비춘 돌벽",
+          "kind": "troops",
+          "layout": "flank",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a3_e12",
+            "a3_e11",
+            "a3_e11",
+            "a3_e12",
+            "a3_e11",
+            "a3_e12",
+            "a3_e11",
+            "a3_e12",
+            "a3_e11"
+          ],
+          "wave_sizes": [
+            2,
+            3,
+            4
+          ],
+          "wave_layouts": [
+            "flank",
+            "staggered",
+            "pincer"
+          ],
+          "pressure": 2.29
+        },
+        {
+          "title": "원본을 들 수 있는 빈터",
+          "kind": "troops",
+          "layout": "pincer",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a3_e11",
+            "a3_e12",
+            "a3_e11",
+            "a3_e12",
+            "a3_e11",
+            "a3_e12",
+            "a3_e11",
+            "a3_e12",
+            "a3_e11"
+          ],
+          "wave_sizes": [
+            3,
+            3,
+            3
+          ],
+          "wave_layouts": [
+            "pincer",
+            "ranged",
+            "flank"
+          ],
+          "pressure": 2.29,
+          "signal_wave": 2,
+          "signal_title": "회랑 불빛 잇기",
+          "signal_reply": "빛이 이어집니다. 등불 쪽으로 모이는 적을 막아 주세요."
+        },
+        {
+          "title": "천개 끝 귀환선",
+          "kind": "troops",
+          "layout": "guarded",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a3_e12",
+            "a3_e11",
+            "a3_e12",
+            "a3_e11",
+            "a3_e11",
+            "a3_e12",
+            "a3_e11",
+            "a3_e12",
+            "a3_e11",
+            "a3_e12"
+          ],
+          "wave_sizes": [
+            4,
+            3,
+            3
+          ],
+          "wave_layouts": [
+            "guarded",
+            "flank",
+            "open"
+          ],
+          "pressure": 2.29
         },
         {
           "title": "핵심 기록 · 우르키오라의 천개",
@@ -1126,14 +4080,16 @@
           "hazard": "",
           "echo": false,
           "ward": false,
-          "reinforcement": false
+          "reinforcement": false,
+          "pressure": 2.65
         }
       ],
       "xp": 392,
       "gold": 170,
       "reason": "우르키오라의 영압이 세 단계로 변하며 천개를 막습니다. 빛의 창과 착지 뒤의 빈틈을 읽고 원본을 회수합니다.",
       "resolution": "원본 기록을 회수했습니다. 마을에서 여섯 사람의 영압과 맞추면 각성기를 강화하고 환영층을 대조할 수 있습니다.",
-      "landmark": "우르키오라의 천개"
+      "landmark": "우르키오라의 천개",
+      "legacy_rooms": 3
     },
     {
       "index": 18,
@@ -1156,7 +4112,8 @@
           "hazard": "",
           "echo": true,
           "ward": false,
-          "reinforcement": false
+          "reinforcement": false,
+          "pressure": 1.35
         },
         {
           "title": "첫 번째 가짜 교차로 · 통로 2",
@@ -1169,7 +4126,8 @@
           "hazard": "barrier",
           "echo": false,
           "ward": true,
-          "reinforcement": false
+          "reinforcement": false,
+          "pressure": 1.35
         },
         {
           "title": "독립 조우방 1",
@@ -1181,7 +4139,8 @@
           "hazard": "",
           "echo": false,
           "ward": false,
-          "reinforcement": false
+          "reinforcement": false,
+          "pressure": 1.5
         },
         {
           "title": "독립 조우방 2",
@@ -1193,14 +4152,148 @@
           "hazard": "",
           "echo": false,
           "ward": false,
-          "reinforcement": false
+          "reinforcement": false,
+          "pressure": 1.5
+        },
+        {
+          "title": "네 번째 기둥의 그림자",
+          "kind": "troops",
+          "layout": "flank",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a4_e11",
+            "a4_e12",
+            "a4_e12",
+            "a4_e11",
+            "a4_e12",
+            "a4_e11",
+            "a4_e12",
+            "a4_e11",
+            "a4_e12"
+          ],
+          "wave_sizes": [
+            2,
+            3,
+            4
+          ],
+          "wave_layouts": [
+            "flank",
+            "staggered",
+            "pincer"
+          ],
+          "pressure": 2.41
+        },
+        {
+          "title": "사본 밖 골목",
+          "kind": "troops",
+          "layout": "pincer",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a4_e12",
+            "a4_e11",
+            "a4_e12",
+            "a4_e11",
+            "a4_e12",
+            "a4_e11",
+            "a4_e12",
+            "a4_e11",
+            "a4_e12"
+          ],
+          "wave_sizes": [
+            3,
+            3,
+            3
+          ],
+          "wave_layouts": [
+            "pincer",
+            "ranged",
+            "flank"
+          ],
+          "pressure": 2.41,
+          "signal_wave": 2,
+          "signal_title": "서로 본 길 맞추기",
+          "signal_reply": "진짜 발소리를 따라 환영이 몰립니다. 남은 길을 지키세요."
+        },
+        {
+          "title": "엇갈린 신호등",
+          "kind": "troops",
+          "layout": "guarded",
+          "hazard": "barrier",
+          "echo": false,
+          "ward": true,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a4_e11",
+            "a4_e12",
+            "a4_e11",
+            "a4_e12",
+            "a4_e12",
+            "a4_e11",
+            "a4_e12",
+            "a4_e11",
+            "a4_e12",
+            "a4_e11"
+          ],
+          "wave_sizes": [
+            4,
+            3,
+            3
+          ],
+          "wave_layouts": [
+            "guarded",
+            "flank",
+            "open"
+          ],
+          "pressure": 2.41
+        },
+        {
+          "title": "같은 곳을 가리키는 창",
+          "kind": "mixed",
+          "layout": "ranged",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a4_e12",
+            "a4_e11",
+            "a4_e12",
+            "a4_e11",
+            "a4_e12",
+            "a4_e11",
+            "a4_e02",
+            "a4_e11",
+            "a4_e12"
+          ],
+          "wave_sizes": [
+            3,
+            3,
+            3
+          ],
+          "wave_layouts": [
+            "ranged",
+            "flank",
+            "open"
+          ],
+          "pressure": 2.41
         }
       ],
       "xp": 408,
       "gold": 165,
       "reason": "원본과 다른 표지가 교차로에 놓여 있습니다. 스타크와 바라간의 서로 다른 기억을 분리해 첫 어긋남을 찾습니다.",
       "resolution": "표지의 어긋남이 정지한 수로까지 이어집니다. 보이는 풍경 대신 원본의 순서를 따라갑니다.",
-      "landmark": "첫 번째 가짜 교차로"
+      "landmark": "첫 번째 가짜 교차로",
+      "legacy_rooms": 4
     },
     {
       "index": 19,
@@ -1221,7 +4314,8 @@
           "hazard": "",
           "echo": true,
           "ward": false,
-          "reinforcement": false
+          "reinforcement": false,
+          "pressure": 1.35
         },
         {
           "title": "정지한 수로의 강적 · 통로 2",
@@ -1235,7 +4329,8 @@
           "hazard": "barrier",
           "echo": false,
           "ward": true,
-          "reinforcement": true
+          "reinforcement": true,
+          "pressure": 1.35
         },
         {
           "title": "독립 조우방 1",
@@ -1247,7 +4342,8 @@
           "hazard": "",
           "echo": false,
           "ward": false,
-          "reinforcement": false
+          "reinforcement": false,
+          "pressure": 1.5
         },
         {
           "title": "독립 조우방 2",
@@ -1259,14 +4355,177 @@
           "hazard": "",
           "echo": false,
           "ward": false,
-          "reinforcement": false
+          "reinforcement": false,
+          "pressure": 1.5
+        },
+        {
+          "title": "멎은 수로의 난간",
+          "kind": "troops",
+          "layout": "guarded",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a4_e11",
+            "a4_e12",
+            "a4_e11",
+            "a4_e12",
+            "a4_e12",
+            "a4_e11",
+            "a4_e12",
+            "a4_e11",
+            "a4_e12",
+            "a4_e11"
+          ],
+          "wave_sizes": [
+            4,
+            3,
+            3
+          ],
+          "wave_layouts": [
+            "guarded",
+            "flank",
+            "open"
+          ],
+          "pressure": 2.41
+        },
+        {
+          "title": "할리벨의 파문",
+          "kind": "troops",
+          "layout": "ranged",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a4_e12",
+            "a4_e11",
+            "a4_e12",
+            "a4_e11",
+            "a4_e12",
+            "a4_e11",
+            "a4_e12",
+            "a4_e11",
+            "a4_e12"
+          ],
+          "wave_sizes": [
+            3,
+            3,
+            3
+          ],
+          "wave_layouts": [
+            "ranged",
+            "flank",
+            "open"
+          ],
+          "pressure": 2.41,
+          "signal_wave": 2,
+          "signal_title": "서로 본 길 맞추기",
+          "signal_reply": "진짜 발소리를 따라 환영이 몰립니다. 남은 길을 지키세요."
+        },
+        {
+          "title": "야미가 디딘 교각",
+          "kind": "troops",
+          "layout": "guarded",
+          "hazard": "barrier",
+          "echo": false,
+          "ward": true,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a4_e11",
+            "a4_e12",
+            "a4_e11",
+            "a4_e12",
+            "a4_e12",
+            "a4_e11",
+            "a4_e12"
+          ],
+          "wave_sizes": [
+            4,
+            3
+          ],
+          "wave_layouts": [
+            "guarded",
+            "pincer"
+          ],
+          "pressure": 2.41
+        },
+        {
+          "title": "혼자 울리는 목소리",
+          "kind": "mixed",
+          "layout": "open",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a4_e12",
+            "a4_e11",
+            "a4_e12",
+            "a4_e11",
+            "a4_e12",
+            "a4_e11",
+            "a4_e12",
+            "a4_e03",
+            "a4_e11",
+            "a4_e12"
+          ],
+          "wave_sizes": [
+            3,
+            4,
+            3
+          ],
+          "wave_layouts": [
+            "open",
+            "ranged",
+            "guarded"
+          ],
+          "pressure": 2.41
+        },
+        {
+          "title": "수로 밖 인계 지점",
+          "kind": "troops",
+          "layout": "flank",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a4_e11",
+            "a4_e12",
+            "a4_e12",
+            "a4_e11",
+            "a4_e12",
+            "a4_e11",
+            "a4_e12",
+            "a4_e11",
+            "a4_e12"
+          ],
+          "wave_sizes": [
+            2,
+            3,
+            4
+          ],
+          "wave_layouts": [
+            "flank",
+            "staggered",
+            "pincer"
+          ],
+          "pressure": 2.41
         }
       ],
       "xp": 424,
       "gold": 170,
       "reason": "할리벨과 야미의 기억이 수로를 가립니다. 물결과 무거운 강타를 구분해 검흔이 이어지는 다리로 접근합니다.",
       "resolution": "긴 칼날이 남긴 자국을 찾았습니다. 란기쿠가 가진 기억과 현장의 자국을 함께 확인합니다.",
-      "landmark": "정지한 수로의 강적"
+      "landmark": "정지한 수로의 강적",
+      "legacy_rooms": 4
     },
     {
       "index": 20,
@@ -1288,7 +4547,8 @@
           "hazard": "",
           "echo": true,
           "ward": false,
-          "reinforcement": false
+          "reinforcement": false,
+          "pressure": 1.35
         },
         {
           "title": "이치마루 긴의 사선 · 통로 2",
@@ -1303,7 +4563,164 @@
           "hazard": "barrier",
           "echo": false,
           "ward": true,
-          "reinforcement": false
+          "reinforcement": false,
+          "pressure": 1.35
+        },
+        {
+          "title": "기울어진 다리",
+          "kind": "troops",
+          "layout": "guarded",
+          "hazard": "barrier",
+          "echo": false,
+          "ward": true,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a4_e11",
+            "a4_e12",
+            "a4_e11",
+            "a4_e12",
+            "a4_e12",
+            "a4_e11",
+            "a4_e12"
+          ],
+          "wave_sizes": [
+            4,
+            3
+          ],
+          "wave_layouts": [
+            "guarded",
+            "pincer"
+          ],
+          "pressure": 2.41
+        },
+        {
+          "title": "신창이 긁은 난간",
+          "kind": "troops",
+          "layout": "open",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a4_e12",
+            "a4_e11",
+            "a4_e12",
+            "a4_e11",
+            "a4_e12",
+            "a4_e11",
+            "a4_e12",
+            "a4_e12",
+            "a4_e11",
+            "a4_e12"
+          ],
+          "wave_sizes": [
+            3,
+            4,
+            3
+          ],
+          "wave_layouts": [
+            "open",
+            "ranged",
+            "guarded"
+          ],
+          "pressure": 2.41,
+          "signal_wave": 2,
+          "signal_title": "서로 본 길 맞추기",
+          "signal_reply": "진짜 발소리를 따라 환영이 몰립니다. 남은 길을 지키세요."
+        },
+        {
+          "title": "돌아서면 보이는 검흔",
+          "kind": "troops",
+          "layout": "flank",
+          "hazard": "barrier",
+          "echo": false,
+          "ward": true,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a4_e11",
+            "a4_e12",
+            "a4_e12",
+            "a4_e11",
+            "a4_e12",
+            "a4_e11",
+            "a4_e12",
+            "a4_e11",
+            "a4_e12"
+          ],
+          "wave_sizes": [
+            2,
+            3,
+            4
+          ],
+          "wave_layouts": [
+            "flank",
+            "staggered",
+            "pincer"
+          ],
+          "pressure": 2.41
+        },
+        {
+          "title": "다시 걸을 자리",
+          "kind": "troops",
+          "layout": "pincer",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a4_e12",
+            "a4_e11",
+            "a4_e12",
+            "a4_e11",
+            "a4_e12",
+            "a4_e11"
+          ],
+          "wave_sizes": [
+            3,
+            3
+          ],
+          "wave_layouts": [
+            "pincer",
+            "ranged"
+          ],
+          "pressure": 2.41
+        },
+        {
+          "title": "사선 끝에 남은 길",
+          "kind": "troops",
+          "layout": "guarded",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a4_e11",
+            "a4_e12",
+            "a4_e11",
+            "a4_e12",
+            "a4_e12",
+            "a4_e11",
+            "a4_e12",
+            "a4_e11",
+            "a4_e12",
+            "a4_e11"
+          ],
+          "wave_sizes": [
+            4,
+            3,
+            3
+          ],
+          "wave_layouts": [
+            "guarded",
+            "flank",
+            "open"
+          ],
+          "pressure": 2.41
         },
         {
           "title": "핵심 기록 · 이치마루 긴의 사선",
@@ -1315,14 +4732,16 @@
           "hazard": "",
           "echo": false,
           "ward": false,
-          "reinforcement": false
+          "reinforcement": false,
+          "pressure": 2.25
         }
       ],
       "xp": 440,
       "gold": 175,
       "reason": "긴의 재현은 살아 돌아온 그가 아닙니다. 란기쿠의 기억을 존중하며, 신창의 궤적이 가리키는 실제 통로를 찾습니다.",
       "resolution": "긴의 자국과 가짜 표지가 어긋나는 지점을 찾았습니다. 란기쿠는 남은 말을 가지고 동료와 돌아가기로 합니다.",
-      "landmark": "이치마루 긴의 사선"
+      "landmark": "이치마루 긴의 사선",
+      "legacy_rooms": 3
     },
     {
       "index": 21,
@@ -1345,7 +4764,8 @@
           "hazard": "",
           "echo": true,
           "ward": false,
-          "reinforcement": false
+          "reinforcement": false,
+          "pressure": 1.35
         },
         {
           "title": "트레스 베스티아의 기억 · 통로 2",
@@ -1358,7 +4778,8 @@
           "hazard": "barrier",
           "echo": false,
           "ward": true,
-          "reinforcement": false
+          "reinforcement": false,
+          "pressure": 1.35
         },
         {
           "title": "독립 조우방 1",
@@ -1370,7 +4791,8 @@
           "hazard": "",
           "echo": false,
           "ward": false,
-          "reinforcement": false
+          "reinforcement": false,
+          "pressure": 1.5
         },
         {
           "title": "독립 조우방 2",
@@ -1382,7 +4804,8 @@
           "hazard": "",
           "echo": false,
           "ward": false,
-          "reinforcement": false
+          "reinforcement": false,
+          "pressure": 1.5
         },
         {
           "title": "독립 조우방 3",
@@ -1394,14 +4817,176 @@
           "hazard": "",
           "echo": false,
           "ward": false,
-          "reinforcement": false
+          "reinforcement": false,
+          "pressure": 1.5
+        },
+        {
+          "title": "원더와이스의 소리 아래",
+          "kind": "troops",
+          "layout": "flank",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a4_e11",
+            "a4_e12",
+            "a4_e12",
+            "a4_e11",
+            "a4_e12",
+            "a4_e11",
+            "a4_e12",
+            "a4_e11",
+            "a4_e12"
+          ],
+          "wave_sizes": [
+            2,
+            3,
+            4
+          ],
+          "wave_layouts": [
+            "flank",
+            "staggered",
+            "pincer"
+          ],
+          "pressure": 2.41
+        },
+        {
+          "title": "아파치 그림자의 맞은편",
+          "kind": "troops",
+          "layout": "pincer",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a4_e12",
+            "a4_e11",
+            "a4_e12",
+            "a4_e11",
+            "a4_e12",
+            "a4_e11",
+            "a4_e12",
+            "a4_e11",
+            "a4_e12"
+          ],
+          "wave_sizes": [
+            3,
+            3,
+            3
+          ],
+          "wave_layouts": [
+            "pincer",
+            "ranged",
+            "flank"
+          ],
+          "pressure": 2.41,
+          "signal_wave": 2,
+          "signal_title": "서로 본 길 맞추기",
+          "signal_reply": "진짜 발소리를 따라 환영이 몰립니다. 남은 길을 지키세요."
+        },
+        {
+          "title": "미라 로즈가 딛던 광장",
+          "kind": "troops",
+          "layout": "guarded",
+          "hazard": "barrier",
+          "echo": false,
+          "ward": true,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a4_e11",
+            "a4_e12",
+            "a4_e11",
+            "a4_e12",
+            "a4_e12",
+            "a4_e11",
+            "a4_e12",
+            "a4_e11",
+            "a4_e12",
+            "a4_e11"
+          ],
+          "wave_sizes": [
+            4,
+            3,
+            3
+          ],
+          "wave_layouts": [
+            "guarded",
+            "flank",
+            "open"
+          ],
+          "pressure": 2.41
+        },
+        {
+          "title": "서로 다른 두 방향",
+          "kind": "mixed",
+          "layout": "ranged",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a4_e12",
+            "a4_e11",
+            "a4_e12",
+            "a4_e11",
+            "a4_e12",
+            "a4_e11",
+            "a4_e07",
+            "a4_e11",
+            "a4_e12"
+          ],
+          "wave_sizes": [
+            3,
+            3,
+            3
+          ],
+          "wave_layouts": [
+            "ranged",
+            "flank",
+            "open"
+          ],
+          "pressure": 2.41
+        },
+        {
+          "title": "광장을 벗어나는 모서리",
+          "kind": "troops",
+          "layout": "guarded",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a4_e11",
+            "a4_e12",
+            "a4_e11",
+            "a4_e12",
+            "a4_e12",
+            "a4_e11",
+            "a4_e12"
+          ],
+          "wave_sizes": [
+            4,
+            3
+          ],
+          "wave_layouts": [
+            "guarded",
+            "pincer"
+          ],
+          "pressure": 2.41
         }
       ],
       "xp": 456,
       "gold": 180,
       "reason": "원더와이스·아파치·미라 로즈의 기록이 같은 광장에 겹칩니다. 소리와 그림자를 분리해 원본의 순서를 되찾습니다.",
       "resolution": "뒤섞인 기록이 각각의 이름으로 돌아갔습니다. 남은 선순·아욘·샤를로테의 기록을 지나 환영의 중심으로 갑니다.",
-      "landmark": "트레스 베스티아의 기억"
+      "landmark": "트레스 베스티아의 기억",
+      "legacy_rooms": 5
     },
     {
       "index": 22,
@@ -1422,7 +5007,8 @@
           "hazard": "",
           "echo": true,
           "ward": false,
-          "reinforcement": false
+          "reinforcement": false,
+          "pressure": 1.35
         },
         {
           "title": "폭주한 영압의 광장 · 통로 2",
@@ -1436,7 +5022,8 @@
           "hazard": "barrier",
           "echo": false,
           "ward": true,
-          "reinforcement": true
+          "reinforcement": true,
+          "pressure": 1.35
         },
         {
           "title": "독립 조우방 1",
@@ -1448,7 +5035,8 @@
           "hazard": "",
           "echo": false,
           "ward": false,
-          "reinforcement": false
+          "reinforcement": false,
+          "pressure": 1.5
         },
         {
           "title": "독립 조우방 2",
@@ -1460,7 +5048,8 @@
           "hazard": "",
           "echo": false,
           "ward": false,
-          "reinforcement": false
+          "reinforcement": false,
+          "pressure": 1.5
         },
         {
           "title": "독립 조우방 3",
@@ -1472,14 +5061,177 @@
           "hazard": "",
           "echo": false,
           "ward": false,
-          "reinforcement": false
+          "reinforcement": false,
+          "pressure": 1.5
+        },
+        {
+          "title": "출구가 돌던 간판",
+          "kind": "troops",
+          "layout": "guarded",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a4_e11",
+            "a4_e12",
+            "a4_e11",
+            "a4_e12",
+            "a4_e12",
+            "a4_e11",
+            "a4_e12",
+            "a4_e11",
+            "a4_e12",
+            "a4_e11"
+          ],
+          "wave_sizes": [
+            4,
+            3,
+            3
+          ],
+          "wave_layouts": [
+            "guarded",
+            "flank",
+            "open"
+          ],
+          "pressure": 2.41
+        },
+        {
+          "title": "아욘이 무너뜨린 입구",
+          "kind": "troops",
+          "layout": "ranged",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a4_e12",
+            "a4_e11",
+            "a4_e12",
+            "a4_e11",
+            "a4_e12",
+            "a4_e11",
+            "a4_e12",
+            "a4_e11",
+            "a4_e12"
+          ],
+          "wave_sizes": [
+            3,
+            3,
+            3
+          ],
+          "wave_layouts": [
+            "ranged",
+            "flank",
+            "open"
+          ],
+          "pressure": 2.41,
+          "signal_wave": 2,
+          "signal_title": "서로 본 길 맞추기",
+          "signal_reply": "진짜 발소리를 따라 환영이 몰립니다. 남은 길을 지키세요."
+        },
+        {
+          "title": "선순의 짧은 사각",
+          "kind": "troops",
+          "layout": "guarded",
+          "hazard": "barrier",
+          "echo": false,
+          "ward": true,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a4_e11",
+            "a4_e12",
+            "a4_e11",
+            "a4_e12",
+            "a4_e12",
+            "a4_e11",
+            "a4_e12"
+          ],
+          "wave_sizes": [
+            4,
+            3
+          ],
+          "wave_layouts": [
+            "guarded",
+            "pincer"
+          ],
+          "pressure": 2.41
+        },
+        {
+          "title": "샤를로테가 가린 표지",
+          "kind": "mixed",
+          "layout": "open",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a4_e12",
+            "a4_e11",
+            "a4_e12",
+            "a4_e11",
+            "a4_e12",
+            "a4_e11",
+            "a4_e12",
+            "a4_e08",
+            "a4_e11",
+            "a4_e12"
+          ],
+          "wave_sizes": [
+            3,
+            4,
+            3
+          ],
+          "wave_layouts": [
+            "open",
+            "ranged",
+            "guarded"
+          ],
+          "pressure": 2.41
+        },
+        {
+          "title": "세 자국이 이어진 곳",
+          "kind": "troops",
+          "layout": "flank",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a4_e11",
+            "a4_e12",
+            "a4_e12",
+            "a4_e11",
+            "a4_e12",
+            "a4_e11",
+            "a4_e12",
+            "a4_e11",
+            "a4_e12"
+          ],
+          "wave_sizes": [
+            2,
+            3,
+            4
+          ],
+          "wave_layouts": [
+            "flank",
+            "staggered",
+            "pincer"
+          ],
+          "pressure": 2.41
         }
       ],
       "xp": 472,
       "gold": 185,
       "reason": "선순·아욘·샤를로테가 남긴 영압의 방향을 대조합니다. 환영을 유지하는 표지와 실제 출구를 구분합니다.",
       "resolution": "두 기록이 어긋난 중심을 찾았습니다. 아이젠의 재현과 균열을 잇는 고리만 분리할 수 있습니다.",
-      "landmark": "폭주한 영압의 광장"
+      "landmark": "폭주한 영압의 광장",
+      "legacy_rooms": 5
     },
     {
       "index": 23,
@@ -1501,7 +5253,8 @@
           "hazard": "",
           "echo": true,
           "ward": false,
-          "reinforcement": false
+          "reinforcement": false,
+          "pressure": 1.35
         },
         {
           "title": "아이젠의 거울 도시 · 통로 2",
@@ -1516,7 +5269,199 @@
           "hazard": "barrier",
           "echo": false,
           "ward": true,
-          "reinforcement": false
+          "reinforcement": false,
+          "pressure": 1.35
+        },
+        {
+          "title": "거울 도시 첫 반사면",
+          "kind": "troops",
+          "layout": "guarded",
+          "hazard": "barrier",
+          "echo": false,
+          "ward": true,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a4_e11",
+            "a4_e12",
+            "a4_e11",
+            "a4_e12",
+            "a4_e12",
+            "a4_e11",
+            "a4_e12"
+          ],
+          "wave_sizes": [
+            4,
+            3
+          ],
+          "wave_layouts": [
+            "guarded",
+            "pincer"
+          ],
+          "pressure": 2.41
+        },
+        {
+          "title": "서로 다른 걸음 소리",
+          "kind": "troops",
+          "layout": "open",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a4_e12",
+            "a4_e11",
+            "a4_e12",
+            "a4_e11",
+            "a4_e12",
+            "a4_e11",
+            "a4_e12",
+            "a4_e12",
+            "a4_e11",
+            "a4_e12"
+          ],
+          "wave_sizes": [
+            3,
+            4,
+            3
+          ],
+          "wave_layouts": [
+            "open",
+            "ranged",
+            "guarded"
+          ],
+          "pressure": 2.41,
+          "signal_wave": 2,
+          "signal_title": "서로 본 길 맞추기",
+          "signal_reply": "진짜 발소리를 따라 환영이 몰립니다. 남은 길을 지키세요."
+        },
+        {
+          "title": "옅은 영압이 가린 거리",
+          "kind": "troops",
+          "layout": "flank",
+          "hazard": "barrier",
+          "echo": false,
+          "ward": true,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a4_e11",
+            "a4_e12",
+            "a4_e12",
+            "a4_e11",
+            "a4_e12",
+            "a4_e11",
+            "a4_e12",
+            "a4_e11",
+            "a4_e12"
+          ],
+          "wave_sizes": [
+            2,
+            3,
+            4
+          ],
+          "wave_layouts": [
+            "flank",
+            "staggered",
+            "pincer"
+          ],
+          "pressure": 2.41
+        },
+        {
+          "title": "사본과 겹치는 횡단로",
+          "kind": "troops",
+          "layout": "pincer",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a4_e12",
+            "a4_e11",
+            "a4_e12",
+            "a4_e11",
+            "a4_e12",
+            "a4_e11"
+          ],
+          "wave_sizes": [
+            3,
+            3
+          ],
+          "wave_layouts": [
+            "pincer",
+            "ranged"
+          ],
+          "pressure": 2.41
+        },
+        {
+          "title": "갈라진 퀸시 문장",
+          "kind": "troops",
+          "layout": "guarded",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a4_e11",
+            "a4_e12",
+            "a4_e11",
+            "a4_e12",
+            "a4_e12",
+            "a4_e11",
+            "a4_e12",
+            "a4_e11",
+            "a4_e12",
+            "a4_e11"
+          ],
+          "wave_sizes": [
+            4,
+            3,
+            3
+          ],
+          "wave_layouts": [
+            "guarded",
+            "flank",
+            "open"
+          ],
+          "pressure": 2.41,
+          "signal_wave": 2,
+          "signal_title": "서로 본 길 맞추기",
+          "signal_reply": "진짜 발소리를 따라 환영이 몰립니다. 남은 길을 지키세요."
+        },
+        {
+          "title": "진한 범위의 바깥",
+          "kind": "troops",
+          "layout": "ranged",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a4_e12",
+            "a4_e11",
+            "a4_e12",
+            "a4_e11",
+            "a4_e12",
+            "a4_e11",
+            "a4_e12",
+            "a4_e11",
+            "a4_e12"
+          ],
+          "wave_sizes": [
+            3,
+            3,
+            3
+          ],
+          "wave_layouts": [
+            "ranged",
+            "flank",
+            "open"
+          ],
+          "pressure": 2.41
         },
         {
           "title": "핵심 기록 · 아이젠의 거울 도시",
@@ -1528,14 +5473,16 @@
           "hazard": "",
           "echo": false,
           "ward": false,
-          "reinforcement": false
+          "reinforcement": false,
+          "pressure": 2.65
         }
       ],
       "xp": 488,
       "gold": 190,
       "reason": "원본을 대조해 옅은 환영과 진한 실체를 구분합니다. 아이젠의 권능 자체를 없애는 대신 이 균열의 연결을 끊습니다.",
       "resolution": "환영 뒤에서 퀸시 문장과 그림자 통로를 찾았습니다. 회수한 기록으로 연결이 다시 열리는 이유를 확인합니다.",
-      "landmark": "아이젠의 거울 도시"
+      "landmark": "아이젠의 거울 도시",
+      "legacy_rooms": 3
     },
     {
       "index": 24,
@@ -1556,7 +5503,8 @@
           "hazard": "",
           "echo": true,
           "ward": false,
-          "reinforcement": false
+          "reinforcement": false,
+          "pressure": 1.35
         },
         {
           "title": "그림자의 진입로 · 통로 2",
@@ -1570,7 +5518,8 @@
           "hazard": "shadow",
           "echo": false,
           "ward": true,
-          "reinforcement": false
+          "reinforcement": false,
+          "pressure": 1.35
         },
         {
           "title": "독립 조우방 1",
@@ -1582,7 +5531,8 @@
           "hazard": "",
           "echo": false,
           "ward": false,
-          "reinforcement": false
+          "reinforcement": false,
+          "pressure": 1.5
         },
         {
           "title": "독립 조우방 2",
@@ -1594,14 +5544,139 @@
           "hazard": "",
           "echo": false,
           "ward": false,
-          "reinforcement": false
+          "reinforcement": false,
+          "pressure": 1.5
+        },
+        {
+          "title": "뒤에서 돌아오는 그림자",
+          "kind": "troops",
+          "layout": "pincer",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a5_e11",
+            "a5_e12",
+            "a5_e11",
+            "a5_e12",
+            "a5_e11",
+            "a5_e12"
+          ],
+          "wave_sizes": [
+            3,
+            3
+          ],
+          "wave_layouts": [
+            "pincer",
+            "ranged"
+          ],
+          "pressure": 2.53
+        },
+        {
+          "title": "킬게의 갇힌 통로",
+          "kind": "troops",
+          "layout": "guarded",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a5_e12",
+            "a5_e11",
+            "a5_e12",
+            "a5_e11",
+            "a5_e11",
+            "a5_e12",
+            "a5_e11",
+            "a5_e12",
+            "a5_e11",
+            "a5_e12"
+          ],
+          "wave_sizes": [
+            4,
+            3,
+            3
+          ],
+          "wave_layouts": [
+            "guarded",
+            "flank",
+            "open"
+          ],
+          "pressure": 2.53,
+          "signal_wave": 2,
+          "signal_title": "귀환 발자국 남기기",
+          "signal_reply": "새 자국이 남았습니다. 왕문 쪽에서 되돌아오는 병력을 막으세요."
+        },
+        {
+          "title": "에스 노트의 흔들린 표지",
+          "kind": "troops",
+          "layout": "ranged",
+          "hazard": "shadow",
+          "echo": false,
+          "ward": true,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a5_e11",
+            "a5_e12",
+            "a5_e11",
+            "a5_e12",
+            "a5_e11",
+            "a5_e12",
+            "a5_e11",
+            "a5_e12",
+            "a5_e11"
+          ],
+          "wave_sizes": [
+            3,
+            3,
+            3
+          ],
+          "wave_layouts": [
+            "ranged",
+            "flank",
+            "open"
+          ],
+          "pressure": 2.53
+        },
+        {
+          "title": "왕문으로 꺾이는 발자국",
+          "kind": "mixed",
+          "layout": "guarded",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a5_e12",
+            "a5_e11",
+            "a5_e12",
+            "a5_e11",
+            "a5_e01",
+            "a5_e12",
+            "a5_e11"
+          ],
+          "wave_sizes": [
+            4,
+            3
+          ],
+          "wave_layouts": [
+            "guarded",
+            "pincer"
+          ],
+          "pressure": 2.53
         }
       ],
       "xp": 504,
       "gold": 185,
       "reason": "그림자 통로가 봉인한 층에 다시 닿습니다. 킬게와 에스 노트의 기억을 지나 재현을 되돌리는 왕문의 방향을 찾습니다.",
       "resolution": "왕문까지 이어지는 전선이 드러났습니다. 폭발과 화염으로 가려진 표지를 먼저 정리합니다.",
-      "landmark": "그림자의 진입로"
+      "landmark": "그림자의 진입로",
+      "legacy_rooms": 4
     },
     {
       "index": 25,
@@ -1623,7 +5698,8 @@
           "hazard": "",
           "echo": true,
           "ward": false,
-          "reinforcement": false
+          "reinforcement": false,
+          "pressure": 1.35
         },
         {
           "title": "슈테른릿터의 전선 · 통로 2",
@@ -1638,7 +5714,8 @@
           "hazard": "shadow",
           "echo": false,
           "ward": true,
-          "reinforcement": true
+          "reinforcement": true,
+          "pressure": 1.35
         },
         {
           "title": "독립 조우방 1",
@@ -1650,7 +5727,8 @@
           "hazard": "",
           "echo": false,
           "ward": false,
-          "reinforcement": false
+          "reinforcement": false,
+          "pressure": 1.5
         },
         {
           "title": "독립 조우방 2",
@@ -1662,14 +5740,176 @@
           "hazard": "",
           "echo": false,
           "ward": false,
-          "reinforcement": false
+          "reinforcement": false,
+          "pressure": 1.5
+        },
+        {
+          "title": "화염 뒤의 흰 발판",
+          "kind": "troops",
+          "layout": "ranged",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a5_e11",
+            "a5_e12",
+            "a5_e11",
+            "a5_e12",
+            "a5_e11",
+            "a5_e12",
+            "a5_e11",
+            "a5_e12",
+            "a5_e11"
+          ],
+          "wave_sizes": [
+            3,
+            3,
+            3
+          ],
+          "wave_layouts": [
+            "ranged",
+            "flank",
+            "open"
+          ],
+          "pressure": 2.53
+        },
+        {
+          "title": "밤비에타의 낙하 지점",
+          "kind": "troops",
+          "layout": "guarded",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a5_e12",
+            "a5_e11",
+            "a5_e12",
+            "a5_e11",
+            "a5_e11",
+            "a5_e12",
+            "a5_e11",
+            "a5_e12",
+            "a5_e11",
+            "a5_e12"
+          ],
+          "wave_sizes": [
+            4,
+            3,
+            3
+          ],
+          "wave_layouts": [
+            "guarded",
+            "pincer",
+            "flank"
+          ],
+          "pressure": 2.53,
+          "signal_wave": 2,
+          "signal_title": "귀환 발자국 남기기",
+          "signal_reply": "새 자국이 남았습니다. 왕문 쪽에서 되돌아오는 병력을 막으세요."
+        },
+        {
+          "title": "버즈비의 잔불 사이",
+          "kind": "troops",
+          "layout": "open",
+          "hazard": "shadow",
+          "echo": false,
+          "ward": true,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a5_e11",
+            "a5_e12",
+            "a5_e11",
+            "a5_e12",
+            "a5_e11",
+            "a5_e12",
+            "a5_e11",
+            "a5_e11",
+            "a5_e12",
+            "a5_e11"
+          ],
+          "wave_sizes": [
+            3,
+            4,
+            3
+          ],
+          "wave_layouts": [
+            "open",
+            "ranged",
+            "guarded"
+          ],
+          "pressure": 2.53
+        },
+        {
+          "title": "저울이 비친 바닥",
+          "kind": "mixed",
+          "layout": "flank",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a5_e12",
+            "a5_e11",
+            "a5_e11",
+            "a5_e12",
+            "a5_e11",
+            "a5_e04",
+            "a5_e11",
+            "a5_e12",
+            "a5_e11"
+          ],
+          "wave_sizes": [
+            2,
+            3,
+            4
+          ],
+          "wave_layouts": [
+            "flank",
+            "staggered",
+            "pincer"
+          ],
+          "pressure": 2.53
+        },
+        {
+          "title": "그림자가 돌아오는 쪽",
+          "kind": "troops",
+          "layout": "pincer",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a5_e11",
+            "a5_e12",
+            "a5_e11",
+            "a5_e12",
+            "a5_e11",
+            "a5_e12"
+          ],
+          "wave_sizes": [
+            3,
+            3
+          ],
+          "wave_layouts": [
+            "pincer",
+            "ranged"
+          ],
+          "pressure": 2.53
         }
       ],
       "xp": 520,
       "gold": 190,
       "reason": "밤비에타의 폭발과 버즈비의 화염이 서로 다른 구역을 막습니다. 두 예고를 구분해 저울 문장까지 접근합니다.",
       "resolution": "되돌림의 중심은 하쉬발트가 지키는 연결 고리입니다. 고리를 끊으면 같은 기록이 다시 돌아오지 않습니다.",
-      "landmark": "슈테른릿터의 전선"
+      "landmark": "슈테른릿터의 전선",
+      "legacy_rooms": 4
     },
     {
       "index": 26,
@@ -1692,7 +5932,8 @@
           "hazard": "",
           "echo": true,
           "ward": false,
-          "reinforcement": false
+          "reinforcement": false,
+          "pressure": 1.35
         },
         {
           "title": "하쉬발트의 저울 · 통로 2",
@@ -1705,7 +5946,168 @@
           "hazard": "shadow",
           "echo": false,
           "ward": true,
-          "reinforcement": false
+          "reinforcement": false,
+          "pressure": 1.35
+        },
+        {
+          "title": "거꾸로 이어진 회랑",
+          "kind": "troops",
+          "layout": "open",
+          "hazard": "shadow",
+          "echo": false,
+          "ward": true,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a5_e11",
+            "a5_e12",
+            "a5_e11",
+            "a5_e12",
+            "a5_e11",
+            "a5_e12",
+            "a5_e11",
+            "a5_e11",
+            "a5_e12",
+            "a5_e11"
+          ],
+          "wave_sizes": [
+            3,
+            4,
+            3
+          ],
+          "wave_layouts": [
+            "open",
+            "ranged",
+            "guarded"
+          ],
+          "pressure": 2.53
+        },
+        {
+          "title": "발걸음이 쌓인 바닥",
+          "kind": "troops",
+          "layout": "flank",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a5_e12",
+            "a5_e11",
+            "a5_e11",
+            "a5_e12",
+            "a5_e11",
+            "a5_e12",
+            "a5_e11",
+            "a5_e12",
+            "a5_e11"
+          ],
+          "wave_sizes": [
+            2,
+            3,
+            4
+          ],
+          "wave_layouts": [
+            "flank",
+            "staggered",
+            "pincer"
+          ],
+          "pressure": 2.53,
+          "signal_wave": 2,
+          "signal_title": "귀환 발자국 남기기",
+          "signal_reply": "새 자국이 남았습니다. 왕문 쪽에서 되돌아오는 병력을 막으세요."
+        },
+        {
+          "title": "저울 아래 숨 고르는 곳",
+          "kind": "troops",
+          "layout": "pincer",
+          "hazard": "shadow",
+          "echo": false,
+          "ward": true,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a5_e11",
+            "a5_e12",
+            "a5_e11",
+            "a5_e12",
+            "a5_e11",
+            "a5_e12"
+          ],
+          "wave_sizes": [
+            3,
+            3
+          ],
+          "wave_layouts": [
+            "pincer",
+            "ranged"
+          ],
+          "pressure": 2.53
+        },
+        {
+          "title": "고리를 잇는 사선",
+          "kind": "troops",
+          "layout": "guarded",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a5_e12",
+            "a5_e11",
+            "a5_e12",
+            "a5_e11",
+            "a5_e11",
+            "a5_e12",
+            "a5_e11",
+            "a5_e12",
+            "a5_e11",
+            "a5_e12"
+          ],
+          "wave_sizes": [
+            4,
+            3,
+            3
+          ],
+          "wave_layouts": [
+            "guarded",
+            "flank",
+            "open"
+          ],
+          "pressure": 2.53
+        },
+        {
+          "title": "지워지지 않는 첫 자국",
+          "kind": "troops",
+          "layout": "ranged",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a5_e11",
+            "a5_e12",
+            "a5_e11",
+            "a5_e12",
+            "a5_e11",
+            "a5_e12",
+            "a5_e11",
+            "a5_e12",
+            "a5_e11"
+          ],
+          "wave_sizes": [
+            3,
+            3,
+            3
+          ],
+          "wave_layouts": [
+            "ranged",
+            "flank",
+            "open"
+          ],
+          "pressure": 2.53
         },
         {
           "title": "핵심 기록 · 하쉬발트의 저울",
@@ -1717,14 +6119,16 @@
           "hazard": "",
           "echo": false,
           "ward": false,
-          "reinforcement": false
+          "reinforcement": false,
+          "pressure": 2.25
         }
       ],
       "xp": 536,
       "gold": 195,
       "reason": "하쉬발트의 세 번째 타격 뒤 되돌림이 예고됩니다. 무작정 연타하지 않고 고리 밖으로 물러날 순간을 만듭니다.",
       "resolution": "되돌림의 고리를 해제했습니다. 왕성 회랑과 미래의 정원을 지나 마지막 기록실까지 길이 열렸습니다.",
-      "landmark": "하쉬발트의 저울"
+      "landmark": "하쉬발트의 저울",
+      "legacy_rooms": 3
     },
     {
       "index": 27,
@@ -1745,7 +6149,8 @@
           "hazard": "",
           "echo": true,
           "ward": false,
-          "reinforcement": false
+          "reinforcement": false,
+          "pressure": 1.35
         },
         {
           "title": "공명하는 왕성 회랑 · 통로 2",
@@ -1759,7 +6164,8 @@
           "hazard": "shadow",
           "echo": false,
           "ward": true,
-          "reinforcement": false
+          "reinforcement": false,
+          "pressure": 1.35
         },
         {
           "title": "독립 조우방 1",
@@ -1771,7 +6177,8 @@
           "hazard": "",
           "echo": false,
           "ward": false,
-          "reinforcement": false
+          "reinforcement": false,
+          "pressure": 1.5
         },
         {
           "title": "독립 조우방 2",
@@ -1783,7 +6190,8 @@
           "hazard": "",
           "echo": false,
           "ward": false,
-          "reinforcement": false
+          "reinforcement": false,
+          "pressure": 1.5
         },
         {
           "title": "독립 조우방 3",
@@ -1795,14 +6203,172 @@
           "hazard": "",
           "echo": false,
           "ward": false,
-          "reinforcement": false
+          "reinforcement": false,
+          "pressure": 1.5
+        },
+        {
+          "title": "창 두가 막은 회랑",
+          "kind": "troops",
+          "layout": "pincer",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a5_e11",
+            "a5_e12",
+            "a5_e11",
+            "a5_e12",
+            "a5_e11",
+            "a5_e12"
+          ],
+          "wave_sizes": [
+            3,
+            3
+          ],
+          "wave_layouts": [
+            "pincer",
+            "ranged"
+          ],
+          "pressure": 2.53
+        },
+        {
+          "title": "BG9의 관측선",
+          "kind": "troops",
+          "layout": "guarded",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a5_e12",
+            "a5_e11",
+            "a5_e12",
+            "a5_e11",
+            "a5_e11",
+            "a5_e12",
+            "a5_e11",
+            "a5_e12",
+            "a5_e11",
+            "a5_e12"
+          ],
+          "wave_sizes": [
+            4,
+            3,
+            3
+          ],
+          "wave_layouts": [
+            "guarded",
+            "flank",
+            "open"
+          ],
+          "pressure": 2.53,
+          "signal_wave": 2,
+          "signal_title": "귀환 발자국 남기기",
+          "signal_reply": "새 자국이 남았습니다. 왕문 쪽에서 되돌아오는 병력을 막으세요."
+        },
+        {
+          "title": "마스크가 내려온 곳",
+          "kind": "troops",
+          "layout": "ranged",
+          "hazard": "shadow",
+          "echo": false,
+          "ward": true,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a5_e11",
+            "a5_e12",
+            "a5_e11",
+            "a5_e12",
+            "a5_e11",
+            "a5_e12",
+            "a5_e11",
+            "a5_e12",
+            "a5_e11"
+          ],
+          "wave_sizes": [
+            3,
+            3,
+            3
+          ],
+          "wave_layouts": [
+            "ranged",
+            "flank",
+            "open"
+          ],
+          "pressure": 2.53
+        },
+        {
+          "title": "왕성 바깥의 출구 표지",
+          "kind": "mixed",
+          "layout": "guarded",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a5_e12",
+            "a5_e11",
+            "a5_e12",
+            "a5_e11",
+            "a5_e05",
+            "a5_e12",
+            "a5_e11"
+          ],
+          "wave_sizes": [
+            4,
+            3
+          ],
+          "wave_layouts": [
+            "guarded",
+            "pincer"
+          ],
+          "pressure": 2.53
+        },
+        {
+          "title": "정원이 내려다보이는 문",
+          "kind": "troops",
+          "layout": "open",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a5_e11",
+            "a5_e12",
+            "a5_e11",
+            "a5_e12",
+            "a5_e11",
+            "a5_e12",
+            "a5_e11",
+            "a5_e11",
+            "a5_e12",
+            "a5_e11"
+          ],
+          "wave_sizes": [
+            3,
+            4,
+            3
+          ],
+          "wave_layouts": [
+            "open",
+            "ranged",
+            "guarded"
+          ],
+          "pressure": 2.53
         }
       ],
       "xp": 552,
       "gold": 200,
       "reason": "창 두·BG9·마스크의 서로 다른 전투 기록이 회랑에 겹칩니다. 방어·사격·돌진을 나누어 상대하고 귀환 표지를 남깁니다.",
       "resolution": "회랑이 안정됐습니다. 가능한 미래가 겹치는 정원에서 확정되기 전의 신호를 대조합니다.",
-      "landmark": "공명하는 왕성 회랑"
+      "landmark": "공명하는 왕성 회랑",
+      "legacy_rooms": 5
     },
     {
       "index": 28,
@@ -1824,7 +6390,8 @@
           "hazard": "",
           "echo": true,
           "ward": false,
-          "reinforcement": false
+          "reinforcement": false,
+          "pressure": 1.35
         },
         {
           "title": "가능한 미래의 정원 · 통로 2",
@@ -1839,7 +6406,8 @@
           "hazard": "shadow",
           "echo": false,
           "ward": true,
-          "reinforcement": true
+          "reinforcement": true,
+          "pressure": 1.35
         },
         {
           "title": "독립 조우방 1",
@@ -1851,7 +6419,8 @@
           "hazard": "",
           "echo": false,
           "ward": false,
-          "reinforcement": false
+          "reinforcement": false,
+          "pressure": 1.5
         },
         {
           "title": "독립 조우방 2",
@@ -1863,7 +6432,8 @@
           "hazard": "",
           "echo": false,
           "ward": false,
-          "reinforcement": false
+          "reinforcement": false,
+          "pressure": 1.5
         },
         {
           "title": "독립 조우방 3",
@@ -1875,14 +6445,176 @@
           "hazard": "",
           "echo": false,
           "ward": false,
-          "reinforcement": false
+          "reinforcement": false,
+          "pressure": 1.5
+        },
+        {
+          "title": "발소리가 있는 정원",
+          "kind": "troops",
+          "layout": "ranged",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a5_e11",
+            "a5_e12",
+            "a5_e11",
+            "a5_e12",
+            "a5_e11",
+            "a5_e12",
+            "a5_e11",
+            "a5_e12",
+            "a5_e11"
+          ],
+          "wave_sizes": [
+            3,
+            3,
+            3
+          ],
+          "wave_layouts": [
+            "ranged",
+            "flank",
+            "open"
+          ],
+          "pressure": 2.53
+        },
+        {
+          "title": "가짜 귀환 갈림길",
+          "kind": "troops",
+          "layout": "guarded",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a5_e12",
+            "a5_e11",
+            "a5_e12",
+            "a5_e11",
+            "a5_e11",
+            "a5_e12",
+            "a5_e11",
+            "a5_e12",
+            "a5_e11",
+            "a5_e12"
+          ],
+          "wave_sizes": [
+            4,
+            3,
+            3
+          ],
+          "wave_layouts": [
+            "guarded",
+            "pincer",
+            "flank"
+          ],
+          "pressure": 2.53,
+          "signal_wave": 2,
+          "signal_title": "귀환 발자국 남기기",
+          "signal_reply": "새 자국이 남았습니다. 왕문 쪽에서 되돌아오는 병력을 막으세요."
+        },
+        {
+          "title": "같은 발의 다른 자국",
+          "kind": "troops",
+          "layout": "open",
+          "hazard": "shadow",
+          "echo": false,
+          "ward": true,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a5_e11",
+            "a5_e12",
+            "a5_e11",
+            "a5_e12",
+            "a5_e11",
+            "a5_e12",
+            "a5_e11",
+            "a5_e11",
+            "a5_e12",
+            "a5_e11"
+          ],
+          "wave_sizes": [
+            3,
+            4,
+            3
+          ],
+          "wave_layouts": [
+            "open",
+            "ranged",
+            "guarded"
+          ],
+          "pressure": 2.53
+        },
+        {
+          "title": "다섯 줄을 잇는 자리",
+          "kind": "mixed",
+          "layout": "flank",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a5_e12",
+            "a5_e11",
+            "a5_e11",
+            "a5_e12",
+            "a5_e11",
+            "a5_e09",
+            "a5_e11",
+            "a5_e12",
+            "a5_e11"
+          ],
+          "wave_sizes": [
+            2,
+            3,
+            4
+          ],
+          "wave_layouts": [
+            "flank",
+            "staggered",
+            "pincer"
+          ],
+          "pressure": 2.53
+        },
+        {
+          "title": "마지막 문 바깥 좌표",
+          "kind": "troops",
+          "layout": "pincer",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a5_e11",
+            "a5_e12",
+            "a5_e11",
+            "a5_e12",
+            "a5_e11",
+            "a5_e12"
+          ],
+          "wave_sizes": [
+            3,
+            3
+          ],
+          "wave_layouts": [
+            "pincer",
+            "ranged"
+          ],
+          "pressure": 2.53
         }
       ],
       "xp": 568,
       "gold": 205,
       "reason": "캔디스·그레미·아스킨의 기록은 다른 미래를 보여 줍니다. 원본 다섯 묶음을 대조해 실제 왕실의 좌표를 정합니다.",
       "resolution": "왕실 좌표가 한곳으로 모였습니다. 되찾은 이름과 여섯 사람의 귀환 약속을 기록함에 고정합니다.",
-      "landmark": "가능한 미래의 정원"
+      "landmark": "가능한 미래의 정원",
+      "legacy_rooms": 5
     },
     {
       "index": 29,
@@ -1905,7 +6637,8 @@
           "hazard": "",
           "echo": true,
           "ward": false,
-          "reinforcement": false
+          "reinforcement": false,
+          "pressure": 1.35
         },
         {
           "title": "유하바하의 마지막 기록 · 통로 2",
@@ -1918,7 +6651,199 @@
           "hazard": "shadow",
           "echo": false,
           "ward": true,
-          "reinforcement": false
+          "reinforcement": false,
+          "pressure": 1.35
+        },
+        {
+          "title": "왕문의 바깥 계단",
+          "kind": "troops",
+          "layout": "open",
+          "hazard": "shadow",
+          "echo": false,
+          "ward": true,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a5_e11",
+            "a5_e12",
+            "a5_e11",
+            "a5_e12",
+            "a5_e11",
+            "a5_e12",
+            "a5_e11",
+            "a5_e11",
+            "a5_e12",
+            "a5_e11"
+          ],
+          "wave_sizes": [
+            3,
+            4,
+            3
+          ],
+          "wave_layouts": [
+            "open",
+            "ranged",
+            "guarded"
+          ],
+          "pressure": 2.53
+        },
+        {
+          "title": "미리 보이는 사선",
+          "kind": "troops",
+          "layout": "flank",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a5_e12",
+            "a5_e11",
+            "a5_e11",
+            "a5_e12",
+            "a5_e11",
+            "a5_e12",
+            "a5_e11",
+            "a5_e12",
+            "a5_e11"
+          ],
+          "wave_sizes": [
+            2,
+            3,
+            4
+          ],
+          "wave_layouts": [
+            "flank",
+            "staggered",
+            "pincer"
+          ],
+          "pressure": 2.53,
+          "signal_wave": 2,
+          "signal_title": "귀환 발자국 남기기",
+          "signal_reply": "새 자국이 남았습니다. 왕문 쪽에서 되돌아오는 병력을 막으세요."
+        },
+        {
+          "title": "두 이름이 엇갈린 곳",
+          "kind": "troops",
+          "layout": "pincer",
+          "hazard": "shadow",
+          "echo": false,
+          "ward": true,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a5_e11",
+            "a5_e12",
+            "a5_e11",
+            "a5_e12",
+            "a5_e11",
+            "a5_e12"
+          ],
+          "wave_sizes": [
+            3,
+            3
+          ],
+          "wave_layouts": [
+            "pincer",
+            "ranged"
+          ],
+          "pressure": 2.53
+        },
+        {
+          "title": "끊어야 할 그림자의 끝",
+          "kind": "troops",
+          "layout": "guarded",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a5_e12",
+            "a5_e11",
+            "a5_e12",
+            "a5_e11",
+            "a5_e11",
+            "a5_e12",
+            "a5_e11",
+            "a5_e12",
+            "a5_e11",
+            "a5_e12"
+          ],
+          "wave_sizes": [
+            4,
+            3,
+            3
+          ],
+          "wave_layouts": [
+            "guarded",
+            "flank",
+            "open"
+          ],
+          "pressure": 2.53
+        },
+        {
+          "title": "여섯 번째 대답의 자리",
+          "kind": "troops",
+          "layout": "ranged",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a5_e11",
+            "a5_e12",
+            "a5_e11",
+            "a5_e12",
+            "a5_e11",
+            "a5_e12",
+            "a5_e11",
+            "a5_e12",
+            "a5_e11"
+          ],
+          "wave_sizes": [
+            3,
+            3,
+            3
+          ],
+          "wave_layouts": [
+            "ranged",
+            "flank",
+            "open"
+          ],
+          "pressure": 2.53,
+          "signal_wave": 2,
+          "signal_title": "귀환 발자국 남기기",
+          "signal_reply": "새 자국이 남았습니다. 왕문 쪽에서 되돌아오는 병력을 막으세요."
+        },
+        {
+          "title": "유하바하 앞의 문턱",
+          "kind": "troops",
+          "layout": "guarded",
+          "hazard": "",
+          "echo": false,
+          "ward": false,
+          "reinforcement": false,
+          "extension": true,
+          "foes": [
+            "a5_e12",
+            "a5_e11",
+            "a5_e12",
+            "a5_e11",
+            "a5_e11",
+            "a5_e12",
+            "a5_e11"
+          ],
+          "wave_sizes": [
+            4,
+            3
+          ],
+          "wave_layouts": [
+            "guarded",
+            "pincer"
+          ],
+          "pressure": 2.53
         },
         {
           "title": "핵심 기록 · 유하바하의 마지막 기록",
@@ -1930,14 +6855,16 @@
           "hazard": "",
           "echo": false,
           "ward": false,
-          "reinforcement": false
+          "reinforcement": false,
+          "pressure": 2.65
         }
       ],
       "xp": 584,
       "gold": 210,
       "reason": "가능한 사선이 확정되는 순간을 확인합니다. 유하바하의 재현과 다섯 균열을 잇는 기록 기능을 봉인하고 함께 돌아갑니다.",
       "resolution": "재현 기능이 멈췄습니다. 구조 신호가 귀환로를 밝힙니다. 마지막 보고로 이름을 돌려주고 여섯 사람의 귀환을 남깁니다.",
-      "landmark": "유하바하의 마지막 기록"
+      "landmark": "유하바하의 마지막 기록",
+      "legacy_rooms": 3
     }
   ],
   "foes": [

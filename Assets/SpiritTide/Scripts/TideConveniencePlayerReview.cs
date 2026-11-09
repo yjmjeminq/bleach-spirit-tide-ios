@@ -44,7 +44,7 @@ namespace SpiritTide
             yield return Capture("83-quest-destination");yield return TapUi("map-act-5");yield return TapUi("close");
             Check("map back restores the quest detail and focus",game.Session.Mode==TideMode.Quests&&VisibleText(q.title)&&EventSystem.current.currentSelectedGameObject==game.Buttons["side-go"].gameObject);
             Check("previewing a route has no progression side effects",before==JsonUtility.ToJson(p));yield return TapUi("side-go");yield return TapUi("depart");
-            yield return ReadStory();Check("destination primary enters the exact historical dungeon",game.Session.IsCampaign&&game.Session.IsReplay&&game.Session.Dungeon.act==1&&game.Session.Dungeon.number==1);game.ReturnTown();
+            yield return ReadStory();Check("destination primary enters the exact historical room",game.Session.IsFieldVisit&&game.Session.Dungeon.act==1&&game.Session.Dungeon.number==1&&game.Session.RoomIndex==0);game.ReturnTown();
 
             game.Session.AcceptSideQuest("side_a1_2");var ward=TideQuests.Find("side_a1_2");yield return OpenSideCard(ward);yield return TapUi("side-go");yield return TapUi("depart");
             Check("ward route prefers an accessible current dungeon",game.Session.Dungeon.number==4&&!game.Session.IsReplay&&game.Session.IsFighting);game.ReturnTown();
@@ -57,7 +57,9 @@ namespace SpiritTide
             Check("previous story line is restored without running completion",game.Session.Mode==TideMode.Story&&VisibleText(lines[0].text)&&before==JsonUtility.ToJson(p)&&game.Session.Clock==clock);
             yield return ReadStory();JsonUtility.FromJsonOverwrite(wardSave,p);game.ReturnTown();
             TideQuests.State(p,ward.id).step=1;p.roomCheckpoint=1;yield return OpenSideCard(ward);yield return TapUi("side-go");
-            Check("route explains a target behind the current saved room",!game.Buttons["depart"].interactable&&!game.Buttons["dungeon-4"].interactable&&VisibleText("정화 후 재현으로 방문"));yield return Capture("83-route-checkpoint-explanation");LeaveToTown();
+            Check("route can revisit a target behind the current saved room",game.Buttons["depart"].interactable&&VisibleText("지나온 방 바로 방문"));
+            yield return Capture("83-route-checkpoint-explanation");yield return TapUi("depart");
+            Check("single room visit preserves the newer current checkpoint",game.Session.IsFieldVisit&&game.Session.RoomIndex==0&&p.roomCheckpoint==1);game.ReturnTown();
 
             yield return TapUi("pause");yield return TapUi("home-settings");p.keyboardHints=2;game.Session.Revision++;yield return null;LeaveToTown();game.StartBattle(true);yield return null;
             bool hidden=true;foreach(Text label in game.Buttons["skill-0"].GetComponentsInChildren<Text>())if(label.text=="A")hidden=false;

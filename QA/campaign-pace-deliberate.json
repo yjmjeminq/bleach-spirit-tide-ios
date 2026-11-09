@@ -1,0 +1,73 @@
+{
+    "method": "60 Hz runtime movement, combat, checkpoints, investigations and request steps. Dialogue and menus estimated separately.",
+    "readingRule": "Per modal line: greater of 2.8 seconds and 1.6 plus 0.095 seconds per character. Concurrent field calls are excluded.",
+    "menuSecondsPerStage": 32,
+    "menuSecondsPerRequest": 22,
+    "attackInterval": 1.0499999523162842,
+    "fieldSeconds": 8824.4833984375,
+    "readingSeconds": 2196.020263671875,
+    "menuSeconds": 1400.0,
+    "estimatedMinutes": 207.00839233398438,
+    "rooms": 264,
+    "requests": 20,
+    "pages": 464,
+    "finalLevel": 31,
+    "defeats": 0,
+    "chapters": [
+        {
+            "act": 1,
+            "rooms": 50,
+            "quests": 4,
+            "pages": 89,
+            "level": 8,
+            "defeats": 0,
+            "fieldSeconds": 1525.5167236328125,
+            "readingSeconds": 425.12005615234377,
+            "menuSeconds": 280.0
+        },
+        {
+            "act": 2,
+            "rooms": 52,
+            "quests": 4,
+            "pages": 87,
+            "level": 13,
+            "defeats": 0,
+            "fieldSeconds": 1340.3167724609375,
+            "readingSeconds": 411.6600341796875,
+            "menuSeconds": 280.0
+        },
+        {
+            "act": 3,
+            "rooms": 54,
+            "quests": 4,
+            "pages": 91,
+            "level": 19,
+            "defeats": 0,
+            "fieldSeconds": 1603.183349609375,
+            "readingSeconds": 439.43505859375,
+            "menuSeconds": 280.0
+        },
+        {
+            "act": 4,
+            "rooms": 54,
+            "quests": 4,
+            "pages": 93,
+            "level": 25,
+            "defeats": 0,
+            "fieldSeconds": 2165.016845703125,
+            "readingSeconds": 439.6551818847656,
+            "menuSeconds": 280.0
+        },
+        {
+            "act": 5,
+            "rooms": 54,
+            "quests": 4,
+            "pages": 104,
+            "level": 31,
+            "defeats": 0,
+            "fieldSeconds": 2190.4501953125,
+            "readingSeconds": 480.15008544921877,
+            "menuSeconds": 280.0
+        }
+    ]
+}

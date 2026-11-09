@@ -4,12 +4,25 @@ using UnityEngine;
 
 namespace SpiritTide
 {
-    [Serializable] public class TideRoomDef {public string title,kind,layout,hazard;public bool echo,ward,reinforcement;public string[] foes;}
-    [Serializable] public class TideDungeonDef {public int index,act,number,xp,gold;public string title,objective,background,reason,resolution,landmark;public TideRoomDef[] rooms;}
+    [Serializable] public class TideRoomDef
+    {
+        public string title,kind,layout,hazard,signal_title,signal_reply;
+        public bool echo,ward,reinforcement;
+        public string[] foes,wave_layouts;
+        public int[] wave_sizes;
+        public int signal_wave;
+        public float pressure;
+        public int WaveCount => wave_sizes != null && wave_sizes.Length > 0 ? wave_sizes.Length : reinforcement && foes.Length > 2 ? 2 : 1;
+        public int WaveSize(int wave) => wave_sizes != null && wave_sizes.Length > 0
+            ? wave_sizes[wave] : WaveCount == 1 ? foes.Length : wave == 0 ? 2 : foes.Length - 2;
+        public string Formation(int wave) => wave_layouts != null && wave_layouts.Length > wave ? wave_layouts[wave] : layout;
+    }
+    [Serializable] public class TideDungeonDef {public int index,act,number,xp,gold,legacy_rooms;public string title,objective,background,reason,resolution,landmark;public TideRoomDef[] rooms;}
     [Serializable] public class TideFoeDef {public string id,name,rank,brain,atlas,tell,counter,attack;public int act,cell,base_hp;public bool IsBoss=>rank=="boss"||rank=="midboss";public bool IsNamed=>rank=="named";}
     [Serializable] public class TideCampaignCatalog {public int schema;public TideDungeonDef[] stages;public TideFoeDef[] foes;}
     public static class TideCampaign
     {
+        public const int MaxRooms=14;
         public static TideCampaignCatalog Data {get;private set;}
         private static readonly Dictionary<string,TideFoeDef> Foes=new Dictionary<string,TideFoeDef>();
         public static void Load()
@@ -21,12 +34,35 @@ namespace SpiritTide
             Foes.Clear();foreach(var f in Data.foes)Foes.Add(f.id,f);
             for(int i=0;i<30;i++)
             {
-                var d=Data.stages[i];if(d.index!=i||d.act!=i/6+1||d.number!=i%6+1||d.rooms.Length<2)throw new InvalidOperationException("Invalid dungeon progression.");
-                foreach(var room in d.rooms)foreach(string id in room.foes)if(!Foes.ContainsKey(id))throw new InvalidOperationException("Unknown room enemy: "+id);
+                var d=Data.stages[i];
+                if(d.index!=i||d.act!=i/6+1||d.number!=i%6+1||d.rooms.Length<2||d.rooms.Length>MaxRooms
+                    ||d.legacy_rooms<2||d.legacy_rooms>d.rooms.Length)
+                    throw new InvalidOperationException("Invalid dungeon progression.");
+                foreach(var room in d.rooms)
+                {
+                    int count=0;
+                    for(int wave=0;wave<room.WaveCount;wave++)
+                    {
+                        int size=room.WaveSize(wave);
+                        if(size<1||size>4)throw new InvalidOperationException("Invalid wave size: "+room.title);
+                        count+=size;
+                    }
+                    if(count!=room.foes.Length||room.signal_wave!=0&&(room.signal_wave<2||room.signal_wave>room.WaveCount
+                        ||string.IsNullOrEmpty(room.signal_title)||string.IsNullOrEmpty(room.signal_reply)))
+                        throw new InvalidOperationException("Invalid expedition room: "+room.title);
+                    foreach(string id in room.foes)if(!Foes.ContainsKey(id))throw new InvalidOperationException("Unknown room enemy: "+id);
+                }
             }
         }
         public static TideFoeDef Foe(string id){return Foes[id];}
         public static TideDungeonDef Dungeon(int act,int number){return Data.stages[(Mathf.Clamp(act,1,5)-1)*6+Mathf.Clamp(number,1,6)-1];}
+        public static bool CanVisitRoom(TideProfile profile,int act,int number,int room)
+        {
+            if(act<1||act>5||number<1||number>6||room<0)return false;
+            var dungeon=Dungeon(act,number);
+            return room<dungeon.rooms.Length&&((profile.clearedDungeons&(1<<dungeon.index))!=0
+                ||profile.campaignAct==act&&profile.campaignStage==number&&profile.quest==(int)QuestState.Active&&room<profile.roomCheckpoint);
+        }
     }
     [Serializable] public class TideGear
     {
@@ -37,7 +73,26 @@ namespace SpiritTide
     public static class TideProgress
     {
         public const int MaxLevel=40,AllDungeons=0x3fffffff;
+        public const int AllHeroes=63;
+        private static readonly int[] LearningLevels={1,3,5,8};
         public static int NeedXp(int level){return 80+Mathf.Clamp(level,1,MaxLevel)*20;}
+        public static bool HeroJoined(TideProfile p,int hero)=>hero>=0&&hero<6&&(p.recruitedHeroes&(1<<hero))!=0;
+        public static bool SkillLearned(TideProfile p,int slot)
+        {
+            if(slot<0||slot>4)return false;
+            return p.classicSkills||(slot==4?(p.reportedActs&4)!=0:p.level>=LearningLevels[slot]);
+        }
+        public static string SkillRequirement(int slot)=>slot==4?"Act 3 보고 후 습득":"Lv."+LearningLevels[slot]+" 습득";
+        public static string LearningBadge(int slot)=>slot==4?"Act 3":"Lv."+LearningLevels[slot];
+        public static string LearnedByLevel(TideProfile p,int before)
+        {
+            if(p.classicSkills||before==p.level)return "";
+            var names=new List<string>();
+            for(int slot=1;slot<LearningLevels.Length;slot++)
+                if(before<LearningLevels[slot]&&p.level>=LearningLevels[slot])
+                    names.Add(TideCatalog.Characters[p.hero].Skill(slot).name);
+            return names.Count==0?"":"새 기술 · "+string.Join(" · ",names);
+        }
         public static TideGear Gear(TideProfile p,int uid){if(p.gear!=null)foreach(var g in p.gear)if(g!=null&&g.uid==uid)return g;return null;}
         public static void Sanitize(TideProfile p)
         {
@@ -51,7 +106,22 @@ namespace SpiritTide
                 p.gear=new[]{new TideGear{uid=1,name="정찰의 영장",slot="power"},new TideGear{uid=2,name="정밀의 영장",slot="power",rarity=1},new TideGear{uid=3,name="수호의 영장",slot="guard"}};
                 p.powerGear=p.precision?2:1;p.guardGear=3;
             }
-            p.campaignSchema=1;p.campaignAct=Mathf.Clamp(p.campaignAct,1,5);p.campaignStage=Mathf.Clamp(p.campaignStage,1,6);p.roomCheckpoint=Mathf.Clamp(p.roomCheckpoint,0,8);
+            p.campaignAct=Mathf.Clamp(p.campaignAct,1,5);p.campaignStage=Mathf.Clamp(p.campaignStage,1,6);
+            var dungeon=TideCampaign.Dungeon(p.campaignAct,p.campaignStage);
+            if(p.campaignSchema<2)
+            {
+                bool played=p.hero>0||p.quest!=0||p.campaignAct>1||p.campaignStage>1||p.roomCheckpoint>0
+                    ||p.level>1||p.clearedDungeons!=0||p.sideQuests!=null&&p.sideQuests.Length>0;
+                p.recruitedHeroes=played?AllHeroes:1;
+                p.classicSkills=played;
+                // Original non-boss room indices are stable. Only the boss moves past the new approach.
+                if(dungeon.rooms[dungeon.rooms.Length-1].kind=="boss"&&p.roomCheckpoint==dungeon.legacy_rooms-1)
+                    p.roomCheckpoint=dungeon.rooms.Length-1;
+            }
+            p.campaignSchema=2;
+            p.recruitedHeroes=(p.recruitedHeroes&AllHeroes)|1;
+            if(!HeroJoined(p,p.hero))p.hero=0;
+            p.roomCheckpoint=Mathf.Clamp(p.roomCheckpoint,0,dungeon.rooms.Length-1);
             p.reportedActs&=31;p.clearedDungeons&=AllDungeons;p.level=Mathf.Clamp(p.level,1,MaxLevel);p.xp=Mathf.Clamp(p.xp,0,NeedXp(p.level)-1);p.crystals=Mathf.Clamp(p.crystals,0,99999);
             p.rescuedDungeons&=AllDungeons;p.rescueReports&=31;p.seenIntros&=1023;p.seenOutros&=1023;
             if(p.gear==null||p.gear.Length==0)p.gear=new[]{new TideGear{uid=1,name="정찰의 영장",slot="power"},new TideGear{uid=3,name="수호의 영장",slot="guard"}};

@@ -8,12 +8,12 @@ namespace SpiritTide.EditorTools
     {
         public static void Run(Action<string,bool> check)
         {
-            int entries=0,clears=0,intros=0,reports=0,parties=0,rescues=0,epilogues=0,fieldEchoes=0;
+            int entries=0,clears=0,intros=0,reports=0,parties=0,rescues=0,epilogues=0,fieldEchoes=0,milestones=0;
             var allIds=new HashSet<string>();
             foreach(var scene in TideDialogue.Data.scenes)
             {
                 check("dialogue has stable unique scene ID "+scene.id,allIds.Add(scene.id)&&scene.act>=1&&scene.act<=5&&scene.stage>=1&&scene.stage<=6);
-                switch(scene.kind){case "entry":entries++;break;case "clear":clears++;break;case "intro":intros++;break;case "report":reports++;break;case "party":parties++;break;case "rescue":rescues++;break;case "epilogue":epilogues++;break;case "field_echo":fieldEchoes++;break;}
+                switch(scene.kind){case "entry":entries++;break;case "clear":clears++;break;case "intro":intros++;break;case "report":reports++;break;case "party":parties++;break;case "rescue":rescues++;break;case "epilogue":epilogues++;break;case "field_echo":fieldEchoes++;break;case "main_checkpoint":milestones++;break;}
                 for(int hero=0;hero<6;hero++)
                 {
                     var lines=TideDialogue.Lines(scene.id,hero);var speakers=new HashSet<string>();bool valid=lines.Length>=2&&lines.Length<=8;
@@ -26,7 +26,7 @@ namespace SpiritTide.EditorTools
                     check("resolved conversation has multiple speakers and no template IDs "+scene.id+" / "+hero,valid&&speakers.Count>=2);
                 }
             }
-            check("full story dialogue and companion coverage",entries==30&&clears==30&&intros==10&&reports==5&&parties==30&&rescues==5&&fieldEchoes==5&&epilogues==1);
+            check("full story dialogue and companion coverage",entries==30&&clears==30&&intros==10&&reports==5&&parties==30&&rescues==5&&fieldEchoes==5&&epilogues==1&&milestones==25);
             foreach(var dungeon in TideCampaign.Data.stages)
             {
                 check("every dungeon has entry and resolution dialogue "+dungeon.index,TideDialogue.Scene(TideDialogue.DungeonId(dungeon,"entry"))!=null&&TideDialogue.Scene(TideDialogue.DungeonId(dungeon,"clear"))!=null);
@@ -47,9 +47,9 @@ namespace SpiritTide.EditorTools
                 old.rescuedDungeons=0;
             }
             int oldAvailable=0;for(int act=1;act<=5;act++)oldAvailable+=TideDialogue.Available(old,act).Count;
-            check("old ending save restores main and companion conversations including investigations",oldAvailable==116&&old.dialogueHistory.Length==0);
+            check("old ending save restores main and companion conversations including investigations",oldAvailable==141&&old.dialogueHistory.Length==0);
             old.rescueReports=31;int complete=0;for(int act=1;act<=5;act++)complete+=TideDialogue.Available(old,act).Count;
-            check("main and original rescue reports unlock 121 scenes without inventing side quest completions",complete==121);
+            check("main and original rescue reports unlock 146 scenes without inventing side quest completions",complete==146);
             TideDialogue.Remember(fresh,"a1_d1_entry",2);fresh.hero=5;TideDialogue.Remember(fresh,"a1_d1_entry",5);
             check("history preserves original lead through character switching and rereads",fresh.dialogueHistory.Length==1&&TideDialogue.ArchiveHero(fresh,"a1_d1_entry")==2);
             string path=Path.GetFullPath("BuildLogs/dialogue-save-check.json"),error,notice;

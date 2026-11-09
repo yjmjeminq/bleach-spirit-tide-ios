@@ -7,9 +7,13 @@ namespace SpiritTide
         public TideRoomDef Room=>IsCampaign?Dungeon.rooms[RoomIndex]:null;
         public bool WardActive,EnvironmentWarning;
         public float EnvironmentTimer,EnvironmentDuration,EnvironmentY,EnvironmentX,EnvironmentPush;
-        private int reinforcementOffset;
+        private int wave,waveEnd;
         private float reinforcementDelay;
-        public bool ReinforcementsPending=>IsCampaign&&reinforcementOffset>0;
+        private bool signalReleased;
+        public int RoomWave=>wave+1;
+        public bool ReinforcementsPending=>IsCampaign&&waveEnd<Room.foes.Length;
+        public bool RoomSignalPending=>ReinforcementsPending&&AliveCount==0&&!signalReleased&&Room.signal_wave==RoomWave+1;
+        public Vector2 SignalPosition=>new Vector2(4.8f,-.42f);
         public Vector2 WardPosition=>new Vector2(1.1f,RoomIndex%2==0?-.65f:.65f);
         public float EchoX=>2.2f;
         public bool EchoAvailable=>IsCampaign&&RoomCleared&&Room.echo&&(Profile.rescuedDungeons&(1<<Dungeon.index))==0;
@@ -17,17 +21,19 @@ namespace SpiritTide
         public string EnvironmentCue=>!WardActive?"":Room.hazard=="tide"?"해안 파도 · 점프 또는 위아래로":Room.hazard=="rubble"?"무너지는 발판 · 낙하 원 밖으로":Room.hazard=="wind"?"백사막 돌풍 · 바람을 가로질러 이동":Room.hazard=="barrier"?"불안정 결계 · 사선 밖으로":"그림자 통로 · 진한 사선 밖으로";
         private void SetupRoomWorld()
         {
-            WardActive=Room.ward;EnvironmentWarning=false;EnvironmentTimer=3.6f;EnvironmentPush=0;reinforcementOffset=Room.reinforcement&&Room.foes.Length>2?2:0;reinforcementDelay=.6f;
+            WardActive=Room.ward;EnvironmentWarning=false;EnvironmentTimer=3.6f;EnvironmentPush=0;
+            wave=waveEnd=0;signalReleased=false;
         }
         private void SpawnRoomFoes()
         {
-            int count=reinforcementOffset>0?2:Room.foes.Length;
-            for(int i=0;i<count;i++)Spawn(Room.foes[i],i,count,Dungeon.index);
+            int start=waveEnd,count=Room.WaveSize(wave);
+            waveEnd+=count;reinforcementDelay=.6f;
+            for(int i=0;i<count;i++)Spawn(Room.foes[start+i],i,count,Dungeon.index);
         }
         private void ApplyFormation(TideEnemy e,int ordinal,int total)
         {
             if(!IsCampaign||total<=1)return;
-            switch(Room.layout)
+            switch(Room.Formation(wave))
             {
                 case "flank":e.X=ordinal%2==0?-5:3.8f+ordinal*.3f;e.Y=ordinal%2==0?.9f:-.9f;break;
                 case "pincer":e.X=ordinal%2==0?-4.8f:5.3f;e.Y=ordinal<2?-1.1f:1.1f;break;
@@ -39,12 +45,13 @@ namespace SpiritTide
         private void StepRoomWorld(float dt)
         {
             if(!IsCampaign||RoomCleared)return;
-            if(AliveCount==0&&reinforcementOffset>0)
+            if(AliveCount==0&&ReinforcementsPending)
             {
+                if(RoomSignalPending)return;
                 reinforcementDelay-=dt;if(reinforcementDelay>0)return;
-                int from=reinforcementOffset;reinforcementOffset=0;Enemies.Clear();target=null;
-                for(int i=from;i<Room.foes.Length;i++)Spawn(Room.foes[i],i-from,Room.foes.Length-from,Dungeon.index);
-                ChooseTarget();Changed("기습 증원 · 양쪽 진입로와 원거리 적부터 확인하세요.");
+                wave++;Enemies.Clear();target=null;SpawnRoomFoes();
+                if(Room.WaveCount>2)Mp=Mathf.Min(100,Mp+12);
+                ChooseTarget();Changed("증원 "+RoomWave+" / "+Room.WaveCount+" · 접근 방향을 확인하세요.");
             }
             EnvironmentPush=Mathf.MoveTowards(EnvironmentPush,0,dt*3);
             if(!WardActive||AliveCount==0)return;
@@ -65,11 +72,18 @@ namespace SpiritTide
             if(!IsFighting||!IsCampaign||!NearInteraction)return false;
             float distance;int target=NearestFieldTarget(out distance);
             if(target>=0)return InteractQuestPoint(target);
+            if(target==-4)
+            {
+                signalReleased=true;
+                QuestFieldEvent("signal");
+                Changed(Room.signal_reply);
+                return true;
+            }
             if(target==-1)
             {
                 Profile.rescuedDungeons|=1<<Dungeon.index;Hp=Mathf.Min(MaxHp,Hp+Mathf.CeilToInt(MaxHp*.15f));Mp=Mathf.Min(100,Mp+15);PersistentChange();Changed("정령에게 귀환 등불을 안내했습니다 · 체력·영압 회복. 마을의 콘에게 소식을 전하세요.");return true;
             }
-            if(target==-2&&WardActive){WardActive=EnvironmentWarning=false;Mp=Mathf.Min(100,Mp+15);QuestWardEvent();Changed("영압 장치 해제 · 이 방의 환경 예고가 멈췄습니다. 영압 +15");return true;}
+            if(target==-2&&WardActive){WardActive=EnvironmentWarning=false;Mp=Mathf.Min(100,Mp+15);QuestFieldEvent("ward");Changed("영압 장치 해제 · 이 방의 환경 예고가 멈췄습니다. 영압 +15");return true;}
             return false;
         }
         public int RescuesInAct(int act){int mask=(Profile.rescuedDungeons>>((Mathf.Clamp(act,1,5)-1)*6))&63,n=0;while(mask!=0){n+=mask&1;mask>>=1;}return n;}

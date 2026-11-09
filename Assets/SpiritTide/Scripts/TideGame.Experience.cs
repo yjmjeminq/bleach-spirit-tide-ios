@@ -6,10 +6,15 @@ namespace SpiritTide
 {
     public sealed partial class TideGame
     {
-        private readonly Image[] townFigures=new Image[5],memorials=new Image[5],roomMarkers=new Image[8];
+        private readonly Image[] townFigures=new Image[5],memorials=new Image[5],roomMarkers=new Image[TideCampaign.MaxRooms];
         private readonly Text[] townSigns=new Text[5];private Text townProgress;
-        private Image wardFigure,echoFigure,environmentArea,environmentSecond;private Text wardLabel,echoLabel;
-        public void AdvanceRoom(){if(MaybeQuestStory())return;if(Session.EnterGate()){MaybeEncounterStory();Persist();Refresh();}}
+        private Image wardFigure,echoFigure,signalFigure,environmentArea,environmentSecond;private Text wardLabel,echoLabel,signalLabel;
+        public void AdvanceRoom()
+        {
+            if(MaybeQuestStory())return;
+            if(Session.IsFieldVisit&&Session.IsFighting&&Session.RoomCleared){ReturnTown();return;}
+            if(Session.EnterGate()){MaybeEncounterStory();Persist();Refresh();}
+        }
         private bool MaybeEncounterStory()
         {
             if(!Session.IsCampaign||Session.IsReplay||Session.IsPaused)return false;
@@ -40,7 +45,9 @@ namespace SpiritTide
             wardLabel=Label("영압 장치 · E",world,Vector2.zero,Vector2.zero,new Vector2(240,36),21,gold,true);wardLabel.alignment=TextAnchor.MiddleCenter;
             echoFigure=Picture("RescueLantern",world,Vector2.zero,Vector2.zero,new Vector2(55,95),new Color(.6f,1,.85f),TideArt.Grid("town_npcs_v1",5,3,2));echoFigure.preserveAspect=true;
             echoLabel=Label("정령의 귀환 등불 · E",world,Vector2.zero,Vector2.zero,new Vector2(280,36),21,gold,true);echoLabel.alignment=TextAnchor.MiddleCenter;
-            foreach(var value in new[]{wardFigure,echoFigure})value.transform.SetSiblingIndex(actorLayer.GetSiblingIndex());
+            signalFigure=Picture("ExpeditionSignal",world,Vector2.zero,Vector2.zero,new Vector2(52,96),new Color(1,.8f,.44f),TideArt.Grid("town_npcs_v1",5,3,2));signalFigure.preserveAspect=true;
+            signalLabel=Label("",world,Vector2.zero,Vector2.zero,new Vector2(266,40),21,gold,true);signalLabel.alignment=TextAnchor.MiddleCenter;
+            foreach(var value in new[]{wardFigure,echoFigure,signalFigure})value.transform.SetSiblingIndex(actorLayer.GetSiblingIndex());
             environmentArea=Picture("EnvironmentTell",world,Vector2.zero,Vector2.zero,new Vector2(100,30),new Color(.25f,.8f,1,.3f));environmentArea.transform.SetSiblingIndex(actorLayer.GetSiblingIndex());
             environmentSecond=Picture("EnvironmentPreview",world,Vector2.zero,Vector2.zero,new Vector2(100,30),new Color(.35f,.65f,1,.14f));environmentSecond.transform.SetSiblingIndex(actorLayer.GetSiblingIndex());
             Button("field-interact","",safe,Vector2.zero,new Vector2(140,445),new Vector2(220,84),InteractField,true);Buttons["field-interact"].transform.SetSiblingIndex(menuRoot.transform.GetSiblingIndex());
@@ -67,7 +74,15 @@ namespace SpiritTide
             echoFigure.color=echo?new Color(.6f,1,.85f):new Color(.6f,1,.85f,.62f);
             wardFigure.rectTransform.anchoredPosition=Project(Session.WardPosition.x,Session.WardPosition.y)+new Vector2(0,45);wardLabel.rectTransform.anchoredPosition=wardFigure.rectTransform.anchoredPosition+new Vector2(0,67);
             echoFigure.rectTransform.anchoredPosition=Project(Session.EchoX,0)+new Vector2(0,48);echoLabel.rectTransform.anchoredPosition=echoFigure.rectTransform.anchoredPosition+new Vector2(0,72);
-            Buttons["field-interact"].gameObject.SetActive(ward||echo||Session.IsFighting&&Session.QuestPointCount>0);Buttons["field-interact"].interactable=Session.NearInteraction;
+            bool signal=Session.IsFighting&&Session.RoomSignalPending;
+            signalFigure.gameObject.SetActive(signal);signalLabel.gameObject.SetActive(signal);
+            if(signal)
+            {
+                signalFigure.rectTransform.anchoredPosition=Project(Session.SignalPosition.x,Session.SignalPosition.y)+new Vector2(0,48);
+                signalLabel.rectTransform.anchoredPosition=signalFigure.rectTransform.anchoredPosition+new Vector2(0,68);
+                Say(signalLabel,Session.Room.signal_title);
+            }
+            Buttons["field-interact"].gameObject.SetActive(ward||echo||signal||Session.IsFighting&&Session.QuestPointCount>0);Buttons["field-interact"].interactable=Session.NearInteraction;
             Say(Buttons["field-interact"].GetComponentInChildren<Text>(),ShowKeyboardHints?Session.FieldInteractionLabel:Session.FieldInteractionLabel.Replace(" · E",""));
             bool hazard=ward&&Session.EnvironmentWarning;environmentArea.gameObject.SetActive(hazard);environmentSecond.gameObject.SetActive(hazard&&Session.Room.hazard=="shadow"&&Session.EnvironmentTimer>Session.EnvironmentDuration*.45f);
             if(hazard)
@@ -77,7 +92,15 @@ namespace SpiritTide
                 environmentArea.rectTransform.localRotation=Quaternion.Euler(0,0,kind=="barrier"?Mathf.Atan(7/unit)*Mathf.Rad2Deg:0);environmentArea.color=kind=="shadow"&&Session.EnvironmentTimer>Session.EnvironmentDuration*.45f?new Color(.3f,.65f,1,.16f):new Color(.4f,.75f,1,.36f);
                 environmentSecond.rectTransform.anchoredPosition=Project(Session.EnvironmentX,-Session.EnvironmentY);environmentSecond.rectTransform.sizeDelta=new Vector2(safe.rect.width*2,34);
             }
-            for(int i=0;i<roomMarkers.Length;i++){bool active=Session.IsCampaign&&i<Session.Dungeon.rooms.Length;roomMarkers[i].gameObject.SetActive(Session.InBattle&&active);roomMarkers[i].color=i<Session.RoomIndex?new Color(.5f,.85f,.7f):i==Session.RoomIndex?gold:muted;}
+            int rooms=Session.IsCampaign?Session.Dungeon.rooms.Length:0;
+            for(int i=0;i<roomMarkers.Length;i++)
+            {
+                bool active=Session.InBattle&&i<rooms;
+                roomMarkers[i].gameObject.SetActive(active);
+                if(!active)continue;
+                roomMarkers[i].rectTransform.anchoredPosition=new Vector2((i-(rooms-1)*.5f)*14,-162);
+                roomMarkers[i].color=i<Session.RoomIndex?new Color(.5f,.85f,.7f):i==Session.RoomIndex?gold:muted;
+            }
         }
         private int RescueReportAct(){for(int a=1;a<=5;a++)if(Session.CanReportRescue(a))return a;return 0;}
         private void ReportTownRescue()

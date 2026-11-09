@@ -10,6 +10,7 @@ namespace SpiritTide
         private bool archiveIndex;
         private int routeAct,routeStage,routeRoom;
         private string routeTitle;
+        private bool routeVisit;
         private Text saveIndicator;
         private readonly Text[] skillKeys=new Text[5];
         private bool ShowKeyboardHints=>Session.Profile.keyboardHints==1||Session.Profile.keyboardHints==0&&!Application.isMobilePlatform&&!smokeSafeArea.HasValue;
@@ -50,14 +51,15 @@ namespace SpiritTide
             var items=VisibleGear();gearPage=Mathf.Clamp(gearPage+delta,0,Mathf.Max(0,(items.Count-1)/3));
             if(items.Count>0)gearSelection=items[gearPage*3].uid;Refresh();
         }
-        private void OpenRoute(int act,int stage,int room,string title)
+        private void OpenRoute(int act,int stage,int room,string title,bool visit=false)
         {
-            OpenMenu(TideMode.Missions);mapAct=routeAct=act;routeStage=stage;routeRoom=room;routeTitle=title;Refresh();
+            OpenMenu(TideMode.Missions);mapAct=routeAct=act;routeStage=stage;routeRoom=room;routeTitle=title;routeVisit=visit;Refresh();
         }
-        private void ClearRoute(){routeAct=routeStage=routeRoom=0;routeTitle=null;}
+        private void ClearRoute(){routeAct=routeStage=routeRoom=0;routeTitle=null;routeVisit=false;}
         private bool RouteReady()
         {
             if(routeAct<1||routeStage<1)return false;
+            if(routeVisit&&TideCampaign.CanVisitRoom(Session.Profile,routeAct,routeStage,routeRoom))return true;
             var d=TideCampaign.Dungeon(routeAct,routeStage);
             bool cleared=(Session.Profile.clearedDungeons&(1<<d.index))!=0;
             bool current=routeAct==Session.Profile.campaignAct&&routeStage==Session.Profile.campaignStage&&Session.Quest==QuestState.Active;
@@ -66,6 +68,11 @@ namespace SpiritTide
         private void DepartRoute()
         {
             if(!RouteReady())return;
+            if(routeVisit&&TideCampaign.CanVisitRoom(Session.Profile,routeAct,routeStage,routeRoom))
+            {
+                BeginDungeonNow(routeAct,routeStage,true,routeRoom);
+                return;
+            }
             bool current=routeAct==Session.Profile.campaignAct&&routeStage==Session.Profile.campaignStage&&Session.Quest==QuestState.Active;
             // A cleared current dungeon may still need replay to revisit an earlier room.
             bool replay=!current||Session.Profile.roomCheckpoint>routeRoom;
@@ -73,16 +80,15 @@ namespace SpiritTide
         }
         private void RouteToWard(TideSideQuest q)
         {
-            // Prefer an accessible ward ahead of the saved room; otherwise use a cleared dungeon.
+            // Prefer a ward ahead of the checkpoint, then a previously visited room.
             for(int pass=0;pass<2;pass++)for(int stage=1;stage<=6;stage++)
             {
                 var d=TideCampaign.Dungeon(q.act,stage);
                 bool current=q.act==Session.Profile.campaignAct&&stage==Session.Profile.campaignStage&&Session.Quest==QuestState.Active;
-                bool cleared=(Session.Profile.clearedDungeons&(1<<d.index))!=0;
-                for(int room=0;room<d.rooms.Length;room++)if(d.rooms[room].ward&&((pass==0&&current&&room>=Session.Profile.roomCheckpoint)||(pass==1&&cleared)))
-                {OpenRoute(q.act,stage,room,q.title+" · 장치 해제");return;}
+                for(int room=0;room<d.rooms.Length;room++)if(d.rooms[room].ward&&((pass==0&&current&&room>=Session.Profile.roomCheckpoint)||(pass==1&&TideCampaign.CanVisitRoom(Session.Profile,q.act,stage,room))))
+                {OpenRoute(q.act,stage,room,q.title+" · 장치 해제",true);return;}
             }
-            for(int stage=1;stage<=6;stage++){var d=TideCampaign.Dungeon(q.act,stage);for(int room=0;room<d.rooms.Length;room++)if(d.rooms[room].ward){OpenRoute(q.act,stage,room,q.title+" · 장치 해제");return;}}
+            for(int stage=1;stage<=6;stage++){var d=TideCampaign.Dungeon(q.act,stage);for(int room=0;room<d.rooms.Length;room++)if(d.rooms[room].ward){OpenRoute(q.act,stage,room,q.title+" · 장치 해제",true);return;}}
         }
         private List<TideDialogueScene> ArchiveScenes()
         {

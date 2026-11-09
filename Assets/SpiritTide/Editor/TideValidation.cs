@@ -25,7 +25,7 @@ namespace SpiritTide.EditorTools
                     Check("dungeon art and briefing "+d.index,TideArt.Background(d.background)!=null&&TideStory.BeforeDungeon(d,new TideProfile{campaignSchema=1,campaignAct=d.act,campaignStage=d.number},false).Length>0);
                     foreach(var r in d.rooms){rooms++;foreach(string id in r.foes){encountered.Add(id);if(r.kind=="troops")Check("waves contain only troops "+d.index+" "+id,TideCampaign.Foe(id).rank=="regular");}}
                 }
-                Check("114 playable rooms and all 70 foe IDs are reachable",rooms==114&&encountered.Count==70);
+                Check("264 playable rooms and all 70 foe IDs are reachable",rooms==264&&encountered.Count==70);
                 foreach(var f in TideCampaign.Data.foes)Check("foe sprite and tell "+f.id,TideArt.Enemy(f.id)!=null&&!string.IsNullOrEmpty(f.brain)&&!string.IsNullOrEmpty(f.tell));
                 for(int hero=0;hero<6;hero++)
                 {
@@ -39,7 +39,7 @@ namespace SpiritTide.EditorTools
                             TideCombatDriver.Prepare(s);Check("start correct dungeon "+hero+" / "+act+"-"+n,s.BeginDungeon()&&s.Dungeon.act==act&&s.Dungeon.number==n&&s.Hp==s.MaxHp);
                             int frame=0,lastRoom=0;
                             while(s.IsFighting&&frame++<60000){TideCombatDriver.Tick(s);lastRoom=Mathf.Max(lastRoom,s.RoomIndex);}
-                            Check("full health input-only clear "+hero+" / "+act+"-"+n+" frames="+frame+" hp="+s.Hp+" room="+s.RoomIndex+" enemies="+s.AliveCount,s.Mode==TideMode.Result&&s.Hp>0&&lastRoom==s.Dungeon.rooms.Length-1);
+                            Check("full health input-only clear "+hero+" / "+act+"-"+n+" frames="+frame+" hp="+s.Hp+" room="+s.RoomIndex+" enemies="+s.AliveCount+" at="+s.X.ToString("F2")+","+s.Y.ToString("F2"),s.Mode==TideMode.Result&&s.Hp>0&&lastRoom==s.Dungeon.rooms.Length-1);
                             Check("one first-clear gear and real XP "+hero+" / "+act+"-"+n,s.LastXp==s.Dungeon.xp&&s.LastGold==s.Dungeon.gold&&s.LastGearUid==1000+s.Dungeon.index&&(s.Profile.clearedDungeons&(1<<s.Dungeon.index))!=0);
                             dungeonCount++;roomCount+=s.Dungeon.rooms.Length;s.ReturnTown();
                         }
@@ -50,7 +50,7 @@ namespace SpiritTide.EditorTools
                     for(int i=0;i<60000&&s.IsFighting;i++)TideCombatDriver.Tick(s);
                     Check("replay rewards reduced and first loot never duplicated "+hero,s.Mode==TideMode.Result&&s.LastGearUid==0&&s.LastXp==24&&s.Profile.gear.Length==items&&s.Profile.reportedActs==mask);s.ReturnTown();
                 }
-                TestCombat();TestCheckpoint();TestStorage();TideUiValidation.Run(Check);TideExperienceValidation.Run(Check);TideDialogueValidation.Run(Check);TideQuestValidation.Run(Check);TideSkillFxValidation.Run(Check);TideSkillIconValidation.Run(Check);TideJourneyValidation.Run(Check);TideMotionValidation.Run(Check);Save(true);
+                TestCombat();TestCheckpoint();TestStorage();TideUiValidation.Run(Check);TideExperienceValidation.Run(Check);TideDialogueValidation.Run(Check);TideQuestValidation.Run(Check);TideSkillFxValidation.Run(Check);TideSkillIconValidation.Run(Check);TideJourneyValidation.Run(Check);TideMotionValidation.Run(Check);TidePaceValidation.Run(Check);Save(true);
             }
             catch{Save(false);throw;}
         }
@@ -70,7 +70,7 @@ namespace SpiritTide.EditorTools
                 if(boss==9){Check("Yhwach previews before locking",!s.Target.FutureLocked);Step(s,.9f);Check("Yhwach confirms future line",s.Target.FutureLocked);}
                 if(boss==1){Vector2 locked=s.WarningPosition;s.Step(.05f,Vector2.up,false);Check("Fisher lure fixed at tell",s.WarningPosition==locked);Step(s,1.2f);Check("Fisher body opening",s.BodyExposed);}
             }
-            var multi=new TideSession(new TideProfile());multi.AcceptQuest();multi.BeginDungeon();multi.X=2;multi.Y=0;foreach(var e in multi.Enemies){e.X=3;e.Y=0;}multi.Request(MoveKind.Ultimate);Step(multi,.6f);Check("area skill damages every live troop",multi.DamageEvents>=2);
+            var multi=new TideSession(new TideProfile{campaignSchema=2,classicSkills=true});multi.AcceptQuest();multi.BeginDungeon();multi.X=2;multi.Y=0;foreach(var e in multi.Enemies){e.X=3;e.Y=0;}multi.Request(MoveKind.Ultimate);Step(multi,.6f);Check("area skill damages every live troop",multi.DamageEvents>=2);
             Check("combat prevents equipment and hero swaps",!multi.EquipGear(2)&&!multi.SelectHero(4));
             float clock=multi.Clock;multi.Pause();Step(multi,3);Check("multi enemy pause freezes clock",multi.Clock==clock);multi.Resume();
             var gear=new TideSession(new TideProfile());gear.Profile.crystals=3;int old=gear.Profile.gold;Check("forge pays both resources exactly once",gear.UpgradeGear(1)&&gear.Profile.gold==old-120&&gear.Profile.crystals==0&&TideProgress.Gear(gear.Profile,1).upgrade==1);old=gear.Profile.gold;Check("failed forge cannot spend gold",!gear.UpgradeGear(1)&&gear.Profile.gold==old);
@@ -80,7 +80,9 @@ namespace SpiritTide.EditorTools
         {
             var s=new TideSession(new TideProfile());s.AcceptQuest();s.BeginDungeon();Check("locked exit cannot skip room",!s.EnterGate());
             for(int i=0;i<12000&&s.IsFighting&&!s.RoomCleared;i++)TideCombatDriver.Tick(s);
-            Check("room clear saves next room immediately",s.RoomCleared&&s.Profile.roomCheckpoint==1&&s.Profile.gold==800&&s.Profile.xp==0);
+            Check("room clear with evidence waits before saving next room",s.RoomCleared&&s.Profile.roomCheckpoint==0&&s.Profile.gold==800&&s.Profile.xp==0);
+            for(int i=0;i<600&&s.MainInvestigationPending;i++)TideCombatDriver.Tick(s,1f/60,false);
+            Check("checking the companion unlocks the real next checkpoint",s.Profile.roomCheckpoint==1&&s.GateReady&&s.Profile.recruitedHeroes==3);
             s.X=-3;Check("gate requires physical approach",!s.EnterGate());s.ReturnTown();s.BeginDungeon();Check("town return resumes next room",s.RoomIndex==1&&s.Hp==s.MaxHp);
             s.Hp=1;s.X=s.EnemyX;s.Y=s.EnemyY;for(int i=0;i<240&&s.IsFighting;i++)s.Step(1f/60,Vector2.zero,false);Check("defeat retains room checkpoint",s.Mode==TideMode.Defeat&&s.Profile.roomCheckpoint==1);s.BeginDungeon();Check("retry restores actual room and full health",s.RoomIndex==1&&s.Hp==s.MaxHp&&s.Enemies.TrueForAll(e=>e.Hp==e.MaxHp));
         }
@@ -88,7 +90,7 @@ namespace SpiritTide.EditorTools
         {
             string folder=Path.GetFullPath("BuildLogs/SaveChecks-"+Guid.NewGuid().ToString("N"));Directory.CreateDirectory(folder);string path=Path.Combine(folder,"profile.json"),error,notice;
             var p=new TideProfile();var s=new TideSession(p);s.AcceptQuest();p.roomCheckpoint=1;p.crystals=9;s.UpgradeGear(1);p.gold=831;Check("atomic first save",TideStorage.Save(path,p,out error));p.gold=952;Check("atomic replacement save",TideStorage.Save(path,p,out error));var loaded=TideStorage.Load(path,out notice);
-            Check("campaign gear preferences checkpoint roundtrip",loaded.gold==952&&loaded.roomCheckpoint==1&&loaded.campaignSchema==1&&TideProgress.Gear(loaded,1).upgrade==1);
+            Check("campaign gear preferences checkpoint roundtrip",loaded.gold==952&&loaded.roomCheckpoint==1&&loaded.campaignSchema==2&&TideProgress.Gear(loaded,1).upgrade==1);
             File.WriteAllText(path,"broken");loaded=TideStorage.Load(path,out notice);Check("verified backup recovers damaged primary",loaded.gold==831&&!string.IsNullOrEmpty(notice));Check("save after corruption succeeds",TideStorage.Save(path,loaded,out error));Check("corrupt primary preserved",Directory.GetFiles(folder,"*.corrupt-*").Length>0);
             var old=new TideProfile{quest=3,checkpoint=2,claimed=true,gold=890,potions=4};TideCatalog.Sanitize(old);Check("old Act1 completion migrates to Act2 without extra payout",old.campaignAct==2&&old.campaignStage==1&&old.quest==0&&old.reportedActs==1&&old.clearedDungeons==63&&old.gold==890&&old.potions==4);
             var broken=new TideProfile{campaignSchema=1,gear=new TideGear[]{null},hero=999,gold=-1};TideCatalog.Sanitize(broken);Check("corrupt inventory and values repaired",broken.gear.Length>0&&broken.hero==5&&broken.gold==0);

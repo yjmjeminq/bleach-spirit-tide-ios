@@ -10,6 +10,7 @@ namespace SpiritTide
         private IEnumerator ReviewSkillIcons()
         {
             string saved=JsonUtility.ToJson(game.Session.Profile);int checkedIcons=0;
+            game.Session.Profile.recruitedHeroes=TideProgress.AllHeroes;
             for(int hero=0;hero<6;hero++)
             {
                 game.ReturnTown();yield return TapUi("hero-"+hero);game.StartBattle(true);yield return null;

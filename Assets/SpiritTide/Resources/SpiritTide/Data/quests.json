@@ -50,6 +50,63 @@
           "goal": "그랜드 피셔의 미끼와 구조 등불을 구분했습니다. 미끼를 거둔 뒤 드러나는 본체와 첫 균열의 연결을 끊습니다.",
           "result": "첫 균열이 닫혔습니다. 회수한 이름은 기록함에 보존했고, 검은 틈의 흔적을 마을에서 대조할 차례입니다."
         }
+      ],
+      "milestones": [
+        {
+          "bit": 0,
+          "stage": 1,
+          "room": 0,
+          "title": "오리히메의 결계",
+          "goal": "결계 곁에서 오리히메와 피난로 열기",
+          "x": 5.65,
+          "y": 0.62,
+          "grant": 2,
+          "scene": "main_a1_evidence1"
+        },
+        {
+          "bit": 1,
+          "stage": 2,
+          "room": 5,
+          "title": "끊어진 전화선",
+          "goal": "신호 뒤에 드러난 전화선의 끝 조사",
+          "x": 6.35,
+          "y": -0.3,
+          "grant": 0,
+          "scene": "main_a1_evidence2"
+        },
+        {
+          "bit": 2,
+          "stage": 3,
+          "room": 5,
+          "title": "사역체가 떨어뜨린 파편",
+          "goal": "사역체의 파편이 향한 방향 확인",
+          "x": 5.25,
+          "y": 0.8,
+          "grant": 0,
+          "scene": "main_a1_evidence3"
+        },
+        {
+          "bit": 3,
+          "stage": 5,
+          "room": 7,
+          "title": "젖지 않은 등대 기둥",
+          "goal": "등불이 같은 박자로 비춘 기둥 표시",
+          "x": 6.6,
+          "y": -0.72,
+          "grant": 0,
+          "scene": "main_a1_evidence4"
+        },
+        {
+          "bit": 4,
+          "stage": 6,
+          "room": 6,
+          "title": "안쪽 문으로 가는 밧줄",
+          "goal": "미끼가 닿지 않은 밧줄을 출입구에 고정",
+          "x": 5.6,
+          "y": 0.45,
+          "grant": 0,
+          "scene": "main_a1_evidence5"
+        }
       ]
     },
     {
@@ -100,6 +157,63 @@
           "title": "그림죠의 결투",
           "goal": "그림죠의 재현이 통로를 고정하고 있습니다. 도약의 착지와 돌진이 멈추는 순간을 노려 기록을 분리합니다.",
           "result": "그림죠의 기록 뒤에서 라스 노체스의 좌표가 남았습니다. 마을에서 좌표를 확인한 뒤 다음 층으로 갑니다."
+        }
+      ],
+      "milestones": [
+        {
+          "bit": 5,
+          "stage": 1,
+          "room": 4,
+          "title": "요루이치의 창가",
+          "goal": "지붕 창을 열어 요루이치와 합류",
+          "x": 5.65,
+          "y": 0.62,
+          "grant": 4,
+          "scene": "main_a2_evidence1"
+        },
+        {
+          "bit": 6,
+          "stage": 2,
+          "room": 6,
+          "title": "두 발씩 남은 소니도 자국",
+          "goal": "디 로이 뒤편의 짧은 소니도 자국 기록",
+          "x": 6.35,
+          "y": -0.3,
+          "grant": 0,
+          "scene": "main_a2_evidence2"
+        },
+        {
+          "bit": 7,
+          "stage": 3,
+          "room": 3,
+          "title": "소이폰이 붙잡은 매듭",
+          "goal": "신호를 받아 안쪽의 소이폰과 합류",
+          "x": 5.25,
+          "y": 0.8,
+          "grant": 8,
+          "scene": "main_a2_evidence3"
+        },
+        {
+          "bit": 8,
+          "stage": 4,
+          "room": 7,
+          "title": "두 좌표의 빈 칸",
+          "goal": "돌아오는 방향에서 읽을 좌표 남기기",
+          "x": 6.6,
+          "y": -0.72,
+          "grant": 0,
+          "scene": "main_a2_evidence4"
+        },
+        {
+          "bit": 9,
+          "stage": 5,
+          "room": 7,
+          "title": "왕복 신호의 교차점",
+          "goal": "두 관문의 표지가 같은 자리에서 읽히는지 확인",
+          "x": 5.6,
+          "y": 0.45,
+          "grant": 0,
+          "scene": "main_a2_evidence5"
         }
       ]
     },
@@ -152,6 +266,63 @@
           "goal": "우르키오라의 영압이 세 단계로 변하며 천개를 막습니다. 빛의 창과 착지 뒤의 빈틈을 읽고 원본을 회수합니다.",
           "result": "원본 기록을 회수했습니다. 마을에서 여섯 사람의 영압과 맞추면 각성기를 강화하고 환영층을 대조할 수 있습니다."
         }
+      ],
+      "milestones": [
+        {
+          "bit": 10,
+          "stage": 1,
+          "room": 6,
+          "title": "같은 돌기둥의 다른 면",
+          "goal": "치루치 뒤쪽 기둥에 돌아갈 방향 표시",
+          "x": 5.65,
+          "y": 0.62,
+          "grant": 0,
+          "scene": "main_a3_evidence1"
+        },
+        {
+          "bit": 11,
+          "stage": 2,
+          "room": 7,
+          "title": "우노하나의 들것",
+          "goal": "대기소에서 부상자 인계와 우노하나 합류",
+          "x": 6.35,
+          "y": -0.3,
+          "grant": 32,
+          "scene": "main_a3_evidence2"
+        },
+        {
+          "bit": 12,
+          "stage": 3,
+          "room": 6,
+          "title": "낫자루 밑에 긁힌 두 줄",
+          "goal": "낫이 반복해서 긁은 바닥의 두 줄 기록",
+          "x": 5.25,
+          "y": 0.8,
+          "grant": 0,
+          "scene": "main_a3_evidence3"
+        },
+        {
+          "bit": 13,
+          "stage": 4,
+          "room": 6,
+          "title": "덮어 쓴 장부의 속장",
+          "goal": "기록고에서 두 이름의 순서를 확인",
+          "x": 6.6,
+          "y": -0.72,
+          "grant": 0,
+          "scene": "main_a3_evidence4"
+        },
+        {
+          "bit": 14,
+          "stage": 6,
+          "room": 6,
+          "title": "밖을 볼 수 있는 틈",
+          "goal": "원본을 들고 나올 때 사용할 바깥 불빛 고정",
+          "x": 5.6,
+          "y": 0.45,
+          "grant": 0,
+          "scene": "main_a3_evidence5"
+        }
       ]
     },
     {
@@ -203,6 +374,63 @@
           "goal": "원본을 대조해 옅은 환영과 진한 실체를 구분합니다. 아이젠의 권능 자체를 없애는 대신 이 균열의 연결을 끊습니다.",
           "result": "환영 뒤에서 퀸시 문장과 그림자 통로를 찾았습니다. 회수한 기록으로 연결이 다시 열리는 이유를 확인합니다."
         }
+      ],
+      "milestones": [
+        {
+          "bit": 15,
+          "stage": 1,
+          "room": 6,
+          "title": "어긋난 신호등 표지",
+          "goal": "사본과 다르게 보이는 신호등 아래를 대조",
+          "x": 5.65,
+          "y": 0.62,
+          "grant": 0,
+          "scene": "main_a4_evidence1"
+        },
+        {
+          "bit": 16,
+          "stage": 2,
+          "room": 6,
+          "title": "거꾸로 그린 다리",
+          "goal": "수로의 물결과 다른 방향으로 이어진 검흔 확인",
+          "x": 6.35,
+          "y": -0.3,
+          "grant": 0,
+          "scene": "main_a4_evidence2"
+        },
+        {
+          "bit": 17,
+          "stage": 2,
+          "room": 7,
+          "title": "란기쿠가 들을 수 있는 목소리",
+          "goal": "검흔 앞에서 란기쿠를 부르고 함께 돌아오기",
+          "x": 5.25,
+          "y": 0.8,
+          "grant": 16,
+          "scene": "main_a4_evidence3"
+        },
+        {
+          "bit": 18,
+          "stage": 4,
+          "room": 8,
+          "title": "소리와 그림자의 갈림점",
+          "goal": "서로 다른 두 표지를 보고 같은 바닥 표시",
+          "x": 6.6,
+          "y": -0.72,
+          "grant": 0,
+          "scene": "main_a4_evidence4"
+        },
+        {
+          "bit": 19,
+          "stage": 6,
+          "room": 6,
+          "title": "거울 아래 남은 홈",
+          "goal": "사본의 끝과 겹치지 않는 문양 일부 기록",
+          "x": 5.6,
+          "y": 0.45,
+          "grant": 0,
+          "scene": "main_a4_evidence5"
+        }
       ]
     },
     {
@@ -253,6 +481,63 @@
           "title": "유하바하의 마지막 기록",
           "goal": "가능한 사선이 확정되는 순간을 확인합니다. 유하바하의 재현과 다섯 균열을 잇는 기록 기능을 봉인하고 함께 돌아갑니다.",
           "result": "재현 기능이 멈췄습니다. 구조 신호가 귀환로를 밝힙니다. 마지막 보고로 이름을 돌려주고 여섯 사람의 귀환을 남깁니다."
+        }
+      ],
+      "milestones": [
+        {
+          "bit": 20,
+          "stage": 1,
+          "room": 4,
+          "title": "돌아오는 그림자의 첫 자국",
+          "goal": "첫 발자국 위에 겹쳐지는 방향 기록",
+          "x": 5.65,
+          "y": 0.62,
+          "grant": 0,
+          "scene": "main_a5_evidence1"
+        },
+        {
+          "bit": 21,
+          "stage": 3,
+          "room": 4,
+          "title": "저울 아래 남겨 둔 선",
+          "goal": "되돌림 고리 앞의 바깥쪽 대피선 표시",
+          "x": 6.35,
+          "y": -0.3,
+          "grant": 0,
+          "scene": "main_a5_evidence2"
+        },
+        {
+          "bit": 22,
+          "stage": 4,
+          "room": 8,
+          "title": "왕성 바깥 귀환 발자국",
+          "goal": "고리가 멎은 뒤 새로 남은 발자국 확인",
+          "x": 5.25,
+          "y": 0.8,
+          "grant": 0,
+          "scene": "main_a5_evidence3"
+        },
+        {
+          "bit": 23,
+          "stage": 5,
+          "room": 8,
+          "title": "다섯 기록의 겹치지 않는 줄",
+          "goal": "정원에서 회수한 기록을 왕문 좌표에 대조",
+          "x": 6.6,
+          "y": -0.72,
+          "grant": 0,
+          "scene": "main_a5_evidence4"
+        },
+        {
+          "bit": 24,
+          "stage": 6,
+          "room": 6,
+          "title": "여섯 번째 대답",
+          "goal": "바깥에서 답이 들리는 귀환 표지 확인",
+          "x": 5.6,
+          "y": 0.45,
+          "grant": 0,
+          "scene": "main_a5_evidence5"
         }
       ]
     }
@@ -1063,6 +1348,1662 @@
       ],
       "choice_keepsakes": [
         "돌아오는 쪽을 향한 마지막 표지"
+      ]
+    },
+    {
+      "id": "side_a1_4",
+      "index": 15,
+      "act": 1,
+      "unlock_stage": 1,
+      "giver": "kon",
+      "title": "둑 위의 마른 신발",
+      "summary": "둑 아래에 신발이 한 짝씩 놓여 있어. 누가 뛰어가다 벗어 놓은 줄 알았는데, 전부 같은 쪽을 향해.",
+      "gold": 90,
+      "xp": 40,
+      "crystals": 1,
+      "keepsake": "제방 위 마른 신발",
+      "afterglow": "신발을 돌려줬어. 나중에 또 신발을 찾으면 뛰기 전에 서로 확인하자고 했대.",
+      "choices": [
+        "소식을 전한다"
+      ],
+      "offer_scene": "side_a1_4_offer",
+      "steps": [
+        {
+          "kind": "clear",
+          "stage": 1,
+          "room": 3,
+          "title": "둑 아래 피난로",
+          "goal": "둑 아래 피난로의 가면을 모두 제압",
+          "npc": "",
+          "x": 3.15,
+          "y": -1.05,
+          "scene": "side_a1_4_step0"
+        },
+        {
+          "kind": "site",
+          "stage": 1,
+          "room": 5,
+          "title": "바위에 올려 둔 신발",
+          "goal": "제방 위에 놓인 마른 신발 확인",
+          "npc": "",
+          "x": 3.15,
+          "y": -1.05,
+          "scene": "side_a1_4_step1"
+        }
+      ],
+      "finish_scenes": [
+        "side_a1_4_finish0"
+      ],
+      "active_line": "둑 아래에 신발이 한 짝씩 놓여 있어. 누가 뛰어가다 벗어 놓은 줄 알았는데, 전부 같은 쪽을 향해.",
+      "ready_line": "‘둑 위의 마른 신발’ 다 봤지? 수첩에서 나한테 알려 줘!",
+      "choice_notes": [
+        "신발을 돌려줬어. 나중에 또 신발을 찾으면 뛰기 전에 서로 확인하자고 했대."
+      ],
+      "choice_keepsakes": [
+        "제방 위 마른 신발"
+      ]
+    },
+    {
+      "id": "side_a1_5",
+      "index": 16,
+      "act": 1,
+      "unlock_stage": 2,
+      "giver": "kukaku",
+      "title": "문고리의 두드림",
+      "summary": "주택가 문은 소리만 들으면 다들 열어. 한 번 울리고 잠깐 기다리는 표지를 남겨야 해.",
+      "gold": 90,
+      "xp": 40,
+      "crystals": 1,
+      "keepsake": "문고리의 짧은 대답",
+      "afterglow": "그 집은 두드리고 대답이 올 때 열기로 했어. 저쪽 벽이 뭐라고 하든 서로 기다려 줄 거야.",
+      "choices": [
+        "소식을 전한다"
+      ],
+      "offer_scene": "side_a1_5_offer",
+      "steps": [
+        {
+          "kind": "signal",
+          "stage": 2,
+          "room": 5,
+          "title": "골목의 응답 표지",
+          "goal": "되울리는 골목에서 피난로 신호 보내기",
+          "npc": "",
+          "x": 3.15,
+          "y": -1.05,
+          "scene": "side_a1_5_step0"
+        },
+        {
+          "kind": "site",
+          "stage": 2,
+          "room": 6,
+          "title": "손때 묻은 문고리",
+          "goal": "빨랫줄 아래 문고리에 답 표시 남기기",
+          "npc": "",
+          "x": 3.15,
+          "y": -1.05,
+          "scene": "side_a1_5_step1"
+        }
+      ],
+      "finish_scenes": [
+        "side_a1_5_finish0"
+      ],
+      "active_line": "주택가 문은 소리만 들으면 다들 열어. 한 번 울리고 잠깐 기다리는 표지를 남겨야 해.",
+      "ready_line": "‘문고리의 두드림’ 얘기 들었어. 수첩에서 마저 전해 줘.",
+      "choice_notes": [
+        "그 집은 두드리고 대답이 올 때 열기로 했어. 저쪽 벽이 뭐라고 하든 서로 기다려 줄 거야."
+      ],
+      "choice_keepsakes": [
+        "문고리의 짧은 대답"
+      ]
+    },
+    {
+      "id": "side_a1_6",
+      "index": 17,
+      "act": 1,
+      "unlock_stage": 3,
+      "giver": "tessai",
+      "title": "종을 세 번 칠 때",
+      "summary": "함정길의 종이 가만히 있어도 울립니다. 줄이 움직이는 것인지, 영압이 흔드는 것인지 살펴 주십시오.",
+      "gold": 90,
+      "xp": 40,
+      "crystals": 1,
+      "keepsake": "세 번 울리는 피난 종",
+      "afterglow": "이제 손으로 당겨야 종이 울립니다. 세 번 울리면 텟사이가 지하도에 들를 겁니다.",
+      "choices": [
+        "소식을 전한다"
+      ],
+      "offer_scene": "side_a1_6_offer",
+      "steps": [
+        {
+          "kind": "ward",
+          "stage": 3,
+          "room": 2,
+          "title": "둥지 입구 장치",
+          "goal": "사역체 둥지 입구의 영압 장치 해제",
+          "npc": "",
+          "x": 3.15,
+          "y": -1.05,
+          "scene": "side_a1_6_step0"
+        },
+        {
+          "kind": "site",
+          "stage": 3,
+          "room": 4,
+          "title": "실이 감긴 종줄",
+          "goal": "울음이 겹친 지하도에서 종줄 찾기",
+          "npc": "",
+          "x": 3.15,
+          "y": -1.05,
+          "scene": "side_a1_6_step1"
+        }
+      ],
+      "finish_scenes": [
+        "side_a1_6_finish0"
+      ],
+      "active_line": "함정길의 종이 가만히 있어도 울립니다. 줄이 움직이는 것인지, 영압이 흔드는 것인지 살펴 주십시오.",
+      "ready_line": "‘종을 세 번 칠 때’의 결과를 수첩에서 말씀해 주십시오.",
+      "choice_notes": [
+        "이제 손으로 당겨야 종이 울립니다. 세 번 울리면 텟사이가 지하도에 들를 겁니다."
+      ],
+      "choice_keepsakes": [
+        "세 번 울리는 피난 종"
+      ]
+    },
+    {
+      "id": "side_a1_7",
+      "index": 18,
+      "act": 1,
+      "unlock_stage": 4,
+      "giver": "kukaku",
+      "title": "셔터 뒤의 열쇠",
+      "summary": "상가 주인이 셔터를 올릴 수 있는 키를 안에 두고 나왔어. 앞이 막혀 있으니 계단으로 올라와야 해.",
+      "gold": 90,
+      "xp": 40,
+      "crystals": 1,
+      "keepsake": "돌아온 상가 열쇠",
+      "afterglow": "주인이 손에 받자마자 어떤 문부터 열지 알더라. 밖에서 기다리던 사람들도 내려왔어.",
+      "choices": [
+        "소식을 전한다"
+      ],
+      "offer_scene": "side_a1_7_offer",
+      "steps": [
+        {
+          "kind": "site",
+          "stage": 4,
+          "room": 3,
+          "title": "붉은 고리 열쇠",
+          "goal": "씨앗이 파고든 바닥의 붉은 고리 열쇠 찾기",
+          "npc": "",
+          "x": 3.15,
+          "y": -1.05,
+          "scene": "side_a1_7_step0"
+        },
+        {
+          "kind": "clear",
+          "stage": 4,
+          "room": 6,
+          "title": "상가의 비상 계단",
+          "goal": "비상 계단에 올라온 증원을 정리",
+          "npc": "",
+          "x": 3.15,
+          "y": -1.05,
+          "scene": "side_a1_7_step1"
+        }
+      ],
+      "finish_scenes": [
+        "side_a1_7_finish0"
+      ],
+      "active_line": "상가 주인이 셔터를 올릴 수 있는 키를 안에 두고 나왔어. 앞이 막혀 있으니 계단으로 올라와야 해.",
+      "ready_line": "‘셔터 뒤의 열쇠’ 얘기 들었어. 수첩에서 마저 전해 줘.",
+      "choice_notes": [
+        "주인이 손에 받자마자 어떤 문부터 열지 알더라. 밖에서 기다리던 사람들도 내려왔어."
+      ],
+      "choice_keepsakes": [
+        "돌아온 상가 열쇠"
+      ]
+    },
+    {
+      "id": "side_a1_8",
+      "index": 19,
+      "act": 1,
+      "unlock_stage": 5,
+      "giver": "byakuya",
+      "title": "젖은 장부 한 장",
+      "summary": "물이 오르기 전에 이름이 쓰인 장부 한 장을 옮겨라. 잉크가 번진 부분은 따로 남기도록.",
+      "gold": 90,
+      "xp": 40,
+      "crystals": 1,
+      "keepsake": "마른 장부의 빈 줄",
+      "afterglow": "마른 뒤 세 번째 이름의 끝을 주인이 직접 채웠다. 처음 옮긴 두 이름과 함께 보관하겠다.",
+      "choices": [
+        "소식을 전한다"
+      ],
+      "offer_scene": "side_a1_8_offer",
+      "steps": [
+        {
+          "kind": "site",
+          "stage": 5,
+          "room": 4,
+          "title": "바닥에 눌린 장부",
+          "goal": "선착장 바닥에 남은 장부를 챙기기",
+          "npc": "",
+          "x": 3.15,
+          "y": -1.05,
+          "scene": "side_a1_8_step0"
+        },
+        {
+          "kind": "ward",
+          "stage": 5,
+          "room": 6,
+          "title": "물결을 부르는 장치",
+          "goal": "밧줄을 삼킨 물결 구역의 장치를 끄기",
+          "npc": "",
+          "x": 3.15,
+          "y": -1.05,
+          "scene": "side_a1_8_step1"
+        },
+        {
+          "kind": "site",
+          "stage": 5,
+          "room": 7,
+          "title": "바람 드는 밧줄",
+          "goal": "등대 측면 다리에 장부를 걸어 말리기",
+          "npc": "",
+          "x": 3.15,
+          "y": -1.05,
+          "scene": "side_a1_8_step2"
+        }
+      ],
+      "finish_scenes": [
+        "side_a1_8_finish0"
+      ],
+      "active_line": "물이 오르기 전에 이름이 쓰인 장부 한 장을 옮겨라. 잉크가 번진 부분은 따로 남기도록.",
+      "ready_line": "‘젖은 장부 한 장’에서 확인한 내용을 수첩에 남겨라.",
+      "choice_notes": [
+        "마른 뒤 세 번째 이름의 끝을 주인이 직접 채웠다. 처음 옮긴 두 이름과 함께 보관하겠다."
+      ],
+      "choice_keepsakes": [
+        "마른 장부의 빈 줄"
+      ]
+    },
+    {
+      "id": "side_a1_9",
+      "index": 20,
+      "act": 1,
+      "unlock_stage": 6,
+      "giver": "urahara",
+      "title": "미끼 뒤의 진짜 약속",
+      "summary": "가게 손님이 아이와 늘 다리 건너에서 만나셨다고 합니다. 돌아갈 표지가 미끼 뒤에 남아 있을 겁니다.",
+      "gold": 90,
+      "xp": 40,
+      "crystals": 1,
+      "keepsake": "등대 아래 기다릴 자리",
+      "afterglow": "딸을 만나면 다리 앞에서 기다리겠다고 하십니다. 그 표지가 있다는 것도 알려 드렸어요.",
+      "choices": [
+        "소식을 전한다"
+      ],
+      "offer_scene": "side_a1_9_offer",
+      "steps": [
+        {
+          "kind": "signal",
+          "stage": 6,
+          "room": 6,
+          "title": "제자리에 남은 불빛",
+          "goal": "등대의 일정한 불빛 아래서 귀환 신호 보내기",
+          "npc": "",
+          "x": 3.15,
+          "y": -1.05,
+          "scene": "side_a1_9_step0"
+        },
+        {
+          "kind": "clear",
+          "stage": 6,
+          "room": 7,
+          "title": "미끼가 닿은 바닥",
+          "goal": "표지 쪽으로 달려드는 마지막 가면들을 몰아내기",
+          "npc": "",
+          "x": 3.15,
+          "y": -1.05,
+          "scene": "side_a1_9_step1"
+        }
+      ],
+      "finish_scenes": [
+        "side_a1_9_finish0"
+      ],
+      "active_line": "가게 손님이 아이와 늘 다리 건너에서 만나셨다고 합니다. 돌아갈 표지가 미끼 뒤에 남아 있을 겁니다.",
+      "ready_line": "‘미끼 뒤의 진짜 약속’의 소식이 도착했습니다. 수첩에 남겨 주시겠어요?",
+      "choice_notes": [
+        "딸을 만나면 다리 앞에서 기다리겠다고 하십니다. 그 표지가 있다는 것도 알려 드렸어요."
+      ],
+      "choice_keepsakes": [
+        "등대 아래 기다릴 자리"
+      ]
+    },
+    {
+      "id": "side_a2_4",
+      "index": 21,
+      "act": 2,
+      "unlock_stage": 1,
+      "giver": "kukaku",
+      "title": "초소에 남긴 소리",
+      "summary": "경계하던 사람이 지붕에서 떨어져도 안쪽에서 들을 수 있게, 낮은 창에 순찰 신호를 남겨.",
+      "gold": 110,
+      "xp": 50,
+      "crystals": 1,
+      "keepsake": "낮은 창을 비추는 신호",
+      "afterglow": "높은 데서 신호 하나만 잘 보여도 아래가 살지. 초소에서 넘어온 길은 그 자리로 이어 둘게.",
+      "choices": [
+        "소식을 전한다"
+      ],
+      "offer_scene": "side_a2_4_offer",
+      "steps": [
+        {
+          "kind": "signal",
+          "stage": 1,
+          "room": 5,
+          "title": "찢긴 순찰표의 신호",
+          "goal": "반쯤 찢긴 순찰표 앞에서 표지를 고정",
+          "npc": "",
+          "x": 3.15,
+          "y": -1.05,
+          "scene": "side_a2_4_step0"
+        },
+        {
+          "kind": "site",
+          "stage": 1,
+          "room": 6,
+          "title": "옥상의 확인점",
+          "goal": "두 거리 사이 옥상에서 신호가 닿는 자리 표시",
+          "npc": "",
+          "x": 3.15,
+          "y": -1.05,
+          "scene": "side_a2_4_step1"
+        }
+      ],
+      "finish_scenes": [
+        "side_a2_4_finish0"
+      ],
+      "active_line": "경계하던 사람이 지붕에서 떨어져도 안쪽에서 들을 수 있게, 낮은 창에 순찰 신호를 남겨.",
+      "ready_line": "‘초소에 남긴 소리’ 얘기 들었어. 수첩에서 마저 전해 줘.",
+      "choice_notes": [
+        "높은 데서 신호 하나만 잘 보여도 아래가 살지. 초소에서 넘어온 길은 그 자리로 이어 둘게."
+      ],
+      "choice_keepsakes": [
+        "낮은 창을 비추는 신호"
+      ]
+    },
+    {
+      "id": "side_a2_5",
+      "index": 22,
+      "act": 2,
+      "unlock_stage": 2,
+      "giver": "kon",
+      "title": "세 번째 가로등",
+      "summary": "사람이 지나가면 가로등이 순서대로 흔들려. 세 번째에서 꼭 한 번 더 움직여서 방향을 모르겠어.",
+      "gold": 110,
+      "xp": 50,
+      "crystals": 1,
+      "keepsake": "세 번째 가로등 밑 표지",
+      "afterglow": "세 번째 가로등 밑에 한 번 멈췄다가 가라고 써 놨어. 이번엔 걸어오는 사람들이 다 세더라.",
+      "choices": [
+        "소식을 전한다"
+      ],
+      "offer_scene": "side_a2_5_offer",
+      "steps": [
+        {
+          "kind": "site",
+          "stage": 2,
+          "room": 4,
+          "title": "먼저 울린 등",
+          "goal": "가로등의 흔들림이 시작된 자리 확인",
+          "npc": "",
+          "x": 3.15,
+          "y": -1.05,
+          "scene": "side_a2_5_step0"
+        },
+        {
+          "kind": "clear",
+          "stage": 2,
+          "room": 6,
+          "title": "디 로이의 좁은 골목",
+          "goal": "가로등 아래의 좁은 골목을 비우기",
+          "npc": "",
+          "x": 3.15,
+          "y": -1.05,
+          "scene": "side_a2_5_step1"
+        }
+      ],
+      "finish_scenes": [
+        "side_a2_5_finish0"
+      ],
+      "active_line": "사람이 지나가면 가로등이 순서대로 흔들려. 세 번째에서 꼭 한 번 더 움직여서 방향을 모르겠어.",
+      "ready_line": "‘세 번째 가로등’ 다 봤지? 수첩에서 나한테 알려 줘!",
+      "choice_notes": [
+        "세 번째 가로등 밑에 한 번 멈췄다가 가라고 써 놨어. 이번엔 걸어오는 사람들이 다 세더라."
+      ],
+      "choice_keepsakes": [
+        "세 번째 가로등 밑 표지"
+      ]
+    },
+    {
+      "id": "side_a2_6",
+      "index": 23,
+      "act": 2,
+      "unlock_stage": 3,
+      "giver": "byakuya",
+      "title": "순찰자의 교대표",
+      "summary": "교대할 때 함께 나와야 할 이름이 종이에서 지워졌다. 지워진 사람 쪽의 발자국을 먼저 살펴라.",
+      "gold": 110,
+      "xp": 50,
+      "crystals": 1,
+      "keepsake": "교대 시간을 적은 표",
+      "afterglow": "밖에서 대답을 한 번 더 받았다. 지워진 이름이 있던 곳에 귀환 시간을 함께 남겼다.",
+      "choices": [
+        "소식을 전한다"
+      ],
+      "offer_scene": "side_a2_6_offer",
+      "steps": [
+        {
+          "kind": "site",
+          "stage": 3,
+          "room": 2,
+          "title": "교차선 밖 교대표",
+          "goal": "교차선 바깥 지붕에서 순찰 교대표 살펴보기",
+          "npc": "",
+          "x": 3.15,
+          "y": -1.05,
+          "scene": "side_a2_6_step0"
+        },
+        {
+          "kind": "signal",
+          "stage": 3,
+          "room": 3,
+          "title": "교대 시간의 신호",
+          "goal": "낡은 정찰 매듭에서 실제 교대 신호 보내기",
+          "npc": "",
+          "x": 3.15,
+          "y": -1.05,
+          "scene": "side_a2_6_step1"
+        }
+      ],
+      "finish_scenes": [
+        "side_a2_6_finish0"
+      ],
+      "active_line": "교대할 때 함께 나와야 할 이름이 종이에서 지워졌다. 지워진 사람 쪽의 발자국을 먼저 살펴라.",
+      "ready_line": "‘순찰자의 교대표’에서 확인한 내용을 수첩에 남겨라.",
+      "choice_notes": [
+        "밖에서 대답을 한 번 더 받았다. 지워진 이름이 있던 곳에 귀환 시간을 함께 남겼다."
+      ],
+      "choice_keepsakes": [
+        "교대 시간을 적은 표"
+      ]
+    },
+    {
+      "id": "side_a2_7",
+      "index": 24,
+      "act": 2,
+      "unlock_stage": 4,
+      "giver": "tessai",
+      "title": "문턱에 두는 추",
+      "summary": "문이 한쪽으로만 기울면 돌아오는 위치가 바뀝니다. 영압을 끈 뒤 문턱의 추를 다시 놓아야겠습니다.",
+      "gold": 110,
+      "xp": 50,
+      "crystals": 1,
+      "keepsake": "가르간타 문턱의 추",
+      "afterglow": "양쪽에서 여닫아도 같은 곳에 놓입니다. 급히 돌아올 때 문을 밀어도 괜찮겠습니다.",
+      "choices": [
+        "소식을 전한다"
+      ],
+      "offer_scene": "side_a2_7_offer",
+      "steps": [
+        {
+          "kind": "signal",
+          "stage": 4,
+          "room": 5,
+          "title": "경계의 왕복 신호",
+          "goal": "경계가 밀려오는 틈에서 왕복 표지를 고정",
+          "npc": "",
+          "x": 3.15,
+          "y": -1.05,
+          "scene": "side_a2_7_step0"
+        },
+        {
+          "kind": "ward",
+          "stage": 4,
+          "room": 6,
+          "title": "문턱의 지지 장치",
+          "goal": "두 사람의 그림자 구역에서 영압 장치 해제",
+          "npc": "",
+          "x": 3.15,
+          "y": -1.05,
+          "scene": "side_a2_7_step1"
+        }
+      ],
+      "finish_scenes": [
+        "side_a2_7_finish0"
+      ],
+      "active_line": "문이 한쪽으로만 기울면 돌아오는 위치가 바뀝니다. 영압을 끈 뒤 문턱의 추를 다시 놓아야겠습니다.",
+      "ready_line": "‘문턱에 두는 추’의 결과를 수첩에서 말씀해 주십시오.",
+      "choice_notes": [
+        "양쪽에서 여닫아도 같은 곳에 놓입니다. 급히 돌아올 때 문을 밀어도 괜찮겠습니다."
+      ],
+      "choice_keepsakes": [
+        "가르간타 문턱의 추"
+      ]
+    },
+    {
+      "id": "side_a2_8",
+      "index": 25,
+      "act": 2,
+      "unlock_stage": 5,
+      "giver": "tessai",
+      "title": "반대편에서 읽는 지도",
+      "summary": "이 지도는 한 방향에서만 읽힙니다. 길에 들어온 사람이 어느 쪽을 향해야 하는지 표시를 부탁드립니다.",
+      "gold": 110,
+      "xp": 50,
+      "crystals": 1,
+      "keepsake": "두 방향의 관문 지도",
+      "afterglow": "다른 방향에서 보아도 문 그림이 먼저 보입니다. 찾아오는 분들에게 새로 그린 쪽을 먼저 펴 드리겠습니다.",
+      "choices": [
+        "소식을 전한다"
+      ],
+      "offer_scene": "side_a2_8_offer",
+      "steps": [
+        {
+          "kind": "site",
+          "stage": 5,
+          "room": 5,
+          "title": "경첩 뒤의 방향 표지",
+          "goal": "데모우라 뒤쪽 경첩에 붙은 방향 표시 확인",
+          "npc": "",
+          "x": 3.15,
+          "y": -1.05,
+          "scene": "side_a2_8_step0"
+        },
+        {
+          "kind": "site",
+          "stage": 5,
+          "room": 7,
+          "title": "반대편 지도 받침",
+          "goal": "들어올 때의 시점에서 지도 거꾸로 읽기",
+          "npc": "",
+          "x": 3.15,
+          "y": -1.05,
+          "scene": "side_a2_8_step1"
+        }
+      ],
+      "finish_scenes": [
+        "side_a2_8_finish0"
+      ],
+      "active_line": "이 지도는 한 방향에서만 읽힙니다. 길에 들어온 사람이 어느 쪽을 향해야 하는지 표시를 부탁드립니다.",
+      "ready_line": "‘반대편에서 읽는 지도’의 결과를 수첩에서 말씀해 주십시오.",
+      "choice_notes": [
+        "다른 방향에서 보아도 문 그림이 먼저 보입니다. 찾아오는 분들에게 새로 그린 쪽을 먼저 펴 드리겠습니다."
+      ],
+      "choice_keepsakes": [
+        "두 방향의 관문 지도"
+      ]
+    },
+    {
+      "id": "side_a2_9",
+      "index": 26,
+      "act": 2,
+      "unlock_stage": 6,
+      "giver": "kukaku",
+      "title": "문이 울릴 때 할 말",
+      "summary": "그림죠가 발을 딛으면 문이 한번 울려. 그때 누가 소리 질러도 위치 확인할 한마디는 들려야 해.",
+      "gold": 110,
+      "xp": 50,
+      "crystals": 1,
+      "keepsake": "문 너머의 대답 순서",
+      "afterglow": "울린 뒤에는 기다렸다가 위치를 말하기로 했어. 다음엔 두 사람 다 부를 차례를 알겠지.",
+      "choices": [
+        "소식을 전한다"
+      ],
+      "offer_scene": "side_a2_9_offer",
+      "steps": [
+        {
+          "kind": "ward",
+          "stage": 6,
+          "room": 2,
+          "title": "문이 울리는 통로 장치",
+          "goal": "문이 울리는 통로에서 장치를 멈추기",
+          "npc": "",
+          "x": 3.15,
+          "y": -1.05,
+          "scene": "side_a2_9_step0"
+        },
+        {
+          "kind": "signal",
+          "stage": 6,
+          "room": 6,
+          "title": "흔들리지 않는 좌표",
+          "goal": "흔들리지 않는 좌표에서 귀환 신호 맞추기",
+          "npc": "",
+          "x": 3.15,
+          "y": -1.05,
+          "scene": "side_a2_9_step1"
+        }
+      ],
+      "finish_scenes": [
+        "side_a2_9_finish0"
+      ],
+      "active_line": "그림죠가 발을 딛으면 문이 한번 울려. 그때 누가 소리 질러도 위치 확인할 한마디는 들려야 해.",
+      "ready_line": "‘문이 울릴 때 할 말’ 얘기 들었어. 수첩에서 마저 전해 줘.",
+      "choice_notes": [
+        "울린 뒤에는 기다렸다가 위치를 말하기로 했어. 다음엔 두 사람 다 부를 차례를 알겠지."
+      ],
+      "choice_keepsakes": [
+        "문 너머의 대답 순서"
+      ]
+    },
+    {
+      "id": "side_a3_4",
+      "index": 27,
+      "act": 3,
+      "unlock_stage": 1,
+      "giver": "kukaku",
+      "title": "모래 밑의 물통",
+      "summary": "백사막 길에 두고 간 물통이 있어. 그걸 마시고 쉬던 자리가 표지인데, 모래가 덮었대.",
+      "gold": 130,
+      "xp": 60,
+      "crystals": 2,
+      "keepsake": "돌기둥에 건 물통",
+      "afterglow": "찾아온 사람들이 먼저 물통을 보더라. 쉬어 가는 자리라고 알려 줬어.",
+      "choices": [
+        "소식을 전한다"
+      ],
+      "offer_scene": "side_a3_4_offer",
+      "steps": [
+        {
+          "kind": "clear",
+          "stage": 1,
+          "room": 4,
+          "title": "발자국이 되감기는 둔덕",
+          "goal": "물통이 있는 둔덕의 재현을 정화",
+          "npc": "",
+          "x": 3.15,
+          "y": -1.05,
+          "scene": "side_a3_4_step0"
+        },
+        {
+          "kind": "site",
+          "stage": 1,
+          "room": 6,
+          "title": "모래 속 물통",
+          "goal": "돌기둥 아래에서 모래 묻은 물통 찾기",
+          "npc": "",
+          "x": 3.15,
+          "y": -1.05,
+          "scene": "side_a3_4_step1"
+        }
+      ],
+      "finish_scenes": [
+        "side_a3_4_finish0"
+      ],
+      "active_line": "백사막 길에 두고 간 물통이 있어. 그걸 마시고 쉬던 자리가 표지인데, 모래가 덮었대.",
+      "ready_line": "‘모래 밑의 물통’ 얘기 들었어. 수첩에서 마저 전해 줘.",
+      "choice_notes": [
+        "찾아온 사람들이 먼저 물통을 보더라. 쉬어 가는 자리라고 알려 줬어."
+      ],
+      "choice_keepsakes": [
+        "돌기둥에 건 물통"
+      ]
+    },
+    {
+      "id": "side_a3_5",
+      "index": 28,
+      "act": 3,
+      "unlock_stage": 2,
+      "giver": "tessai",
+      "title": "들것의 한쪽 손잡이",
+      "summary": "회랑의 들것이 한쪽으로 기웁니다. 손잡이와 나오는 길을 함께 확인해 주십시오.",
+      "gold": 130,
+      "xp": 60,
+      "crystals": 2,
+      "keepsake": "두 손으로 잡는 들것",
+      "afterglow": "들것이 끝까지 기울지 않았습니다. 안쪽에서 잡으신 분의 손도 확인했습니다.",
+      "choices": [
+        "소식을 전한다"
+      ],
+      "offer_scene": "side_a3_5_offer",
+      "steps": [
+        {
+          "kind": "site",
+          "stage": 2,
+          "room": 4,
+          "title": "남겨진 들것 끈",
+          "goal": "무너진 회랑 안쪽에서 손잡이 끈 찾기",
+          "npc": "",
+          "x": 3.15,
+          "y": -1.05,
+          "scene": "side_a3_5_step0"
+        },
+        {
+          "kind": "clear",
+          "stage": 2,
+          "room": 7,
+          "title": "부상자 대기소",
+          "goal": "들것이 나갈 대기소의 적 정리",
+          "npc": "",
+          "x": 3.15,
+          "y": -1.05,
+          "scene": "side_a3_5_step1"
+        }
+      ],
+      "finish_scenes": [
+        "side_a3_5_finish0"
+      ],
+      "active_line": "회랑의 들것이 한쪽으로 기웁니다. 손잡이와 나오는 길을 함께 확인해 주십시오.",
+      "ready_line": "‘들것의 한쪽 손잡이’의 결과를 수첩에서 말씀해 주십시오.",
+      "choice_notes": [
+        "들것이 끝까지 기울지 않았습니다. 안쪽에서 잡으신 분의 손도 확인했습니다."
+      ],
+      "choice_keepsakes": [
+        "두 손으로 잡는 들것"
+      ]
+    },
+    {
+      "id": "side_a3_6",
+      "index": 29,
+      "act": 3,
+      "unlock_stage": 3,
+      "giver": "kon",
+      "title": "회랑이 멎는 동안",
+      "summary": "바람이 불 때마다 멀리서 불빛이 가려져. 깜빡이는 걸 보고도 기다려야 하는지 헷갈려.",
+      "gold": 130,
+      "xp": 60,
+      "crystals": 2,
+      "keepsake": "높아진 회랑 등불",
+      "afterglow": "등불을 올렸더니 모래가 조금 날려도 보여. 그 자리에서 두 사람이 기다렸다 같이 나왔어.",
+      "choices": [
+        "소식을 전한다"
+      ],
+      "offer_scene": "side_a3_6_offer",
+      "steps": [
+        {
+          "kind": "ward",
+          "stage": 3,
+          "room": 2,
+          "title": "낫에 패인 모래의 장치",
+          "goal": "낫에 패인 모래 구역에서 돌풍 장치 해제",
+          "npc": "",
+          "x": 3.15,
+          "y": -1.05,
+          "scene": "side_a3_6_step0"
+        },
+        {
+          "kind": "signal",
+          "stage": 3,
+          "room": 3,
+          "title": "회랑 불빛 응답",
+          "goal": "테슬러가 지나간 통로에서 불빛 잇기",
+          "npc": "",
+          "x": 3.15,
+          "y": -1.05,
+          "scene": "side_a3_6_step1"
+        },
+        {
+          "kind": "site",
+          "stage": 3,
+          "room": 4,
+          "title": "꺼진 등불의 받침",
+          "goal": "끊긴 등불 아래에서 불빛이 가려진 높이 확인",
+          "npc": "",
+          "x": 3.15,
+          "y": -1.05,
+          "scene": "side_a3_6_step2"
+        }
+      ],
+      "finish_scenes": [
+        "side_a3_6_finish0"
+      ],
+      "active_line": "바람이 불 때마다 멀리서 불빛이 가려져. 깜빡이는 걸 보고도 기다려야 하는지 헷갈려.",
+      "ready_line": "‘회랑이 멎는 동안’ 다 봤지? 수첩에서 나한테 알려 줘!",
+      "choice_notes": [
+        "등불을 올렸더니 모래가 조금 날려도 보여. 그 자리에서 두 사람이 기다렸다 같이 나왔어."
+      ],
+      "choice_keepsakes": [
+        "높아진 회랑 등불"
+      ]
+    },
+    {
+      "id": "side_a3_7",
+      "index": 30,
+      "act": 3,
+      "unlock_stage": 4,
+      "giver": "byakuya",
+      "title": "지운 이름의 자리",
+      "summary": "장부에 두 줄이 겹쳐 있어도 순서를 잃지 말아라. 어떤 이름이 위에 있었는지도 기록으로 남는다.",
+      "gold": 130,
+      "xp": 60,
+      "crystals": 2,
+      "keepsake": "서가 번호가 남은 기록",
+      "afterglow": "빈칸까지 원래 순서에 두었다. 두 기록이 겹친 곳에서도 각자의 줄을 찾을 수 있게 됐다.",
+      "choices": [
+        "소식을 전한다"
+      ],
+      "offer_scene": "side_a3_7_offer",
+      "steps": [
+        {
+          "kind": "site",
+          "stage": 4,
+          "room": 5,
+          "title": "먼지 밑의 서가 번호",
+          "goal": "먼지가 눌린 서가에서 장부 번호 확인",
+          "npc": "",
+          "x": 3.15,
+          "y": -1.05,
+          "scene": "side_a3_7_step0"
+        },
+        {
+          "kind": "site",
+          "stage": 4,
+          "room": 7,
+          "title": "비어 있는 이름칸",
+          "goal": "아로니로가 지나간 자리의 빈 이름칸 확인",
+          "npc": "",
+          "x": 3.15,
+          "y": -1.05,
+          "scene": "side_a3_7_step1"
+        }
+      ],
+      "finish_scenes": [
+        "side_a3_7_finish0"
+      ],
+      "active_line": "장부에 두 줄이 겹쳐 있어도 순서를 잃지 말아라. 어떤 이름이 위에 있었는지도 기록으로 남는다.",
+      "ready_line": "‘지운 이름의 자리’에서 확인한 내용을 수첩에 남겨라.",
+      "choice_notes": [
+        "빈칸까지 원래 순서에 두었다. 두 기록이 겹친 곳에서도 각자의 줄을 찾을 수 있게 됐다."
+      ],
+      "choice_keepsakes": [
+        "서가 번호가 남은 기록"
+      ]
+    },
+    {
+      "id": "side_a3_8",
+      "index": 31,
+      "act": 3,
+      "unlock_stage": 5,
+      "giver": "urahara",
+      "title": "정원에 붙은 이끼",
+      "summary": "분석실에서 계속 영압을 보내는 장치가 있군요. 정원까지 흔들리면 원본의 신호를 찾기 어렵겠습니다.",
+      "gold": 130,
+      "xp": 60,
+      "crystals": 2,
+      "keepsake": "이끼가 표시한 경계",
+      "afterglow": "신호가 닿았던 범위를 표시에 남겼습니다. 원본을 꺼낼 때 그 안쪽 장치는 다시 켜지 않겠습니다.",
+      "choices": [
+        "소식을 전한다"
+      ],
+      "offer_scene": "side_a3_8_offer",
+      "steps": [
+        {
+          "kind": "ward",
+          "stage": 5,
+          "room": 7,
+          "title": "낮은 담의 영압 장치",
+          "goal": "지오가 뛰어든 낮은 담에서 장치 해제",
+          "npc": "",
+          "x": 3.15,
+          "y": -1.05,
+          "scene": "side_a3_8_step0"
+        },
+        {
+          "kind": "site",
+          "stage": 5,
+          "room": 8,
+          "title": "그늘의 이끼 자국",
+          "goal": "측정판 아래에서 젖은 이끼의 경계 확인",
+          "npc": "",
+          "x": 3.15,
+          "y": -1.05,
+          "scene": "side_a3_8_step1"
+        }
+      ],
+      "finish_scenes": [
+        "side_a3_8_finish0"
+      ],
+      "active_line": "분석실에서 계속 영압을 보내는 장치가 있군요. 정원까지 흔들리면 원본의 신호를 찾기 어렵겠습니다.",
+      "ready_line": "‘정원에 붙은 이끼’의 소식이 도착했습니다. 수첩에 남겨 주시겠어요?",
+      "choice_notes": [
+        "신호가 닿았던 범위를 표시에 남겼습니다. 원본을 꺼낼 때 그 안쪽 장치는 다시 켜지 않겠습니다."
+      ],
+      "choice_keepsakes": [
+        "이끼가 표시한 경계"
+      ]
+    },
+    {
+      "id": "side_a3_9",
+      "index": 32,
+      "act": 3,
+      "unlock_stage": 6,
+      "giver": "kukaku",
+      "title": "천개 아래 불빛",
+      "summary": "천개에서 나오면 위쪽엔 밖이 보이지 않아. 원본을 든 손이 비지 않을 때 볼 불을 아래에 고정해.",
+      "gold": 130,
+      "xp": 60,
+      "crystals": 2,
+      "keepsake": "천개 아래의 귀환 불빛",
+      "afterglow": "원본을 든 사람이 멀리서도 길을 알아보더라. 그 불은 돌아올 때까지 여기서 같이 본다.",
+      "choices": [
+        "소식을 전한다"
+      ],
+      "offer_scene": "side_a3_9_offer",
+      "steps": [
+        {
+          "kind": "signal",
+          "stage": 6,
+          "room": 6,
+          "title": "원본 아래 불빛",
+          "goal": "원본을 들 수 있는 빈터에서 회랑 불빛 잇기",
+          "npc": "",
+          "x": 3.15,
+          "y": -1.05,
+          "scene": "side_a3_9_step0"
+        },
+        {
+          "kind": "clear",
+          "stage": 6,
+          "room": 7,
+          "title": "천개 끝 귀환선",
+          "goal": "천개 끝의 귀환선을 막은 증원을 모두 정리",
+          "npc": "",
+          "x": 3.15,
+          "y": -1.05,
+          "scene": "side_a3_9_step1"
+        }
+      ],
+      "finish_scenes": [
+        "side_a3_9_finish0"
+      ],
+      "active_line": "천개에서 나오면 위쪽엔 밖이 보이지 않아. 원본을 든 손이 비지 않을 때 볼 불을 아래에 고정해.",
+      "ready_line": "‘천개 아래 불빛’ 얘기 들었어. 수첩에서 마저 전해 줘.",
+      "choice_notes": [
+        "원본을 든 사람이 멀리서도 길을 알아보더라. 그 불은 돌아올 때까지 여기서 같이 본다."
+      ],
+      "choice_keepsakes": [
+        "천개 아래의 귀환 불빛"
+      ]
+    },
+    {
+      "id": "side_a4_4",
+      "index": 33,
+      "act": 4,
+      "unlock_stage": 1,
+      "giver": "byakuya",
+      "title": "그림자가 세는 기둥",
+      "summary": "사본에 적힌 기둥 수와 발걸음 소리를 따로 남겨라. 한쪽에서 보이지 않는 것도 있을 것이다.",
+      "gold": 150,
+      "xp": 70,
+      "crystals": 2,
+      "keepsake": "기둥 수 두 줄",
+      "afterglow": "넷이라는 기록과 셋이라는 기록을 함께 두었다. 둘의 발소리가 모인 곳이 출구를 찾는 데 쓰일 것이다.",
+      "choices": [
+        "소식을 전한다"
+      ],
+      "offer_scene": "side_a4_4_offer",
+      "steps": [
+        {
+          "kind": "site",
+          "stage": 1,
+          "room": 4,
+          "title": "네 번째 기둥 자국",
+          "goal": "네 번째 기둥이 보이는 자리에서 발자국 수 확인",
+          "npc": "",
+          "x": 3.15,
+          "y": -1.05,
+          "scene": "side_a4_4_step0"
+        },
+        {
+          "kind": "signal",
+          "stage": 1,
+          "room": 5,
+          "title": "사본 밖 골목",
+          "goal": "사본 밖 골목에서 대조 신호 보내기",
+          "npc": "",
+          "x": 3.15,
+          "y": -1.05,
+          "scene": "side_a4_4_step1"
+        }
+      ],
+      "finish_scenes": [
+        "side_a4_4_finish0"
+      ],
+      "active_line": "사본에 적힌 기둥 수와 발걸음 소리를 따로 남겨라. 한쪽에서 보이지 않는 것도 있을 것이다.",
+      "ready_line": "‘그림자가 세는 기둥’에서 확인한 내용을 수첩에 남겨라.",
+      "choice_notes": [
+        "넷이라는 기록과 셋이라는 기록을 함께 두었다. 둘의 발소리가 모인 곳이 출구를 찾는 데 쓰일 것이다."
+      ],
+      "choice_keepsakes": [
+        "기둥 수 두 줄"
+      ]
+    },
+    {
+      "id": "side_a4_5",
+      "index": 34,
+      "act": 4,
+      "unlock_stage": 2,
+      "giver": "kukaku",
+      "title": "물이 움직이지 않는 다리",
+      "summary": "다리 아래 물이 멎었는데도 위쪽 난간이 계속 흔들려. 흔들리는 쪽에 서 있으면 돌아갈 방향을 바꿔 버려.",
+      "gold": 150,
+      "xp": 70,
+      "crystals": 2,
+      "keepsake": "고요해진 교각 표지",
+      "afterglow": "난간이 멎고 나서야 같이 건널 수 있었어. 물이 움직이기 시작하면 한 번 더 서로를 불러.",
+      "choices": [
+        "소식을 전한다"
+      ],
+      "offer_scene": "side_a4_5_offer",
+      "steps": [
+        {
+          "kind": "ward",
+          "stage": 2,
+          "room": 6,
+          "title": "교각의 결계 장치",
+          "goal": "야미가 디딘 교각의 결계 장치를 끄기",
+          "npc": "",
+          "x": 3.15,
+          "y": -1.05,
+          "scene": "side_a4_5_step0"
+        },
+        {
+          "kind": "site",
+          "stage": 2,
+          "room": 7,
+          "title": "물에 닿지 않은 발자국",
+          "goal": "혼자 울리는 목소리 주변의 실제 발자국 살펴보기",
+          "npc": "",
+          "x": 3.15,
+          "y": -1.05,
+          "scene": "side_a4_5_step1"
+        }
+      ],
+      "finish_scenes": [
+        "side_a4_5_finish0"
+      ],
+      "active_line": "다리 아래 물이 멎었는데도 위쪽 난간이 계속 흔들려. 흔들리는 쪽에 서 있으면 돌아갈 방향을 바꿔 버려.",
+      "ready_line": "‘물이 움직이지 않는 다리’ 얘기 들었어. 수첩에서 마저 전해 줘.",
+      "choice_notes": [
+        "난간이 멎고 나서야 같이 건널 수 있었어. 물이 움직이기 시작하면 한 번 더 서로를 불러."
+      ],
+      "choice_keepsakes": [
+        "고요해진 교각 표지"
+      ]
+    },
+    {
+      "id": "side_a4_6",
+      "index": 35,
+      "act": 4,
+      "unlock_stage": 3,
+      "giver": "kon",
+      "title": "다시 걸을 자리",
+      "summary": "거기서 돌아온 사람이 한동안 아무 말 없이 서 있더라. 먼저 앉을 곳을 만들어 두면 안 될까?",
+      "gold": 150,
+      "xp": 70,
+      "crystals": 2,
+      "keepsake": "기다려 주는 돌난간",
+      "afterglow": "돌난간에 앉았다가 간 사람이 있었어. 떠나기 전에 고맙다고 손바닥으로 난간을 두드렸어.",
+      "choices": [
+        "소식을 전한다"
+      ],
+      "offer_scene": "side_a4_6_offer",
+      "steps": [
+        {
+          "kind": "site",
+          "stage": 3,
+          "room": 2,
+          "title": "기울지 않은 돌난간",
+          "goal": "기울어진 다리에서 쉬어 갈 난간 확인",
+          "npc": "",
+          "x": 3.15,
+          "y": -1.05,
+          "scene": "side_a4_6_step0"
+        },
+        {
+          "kind": "clear",
+          "stage": 3,
+          "room": 5,
+          "title": "다시 걸을 자리",
+          "goal": "쉬어 갈 자리까지 따라온 기억들을 정화",
+          "npc": "",
+          "x": 3.15,
+          "y": -1.05,
+          "scene": "side_a4_6_step1"
+        }
+      ],
+      "finish_scenes": [
+        "side_a4_6_finish0"
+      ],
+      "active_line": "거기서 돌아온 사람이 한동안 아무 말 없이 서 있더라. 먼저 앉을 곳을 만들어 두면 안 될까?",
+      "ready_line": "‘다시 걸을 자리’ 다 봤지? 수첩에서 나한테 알려 줘!",
+      "choice_notes": [
+        "돌난간에 앉았다가 간 사람이 있었어. 떠나기 전에 고맙다고 손바닥으로 난간을 두드렸어."
+      ],
+      "choice_keepsakes": [
+        "기다려 주는 돌난간"
+      ]
+    },
+    {
+      "id": "side_a4_7",
+      "index": 36,
+      "act": 4,
+      "unlock_stage": 4,
+      "giver": "tessai",
+      "title": "광장의 반대편",
+      "summary": "광장에 있는 두 길이 가끔 같은 쪽으로 보입니다. 반대편에서 들어오는 신호를 따로 받아 보겠습니다.",
+      "gold": 150,
+      "xp": 70,
+      "crystals": 2,
+      "keepsake": "광장 가운데의 짧은 금",
+      "afterglow": "반대편에서도 이 표시를 볼 수 있습니다. 서로 다르게 보인 자리도 장부에 따로 남겼습니다.",
+      "choices": [
+        "소식을 전한다"
+      ],
+      "offer_scene": "side_a4_7_offer",
+      "steps": [
+        {
+          "kind": "signal",
+          "stage": 4,
+          "room": 6,
+          "title": "광장 대조 신호",
+          "goal": "아파치 그림자의 맞은편에서 길 대조하기",
+          "npc": "",
+          "x": 3.15,
+          "y": -1.05,
+          "scene": "side_a4_7_step0"
+        },
+        {
+          "kind": "ward",
+          "stage": 4,
+          "room": 7,
+          "title": "광장 영압 장치",
+          "goal": "미라 로즈가 딛던 광장의 장치 해제",
+          "npc": "",
+          "x": 3.15,
+          "y": -1.05,
+          "scene": "side_a4_7_step1"
+        },
+        {
+          "kind": "site",
+          "stage": 4,
+          "room": 8,
+          "title": "두 쪽에서 읽는 표지",
+          "goal": "서로 다른 방향의 중간에 귀환 표시 남기기",
+          "npc": "",
+          "x": 3.15,
+          "y": -1.05,
+          "scene": "side_a4_7_step2"
+        }
+      ],
+      "finish_scenes": [
+        "side_a4_7_finish0"
+      ],
+      "active_line": "광장에 있는 두 길이 가끔 같은 쪽으로 보입니다. 반대편에서 들어오는 신호를 따로 받아 보겠습니다.",
+      "ready_line": "‘광장의 반대편’의 결과를 수첩에서 말씀해 주십시오.",
+      "choice_notes": [
+        "반대편에서도 이 표시를 볼 수 있습니다. 서로 다르게 보인 자리도 장부에 따로 남겼습니다."
+      ],
+      "choice_keepsakes": [
+        "광장 가운데의 짧은 금"
+      ]
+    },
+    {
+      "id": "side_a4_8",
+      "index": 37,
+      "act": 4,
+      "unlock_stage": 5,
+      "giver": "byakuya",
+      "title": "방향을 바꾼 간판",
+      "summary": "출구 간판은 네가 다가가면 방향을 바꾼다. 언제 바뀌는지 먼저 적어라.",
+      "gold": 150,
+      "xp": 70,
+      "crystals": 2,
+      "keepsake": "간판 뒤의 한 줄",
+      "afterglow": "정면의 화살표와 뒤의 선을 각각 남겨 두었다. 입구에서 보면 어느 쪽을 볼지 알 수 있다.",
+      "choices": [
+        "소식을 전한다"
+      ],
+      "offer_scene": "side_a4_8_offer",
+      "steps": [
+        {
+          "kind": "site",
+          "stage": 5,
+          "room": 5,
+          "title": "뒤집히기 전의 화살표",
+          "goal": "출구 간판이 돌아가기 전 방향 기록",
+          "npc": "",
+          "x": 3.15,
+          "y": -1.05,
+          "scene": "side_a4_8_step0"
+        },
+        {
+          "kind": "site",
+          "stage": 5,
+          "room": 8,
+          "title": "간판 뒤의 긁힌 선",
+          "goal": "샤를로테가 가린 표지의 뒷면을 확인",
+          "npc": "",
+          "x": 3.15,
+          "y": -1.05,
+          "scene": "side_a4_8_step1"
+        }
+      ],
+      "finish_scenes": [
+        "side_a4_8_finish0"
+      ],
+      "active_line": "출구 간판은 네가 다가가면 방향을 바꾼다. 언제 바뀌는지 먼저 적어라.",
+      "ready_line": "‘방향을 바꾼 간판’에서 확인한 내용을 수첩에 남겨라.",
+      "choice_notes": [
+        "정면의 화살표와 뒤의 선을 각각 남겨 두었다. 입구에서 보면 어느 쪽을 볼지 알 수 있다."
+      ],
+      "choice_keepsakes": [
+        "간판 뒤의 한 줄"
+      ]
+    },
+    {
+      "id": "side_a4_9",
+      "index": 38,
+      "act": 4,
+      "unlock_stage": 6,
+      "giver": "urahara",
+      "title": "거울 뒤 흰 조각",
+      "summary": "거울 도시는 환영이 꺼져도 벽 아래에 흔적이 남을 수 있습니다. 흰 조각이 보이면 만져 보지 말고 위치부터 알려 주세요.",
+      "gold": 150,
+      "xp": 70,
+      "crystals": 2,
+      "keepsake": "거울 뒤 흰 조각의 탁본",
+      "afterglow": "벽에서 가져온 모양은 따로 보존했습니다. 다음에 같은 조각을 보면 여기 기록부터 대조하겠습니다.",
+      "choices": [
+        "소식을 전한다"
+      ],
+      "offer_scene": "side_a4_9_offer",
+      "steps": [
+        {
+          "kind": "ward",
+          "stage": 6,
+          "room": 4,
+          "title": "옅은 영압의 장치",
+          "goal": "옅은 영압이 가린 거리에서 결계 장치 해제",
+          "npc": "",
+          "x": 3.15,
+          "y": -1.05,
+          "scene": "side_a4_9_step0"
+        },
+        {
+          "kind": "signal",
+          "stage": 6,
+          "room": 6,
+          "title": "갈라진 문양 대조",
+          "goal": "갈라진 문양 앞에서 두 위치 대조하기",
+          "npc": "",
+          "x": 3.15,
+          "y": -1.05,
+          "scene": "side_a4_9_step1"
+        },
+        {
+          "kind": "site",
+          "stage": 6,
+          "room": 7,
+          "title": "흰 조각의 바닥 자국",
+          "goal": "진한 범위 바깥에서 남아 있는 조각 조사",
+          "npc": "",
+          "x": 3.15,
+          "y": -1.05,
+          "scene": "side_a4_9_step2"
+        }
+      ],
+      "finish_scenes": [
+        "side_a4_9_finish0"
+      ],
+      "active_line": "거울 도시는 환영이 꺼져도 벽 아래에 흔적이 남을 수 있습니다. 흰 조각이 보이면 만져 보지 말고 위치부터 알려 주세요.",
+      "ready_line": "‘거울 뒤 흰 조각’의 소식이 도착했습니다. 수첩에 남겨 주시겠어요?",
+      "choice_notes": [
+        "벽에서 가져온 모양은 따로 보존했습니다. 다음에 같은 조각을 보면 여기 기록부터 대조하겠습니다."
+      ],
+      "choice_keepsakes": [
+        "거울 뒤 흰 조각의 탁본"
+      ]
+    },
+    {
+      "id": "side_a5_4",
+      "index": 39,
+      "act": 5,
+      "unlock_stage": 1,
+      "giver": "kon",
+      "title": "빼앗기지 않은 걸음",
+      "summary": "같은 발자국이 되돌아와. 걷는 사람 자국이랑 헷갈리니까 먼저 지워지지 않는 걸 하나만 찾아 줘.",
+      "gold": 170,
+      "xp": 80,
+      "crystals": 2,
+      "keepsake": "되돌아오지 않은 첫 걸음",
+      "afterglow": "이번엔 발자국을 따라오던 사람들이 제자리로 돌아가지 않았어. 끊긴 자국부터 찾았대.",
+      "choices": [
+        "소식을 전한다"
+      ],
+      "offer_scene": "side_a5_4_offer",
+      "steps": [
+        {
+          "kind": "signal",
+          "stage": 1,
+          "room": 5,
+          "title": "그림자 속 귀환 신호",
+          "goal": "킬게의 통로에서 새 귀환 신호 남기기",
+          "npc": "",
+          "x": 3.15,
+          "y": -1.05,
+          "scene": "side_a5_4_step0"
+        },
+        {
+          "kind": "site",
+          "stage": 1,
+          "room": 6,
+          "title": "되돌아가지 않은 자국",
+          "goal": "흔들린 표지 옆에서 새로 남은 발자국 확인",
+          "npc": "",
+          "x": 3.15,
+          "y": -1.05,
+          "scene": "side_a5_4_step1"
+        }
+      ],
+      "finish_scenes": [
+        "side_a5_4_finish0"
+      ],
+      "active_line": "같은 발자국이 되돌아와. 걷는 사람 자국이랑 헷갈리니까 먼저 지워지지 않는 걸 하나만 찾아 줘.",
+      "ready_line": "‘빼앗기지 않은 걸음’ 다 봤지? 수첩에서 나한테 알려 줘!",
+      "choice_notes": [
+        "이번엔 발자국을 따라오던 사람들이 제자리로 돌아가지 않았어. 끊긴 자국부터 찾았대."
+      ],
+      "choice_keepsakes": [
+        "되돌아오지 않은 첫 걸음"
+      ]
+    },
+    {
+      "id": "side_a5_5",
+      "index": 40,
+      "act": 5,
+      "unlock_stage": 2,
+      "giver": "tessai",
+      "title": "불길 밖의 흰 돌",
+      "summary": "화염이 사라져도 밟으면 뜨거운 자리가 남습니다. 쉬어 갈 수 있는 흰 돌을 찾아 주십시오.",
+      "gold": 170,
+      "xp": 80,
+      "crystals": 2,
+      "keepsake": "식은 돌의 흰 모서리",
+      "afterglow": "흰 모서리에 누가 먼저 서면 뒤에서 오는 분이 보입니다. 발을 쉬어 갈 자리가 생겼습니다.",
+      "choices": [
+        "소식을 전한다"
+      ],
+      "offer_scene": "side_a5_5_offer",
+      "steps": [
+        {
+          "kind": "site",
+          "stage": 2,
+          "room": 4,
+          "title": "발판의 식은 모서리",
+          "goal": "화염 뒤 흰 발판의 식은 모서리 확인",
+          "npc": "",
+          "x": 3.15,
+          "y": -1.05,
+          "scene": "side_a5_5_step0"
+        },
+        {
+          "kind": "ward",
+          "stage": 2,
+          "room": 6,
+          "title": "잔불의 영압 장치",
+          "goal": "버즈비의 잔불 사이에서 장치를 끄기",
+          "npc": "",
+          "x": 3.15,
+          "y": -1.05,
+          "scene": "side_a5_5_step1"
+        },
+        {
+          "kind": "clear",
+          "stage": 2,
+          "room": 7,
+          "title": "저울이 비친 바닥",
+          "goal": "흰 돌을 향하는 적을 정리하고 대피 자리 확보",
+          "npc": "",
+          "x": 3.15,
+          "y": -1.05,
+          "scene": "side_a5_5_step2"
+        }
+      ],
+      "finish_scenes": [
+        "side_a5_5_finish0"
+      ],
+      "active_line": "화염이 사라져도 밟으면 뜨거운 자리가 남습니다. 쉬어 갈 수 있는 흰 돌을 찾아 주십시오.",
+      "ready_line": "‘불길 밖의 흰 돌’의 결과를 수첩에서 말씀해 주십시오.",
+      "choice_notes": [
+        "흰 모서리에 누가 먼저 서면 뒤에서 오는 분이 보입니다. 발을 쉬어 갈 자리가 생겼습니다."
+      ],
+      "choice_keepsakes": [
+        "식은 돌의 흰 모서리"
+      ]
+    },
+    {
+      "id": "side_a5_6",
+      "index": 41,
+      "act": 5,
+      "unlock_stage": 3,
+      "giver": "byakuya",
+      "title": "저울 앞의 사각",
+      "summary": "되돌림이 와도 돌아서지 않는 자리를 찾아라. 저울을 바라본 방향도 남겨 두어야 한다.",
+      "gold": 170,
+      "xp": 80,
+      "crystals": 2,
+      "keepsake": "저울 앞의 고정된 사각",
+      "afterglow": "사각의 모서리는 돌아오는 쪽에서 읽도록 적었다. 저울이 움직여도 대피할 기준은 남아 있다.",
+      "choices": [
+        "소식을 전한다"
+      ],
+      "offer_scene": "side_a5_6_offer",
+      "steps": [
+        {
+          "kind": "ward",
+          "stage": 3,
+          "room": 2,
+          "title": "거꾸로 이어진 회랑 장치",
+          "goal": "거꾸로 이어진 회랑에서 그림자 장치 해제",
+          "npc": "",
+          "x": 3.15,
+          "y": -1.05,
+          "scene": "side_a5_6_step0"
+        },
+        {
+          "kind": "signal",
+          "stage": 3,
+          "room": 3,
+          "title": "발걸음이 쌓인 바닥",
+          "goal": "발걸음이 쌓인 바닥에 귀환 신호를 남기기",
+          "npc": "",
+          "x": 3.15,
+          "y": -1.05,
+          "scene": "side_a5_6_step1"
+        }
+      ],
+      "finish_scenes": [
+        "side_a5_6_finish0"
+      ],
+      "active_line": "되돌림이 와도 돌아서지 않는 자리를 찾아라. 저울을 바라본 방향도 남겨 두어야 한다.",
+      "ready_line": "‘저울 앞의 사각’에서 확인한 내용을 수첩에 남겨라.",
+      "choice_notes": [
+        "사각의 모서리는 돌아오는 쪽에서 읽도록 적었다. 저울이 움직여도 대피할 기준은 남아 있다."
+      ],
+      "choice_keepsakes": [
+        "저울 앞의 고정된 사각"
+      ]
+    },
+    {
+      "id": "side_a5_7",
+      "index": 42,
+      "act": 5,
+      "unlock_stage": 4,
+      "giver": "kukaku",
+      "title": "왕성의 반쪽 명부",
+      "summary": "안쪽에서 나온 명부 반이 비었어. 발자국 따라 나온 분들이 어디서 자기 이름을 부르는지 남겨 둘게.",
+      "gold": 170,
+      "xp": 80,
+      "crystals": 2,
+      "keepsake": "왕성 양쪽의 명부",
+      "afterglow": "들어간 사람과 나온 사람의 이름을 나란히 붙였어. 비어 있던 줄에도 대답이 돌아왔어.",
+      "choices": [
+        "소식을 전한다"
+      ],
+      "offer_scene": "side_a5_7_offer",
+      "steps": [
+        {
+          "kind": "site",
+          "stage": 4,
+          "room": 6,
+          "title": "관측선 아래 명부",
+          "goal": "BG9의 관측선 아래에서 명부의 안쪽 절반 확인",
+          "npc": "",
+          "x": 3.15,
+          "y": -1.05,
+          "scene": "side_a5_7_step0"
+        },
+        {
+          "kind": "clear",
+          "stage": 4,
+          "room": 7,
+          "title": "마스크가 내려온 곳",
+          "goal": "왕성 밖 출구로 향하는 길을 다시 열기",
+          "npc": "",
+          "x": 3.15,
+          "y": -1.05,
+          "scene": "side_a5_7_step1"
+        },
+        {
+          "kind": "site",
+          "stage": 4,
+          "room": 8,
+          "title": "출구에 걸린 명부",
+          "goal": "왕성 바깥 출구 표지에서 남은 명부 확인",
+          "npc": "",
+          "x": 3.15,
+          "y": -1.05,
+          "scene": "side_a5_7_step2"
+        }
+      ],
+      "finish_scenes": [
+        "side_a5_7_finish0"
+      ],
+      "active_line": "안쪽에서 나온 명부 반이 비었어. 발자국 따라 나온 분들이 어디서 자기 이름을 부르는지 남겨 둘게.",
+      "ready_line": "‘왕성의 반쪽 명부’ 얘기 들었어. 수첩에서 마저 전해 줘.",
+      "choice_notes": [
+        "들어간 사람과 나온 사람의 이름을 나란히 붙였어. 비어 있던 줄에도 대답이 돌아왔어."
+      ],
+      "choice_keepsakes": [
+        "왕성 양쪽의 명부"
+      ]
+    },
+    {
+      "id": "side_a5_8",
+      "index": 43,
+      "act": 5,
+      "unlock_stage": 5,
+      "giver": "urahara",
+      "title": "지금 놓인 발",
+      "summary": "정원에서는 앞에 보이는 모습이 동시에 걷습니다. 실제로 같은 곳에 발을 딛는 소리를 남겨 주세요.",
+      "gold": 170,
+      "xp": 80,
+      "crystals": 2,
+      "keepsake": "정원 모래 위의 진짜 자국",
+      "afterglow": "앞서 가는 모습보다 실제 발소리가 가까웠다고 하시더군요. 그 차이를 기록에 남겼습니다.",
+      "choices": [
+        "소식을 전한다"
+      ],
+      "offer_scene": "side_a5_8_offer",
+      "steps": [
+        {
+          "kind": "site",
+          "stage": 5,
+          "room": 6,
+          "title": "발소리가 멎는 갈림길",
+          "goal": "가짜 귀환 갈림길에서 실제 발소리가 난 자리 확인",
+          "npc": "",
+          "x": 3.15,
+          "y": -1.05,
+          "scene": "side_a5_8_step0"
+        },
+        {
+          "kind": "clear",
+          "stage": 5,
+          "room": 8,
+          "title": "다섯 줄을 잇는 자리",
+          "goal": "실제 발자국이 남는 길의 적들을 정리",
+          "npc": "",
+          "x": 3.15,
+          "y": -1.05,
+          "scene": "side_a5_8_step1"
+        }
+      ],
+      "finish_scenes": [
+        "side_a5_8_finish0"
+      ],
+      "active_line": "정원에서는 앞에 보이는 모습이 동시에 걷습니다. 실제로 같은 곳에 발을 딛는 소리를 남겨 주세요.",
+      "ready_line": "‘지금 놓인 발’의 소식이 도착했습니다. 수첩에 남겨 주시겠어요?",
+      "choice_notes": [
+        "앞서 가는 모습보다 실제 발소리가 가까웠다고 하시더군요. 그 차이를 기록에 남겼습니다."
+      ],
+      "choice_keepsakes": [
+        "정원 모래 위의 진짜 자국"
+      ]
+    },
+    {
+      "id": "side_a5_9",
+      "index": 44,
+      "act": 5,
+      "unlock_stage": 6,
+      "giver": "kukaku",
+      "title": "왕문 밖에 걸어 둔 종",
+      "summary": "마지막 문 앞에서도 서로 발소리가 들리는지 확인해. 다 돌아오면 바깥에서 종을 한 번 치기로 하자.",
+      "gold": 170,
+      "xp": 80,
+      "crystals": 2,
+      "keepsake": "왕문 밖의 귀환 종",
+      "afterglow": "종을 한 번 치고 손을 놨어. 오늘은 그 소리 뒤에 기다리던 사람들의 대답이 다 돌아왔어.",
+      "choices": [
+        "소식을 전한다"
+      ],
+      "offer_scene": "side_a5_9_offer",
+      "steps": [
+        {
+          "kind": "signal",
+          "stage": 6,
+          "room": 6,
+          "title": "여섯 번째 대답의 자리",
+          "goal": "여섯 번째 대답이 들리는 곳에서 귀환 신호 보내기",
+          "npc": "",
+          "x": 3.15,
+          "y": -1.05,
+          "scene": "side_a5_9_step0"
+        },
+        {
+          "kind": "clear",
+          "stage": 6,
+          "room": 7,
+          "title": "유하바하 앞의 문턱",
+          "goal": "문턱에서 귀환로를 끊으려는 병력을 몰아내기",
+          "npc": "",
+          "x": 3.15,
+          "y": -1.05,
+          "scene": "side_a5_9_step1"
+        }
+      ],
+      "finish_scenes": [
+        "side_a5_9_finish0"
+      ],
+      "active_line": "마지막 문 앞에서도 서로 발소리가 들리는지 확인해. 다 돌아오면 바깥에서 종을 한 번 치기로 하자.",
+      "ready_line": "‘왕문 밖에 걸어 둔 종’ 얘기 들었어. 수첩에서 마저 전해 줘.",
+      "choice_notes": [
+        "종을 한 번 치고 손을 놨어. 오늘은 그 소리 뒤에 기다리던 사람들의 대답이 다 돌아왔어."
+      ],
+      "choice_keepsakes": [
+        "왕문 밖의 귀환 종"
       ]
     }
   ]

@@ -5,7 +5,7 @@ namespace SpiritTide
 {
     public struct TideQuestPoint
     {
-        public string title;public Vector2 position;public bool main;public TideSideQuest quest;
+        public string title;public Vector2 position;public bool main;public TideSideQuest quest;public TideMainPoint evidence;
     }
     public sealed partial class TideSession
     {
@@ -19,7 +19,8 @@ namespace SpiritTide
         public string PendingQuestScene=>pendingQuestScenes.Count==0?null:pendingQuestScenes.Peek();
         public void ConsumeQuestScene(){if(pendingQuestScenes.Count>0)pendingQuestScenes.Dequeue();}
         public void ClearQuestNotifications(){pendingQuestScenes.Clear();}
-        public bool MainInvestigationPending=>IsCampaign&&!IsReplay&&Dungeon.number==4&&RoomIndex==0&&(Profile.mainInvestigations&(1<<(Dungeon.act-1)))==0;
+        public TideMainPoint MainPoint=>IsCampaign&&!IsReplay?TideQuests.PendingPoint(Profile,Dungeon.act,Dungeon.number,RoomIndex):null;
+        public bool MainInvestigationPending=>MainPoint!=null;
         public bool GateReady=>RoomCleared&&!MainInvestigationPending;
         public bool AcceptSideQuest(string id)
         {
@@ -37,8 +38,10 @@ namespace SpiritTide
         {
             var q=TideQuests.Find(id);if(InBattle||q==null||!TideQuests.Ready(Profile,q)||choice<0||choice>=q.choices.Length)return false;
             var state=TideQuests.State(Profile,id);state.choice=choice;state.claimed=true;int order=0;foreach(var item in Profile.sideQuests)order=Mathf.Max(order,item.order);state.order=order+1;
+            int before=Profile.level;
             Profile.gold=Mathf.Min(1000000,Profile.gold+q.gold);Profile.crystals=Mathf.Min(99999,Profile.crystals+q.crystals);TideProgress.AddXp(Profile,q.xp);
-            if(Profile.trackedSide==id)Profile.trackedSide="";TideCatalog.Sanitize(Profile);PersistentChange();Changed(q.title+" · 소식 전달 · 경험치 +"+q.xp+" · 골드 +"+q.gold);return true;
+            string learned=TideProgress.LearnedByLevel(Profile,before);
+            if(Profile.trackedSide==id)Profile.trackedSide="";TideCatalog.Sanitize(Profile);PersistentChange();Changed(learned.Length>0?learned:q.title+" · 소식 전달 · 경험치 +"+q.xp+" · 골드 +"+q.gold);return true;
         }
         private void CompleteQuestStep(TideSideQuest q)
         {
@@ -53,12 +56,15 @@ namespace SpiritTide
                 var state=TideQuests.State(Profile,q.id);if(state!=null&&!state.claimed&&state.step<q.steps.Length&&q.steps[state.step].kind==kind)CompleteQuestStep(q);
             }
         }
-        private void QuestWardEvent()
+        private void QuestFieldEvent(string kind)
         {
             if(!IsCampaign)return;
             foreach(var q in TideQuests.Data.side)
             {
-                var state=TideQuests.State(Profile,q.id);if(q.act==Dungeon.act&&state!=null&&!state.claimed&&state.step<q.steps.Length&&q.steps[state.step].kind=="ward")CompleteQuestStep(q);
+                var state=TideQuests.State(Profile,q.id);
+                if(q.act!=Dungeon.act||state==null||state.claimed||state.step>=q.steps.Length)continue;
+                var step=q.steps[state.step];
+                if(step.kind==kind&&(step.stage==0||step.stage==Dungeon.number&&step.room==RoomIndex))CompleteQuestStep(q);
             }
         }
         public bool QuestTalk(string npc)
@@ -83,9 +89,11 @@ namespace SpiritTide
         }
         public TideQuestPoint QuestPoint(int index)
         {
-            if(MainInvestigationPending)
+            var main=MainPoint;
+            if(main!=null)
             {
-                if(index==0){var main=TideQuests.Main(Dungeon.act);return new TideQuestPoint{main=true,title=main.inspect_title,position=new Vector2(main.x,main.y)};}index--;
+                if(index==0)return new TideQuestPoint{main=true,title=main.title,position=new Vector2(main.x,main.y),evidence=main};
+                index--;
             }
             foreach(var q in TideQuests.Data.side)if(QuestSiteAvailable(q))
             {
@@ -98,20 +106,31 @@ namespace SpiritTide
             distance=float.MaxValue;int target=-3;var position=new Vector2(X,Y);
             if(EchoAvailable){distance=Vector2.Distance(position,new Vector2(EchoX,0));target=-1;}
             if(WardActive&&!RoomCleared){float d=Vector2.Distance(position,WardPosition);if(d<distance){distance=d;target=-2;}}
+            if(RoomSignalPending){float d=Vector2.Distance(position,SignalPosition);if(d<distance){distance=d;target=-4;}}
             for(int i=0;i<QuestPointCount;i++){float d=Vector2.Distance(position,QuestPoint(i).position);if(d<distance){distance=d;target=i;}}
             return target;
         }
         public string FieldInteractionLabel
         {
-            get {float distance;int target=NearestFieldTarget(out distance);return target>=0?QuestPoint(target).title+" · E":target==-1?"귀환 등불 안내 · E":"영압 장치 해제 · E";}
+            get {float distance;int target=NearestFieldTarget(out distance);return target>=0?(QuestPoint(target).main?"현장 조사 · E":"부탁 조사 · E"):target==-4?"신호 보내기 · E":target==-1?"귀환 등불 안내 · E":"영압 장치 해제 · E";}
         }
         private bool InteractQuestPoint(int index)
         {
             var point=QuestPoint(index);
             if(point.main)
             {
-                Profile.mainInvestigations|=1<<(Dungeon.act-1);Profile.roomCheckpoint=Mathf.Max(Profile.roomCheckpoint,RoomIndex+1);
-                pendingQuestScenes.Enqueue(TideQuests.Main(Dungeon.act).inspect_scene);PersistentChange();Changed(point.title+" · 귀환 신호를 남겼습니다. 다음 통로로 갈 수 있습니다.");
+                var evidence=point.evidence;
+                if(evidence.bit<0)Profile.mainInvestigations|=1<<(Dungeon.act-1);
+                else Profile.mainEvidence|=1<<evidence.bit;
+                int newHero=evidence.grant&~Profile.recruitedHeroes;
+                Profile.recruitedHeroes|=evidence.grant;
+                if(!MainInvestigationPending)Profile.roomCheckpoint=Mathf.Max(Profile.roomCheckpoint,RoomIndex+1);
+                pendingQuestScenes.Enqueue(evidence.scene);
+                PersistentChange();
+                string result=point.title+" · 확인 완료. 다음 통로로 갈 수 있습니다.";
+                for(int hero=1;hero<6;hero++)
+                    if(newHero==(1<<hero))result=TideStory.HeroName(hero)+" 합류 · 거점에서 선두로 선택할 수 있습니다.";
+                Changed(result);
             }
             else {CompleteQuestStep(point.quest);Changed(point.quest.title+" · "+TideQuests.Objective(Profile,point.quest));}
             return true;

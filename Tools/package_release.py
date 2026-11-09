@@ -62,6 +62,13 @@ def main():
     for row in experience_art["files"]:
         assert digest(ROOT / row["path"]) == row["sha256"]
     campaign = read(ROOT / "Assets/SpiritTide/Resources/SpiritTide/Data/campaign.json")
+    room_count = sum(len(stage["rooms"]) for stage in campaign["stages"])
+    assert len(campaign["stages"])==30 and room_count==264
+    pace_path=ROOT/'BuildLogs/campaign-pace.json'
+    deliberate_path=ROOT/'BuildLogs/campaign-pace-deliberate.json'
+    pace,deliberate=read(pace_path),read(deliberate_path)
+    assert all(row['rooms']==room_count and row['requests']==20 and row['finalLevel']==31 for row in (pace,deliberate))
+    assert 165<=pace['estimatedMinutes']<=200 and deliberate['estimatedMinutes']>pace['estimatedMinutes']
     experience = read(ROOT / "Assets/SpiritTide/Resources/SpiritTide/Data/experience.json")
     assert len({row["background"] for row in campaign["stages"]}) == 15
     assert len(experience["voices"]) == 30 and len(experience["clues"]) == 11 and len(experience["encounters"]) == 10
@@ -70,15 +77,18 @@ def main():
     script_path = ROOT / "Docs/character-dialogue-script.txt"
     script = script_path.read_text(encoding="utf-8")
     scene_count = len(dialogue["scenes"])
-    assert dialogue_index["version"] == build["version"] and scene_count == 189 and len(dialogue["town"]) == 105
+    assert dialogue_index["version"] == build["version"] and scene_count == 340 and len(dialogue["town"]) == 105
     opening_checks = [
         "fresh player boots at title without an active quest",
-        "new story opens the six-lead selection",
+        "new story follows Rukia before any companion joins",
         "finishing prologue enters the actual first fight without a town menu",
         "paused field dialogue hides and keeps its timing",
         "resuming returns to the same field dialogue",
         "continue opens town without replaying the opening or rewriting progress",
-        "continuing a saved room does not replay a departure scene",
+        "title resumes the exact saved room without repeating departure",
+        "only the starter technique is castable in the first fight",
+        "Orihime joins through the rescue and the checkpoint becomes available",
+        "recruitment and checkpoint survive checksum reload",
         "canceling report keeps the saved act ready",
         "final report naturally leads to the original caller's epilogue",
         "unfinished epilogue is available on continue",
@@ -88,7 +98,6 @@ def main():
     for report in (desktop, phone):
         passed_names = {row["name"] for row in report["checks"] if row["passed"]}
         assert all(name in passed_names for name in opening_checks)
-        assert all("opening lead answers the incident in character " + str(hero) in passed_names for hero in range(6))
         assert all("boss result opens report directly without awarding it early " + str(act) in passed_names for act in range(1,6))
         assert sum(name.startswith("routine departure keeps live controls ") for name in passed_names) == 14
         assert sum(name.startswith("ordinary clear gives immediate results ") for name in passed_names) == 20
@@ -96,10 +105,11 @@ def main():
         assert all("lantern scene follows the real rescue without pausing in act " + str(act) in passed_names for act in range(2,6))
     quest_path = ROOT / "Assets/SpiritTide/Resources/SpiritTide/Data/quests.json"
     quests=read(quest_path);quest_script_path=ROOT/"Docs/quest-script.txt";quest_script=quest_script_path.read_text(encoding="utf-8")
-    assert len(quests["main"])==5 and len(quests["side"])==15 and sum(len(q["steps"]) for q in quests["side"])==30
-    assert sum(len(q["choices"]) for q in quests["side"])==18
+    assert len(quests["main"])==5 and len(quests["side"])==45 and sum(len(q["steps"]) for q in quests["side"])==96
+    assert sum(len(q["choices"]) for q in quests["side"])==48
     for main in quests["main"]:
         assert main["title"] in quest_script and main["inspect_title"] in quest_script
+        assert len(main['milestones'])==5 and all(point['goal'] in quest_script for point in main['milestones'])
         for step in main["steps"]:
             actual=next(d for d in campaign["stages"] if d["act"]==main["act"] and d["number"]==step["stage"])
             assert step["goal"]==actual["reason"] and step["result"]==actual["resolution"]
@@ -108,14 +118,14 @@ def main():
         assert all(value in quest_script for value in q["choices"]+q["choice_notes"]+q["choice_keepsakes"])
     for report in [desktop,phone]:
         names={row["name"] for row in report["checks"] if row["passed"]}
-        assert "all fifteen side quests completed through live controls" in names
+        assert "all forty-five side quests completed through live controls" in names
         assert "live main and side investigation appear together" in names
         assert "main field completion opens route and saves checkpoint" in names
         for check in ["two independent touch pointers move and attack together", "releasing attack finger keeps movement finger active", "another finger cannot release the owned joystick", "opening a modal releases all held touch pointers", "touch pause freezes position and combat clock", "resuming does not revive a released touch"]:
             assert check in names,check
         if report['device'].endswith('2556x1179'):
             assert "iPhone 15 Pro touch controls meet 44 point targets at native 3x scale" in names
-        for required in ["town menu opens a service hub", "forge back restores filter sort page and selected gear", "scene list jumps directly to the selected conversation", "quest map highlights its exact destination", "destination primary enters the exact historical dungeon", "previous story line is restored without running completion", "route explains a target behind the current saved room", "automatic hints match the current input layout"]:
+        for required in ["town menu opens a service hub", "forge back restores filter sort page and selected gear", "scene list jumps directly to the selected conversation", "quest map highlights its exact destination", "destination primary enters the exact historical room", "previous story line is restored without running completion", "single room visit preserves the newer current checkpoint", "request page and filter survive a return from detail", "automatic hints match the current input layout"]:
             assert required in names, required
     for report in [desktop,phone]:
         names={row['name'] for row in report['checks'] if row['passed']}
@@ -188,6 +198,8 @@ def main():
     shutil.copy2(ROOT / "BuildLogs" / "model-validation.json", qa / "model.json")
     shutil.copy2(desktop_path, qa / "player-desktop.json")
     shutil.copy2(phone_path, qa / "player-phone-layout.json")
+    shutil.copy2(pace_path,qa/pace_path.name)
+    shutil.copy2(deliberate_path,qa/deliberate_path.name)
     for filename in ["01-town.png","03-combat.png","06-equipment.png","07-departure.png","22-large-training.png","30-map-locked.png","31-room-clear.png","33-first-loot.png","35-forge.png","36-forged.png","40-act3-boss6.png","40-act4-boss6.png","40-act5-boss6.png","40-future-preview.png","40-future-locked.png","42-act5-report.png","43-ending-town.png","44-journal.png","45-replay-map.png","46-replay-result.png"]:
         shutil.copy2(phone_path.parent / filename, qa / filename)
     opening_shots = sorted([*phone_path.parent.glob("00-story-*.png"), *phone_path.parent.glob("42-*.png")])
@@ -195,7 +207,7 @@ def main():
         shutil.copy2(shot, qa / shot.name)
     write(qa / "story-opening-verification.json", {
         "passed": True, "version": build["version"], "guid": build["guid"],
-        "checks": opening_checks, "title_leads": 6, "direct_routine_transitions_reviewed": 14,
+        "checks": opening_checks, "starter": "rukia", "direct_routine_transitions_reviewed": 14,
         "ordinary_results": 20, "field_rescues": 5, "act_reports": 5,
         "screens": {shot.name: digest(shot) for shot in opening_shots},
         "story_data_sha256": digest(dialogue_path), "physical_iphone_tested": False,
@@ -253,12 +265,14 @@ def main():
         "passed": True, "unity": build["unity"], "version":build["version"],"build_guid":build["guid"],"managed_sha256":build["managed_sha256"],"build_errors": build["errors"], "build_warnings": build["warnings"],
         "model_checks": len(model["checks"]), "desktop_checks": len(desktop["checks"]), "phone_layout_checks": len(phone["checks"]),
         "full_health_model_dungeons":model["fullHealthDungeons"],"full_health_model_rooms":model["fullHealthRooms"],
-        "playable_dungeons":30,"playable_rooms":114,"enemy_sprites":70,"playable_heroes":6,"backgrounds":16,"combat_backgrounds":15,
+        "playable_dungeons":30,"playable_rooms":room_count,"enemy_sprites":70,"playable_heroes":6,"backgrounds":16,"combat_backgrounds":15,
         "causal_dungeon_briefings":30,"hero_act_voice_sets":30,"localized_clues":11,"encounter_scenes":10,
-        "town_npcs":5,"formations":6,"environment_types":5,"ambush_rooms":10,
+        "town_npcs":5,"formations":6,"environment_types":5,
+        "ambush_rooms":sum(bool(room.get('reinforcement') or len(room.get('wave_sizes',[]))>1) for stage in campaign['stages'] for room in stage['rooms']),
         "maximum_font_npc_dialogues_per_layout":600,"combat_review_frames":media["frames"],"combat_review_sound_cues":media["sound_cues"],
-        "dialogue_scenes":scene_count,"main_story_scenes":85,"companion_scenes":30,"rescue_scenes":5,"field_rescue_scenes":5,"epilogues":1,"side_quest_scenes":63,
-        "main_chapter_quests":5,"main_investigations":5,"side_quests":15,"side_objectives":30,"side_report_outcomes":18,
+        "dialogue_scenes":scene_count,"main_story_scenes":110,"companion_scenes":30,"rescue_scenes":5,"field_rescue_scenes":5,"epilogues":1,"side_quest_scenes":189,
+        "main_chapter_quests":5,"main_investigations":30,"side_quests":45,"side_objectives":96,"side_report_outcomes":48,
+        "modeled_campaign_minutes":[round(pace['estimatedMinutes'],1),round(deliberate['estimatedMinutes'],1)],
         "dialogue_base_lines":dialogue_index["base_lines"],"dialogue_lead_responses":dialogue_index["lead_responses"],"town_reply_states":105,
         "maximum_font_resolved_scene_variants_per_layout":scene_count*6,
         "story_act_links_reviewed":5,
@@ -266,7 +280,7 @@ def main():
         "player_sha256": digest(ROOT / "Builds" / "Windows" / "SpiritTide.exe"),
         "render_scope": "Live uGUI canvas rendered through the Unity camera to a texture; pointer-event simulation in Windows Direct3D11.",
         "phone_scope": "2556x1179 landscape with example safe-area insets. Not an iPhone OS/device run.",
-        "implemented": f"Playable title and opening, field dialogue, five main chapter quests, fifteen optional quests and eighteen personal report outcomes. {scene_count} dialogue scenes and a gated archive, NPC requests, tracked goals, memory board and real training attacks. Fifteen combat backdrops and hit stop/cancel/juggle/poise mechanics. Six source-preserving articulated heroes with planted-foot locomotion and continuous combat poses; seven continuous motion families for seventy original foe images.",
+        "implemented": f"Rukia opening, five companion recruitments, level-gated techniques and Act 3 awakening. Thirty main investigations, forty-five optional requests and forty-eight report outcomes. {scene_count} dialogue scenes with a gated archive, tracked goals and training. Reinforcement signals, room visits and saved field resume. Six articulated heroes and seventy responsive enemies.",
         "review_video_scope": media["scope"] + "; " + media["audio_scope"],
         "pending": ["production VFX and audio", "native iPhone touch and Metal/performance checks"],
         "ipa_deferred": False,
@@ -280,7 +294,7 @@ def main():
         ios=read(ios_report);ipa=ROOT/"Artifacts"/ios["ipa"]
         assert ios["passed"] and ios["app"]["version"]==build["version"] and digest(ipa)==ios["sha256"]
         assert ios["app"]["unsigned"] and not ios["deviceLaunched"]
-        state=read(ROOT/".runtime/ios-build-state.json")
+        state=read(ROOT/f".runtime/ios-build-state-v{build['version']}.json")
         export=read(ROOT/"BuildLogs/ios-export.json")
         assert export["passed"] and export["version"]==build["version"]
         summary["ios"]={"version":ios["app"]["version"],"build":ios["app"]["build"],"minimum_ios":ios["app"]["minimumIOS"],"ipa":ipa.name,"bytes":ipa.stat().st_size,"sha256":ios["sha256"],"unsigned":True,"physical_iphone_tested":False,"source_revision":state["revision"],"run_url":state["runURL"],"unity_export_guid":export["guid"]}
@@ -294,14 +308,14 @@ def main():
         "source": "Tools/prepare_dialogue.py", "runtime_sha256": digest(dialogue_path), "script_sha256": digest(script_path),
         "scenes": scene_count, "fixed_lines": dialogue_index["base_lines"], "lead_responses": dialogue_index["lead_responses"], "town_replies": 105,
         "checks": {"model":len(model["checks"]),"desktop":len(desktop["checks"]),"phone_layout":len(phone["checks"])},
-        "evidence": ["Every scene resolves for all six leads and has multiple speakers", f"All {scene_count*6} resolved scene variants fit maximum story and archive fonts", "Native campaign records all 85 main scenes", "Real optional conversations for all 30 act/hero combinations", "126 completed core scenes and sixty played side scenes navigated in archive", "First-view lead survives character switch and storage reload", "Old ending saves restore 116 main/companion/epilogue scenes without inventing side progress", "Unplayed acts and unchosen personal outcomes stay hidden", "Archive reads do not change rewards or progress", "Abandon skip and duplicate-click behavior verified", "Script book contains every authored runtime line and response"],
+        "evidence": ["Every scene resolves for all six leads and has multiple speakers", f"All {scene_count*6} resolved scene variants fit maximum story and archive fonts", "Native campaign records all 110 main scenes", "Real optional conversations for all 30 act/hero combinations", "151 completed core scenes and 186 played side scenes navigated in archive", "First-view lead survives character switch and storage reload", "Old ending saves restore 141 scenes with no invented side progress", "Unplayed acts and unchosen personal outcomes stay hidden", "Archive reads do not change rewards or progress", "Abandon skip and duplicate-click behavior verified", "Script book contains every authored runtime line and response"],
         "scope": "Original Korean writing and Windows live UI/pointer checks at two resolutions. No voice acting or iPhone device execution.",
     }
     write(qa / "dialogue-verification.json",dialogue_qa)
     write(qa/"quest-verification.json",{
         "passed":True,"version":build["version"],"guid":build["guid"],"runtime_sha256":digest(quest_path),"script_sha256":digest(quest_script_path),
-        "main_chapters":5,"main_dungeon_stages":30,"required_field_investigations":5,"optional_quests":15,"optional_steps":30,"report_outcomes":18,
-        "evidence":["Six normal-health full campaigns include mandatory field investigations", "Main gates and checkpoints cannot skip unexamined clues", "All eighteen side outcomes exercised with real objectives and one-time rewards in model", "All fifteen side quests accepted performed and reported with live controls per layout", "Actual training cancel and perfect dodge against real attack telegraphs", "Main and side objectives coexist in an ongoing Act 2 fixture", "Optional action cannot satisfy main evidence; mandatory action does not claim optional reward", "Optional catch-up leaves main completion and first-clear bits unchanged", "Chosen aftermath appears in NPC conversation and town memory", "Checksum reload preserves quest step report choice and payout flag", "All sixty played side conversations available in archive"],
+        "main_chapters":5,"main_dungeon_stages":30,"required_field_investigations":30,"optional_quests":45,"optional_steps":96,"report_outcomes":48,
+        "evidence":["Six normal-health full campaigns include mandatory field investigations", "Main gates and checkpoints cannot skip unexamined clues", "All forty-eight side outcomes exercised with real objectives and one-time rewards in model", "All forty-five side quests accepted performed and reported with live controls per layout", "Actual training cancel and perfect dodge against real attack telegraphs", "Main and side objectives coexist in an ongoing Act 2 fixture", "Single-room visits leave main completion and first-clear bits unchanged", "Chosen aftermath appears in the quest book and town memory", "Checksum reload preserves quest step report choice and payout flag", "All 186 played side conversations available in archive"],
         "scope":"Windows pointer and rendering checks at two resolutions; normal campaign plus endgame catch-up and ongoing-campaign fixtures. Not iPhone hardware validation.",
     })
     ui_evidence={}
