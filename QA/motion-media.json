@@ -1,0 +1,19 @@
+{
+  "fps": 30,
+  "frames": 1350,
+  "heroes": 6,
+  "sound_cues": 72,
+  "scope": "Fixed-step native Unity locomotion, combo, heavy, jump-air, dodge and ultimate review; not an iPhone recording or FPS measurement",
+  "version": "0.11.0",
+  "guid": "85af773eb0794547b0e1e8616e9baa1b",
+  "device": "Direct3D11 / 2556x1179",
+  "report": "BuildLogs/PlayerChecks-20261106-235252509/report.json",
+  "movie_sha256": "5090aee0577e750fe94c3fcff1a7780ade9e28baee13a4642f5d4b1620d68305",
+  "wav_sha256": "f32a55d096ba7d73d3317518977dc6fdc3d7c15abb5a8c99e49207dc5776bd94",
+  "audio_seconds": 45.3,
+  "audio_rms": 0.038026,
+  "audio_scope": "The same in-game effect clips mixed at their replay cue times; not hardware audio capture.",
+  "decode_passed": true,
+  "trace_sha256": "9e4aab6c290dd987cea7dd94cb69c9de054aa7fa50b0580ae7d7103ad9ad06d5",
+  "maximum_foot_error": 7.76234628574457e-06
+}

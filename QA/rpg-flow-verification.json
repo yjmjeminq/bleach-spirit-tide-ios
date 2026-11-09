@@ -1,7 +1,7 @@
 {
   "passed": true,
-  "version": "0.10.0",
-  "guid": "788b2ff0f52c47b1a1344f0c8f0cb7ea",
+  "version": "0.11.0",
+  "guid": "85af773eb0794547b0e1e8616e9baa1b",
   "story_contexts_per_layout": 41,
   "boss_practices_per_layout": 10,
   "midpoint_rests_per_layout": 5,
@@ -11,10 +11,10 @@
   "source_sha256": {
     "Assets/SpiritTide/Scripts/TideJourney.cs": "0064085fcc196a3d59327c6486d8b505d3f0180179b10e545be3082bb1b23d56",
     "Assets/SpiritTide/Scripts/TideGame.Journey.cs": "39e00a83cf17639270f8c5f8cbceae4c4708e6d824f773df54d2d166854c55ef",
-    "Assets/SpiritTide/Scripts/TideSession.cs": "dc9e36b8a6aad636ebc23cf07fa6e7ed3e5b7855a85d87e83e075268ae4cee48",
-    "Assets/SpiritTide/Scripts/TideSession.Campaign.cs": "6e8d3966b5611171c39a5c5c7b28e1ba7ab7a1d03cce6447828b730213271925",
+    "Assets/SpiritTide/Scripts/TideSession.cs": "79e8c6d8268d6ee944652f6788cdab755a66a01c40eb840b7413abdd54985c86",
+    "Assets/SpiritTide/Scripts/TideSession.Campaign.cs": "6c92310e97afd46491f676bfb992eddaef5f06375b0ef3bcd337ffd630f0f21f",
     "Assets/SpiritTide/Resources/SpiritTide/Data/journey.json": "94212ec0433445fe7b3e372c01f024398507a88fa7bb646975699813e80fee4c",
-    "Tools/prepare_dialogue.py": "d5ea4c744f92459ef0c5b40fda4ced4dfcb213c4be1f2d29fdce1a4fe1aae9ea"
+    "Tools/prepare_dialogue.py": "af8c312616a9d85b07aa45dd782093bc6a0dd96f04560d3465272476ef1ad277"
   },
   "references": {
     "reviewed_at": "2026-11-06",

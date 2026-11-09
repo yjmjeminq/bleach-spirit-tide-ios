@@ -15532,6 +15532,534 @@
         {
             "name": "practice return preserves the full saved campaign 9",
             "passed": true
+        },
+        {
+            "name": "complete bind texture and eighteen bones 0",
+            "passed": true
+        },
+        {
+            "name": "continuous limbs stay finite and preserve lengths 0",
+            "passed": true
+        },
+        {
+            "name": "planted feet remain on their real world contact 0",
+            "passed": true
+        },
+        {
+            "name": "pause freezes every joint and gait phase 0",
+            "passed": true
+        },
+        {
+            "name": "impact stop freezes every joint 0",
+            "passed": true
+        },
+        {
+            "name": "return resets velocity and world foot anchors 0",
+            "passed": true
+        },
+        {
+            "name": "30 60 and 120 Hz produce consistent locomotion 0",
+            "passed": true
+        },
+        {
+            "name": "complete articulated action stays finite 0 / Basic / 0",
+            "passed": true
+        },
+        {
+            "name": "complete articulated action stays finite 0 / Basic / 1",
+            "passed": true
+        },
+        {
+            "name": "complete articulated action stays finite 0 / Basic / 2",
+            "passed": true
+        },
+        {
+            "name": "complete articulated action stays finite 0 / Heavy / 0",
+            "passed": true
+        },
+        {
+            "name": "complete articulated action stays finite 0 / Launcher / 0",
+            "passed": true
+        },
+        {
+            "name": "complete articulated action stays finite 0 / Air / 0",
+            "passed": true
+        },
+        {
+            "name": "complete articulated action stays finite 0 / Counter / 0",
+            "passed": true
+        },
+        {
+            "name": "complete articulated action stays finite 0 / Skill0 / 0",
+            "passed": true
+        },
+        {
+            "name": "complete articulated action stays finite 0 / Skill1 / 0",
+            "passed": true
+        },
+        {
+            "name": "complete articulated action stays finite 0 / Skill2 / 0",
+            "passed": true
+        },
+        {
+            "name": "complete articulated action stays finite 0 / Skill3 / 0",
+            "passed": true
+        },
+        {
+            "name": "complete articulated action stays finite 0 / Ultimate / 0",
+            "passed": true
+        },
+        {
+            "name": "running air dodge and landing preserve posture continuity 0",
+            "passed": true
+        },
+        {
+            "name": "hit into dodge blends the existing wrist pose 0",
+            "passed": true
+        },
+        {
+            "name": "weapon rotation also blends through a dodge cancel 0",
+            "passed": true
+        },
+        {
+            "name": "complete bind texture and eighteen bones 1",
+            "passed": true
+        },
+        {
+            "name": "continuous limbs stay finite and preserve lengths 1",
+            "passed": true
+        },
+        {
+            "name": "planted feet remain on their real world contact 1",
+            "passed": true
+        },
+        {
+            "name": "pause freezes every joint and gait phase 1",
+            "passed": true
+        },
+        {
+            "name": "impact stop freezes every joint 1",
+            "passed": true
+        },
+        {
+            "name": "return resets velocity and world foot anchors 1",
+            "passed": true
+        },
+        {
+            "name": "30 60 and 120 Hz produce consistent locomotion 1",
+            "passed": true
+        },
+        {
+            "name": "complete articulated action stays finite 1 / Basic / 0",
+            "passed": true
+        },
+        {
+            "name": "complete articulated action stays finite 1 / Basic / 1",
+            "passed": true
+        },
+        {
+            "name": "complete articulated action stays finite 1 / Basic / 2",
+            "passed": true
+        },
+        {
+            "name": "complete articulated action stays finite 1 / Heavy / 0",
+            "passed": true
+        },
+        {
+            "name": "complete articulated action stays finite 1 / Launcher / 0",
+            "passed": true
+        },
+        {
+            "name": "complete articulated action stays finite 1 / Air / 0",
+            "passed": true
+        },
+        {
+            "name": "complete articulated action stays finite 1 / Counter / 0",
+            "passed": true
+        },
+        {
+            "name": "complete articulated action stays finite 1 / Skill0 / 0",
+            "passed": true
+        },
+        {
+            "name": "complete articulated action stays finite 1 / Skill1 / 0",
+            "passed": true
+        },
+        {
+            "name": "complete articulated action stays finite 1 / Skill2 / 0",
+            "passed": true
+        },
+        {
+            "name": "complete articulated action stays finite 1 / Skill3 / 0",
+            "passed": true
+        },
+        {
+            "name": "complete articulated action stays finite 1 / Ultimate / 0",
+            "passed": true
+        },
+        {
+            "name": "running air dodge and landing preserve posture continuity 1",
+            "passed": true
+        },
+        {
+            "name": "hit into dodge blends the existing wrist pose 1",
+            "passed": true
+        },
+        {
+            "name": "weapon rotation also blends through a dodge cancel 1",
+            "passed": true
+        },
+        {
+            "name": "complete bind texture and eighteen bones 2",
+            "passed": true
+        },
+        {
+            "name": "continuous limbs stay finite and preserve lengths 2",
+            "passed": true
+        },
+        {
+            "name": "planted feet remain on their real world contact 2",
+            "passed": true
+        },
+        {
+            "name": "pause freezes every joint and gait phase 2",
+            "passed": true
+        },
+        {
+            "name": "impact stop freezes every joint 2",
+            "passed": true
+        },
+        {
+            "name": "return resets velocity and world foot anchors 2",
+            "passed": true
+        },
+        {
+            "name": "30 60 and 120 Hz produce consistent locomotion 2",
+            "passed": true
+        },
+        {
+            "name": "complete articulated action stays finite 2 / Basic / 0",
+            "passed": true
+        },
+        {
+            "name": "complete articulated action stays finite 2 / Basic / 1",
+            "passed": true
+        },
+        {
+            "name": "complete articulated action stays finite 2 / Basic / 2",
+            "passed": true
+        },
+        {
+            "name": "complete articulated action stays finite 2 / Heavy / 0",
+            "passed": true
+        },
+        {
+            "name": "complete articulated action stays finite 2 / Launcher / 0",
+            "passed": true
+        },
+        {
+            "name": "complete articulated action stays finite 2 / Air / 0",
+            "passed": true
+        },
+        {
+            "name": "complete articulated action stays finite 2 / Counter / 0",
+            "passed": true
+        },
+        {
+            "name": "complete articulated action stays finite 2 / Skill0 / 0",
+            "passed": true
+        },
+        {
+            "name": "complete articulated action stays finite 2 / Skill1 / 0",
+            "passed": true
+        },
+        {
+            "name": "complete articulated action stays finite 2 / Skill2 / 0",
+            "passed": true
+        },
+        {
+            "name": "complete articulated action stays finite 2 / Skill3 / 0",
+            "passed": true
+        },
+        {
+            "name": "complete articulated action stays finite 2 / Ultimate / 0",
+            "passed": true
+        },
+        {
+            "name": "running air dodge and landing preserve posture continuity 2",
+            "passed": true
+        },
+        {
+            "name": "hit into dodge blends the existing wrist pose 2",
+            "passed": true
+        },
+        {
+            "name": "weapon rotation also blends through a dodge cancel 2",
+            "passed": true
+        },
+        {
+            "name": "complete bind texture and eighteen bones 3",
+            "passed": true
+        },
+        {
+            "name": "continuous limbs stay finite and preserve lengths 3",
+            "passed": true
+        },
+        {
+            "name": "planted feet remain on their real world contact 3",
+            "passed": true
+        },
+        {
+            "name": "pause freezes every joint and gait phase 3",
+            "passed": true
+        },
+        {
+            "name": "impact stop freezes every joint 3",
+            "passed": true
+        },
+        {
+            "name": "return resets velocity and world foot anchors 3",
+            "passed": true
+        },
+        {
+            "name": "30 60 and 120 Hz produce consistent locomotion 3",
+            "passed": true
+        },
+        {
+            "name": "complete articulated action stays finite 3 / Basic / 0",
+            "passed": true
+        },
+        {
+            "name": "complete articulated action stays finite 3 / Basic / 1",
+            "passed": true
+        },
+        {
+            "name": "complete articulated action stays finite 3 / Basic / 2",
+            "passed": true
+        },
+        {
+            "name": "complete articulated action stays finite 3 / Heavy / 0",
+            "passed": true
+        },
+        {
+            "name": "complete articulated action stays finite 3 / Launcher / 0",
+            "passed": true
+        },
+        {
+            "name": "complete articulated action stays finite 3 / Air / 0",
+            "passed": true
+        },
+        {
+            "name": "complete articulated action stays finite 3 / Counter / 0",
+            "passed": true
+        },
+        {
+            "name": "complete articulated action stays finite 3 / Skill0 / 0",
+            "passed": true
+        },
+        {
+            "name": "complete articulated action stays finite 3 / Skill1 / 0",
+            "passed": true
+        },
+        {
+            "name": "complete articulated action stays finite 3 / Skill2 / 0",
+            "passed": true
+        },
+        {
+            "name": "complete articulated action stays finite 3 / Skill3 / 0",
+            "passed": true
+        },
+        {
+            "name": "complete articulated action stays finite 3 / Ultimate / 0",
+            "passed": true
+        },
+        {
+            "name": "running air dodge and landing preserve posture continuity 3",
+            "passed": true
+        },
+        {
+            "name": "hit into dodge blends the existing wrist pose 3",
+            "passed": true
+        },
+        {
+            "name": "weapon rotation also blends through a dodge cancel 3",
+            "passed": true
+        },
+        {
+            "name": "complete bind texture and eighteen bones 4",
+            "passed": true
+        },
+        {
+            "name": "continuous limbs stay finite and preserve lengths 4",
+            "passed": true
+        },
+        {
+            "name": "planted feet remain on their real world contact 4",
+            "passed": true
+        },
+        {
+            "name": "pause freezes every joint and gait phase 4",
+            "passed": true
+        },
+        {
+            "name": "impact stop freezes every joint 4",
+            "passed": true
+        },
+        {
+            "name": "return resets velocity and world foot anchors 4",
+            "passed": true
+        },
+        {
+            "name": "30 60 and 120 Hz produce consistent locomotion 4",
+            "passed": true
+        },
+        {
+            "name": "complete articulated action stays finite 4 / Basic / 0",
+            "passed": true
+        },
+        {
+            "name": "complete articulated action stays finite 4 / Basic / 1",
+            "passed": true
+        },
+        {
+            "name": "complete articulated action stays finite 4 / Basic / 2",
+            "passed": true
+        },
+        {
+            "name": "complete articulated action stays finite 4 / Heavy / 0",
+            "passed": true
+        },
+        {
+            "name": "complete articulated action stays finite 4 / Launcher / 0",
+            "passed": true
+        },
+        {
+            "name": "complete articulated action stays finite 4 / Air / 0",
+            "passed": true
+        },
+        {
+            "name": "complete articulated action stays finite 4 / Counter / 0",
+            "passed": true
+        },
+        {
+            "name": "complete articulated action stays finite 4 / Skill0 / 0",
+            "passed": true
+        },
+        {
+            "name": "complete articulated action stays finite 4 / Skill1 / 0",
+            "passed": true
+        },
+        {
+            "name": "complete articulated action stays finite 4 / Skill2 / 0",
+            "passed": true
+        },
+        {
+            "name": "complete articulated action stays finite 4 / Skill3 / 0",
+            "passed": true
+        },
+        {
+            "name": "complete articulated action stays finite 4 / Ultimate / 0",
+            "passed": true
+        },
+        {
+            "name": "running air dodge and landing preserve posture continuity 4",
+            "passed": true
+        },
+        {
+            "name": "hit into dodge blends the existing wrist pose 4",
+            "passed": true
+        },
+        {
+            "name": "weapon rotation also blends through a dodge cancel 4",
+            "passed": true
+        },
+        {
+            "name": "complete bind texture and eighteen bones 5",
+            "passed": true
+        },
+        {
+            "name": "continuous limbs stay finite and preserve lengths 5",
+            "passed": true
+        },
+        {
+            "name": "planted feet remain on their real world contact 5",
+            "passed": true
+        },
+        {
+            "name": "pause freezes every joint and gait phase 5",
+            "passed": true
+        },
+        {
+            "name": "impact stop freezes every joint 5",
+            "passed": true
+        },
+        {
+            "name": "return resets velocity and world foot anchors 5",
+            "passed": true
+        },
+        {
+            "name": "30 60 and 120 Hz produce consistent locomotion 5",
+            "passed": true
+        },
+        {
+            "name": "complete articulated action stays finite 5 / Basic / 0",
+            "passed": true
+        },
+        {
+            "name": "complete articulated action stays finite 5 / Basic / 1",
+            "passed": true
+        },
+        {
+            "name": "complete articulated action stays finite 5 / Basic / 2",
+            "passed": true
+        },
+        {
+            "name": "complete articulated action stays finite 5 / Heavy / 0",
+            "passed": true
+        },
+        {
+            "name": "complete articulated action stays finite 5 / Launcher / 0",
+            "passed": true
+        },
+        {
+            "name": "complete articulated action stays finite 5 / Air / 0",
+            "passed": true
+        },
+        {
+            "name": "complete articulated action stays finite 5 / Counter / 0",
+            "passed": true
+        },
+        {
+            "name": "complete articulated action stays finite 5 / Skill0 / 0",
+            "passed": true
+        },
+        {
+            "name": "complete articulated action stays finite 5 / Skill1 / 0",
+            "passed": true
+        },
+        {
+            "name": "complete articulated action stays finite 5 / Skill2 / 0",
+            "passed": true
+        },
+        {
+            "name": "complete articulated action stays finite 5 / Skill3 / 0",
+            "passed": true
+        },
+        {
+            "name": "complete articulated action stays finite 5 / Ultimate / 0",
+            "passed": true
+        },
+        {
+            "name": "running air dodge and landing preserve posture continuity 5",
+            "passed": true
+        },
+        {
+            "name": "hit into dodge blends the existing wrist pose 5",
+            "passed": true
+        },
+        {
+            "name": "weapon rotation also blends through a dodge cancel 5",
+            "passed": true
         }
     ],
     "scope": "Unity model/resources: six input-only complete campaigns with normal HP, real XP, loot, upgrades and manual gate approach. Native iPhone validation remains deferred.",

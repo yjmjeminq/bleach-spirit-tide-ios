@@ -1,14 +1,14 @@
 {
   "passed": true,
   "unity": "6000.3.27f1",
-  "version": "0.10.0",
-  "build_guid": "788b2ff0f52c47b1a1344f0c8f0cb7ea",
-  "managed_sha256": "ccdd9c0a42ae939bba98f2e4d30010db02627bede2ebd2b5768128b6c42350d3",
+  "version": "0.11.0",
+  "build_guid": "85af773eb0794547b0e1e8616e9baa1b",
+  "managed_sha256": "fcd860dbf288c6800ed38016b239fbc8d916ef91e0ed943a4a14ec9821bff6a7",
   "build_errors": 0,
   "build_warnings": 0,
-  "model_checks": 3883,
-  "desktop_checks": 16090,
-  "phone_layout_checks": 15643,
+  "model_checks": 4015,
+  "desktop_checks": 23318,
+  "phone_layout_checks": 22198,
   "full_health_model_dungeons": 180,
   "full_health_model_rooms": 684,
   "playable_dungeons": 30,
@@ -72,14 +72,23 @@
   "player_sha256": "f083b0e879a9298cdcf9933a8f3b4f2b013e13f7d3e51221fc0d756b79e28807",
   "render_scope": "Live uGUI canvas rendered through the Unity camera to a texture; pointer-event simulation in Windows Direct3D11.",
   "phone_scope": "2556x1179 landscape with example safe-area insets. Not an iPhone OS/device run.",
-  "implemented": "Five main chapter quests with mandatory field evidence, fifteen original two-step optional quests and eighteen personal report outcomes; 184 dialogue scenes and a gated archive, NPC requests, tracked goals, memory board and real training attacks. Fifteen combat backdrops and hit stop/cancel/juggle/poise mechanics. Sprite animation remains a prototype.",
+  "implemented": "Five main chapter quests with mandatory field evidence, fifteen original two-step optional quests and eighteen personal report outcomes; 184 dialogue scenes and a gated archive, NPC requests, tracked goals, memory board and real training attacks. Fifteen combat backdrops and hit stop/cancel/juggle/poise mechanics. Six source-preserving articulated heroes with planted-foot locomotion and continuous combat poses; seven continuous motion families for seventy original foe images.",
   "review_video_scope": "Input-only Unity replay with fixed simulation steps; not a performance recording; The same in-game effect clips mixed at their replay cue times; not hardware audio capture.",
   "pending": [
-    "finished coherent sprite animation for all heroes and enemies",
     "production VFX and audio",
     "native iPhone touch and Metal/performance checks"
   ],
   "ipa_deferred": false,
+  "motion": {
+    "articulated_heroes": 6,
+    "bones_per_hero": 18,
+    "skill_poses_per_layout": 30,
+    "responsive_foes": 70,
+    "enemy_anatomies": 7,
+    "movie_frames": 1350,
+    "movie_fps": 30,
+    "maximum_foot_error": 1.5417337635881267e-05
+  },
   "rpg_flow": {
     "story_contexts_per_layout": 41,
     "boss_practices_per_layout": 10,
@@ -105,16 +114,16 @@
     "scope": "Unity mesh effects and synthesized game sounds; not iPhone hardware performance"
   },
   "ios": {
-    "version": "0.10.0",
-    "build": "6",
+    "version": "0.11.0",
+    "build": "7",
     "minimum_ios": "17.0",
-    "ipa": "SpiritTide-iPhone-unsigned-v0.10.0.ipa",
-    "bytes": 50223693,
-    "sha256": "8a5e2608ecc618962b6426aab7ba180858f2b6b59f379472c4a85bcfaf896345",
+    "ipa": "SpiritTide-iPhone-unsigned-v0.11.0.ipa",
+    "bytes": 80971328,
+    "sha256": "8552d67a193178f4f1aa77a1c4dcf94aaed73c4d9b27c8c529233c67f758fd7a",
     "unsigned": true,
     "physical_iphone_tested": false,
-    "source_revision": "9645c9ccd70d24060da73296f4fb88c947f0a59d",
-    "run_url": "https://github.com/yjmjeminq/bleach-spirit-tide-ios/actions/runs/42196359780",
-    "unity_export_guid": "ab9b40f13f864201a31e77f9dfc08c1b"
+    "source_revision": "f0c7e55ffcb980c4b9b559c8c992eac428dfa50f",
+    "run_url": "https://github.com/yjmjeminq/bleach-spirit-tide-ios/actions/runs/42238438771",
+    "unity_export_guid": "cc2d3709c2a04967bc32eb4c40c8f45a"
   }
 }
