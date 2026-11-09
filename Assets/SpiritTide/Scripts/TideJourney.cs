@@ -66,7 +66,8 @@ namespace SpiritTide
         }
         public static string DefeatAdvice(TideSession s)
         {
-            string at=s.IsCampaign?s.Dungeon.title+" · "+((s.IsReplay?s.RoomIndex:s.Profile.roomCheckpoint)+1)+"방부터 재도전":"보스 패턴 연습 · 진행 보상 없음";
+            int retryRoom=s.IsFieldVisit?s.RoomIndex:s.IsReplay?0:s.Profile.roomCheckpoint;
+            string at=s.IsCampaign?s.Dungeon.title+" · "+(retryRoom+1)+"방부터 재도전":"보스 패턴 연습 · 진행 보상 없음";
             string cause=string.IsNullOrEmpty(s.LastDamageCue)?"바닥 예고를 확인하고 짧게 공격한 뒤 이동해 보세요.":"마지막 피격 · "+(string.IsNullOrEmpty(s.LastDamageFoe)?"환경 공격":TideCampaign.Foe(s.LastDamageFoe).name)+"\n"+s.LastDamageCue;
             return at+"\n"+cause;
         }

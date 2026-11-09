@@ -27,6 +27,12 @@ namespace SpiritTide.EditorTools
             }
             var resumed=new TideSession(new TideProfile{campaignSchema=1,campaignAct=2,campaignStage=2,quest=1,roomCheckpoint=1,reportedActs=1,clearedDungeons=127});
             check("journey resume uses the saved second room",TideJourney.Next(resumed.Profile).Contains("2 / "+TideJourney.Current(resumed.Profile).rooms.Length+"방"));
+            var replay=new TideSession(new TideProfile{campaignSchema=1,campaignAct=2,campaignStage=2,quest=1,reportedActs=1,clearedDungeons=127});
+            replay.BeginDungeon(1,1,true);replay.RoomIndex=2;
+            check("full replay defeat advice names the first room",TideJourney.DefeatAdvice(replay).Contains(" · 1방부터"));
+            replay.ReturnTown();
+            check("single room revisit defeat advice names the room it retries",replay.BeginDungeon(1,1,true,2)
+                &&TideJourney.DefeatAdvice(replay).Contains(" · 3방부터"));
             for(int i=0;i<10;i++)
             {
                 var p=new TideProfile{campaignSchema=1,campaignAct=5,campaignStage=6,reportedActs=31,clearedDungeons=TideProgress.AllDungeons,claimed=true,quest=3,level=30,potions=0};var s=new TideSession(p);string saved=JsonUtility.ToJson(p);int revision=s.SaveRevision;

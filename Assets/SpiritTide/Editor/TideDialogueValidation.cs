@@ -8,12 +8,18 @@ namespace SpiritTide.EditorTools
     {
         public static void Run(Action<string,bool> check)
         {
-            int entries=0,clears=0,intros=0,reports=0,parties=0,rescues=0,epilogues=0,fieldEchoes=0,milestones=0;
+            int entries=0,clears=0,intros=0,reports=0,parties=0,rescues=0,epilogues=0,fieldEchoes=0,milestones=0,voiced=0;
             var allIds=new HashSet<string>();
             foreach(var scene in TideDialogue.Data.scenes)
             {
                 check("dialogue has stable unique scene ID "+scene.id,allIds.Add(scene.id)&&scene.act>=1&&scene.act<=5&&scene.stage>=1&&scene.stage<=6);
                 switch(scene.kind){case "entry":entries++;break;case "clear":clears++;break;case "intro":intros++;break;case "report":reports++;break;case "party":parties++;break;case "rescue":rescues++;break;case "epilogue":epilogues++;break;case "field_echo":fieldEchoes++;break;case "main_checkpoint":milestones++;break;}
+                bool hasLead=scene.responses!=null&&scene.responses.Length>0;
+                if(hasLead)
+                {
+                    voiced++;
+                    check("six individually authored lead replies "+scene.id,scene.responses.Length==6&&new HashSet<string>(scene.responses).Count==6);
+                }
                 for(int hero=0;hero<6;hero++)
                 {
                     var lines=TideDialogue.Lines(scene.id,hero);var speakers=new HashSet<string>();bool valid=lines.Length>=2&&lines.Length<=8;
@@ -24,9 +30,17 @@ namespace SpiritTide.EditorTools
                         foreach(var clue in TideExperience.Data.clues)valid&=!l.text.Contains(clue.id);
                     }
                     check("resolved conversation has multiple speakers and no template IDs "+scene.id+" / "+hero,valid&&speakers.Count>=2);
+                    if(scene.kind=="field_echo")check("the actual guide answers the spirit "+scene.id+" / "+hero,
+                        hasLead&&lines.Length==2&&lines[0].speaker=="정령"&&lines[1].speaker==TideStory.HeroName(hero)&&lines[1].text==scene.responses[hero]);
                 }
             }
             check("full story dialogue and companion coverage",entries==30&&clears==30&&intros==10&&reports==5&&parties==30&&rescues==5&&fieldEchoes==5&&epilogues==1&&milestones==25);
+            check("thirty-one scenes use distinct dialogue for each active fighter",voiced==31);
+            var bond=TideDialogue.Lines("main_a1_evidence1",0);
+            check("Rukia and Orihime use their own forms of address in the rescue",
+                bond[0].text.Contains("이노우에")&&bond[1].text.Contains("쿠치키 씨"));
+            check("Soi Fon keeps her honorific for Yoruichi in the actual reunion",
+                TideDialogue.Lines("main_a2_evidence3",0)[0].text.StartsWith("요루이치 님"));
             foreach(var dungeon in TideCampaign.Data.stages)
             {
                 check("every dungeon has entry and resolution dialogue "+dungeon.index,TideDialogue.Scene(TideDialogue.DungeonId(dungeon,"entry"))!=null&&TideDialogue.Scene(TideDialogue.DungeonId(dungeon,"clear"))!=null);
@@ -60,6 +74,9 @@ namespace SpiritTide.EditorTools
             var final=TideDialogue.Lines("a5_report",0);var finalSpeakers=new HashSet<string>();foreach(var l in final)finalSpeakers.Add(l.speaker);
             bool allSix=true;for(int hero=0;hero<6;hero++)allSix&=finalSpeakers.Contains(TideStory.HeroName(hero));
             check("final return scene includes all six companions",allSix);
+            var guides=new TideProfile{hero=3};TideDialogue.Remember(guides,"a2_d1_answer",1);
+            var recalled=TideDialogue.Lines("a2_d1_answer",TideDialogue.ArchiveHero(guides,"a2_d1_answer"));
+            check("a lantern conversation remembers the original guide after a hero change",recalled[1].speaker==TideStory.HeroName(1));
             foreach(var reply in TideDialogue.Data.town)
                 check("town reply has an explicit act and progress condition "+reply.npc+" / "+reply.act+" / "+reply.phase,!string.IsNullOrWhiteSpace(reply.text)&&reply.text.Length>20);
         }

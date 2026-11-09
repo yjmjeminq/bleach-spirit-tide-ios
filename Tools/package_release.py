@@ -22,13 +22,13 @@ def digest(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
-def latest_player(size, after, build):
+def latest_player(size, after, build, run_mode="full"):
     for path in sorted((ROOT / "BuildLogs").glob("PlayerChecks-*/report.json"), key=lambda p: p.stat().st_mtime, reverse=True):
         data = read(path)
-        if data.get("runMode","full")=="full" and path.stat().st_mtime >= after and data["device"].endswith(size) and data["passed"] and data.get("version")==build["version"] and data.get("guid","").replace("-","").lower()==build["guid"].replace("-","").lower():
+        if data.get("runMode","full")==run_mode and path.stat().st_mtime >= after and data["device"].endswith(size) and data["passed"] and data.get("version")==build["version"] and data.get("guid","").replace("-","").lower()==build["guid"].replace("-","").lower():
             assert not data["errors"] and all(row["passed"] for row in data["checks"])
             return path, data
-    raise RuntimeError("No current-build passing player report for " + size)
+    raise RuntimeError("No current-build passing " + run_mode + " player report for " + size)
 
 
 def make_zip(target, pairs):
@@ -53,6 +53,15 @@ def main():
     assert digest(managed)==build["managed_sha256"]
     desktop_path, desktop = latest_player("1560x720", build_path.stat().st_mtime,build)
     phone_path, phone = latest_player("2556x1179", build_path.stat().st_mtime,build)
+    desktop_interface_path, desktop_interface = latest_player("1560x720",build_path.stat().st_mtime,build,"interface-only")
+    phone_interface_path, phone_interface = latest_player("2556x1179",build_path.stat().st_mtime,build,"interface-only")
+    for report in (desktop_interface,phone_interface):
+        names={row['name'] for row in report['checks'] if row['passed']}
+        assert sum(name.startswith('skill button stays in reach of attack at scale ') for name in names)==10
+        assert all(f"actual field response has the selected fighter's voice {hero}" in names for hero in range(6))
+        assert 'joystick lights the direction ring and displaces the thumb cap' in names
+        assert 'opening a modal clears joystick visuals' in names
+        assert 'a skill beside attack casts while the movement finger stays down' in names
     media = read(phone_path.parent / "combat-review-encoded.json")
     assert media["guid"] == build["guid"] and media["decode_passed"]
     assert digest(phone_path.parent / "combat-review.mp4") == media["movie_sha256"]
@@ -198,6 +207,8 @@ def main():
     shutil.copy2(ROOT / "BuildLogs" / "model-validation.json", qa / "model.json")
     shutil.copy2(desktop_path, qa / "player-desktop.json")
     shutil.copy2(phone_path, qa / "player-phone-layout.json")
+    shutil.copy2(desktop_interface_path,qa/'player-interface-desktop.json')
+    shutil.copy2(phone_interface_path,qa/'player-interface-phone-layout.json')
     shutil.copy2(pace_path,qa/pace_path.name)
     shutil.copy2(deliberate_path,qa/deliberate_path.name)
     for filename in ["01-town.png","03-combat.png","06-equipment.png","07-departure.png","22-large-training.png","30-map-locked.png","31-room-clear.png","33-first-loot.png","35-forge.png","36-forged.png","40-act3-boss6.png","40-act4-boss6.png","40-act5-boss6.png","40-future-preview.png","40-future-locked.png","42-act5-report.png","43-ending-town.png","44-journal.png","45-replay-map.png","46-replay-result.png"]:
@@ -215,6 +226,8 @@ def main():
     })
     for shot in phone_path.parent.glob("5*.png"):
         shutil.copy2(shot, qa / shot.name)
+    for shot in phone_interface_path.parent.glob('51-voice-guide-*.png'):
+        shutil.copy2(shot,qa/shot.name)
     for shot in phone_path.parent.glob("6*.png"):
         shutil.copy2(shot, qa / shot.name)
     for shot in phone_path.parent.glob("7*.png"):
@@ -323,7 +336,8 @@ def main():
         ui_evidence[layout]=[row["name"] for row in report["checks"] if any(term in row["name"] for term in ["service hub", "restores home", "filter", "gear comparison", "forge back", "auto equips", "scene list", "scene index", "quest map", "map back", "previewing a route", "story line", "destination primary", "ward route", "route explains", "hint", "truthful indicator", "new loot", "touch", "finger", "44 point"]) ]
     write(qa/"ui-verification.json",{
         "passed":True,"version":build["version"],"guid":build["guid"],"managed_sha256":build["managed_sha256"],
-        "checks":ui_evidence,"evidence":["QA/80-home.png","QA/81-gear-comparison.png","QA/82-dialogue-scene-list.png","QA/83-quest-destination.png","QA/84-story-previous.png","QA/85-touch-controls.png"],
+        "checks":ui_evidence,"interface_checks":{"desktop":len(desktop_interface['checks']),"phone_layout":len(phone_interface['checks'])},
+        "evidence":["QA/00-story-first-fight.png","QA/86-combat-dock-active.png","QA/80-home.png","QA/81-gear-comparison.png","QA/82-dialogue-scene-list.png","QA/83-quest-destination.png","QA/84-story-previous.png","QA/85-touch-controls.png"],
         "scope":"Windows Direct3D11 live uGUI rendering and simulated pointer events, 1560x720 and 2556x1179 with example safe insets. Not iPhone hardware or iOS execution."
     })
     audit_path = ROOT / "Docs" / "experience-audit.json"

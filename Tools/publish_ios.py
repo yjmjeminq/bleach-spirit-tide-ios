@@ -52,7 +52,7 @@ def prepare():
     assert sha(ARCHIVE)==metadata['sha256'] and metadata['export']['version']==VERSION
     if not STAGE.exists():
         clone = ['git', 'clone', '--depth', '1']
-        prior = ROOT/'Builds/PublicSource-v0.12.0'
+        prior = ROOT/'Builds/PublicSource-v0.13.0'
         if (prior/'.git').is_dir():
             clone.extend(['--reference-if-able', str(prior), '--dissociate'])
         run(clone + ['https://github.com/'+REPO+'.git', str(STAGE)])
@@ -93,13 +93,13 @@ def publish():
     if not (STAGE/'.git').exists():git('init','--initial-branch=main')
     git('config','user.name','yjmjeminq');git('config','user.email','yjmjeminq@users.noreply.github.com')
     if git('status','--porcelain'):
-        git('add','--all');git('commit','-m',f'Expand Spirit Tide {VERSION} campaign and progression')
+        git('add','--all');git('commit','-m',f'Refine Spirit Tide {VERSION} touch controls and dialogue')
     revision=git('rev-parse','HEAD')
     if not git('remote'):git('remote','add','origin','https://github.com/'+REPO+'.git')
     assert git('remote','get-url','origin')=='https://github.com/'+REPO+'.git'
     git('push','-u','origin','main')
     notes=ROOT/f'.runtime/ios-release-notes-v{VERSION}.md'
-    notes.write_text(f'BLEACH: 영해의 균열 {VERSION} iPhone 시험판\n\niPhone 15 Pro · iOS 17 이상 · 가로 화면 · ARM64 · Metal.\n5액트, 던전 30개, 전투 구역 264개, 본편 현장 조사 30개, 선택 의뢰 45개.\n루키아로 시작해 동료 다섯을 구합니다. 파티 Lv. 3·5·8과 Act 3 보고로 기술을 열 수 있습니다.\n\n{IPA_NAME}를 iLoader에서 서명·설치하세요. 실제 아이폰 설치와 플레이는 기기에서 확인이 필요합니다.\n',encoding='utf-8')
+    notes.write_text(f'BLEACH: 영해의 균열 {VERSION} iPhone 시험판\n\niPhone 15 Pro · iOS 17 이상 · 가로 화면 · ARM64 · Metal.\n공격 주변에 기술 다섯 개를 모았고, 왼쪽 조이스틱은 입력 방향에 따라 빛납니다.\n여섯 인물의 한국어 말투와 호칭을 다듬었습니다. 귀환 등불에는 현재 조작 중인 인물이 답합니다.\n\n{IPA_NAME}를 iLoader에서 서명·설치하세요. 실제 아이폰 설치와 플레이는 기기에서 확인이 필요합니다.\n',encoding='utf-8')
     gh('release','create',TAG,ARCHIVE,'--repo',REPO,'--target',revision,'--title',f'Spirit Tide {VERSION} iPhone test','--notes-file',notes,'--prerelease')
     state.update(revision=revision,status='published');write(state)
     gh('workflow','run','ios-build.yml','--repo',REPO,'--ref','main','-f','source_tag='+TAG,'-f','source_sha256='+state['sourceSHA256'])

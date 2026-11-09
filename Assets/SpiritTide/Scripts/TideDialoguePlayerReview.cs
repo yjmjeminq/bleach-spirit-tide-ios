@@ -6,9 +6,8 @@ namespace SpiritTide
 {
     public sealed partial class TidePlayerSmoke
     {
-        private IEnumerator ReviewDialogueLibrary()
+        private void ReviewDialogueFonts()
         {
-            string saved=JsonUtility.ToJson(game.Session.Profile);
             var probeObject=new GameObject("DialogueFontProbe",typeof(RectTransform),typeof(CanvasRenderer),typeof(Text));probeObject.SetActive(false);
             var probe=probeObject.GetComponent<Text>();probe.font=Resources.Load<Font>("SpiritTide/UI/Pretendard-Regular");probe.horizontalOverflow=HorizontalWrapMode.Wrap;probe.verticalOverflow=VerticalWrapMode.Truncate;
             foreach(var scene in TideDialogue.Data.scenes)for(int hero=0;hero<6;hero++)
@@ -23,6 +22,36 @@ namespace SpiritTide
                 Check("all dialogue pages fit maximum archive font "+scene.id+" / "+hero,archiveFits);
             }
             Destroy(probeObject);
+        }
+
+        private IEnumerator ReviewVoicePresentation()
+        {
+            ReviewDialogueFonts();
+            var session=game.Session;
+            string saved=JsonUtility.ToJson(session.Profile);
+            var ending=new TideProfile{campaignSchema=1,campaignAct=5,campaignStage=6,quest=3,level=29,
+                reportedActs=31,clearedDungeons=TideProgress.AllDungeons,claimed=true,uiScale=1.25f};
+            TideCatalog.Sanitize(ending);
+            string fixture=JsonUtility.ToJson(ending);
+            for(int hero=0;hero<6;hero++)
+            {
+                JsonUtility.FromJsonOverwrite(fixture,session.Profile);game.ReturnTown();yield return null;
+                yield return TapUi("hero-"+hero);
+                int act=hero%5+1;
+                yield return TapUi("npc-kukaku");yield return TapUi("choice-0");
+                yield return TapUi("map-act-"+act);yield return TapUi("dungeon-1");
+                Check("selected fighter takes the field for the spoken response "+hero,
+                    session.IsReplay&&session.Dungeon.act==act&&session.Profile.hero==hero);
+                yield return ReviewFirstLantern(act,true);
+            }
+            JsonUtility.FromJsonOverwrite(saved,session.Profile);
+            session.ClearQuestNotifications();game.ReturnTown();yield return null;
+        }
+
+        private IEnumerator ReviewDialogueLibrary()
+        {
+            string saved=JsonUtility.ToJson(game.Session.Profile);
+            ReviewDialogueFonts();
             int main=0;foreach(var record in game.Session.Profile.dialogueHistory)if(record.id.EndsWith("_entry")||record.id.EndsWith("_intro")||record.id.EndsWith("_clear")||record.id.EndsWith("_report")||record.id.StartsWith("main_a"))main++;
             Check("native campaign records all one hundred and ten main scenes",main==110);
             foreach(string npc in new[]{"urahara","tessai","kon","byakuya","kukaku"})

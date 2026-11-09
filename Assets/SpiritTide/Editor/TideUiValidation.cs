@@ -27,21 +27,25 @@ namespace SpiritTide.EditorTools
             var burst=Battle(2,true);burst.Request(MoveKind.Skill2);Advance(burst,.22f);burst.Pause();Advance(burst,3);burst.Resume();Advance(burst,.7f);
             check("pause preserves later hits of multi-hit skill",burst.DamageEvents==3);
             burst.Pause();check("paused training cannot replace active hero",!burst.SelectHero(4));
-            foreach(float width in new[]{1345f,1560f})foreach(float scale in new[]{1f,1.1f})
+            foreach(float width in new[]{1280f,1345f,1560f,1700f})foreach(float scale in new[]{1f,1.1f})
             {
-                bool separate=true,inside=true,largeEnough=true;
-                Rect joystick=new Rect(new Vector2(25,27)*scale,new Vector2(230,230)*scale);
+                bool separate=true,inside=true,largeEnough=true,nearAttack=true;
+                Rect joystick=new Rect((TideHudLayout.JoystickCenter-TideHudLayout.JoystickSize*.5f)*scale,TideHudLayout.JoystickSize*scale);
+                Vector2 attack=TideHudLayout.Bounds(0,width,scale).center;
                 for(int i=0;i<TideHudLayout.Ids.Length;i++)
                 {
                     Rect a=TideHudLayout.Bounds(i,width,scale);
                     inside&=a.xMin>=0&&a.xMax<=width&&a.yMin>=0&&a.yMax<450;
                     largeEnough&=a.width>=84&&a.height>=84;
                     separate&=!a.Overlaps(joystick);
+                    if(i>=5)nearAttack&=Vector2.Distance(attack,a.center)<=180*scale;
                     for(int j=0;j<i;j++)separate&=!a.Overlaps(TideHudLayout.Bounds(j,width,scale));
                 }
                 check("control preset stays separate and inside "+width+" / "+scale,separate&&inside&&largeEnough);
+                check("every skill is in the same thumb cluster as attack "+width+" / "+scale,nearAttack);
                 float bodyRight=width*.23f+6*TideHudLayout.UnitX(width,scale)+160;
-                check("first boss remains clear of action panel "+width+" / "+scale,bodyRight<=width-525*scale-23);
+                float nearestSkill=TideHudLayout.Bounds(5,width,scale).xMin;
+                check("first boss remains clear of action panel "+width+" / "+scale,bodyRight<=nearestSkill-23);
             }
             string legacy=Path.GetFullPath("BuildLogs/legacy-ui-"+Guid.NewGuid().ToString("N")+".json");
             File.Copy("Assets/SpiritTide/Editor/Fixtures/profile-v1-0.1.0.json",legacy);string notice,error;

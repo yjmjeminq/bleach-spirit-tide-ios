@@ -17,6 +17,7 @@ namespace SpiritTide
     public sealed class TideJoystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointerUpHandler
     {
         public RectTransform Knob;
+        public Image DirectionRing;
         public Vector2 Value { get; private set; }
         public int Owner { get; private set; } = int.MinValue;
         public float DeadZone = .16f;
@@ -37,8 +38,21 @@ namespace SpiritTide
             float magnitude = v.magnitude;
             Value = magnitude <= DeadZone ? Vector2.zero : v.normalized * ((magnitude - DeadZone) / (1 - DeadZone));
             if (Knob != null) Knob.anchoredPosition = v * radius;
+            if (DirectionRing != null)
+            {
+                DirectionRing.enabled = Value.sqrMagnitude > 0;
+                DirectionRing.fillAmount = Mathf.Lerp(.09f, .22f, Value.magnitude);
+                float angle = Mathf.Atan2(v.y, v.x) * Mathf.Rad2Deg;
+                DirectionRing.rectTransform.localRotation = Quaternion.Euler(0, 0, angle + 180f * DirectionRing.fillAmount);
+            }
         }
-        public void ResetInput() { Owner = int.MinValue; Value = Vector2.zero; if (Knob != null) Knob.anchoredPosition = Vector2.zero; }
+        public void ResetInput()
+        {
+            Owner = int.MinValue;
+            Value = Vector2.zero;
+            if (Knob != null) Knob.anchoredPosition = Vector2.zero;
+            if (DirectionRing != null) DirectionRing.enabled = false;
+        }
         private void OnDisable() { ResetInput(); }
     }
     public sealed class TideHold : MonoBehaviour, IPointerDownHandler, IPointerUpHandler

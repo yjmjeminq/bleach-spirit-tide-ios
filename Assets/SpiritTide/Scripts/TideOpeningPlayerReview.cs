@@ -131,7 +131,7 @@ namespace SpiritTide
                 && TideDialogue.Seen(session.Profile, id) != null);
         }
 
-        private IEnumerator ReviewFirstLantern(int act)
+        private IEnumerator ReviewFirstLantern(int act,bool reviewReply=false)
         {
             var session = game.Session;
             string id = TideDialogue.DungeonId(session.Dungeon, "answer");
@@ -148,10 +148,24 @@ namespace SpiritTide
             for (int i = 0; i < 100 && !session.NearInteraction; i++)
                 session.Step(.05f, (new Vector2(session.EchoX - session.X, -session.Y)).normalized, false);
             yield return TapUi("field-interact");
+            int hero=session.Profile.hero;
+            var lines=TideDialogue.Lines(id,hero);
             Check("lantern scene follows the real rescue without pausing in act " + act,
-                session.IsFighting && !session.EchoAvailable && VisibleText(TideDialogue.Lines(id, session.Profile.hero)[0].text)
+                session.IsFighting && !session.EchoAvailable && VisibleText(lines[0].text)
                 && TideDialogue.Seen(session.Profile, id) != null);
             yield return Capture("51-story-lantern-act" + act);
+            if(reviewReply)
+            {
+                string expected=TideStory.HeroName(hero)+"  ·  "+lines[1].text;
+                for(int i=0;i<50&&!VisibleText(expected);i++)
+                {
+                    for(int step=0;step<9;step++)session.Step(1f/60,Vector2.zero,false);
+                    yield return null;
+                }
+                Check("actual field response has the selected fighter's voice "+hero,
+                    VisibleText(expected)&&TideDialogue.ArchiveHero(session.Profile,id)==hero);
+                yield return Capture("51-voice-guide-"+hero);
+            }
         }
     }
 }

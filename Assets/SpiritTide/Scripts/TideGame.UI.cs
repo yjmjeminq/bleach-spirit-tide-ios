@@ -125,25 +125,7 @@ namespace SpiritTide
             actionText = Label("",safe,new Vector2(.5f,0),new Vector2(0,130),new Vector2(600,42),25,gold,true); actionText.alignment=TextAnchor.MiddleCenter;
             statusText = Label("",safe,new Vector2(.5f,0),new Vector2(0,32),new Vector2(940,40),21,muted); statusText.alignment=TextAnchor.MiddleCenter;
             controlsRoot=Stretch("TouchControls",safe).gameObject;
-            Image joy = Picture("MoveJoystick",controlsRoot.transform,Vector2.zero,new Vector2(140,142),new Vector2(230,230),new Color(.2f,.35f,.38f,.8f),circle);
-            joy.raycastTarget=true; Joystick=joy.gameObject.AddComponent<TideJoystick>();
-            Joystick.Knob=Picture("Knob",joy.transform,new Vector2(.5f,.5f),Vector2.zero,new Vector2(78,78),new Color(.55f,.76f,.75f,.9f),circle).rectTransform;
-            Text move = Label("이동",joy.transform,new Vector2(.5f,.5f),Vector2.zero,new Vector2(80,40),22);move.alignment=TextAnchor.MiddleCenter;
-            Button basic=Button("attack","공격\n연계",controlsRoot.transform,new Vector2(1,0),new Vector2(-92,91),new Vector2(120,120),null,true);
-            basic.GetComponent<Image>().sprite=circle; AttackHold=basic.gameObject.AddComponent<TideHold>(); AttackHold.Down=()=>{blockHeldAttackUntilRelease=false;Session.Request(Joystick.Value.y>.55f?MoveKind.Launcher:MoveKind.Basic);};
-            Button heavy=Button("heavy","강공격\n모으기",controlsRoot.transform,new Vector2(1,0),new Vector2(-350,91),new Vector2(100,100),null);
-            heavyHold=heavy.gameObject.AddComponent<TideHold>();heavyHold.Down=()=>Session.BeginHeavy();heavyHold.Up=()=>Session.ReleaseHeavy();
-            Button("jump","점프",controlsRoot.transform,new Vector2(1,0),new Vector2(-92,221),new Vector2(100,100),()=>Session.Jump());
-            Button("dodge","회피",controlsRoot.transform,new Vector2(1,0),new Vector2(-222,91),new Vector2(100,100),()=>Session.Dodge(Joystick.Value.sqrMagnitude>.01f?Joystick.Value:keyboardMove));
-            Button potion=Button("potion","회복",controlsRoot.transform,new Vector2(1,0),new Vector2(-222,215),new Vector2(100,96),()=>{if(Session.UsePotion())Persist();});potion.GetComponentInChildren<Text>().fontSize=20;
-            Vector2[] positions = {new Vector2(-470,215),new Vector2(-350,215),new Vector2(-470,335),new Vector2(-350,335),new Vector2(-222,335)};
-            for(int i=0;i<5;i++)
-            {
-                int slot=i;
-                skillButtons[i]=Button("skill-"+i,"",controlsRoot.transform,new Vector2(1,0),positions[i],new Vector2(110,108),
-                    ()=>Session.Request((MoveKind)((int)MoveKind.Skill0+slot)),i==4);
-                skillLabels[i]=skillButtons[i].GetComponentInChildren<Text>();skillLabels[i].fontSize=22;
-            }
+            BuildTouchControls();
             menuRoot=Stretch("Menus",safe).gameObject;MakeModalShade(menuRoot);
             openingBackdrop=SceneBackground("OpeningBackdrop",menuRoot.transform,"act1_river_v1");
             panel=Node("MenuCard",menuRoot.transform,new Vector2(.5f,.5f),new Vector2(0,-15),new Vector2(1060,560));

@@ -28,7 +28,7 @@ namespace SpiritTide
             classStateText=Label("",safe,new Vector2(0,1),new Vector2(180,-160),new Vector2(330,54),21,muted);
             // The state is part of the HUD, behind modal shades.
             classStateText.transform.SetSiblingIndex(controlsRoot.transform.GetSiblingIndex());
-            Image chargeTrack=Picture("ChargeTrack",Buttons["heavy"].transform,new Vector2(.5f,.5f),new Vector2(0,-40),new Vector2(82,6),new Color(.03f,.08f,.1f));
+            Image chargeTrack=Picture("ChargeTrack",Buttons["heavy"].transform,new Vector2(.5f,.5f),new Vector2(0,-33),new Vector2(82,6),new Color(.03f,.08f,.1f));
             chargeFill=Picture("ChargeFill",chargeTrack.transform,new Vector2(.5f,.5f),Vector2.zero,new Vector2(82,6),gold);
             chargeFill.type=Image.Type.Filled;chargeFill.fillMethod=Image.FillMethod.Horizontal;
             Image warningTrack=Picture("TellClock",world,new Vector2(.5f,1),new Vector2(0,-243),new Vector2(720,5),new Color(.13f,.21f,.24f));
@@ -64,11 +64,12 @@ namespace SpiritTide
                 RectTransform rect=(RectTransform)Buttons[TideHudLayout.Ids[i]].transform;
                 rect.anchorMin=rect.anchorMax=new Vector2(1,0);rect.anchoredPosition=TideHudLayout.Positions[i]*scale;rect.sizeDelta=TideHudLayout.Sizes[i];rect.localScale=Vector3.one*scale;
             }
-            RectTransform joy=(RectTransform)Joystick.transform;joy.anchoredPosition=new Vector2(140,142)*scale;joy.localScale=Vector3.one*scale;
+            RectTransform joy=(RectTransform)Joystick.transform;joy.anchoredPosition=TideHudLayout.JoystickCenter*scale;joy.localScale=Vector3.one*scale;
             string[] npcIds={"urahara","tessai","kon","byakuya","kukaku"};
             float dockShift=(255*scale-202)*.5f;
             for(int i=0;i<npcIds.Length;i++)((RectTransform)Buttons["npc-"+npcIds[i]].transform).anchoredPosition=new Vector2((i-2)*160+dockShift,0);
-            float left=255*scale,right=safe.rect.width-525*scale;
+            float left=(TideHudLayout.JoystickCenter.x+TideHudLayout.JoystickSize.x*.5f)*scale;
+            float right=TideHudLayout.Bounds(4,safe.rect.width,scale).xMin;
             statusText.rectTransform.anchorMin=statusText.rectTransform.anchorMax=Vector2.zero;
             statusText.rectTransform.anchoredPosition=new Vector2((left+right)*.5f,43);statusText.rectTransform.sizeDelta=new Vector2(Mathf.Max(420,right-left-40),70);statusText.fontSize=20;
             actionText.rectTransform.anchorMin=actionText.rectTransform.anchorMax=Vector2.zero;

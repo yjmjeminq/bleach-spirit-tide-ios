@@ -29,9 +29,19 @@ namespace SpiritTide
     }
     public static class TideHudLayout
     {
+        public static readonly Vector2 JoystickCenter=new Vector2(140,142);
+        public static readonly Vector2 JoystickSize=new Vector2(230,230);
         public static readonly string[] Ids={"attack","heavy","jump","dodge","potion","skill-0","skill-1","skill-2","skill-3","skill-4"};
-        public static readonly Vector2[] Positions={new Vector2(-92,91),new Vector2(-350,91),new Vector2(-92,221),new Vector2(-222,91),new Vector2(-222,215),new Vector2(-470,215),new Vector2(-350,215),new Vector2(-470,335),new Vector2(-350,335),new Vector2(-222,335)};
-        public static readonly Vector2[] Sizes={new Vector2(120,120),new Vector2(100,100),new Vector2(100,100),new Vector2(100,100),new Vector2(100,96),new Vector2(110,108),new Vector2(110,108),new Vector2(110,108),new Vector2(110,108),new Vector2(110,108)};
+        public static readonly Vector2[] Positions={
+            new Vector2(-174,175),
+            new Vector2(-301,55),new Vector2(-51,55),new Vector2(-174,55),new Vector2(-418,55),
+            new Vector2(-301,175),new Vector2(-51,175),new Vector2(-174,301),new Vector2(-301,301),new Vector2(-51,301)
+        };
+        public static readonly Vector2[] Sizes={
+            new Vector2(126,126),
+            new Vector2(100,94),new Vector2(96,94),new Vector2(106,94),new Vector2(94,94),
+            new Vector2(110,108),new Vector2(100,108),new Vector2(110,108),new Vector2(110,108),new Vector2(100,108)
+        };
         public static Rect Bounds(int index,float width,float scale){Vector2 center=new Vector2(width,0)+Positions[index]*scale;return new Rect(center-Sizes[index]*scale*.5f,Sizes[index]*scale);}
         public static float UnitX(float width,float scale){return Mathf.Clamp((width-525*scale-width*.30f-184)/6,35,62);}
     }

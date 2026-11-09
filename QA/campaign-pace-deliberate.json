@@ -5,12 +5,12 @@
     "menuSecondsPerRequest": 22,
     "attackInterval": 1.0499999523162842,
     "fieldSeconds": 8824.4833984375,
-    "readingSeconds": 2196.020263671875,
+    "readingSeconds": 2229.3505859375,
     "menuSeconds": 1400.0,
-    "estimatedMinutes": 207.00839233398438,
+    "estimatedMinutes": 207.56390380859376,
     "rooms": 264,
     "requests": 20,
-    "pages": 464,
+    "pages": 465,
     "finalLevel": 31,
     "defeats": 0,
     "chapters": [
@@ -22,7 +22,7 @@
             "level": 8,
             "defeats": 0,
             "fieldSeconds": 1525.5167236328125,
-            "readingSeconds": 425.12005615234377,
+            "readingSeconds": 431.9600524902344,
             "menuSeconds": 280.0
         },
         {
@@ -33,7 +33,7 @@
             "level": 13,
             "defeats": 0,
             "fieldSeconds": 1340.3167724609375,
-            "readingSeconds": 411.6600341796875,
+            "readingSeconds": 419.6401062011719,
             "menuSeconds": 280.0
         },
         {
@@ -44,7 +44,7 @@
             "level": 19,
             "defeats": 0,
             "fieldSeconds": 1603.183349609375,
-            "readingSeconds": 439.43505859375,
+            "readingSeconds": 442.00006103515627,
             "menuSeconds": 280.0
         },
         {
@@ -55,18 +55,18 @@
             "level": 25,
             "defeats": 0,
             "fieldSeconds": 2165.016845703125,
-            "readingSeconds": 439.6551818847656,
+            "readingSeconds": 445.1651306152344,
             "menuSeconds": 280.0
         },
         {
             "act": 5,
             "rooms": 54,
             "quests": 4,
-            "pages": 104,
+            "pages": 105,
             "level": 31,
             "defeats": 0,
             "fieldSeconds": 2190.4501953125,
-            "readingSeconds": 480.15008544921877,
+            "readingSeconds": 490.5850830078125,
             "menuSeconds": 280.0
         }
     ]

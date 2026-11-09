@@ -74,7 +74,14 @@ namespace SpiritTide
                 if(current is IEnumerator)stack.Push((IEnumerator)current);else yield return current;
             }
             bool passed=!failed&&errors.Count==0;
-            File.WriteAllText(Path.Combine(output,"report.json"),JsonUtility.ToJson(new Report{passed=passed,runMode=Array.IndexOf(Environment.GetCommandLineArgs(),"-spirit-fx-review")>=0?"skills-only":Array.IndexOf(Environment.GetCommandLineArgs(),"-spirit-icons-review")>=0?"icons-only":Array.IndexOf(Environment.GetCommandLineArgs(),"-spirit-journey-review")>=0?"journey-only":Array.IndexOf(Environment.GetCommandLineArgs(),"-spirit-motion-review")>=0?"motion-only":Array.IndexOf(Environment.GetCommandLineArgs(),"-spirit-requests-review")>=0?"requests-only":"full",version=Application.version,guid=Application.buildGUID,device=SystemInfo.graphicsDeviceType+" / "+Screen.width+"x"+Screen.height,scope="Windows live UI rendering, pointer-event simulation, menu focus, campaign loot and input-only multi-enemy victories. Not iPhone OS touch, Metal or performance validation.",checks=rows.ToArray(),errors=errors.ToArray()},true));
+            string[] args=Environment.GetCommandLineArgs();
+            string runMode=Array.IndexOf(args,"-spirit-fx-review")>=0?"skills-only"
+                :Array.IndexOf(args,"-spirit-icons-review")>=0?"icons-only"
+                :Array.IndexOf(args,"-spirit-journey-review")>=0?"journey-only"
+                :Array.IndexOf(args,"-spirit-motion-review")>=0?"motion-only"
+                :Array.IndexOf(args,"-spirit-requests-review")>=0?"requests-only"
+                :Array.IndexOf(args,"-spirit-interface-review")>=0?"interface-only":"full";
+            File.WriteAllText(Path.Combine(output,"report.json"),JsonUtility.ToJson(new Report{passed=passed,runMode=runMode,version=Application.version,guid=Application.buildGUID,device=SystemInfo.graphicsDeviceType+" / "+Screen.width+"x"+Screen.height,scope="Windows live UI rendering, pointer-event simulation, menu focus, campaign loot and input-only multi-enemy victories. Not iPhone OS touch, Metal or performance validation.",checks=rows.ToArray(),errors=errors.ToArray()},true));
             Application.logMessageReceived-=Log;Application.Quit(passed?0:1);
         }
         private IEnumerator Capture(string name)
@@ -129,6 +136,10 @@ namespace SpiritTide
             if(Array.IndexOf(Environment.GetCommandLineArgs(),"-spirit-icons-review")>=0){yield return ReviewSkillIcons();yield break;}
             if(Array.IndexOf(Environment.GetCommandLineArgs(),"-spirit-journey-review")>=0){yield return ReviewJourney();yield break;}
             if(Array.IndexOf(Environment.GetCommandLineArgs(),"-spirit-motion-review")>=0){yield return ReviewNaturalMotion();yield break;}
+            if(Array.IndexOf(Environment.GetCommandLineArgs(),"-spirit-interface-review")>=0)
+            {
+                yield return ReviewOpening();yield return ReviewTouchInput();yield return ReviewVoicePresentation();yield break;
+            }
             if(Array.IndexOf(Environment.GetCommandLineArgs(),"-spirit-requests-review")>=0)
             {
                 var ending=new TideProfile{campaignSchema=1,campaignAct=5,campaignStage=6,quest=3,level=29,

@@ -1,8 +1,8 @@
 {
-  "version": "0.13.0",
+  "version": "0.13.1",
   "scenes": 340,
-  "base_lines": 830,
-  "lead_responses": 156,
+  "base_lines": 826,
+  "lead_responses": 186,
   "town_replies": 105,
   "source": "Tools/prepare_dialogue.py + Tools/prepare_quests.py",
   "runtime": "Assets/SpiritTide/Resources/SpiritTide/Data/dialogue.json",
