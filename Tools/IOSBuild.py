@@ -21,7 +21,7 @@ import uuid
 import zipfile
 
 BUNDLE = 'com.yjmjemin.bleachspirittide'
-VERSION, BUILD = '0.14.0', '11'
+VERSION, BUILD = '0.15.0', '12'
 IPA_NAME = f'SpiritTide-iPhone-unsigned-v{VERSION}.ipa'
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -102,12 +102,15 @@ def inspect_export(project):
         'TideGame_BuildSkillLoadout_m',
         'TideGame_MakeTouchSprite_m',
         'TideGame_PlaceDialoguePortrait_m',
+        'TideNaturalMotion_BeginStrikeStance_m',
+        'TideGame_DrawStrikeTrail_m',
+        'TideImpactBurst_OnPopulateMesh_m',
     ]
     found = set()
     for path in generated:
         code = path.read_text(encoding='utf-8')
         found.update(marker for marker in markers if marker in code)
-    require(found == set(markers), 'Export is missing this game, touch layout or workshop code')
+    require(found == set(markers), 'Export is missing game code: ' + ', '.join(sorted(set(markers) - found)))
     info = plistlib.loads((project / 'Info.plist').read_bytes())
     require(info.get('CFBundleShortVersionString') == VERSION and str(info.get('CFBundleVersion')) == BUILD,
             'Wrong source version/build')
