@@ -59,70 +59,68 @@ namespace SpiritTide
         private void BuildTitle()
         {
             Clear(panel);
-            Label("BLEACH", panel, Center, new Vector2(-280, 141), new Vector2(422, 44), 32, gold, true);
-            Label("영해의 균열", panel, Center, new Vector2(-170, 66), new Vector2(642, 104), 74, ink, true);
-            Picture("TitleRule", panel, Center, new Vector2(-370, 3), new Vector2(240, 3), gold);
+            var cover=Surface("TitleCover",panel,Center,new Vector2(-152,4),new Vector2(744,464),
+                new Color(.14f,.24f,.30f,.98f)).rectTransform;
+            Picture("TitleAccent",cover,Center,new Vector2(-370,115),new Vector2(4,132),gold);
+            Label("BLEACH",cover,Center,new Vector2(0,152),new Vector2(648,37),28,gold,true);
+            Label("영해의 균열",cover,Center,new Vector2(0,79),new Vector2(648,98),76,ink,true);
+            Picture("TitleRule",cover,Center,new Vector2(-242,14),new Vector2(164,2),gold);
             string note = FreshCampaign ? "루키아  ·  카라쿠라\n평소라면 대답이 돌아올 시간이었다."
                 : Session.CampaignFinished ? "다섯 균열의 조사를 마쳤습니다."
-                : "ACT " + Session.Profile.campaignAct + "  ·  " + TideStory.HeroName(Session.Profile.hero) + "\n"
+                : "ACT " + Session.Profile.campaignAct.ToString("00") + "  ·  " + TideStory.HeroName(Session.Profile.hero) + "\n"
                     + (Session.Quest == QuestState.Ready ? "우라하라 상점으로 돌아갈 때" : TideJourney.Current(Session.Profile).title
                         + " · " + (Session.Profile.roomCheckpoint+1) + "방");
-            Label(note, panel, Center, new Vector2(-183, -58), new Vector2(616, 96), 26, muted);
+            Label(note,cover,Center,new Vector2(0,-50),new Vector2(648,83),26,ink);
+            bool field=Session.Quest==QuestState.Active;
             Button("title-start", FreshCampaign ? "이야기 시작" : UnreadEnding ? "후일담 이어보기" : "이어서 하기",
-                panel, Center, new Vector2(-313, -165), new Vector2(360, 86), ContinueFromTitle, true);
-            if (Session.Quest == QuestState.Active)
-                Button("title-resume-field", "현장 이어가기", panel, Center, new Vector2(66, -165), new Vector2(360, 86),
-                    () => { if (Session.Mode == TideMode.Title) StartBattle(false); }, true);
+                cover,Center,new Vector2(field?-166:0,-145),new Vector2(field?314:648,88),ContinueFromTitle,true);
+            if(field)
+                Button("title-resume-field","현장 이어가기",cover,Center,new Vector2(166,-145),new Vector2(316,88),
+                    () => { if (Session.Mode == TideMode.Title) StartBattle(false); });
             if (!string.IsNullOrEmpty(lastSaveNotice))
-                Label(lastSaveNotice, panel, Center, new Vector2(-128, -240), new Vector2(730, 52), 20, gold);
+                Label(lastSaveNotice,cover,Center,new Vector2(0,-209),new Vector2(648,38),19,gold);
         }
 
         private void BuildStory()
         {
-            Clear(dialogueRoot.transform);
             var scene = TideDialogue.Scene(storyRecordId);
             int page = storyPage, epoch = storyEpoch;
             bool last = page == storyLines.Length - 1;
             StoryLine line = storyLines[page];
             bool field = Session.InBattle || scene.kind == "entry" || scene.kind == "intro" || scene.kind == "clear";
             var dungeon = TideCampaign.Dungeon(scene.act, scene.stage);
-            SceneBackground("StorySetting", dialogueRoot.transform, field ? dungeon.background : "town");
-            var shade = Stretch("StoryShade", dialogueRoot.transform).gameObject.AddComponent<Image>();
-            shade.color = new Color(.022f, .06f, .09f, .55f);
-            shade.raycastTarget = false;
-
-            var stage = Node("StoryStage", dialogueRoot.transform, Center, Vector2.zero, new Vector2(1060, 580));
-            Label("ACT " + scene.act + "   /   " + (field ? dungeon.title : scene.place), stage, Center,
-                new Vector2(-20, 237), new Vector2(980, 42), 22, gold, true);
-            Label(scene.title, stage, Center, new Vector2(-20, 188), new Vector2(980, 64), 43, ink, true);
-            Picture("StoryRule", stage, Center, new Vector2(0, 146), new Vector2(1020, 2), new Color(.83f, .69f, .44f, .65f));
-
-            Sprite portrait = StoryPortrait(line.speaker, dungeon, scene.kind == "intro");
-            if (portrait != null)
-                Picture("SpeakerPortrait", stage, Center, new Vector2(-372, -28), new Vector2(260, 315), Color.white, portrait).preserveAspect = true;
-
-            var speech = Picture("Speech", stage, Center, new Vector2(127, -29), new Vector2(764, 278), new Color(.024f, .077f, .104f, .97f));
-            Picture("SpeakerAccent", speech.transform, Center, new Vector2(-380, 0), new Vector2(4, 278), gold);
-            string speaker = line.speaker;
+            var stage=OpenDialogueStage("StoryStage",field?dungeon.background:"town");
+            bool encounter=scene.kind=="intro";
+            string listener=page>0?storyLines[page-1].speaker:null;
+            Sprite portrait=PortraitCrop(line.speaker,dungeon,encounter);
+            if(listener!=null&&listener!=line.speaker)
+                PlaceDialoguePortrait(stage,PortraitCrop(listener,dungeon,encounter),listener,false);
+            else if(portrait==null&&scene.id=="main_a1_accept")
+            {
+                string lead=TideStory.HeroName(storyHero);
+                PlaceDialoguePortrait(stage,PortraitCrop(lead),lead,false);
+            }
+            PlaceDialoguePortrait(stage,portrait,line.speaker,true);
+            if(portrait==null)shownSpeaker=line.speaker;
+            DialogueHeading(stage,"ACT "+scene.act.ToString("00")+"  ·  "+(field?dungeon.title:scene.place),scene.title);
+            string channel="";
             if (field && scene.kind != "main_checkpoint")
                 for (int i = 0; i < heroSprites.Length; i++)
-                    if (i != storyHero && speaker == TideStory.HeroName(i))
+                    if (i != storyHero && line.speaker == TideStory.HeroName(i))
                     {
-                        speaker += "  ·  동료 통신";
+                        channel="동료 통신";
                         break;
                     }
             if (scene.kind.StartsWith("side_", StringComparison.Ordinal) && (scene.act < Session.Profile.campaignAct || Session.Profile.claimed))
-                speaker = "지난 부탁  /  " + speaker;
-            Label(speaker, speech.transform, Center, new Vector2(-68, 97), new Vector2(572, 52), 28, gold, true);
-            var count = Label((page + 1) + " / " + storyLines.Length, speech.transform, Center, new Vector2(312, 97),
-                new Vector2(84, 48), 22, muted);
+                channel="지난 부탁";
+            float heading=DrawDialogueSpeech(stage,line.speaker,line.text,-146,channel);
+            var count=Label((page+1)+" / "+storyLines.Length,stage,Center,new Vector2(459,heading),new Vector2(90,36),19,muted);
             count.alignment = TextAnchor.MiddleRight;
-            var body = Label(line.text, speech.transform, Center, new Vector2(0, -20), new Vector2(704, 180),
-                Mathf.RoundToInt(32 * Session.Profile.uiScale));
-            body.name = "StorySpeech";
-            body.alignment = TextAnchor.MiddleLeft;
+            for(int i=0;i<storyLines.Length;i++)
+                Picture("StoryPage",stage,Center,new Vector2(400-(storyLines.Length-1-i)*14,heading),
+                    new Vector2(i==page?11:5,3),i<=page?SpeakerColor(line.speaker):new Color(.40f,.53f,.58f,.65f));
 
-            Button("story-previous", "이전 문장", stage, Center, new Vector2(-413, -232), new Vector2(192, 84), () =>
+            DialogueButton("story-previous", "이전 문장", stage, new Vector2(-414,-264),new Vector2(192,84),() =>
             {
                 if (epoch != storyEpoch || Session.Mode != TideMode.Story || storyPage != page || page <= 0) return;
                 storyPage--;
@@ -133,13 +131,12 @@ namespace SpiritTide
             {
                 string skip = scene.kind == "report" ? "건너뛰고 보고" : storyEndLabel == "강변으로" ? "바로 강변으로"
                     : scene.kind == "main_accept" ? "건너뛰고 수락" : "장면 건너뛰기";
-                Button("choice-1", skip, stage, Center, new Vector2(-172, -232), new Vector2(264, 84),
+                DialogueButton("choice-1",skip,stage,new Vector2(-176,-264),new Vector2(258,84),
                     () => { if (epoch == storyEpoch) FinishStory(); });
             }
             if(!last||storyCancelLabel!=storyEndLabel)
-                Button(last ? "choice-1" : "choice-2", storyCancelLabel, stage, Center, new Vector2(79, -232),
-                    new Vector2(214, 84), CancelStory);
-            Button("choice-0", last ? storyEndLabel : "계속", stage, Center, new Vector2(355, -232), new Vector2(312, 84),
+                DialogueButton(last?"choice-1":"choice-2",storyCancelLabel,stage,new Vector2(74,-264),new Vector2(216,84),CancelStory);
+            DialogueButton("choice-0",last?storyEndLabel:"계속",stage,new Vector2(354,-264),new Vector2(312,84),
                 () => { if (epoch == storyEpoch) AdvanceStory(page); }, true);
         }
 
@@ -222,8 +219,9 @@ namespace SpiritTide
             Refresh();
         }
 
-        private string FieldStatus()
+        private string FieldStatus(out StoryLine call)
         {
+            call=null;
             if (!Session.IsFighting || !Session.IsCampaign) return Session.Status;
             if (fieldLines != null && fieldEpoch == Session.PresentationEpoch)
             {
@@ -231,8 +229,8 @@ namespace SpiritTide
                     fieldNext = Session.PresentationClock + FieldLineTime(fieldLines[fieldPage]);
                 if (fieldPage < fieldLines.Length)
                 {
-                    StoryLine line = fieldLines[fieldPage];
-                    return line.speaker + "  ·  " + line.text;
+                    call=fieldLines[fieldPage];
+                    return "";
                 }
                 fieldLines = null;
             }
@@ -247,7 +245,7 @@ namespace SpiritTide
             if (!Session.IsFighting || Session.RoomCleared || openingRoomEpoch != Session.PresentationEpoch)
                 return null;
             firstMove |= Mathf.Abs(Session.X + 3f) + Mathf.Abs(Session.Y) > .55f;
-            if (!firstMove) return ShowKeyboardHints ? "방향키로 강변의 가면 쪽에 다가가세요." : "왼쪽 이동 패드를 밀어 가면 쪽에 다가가세요.";
+            if (!firstMove) return ShowKeyboardHints ? "방향키로 가면에게 다가가세요." : "왼쪽 패드로 가면에게 다가가세요.";
             if (Session.AttackSerial == firstAttack)
                 return ShowKeyboardHints ? "가까이서 Z로 공격하세요." : "가까이서 오른쪽의 공격 버튼을 누르세요.";
             return null;

@@ -1,0 +1,226 @@
+{
+  "characters": [
+    {
+      "id": "rukia",
+      "extra_skills": [
+        {
+          "id": "rk_s5",
+          "name": "서릿결",
+          "label": "서릿결",
+          "cooldown_seconds": 8,
+          "spirit_cost": 10,
+          "effect": "주변에 서리를 퍼뜨려 뒤쪽의 적도 타격하고 이동을 2.5초 늦춥니다."
+        },
+        {
+          "id": "rk_s6",
+          "name": "백빙참",
+          "label": "백빙참",
+          "cooldown_seconds": 10,
+          "spirit_cost": 13,
+          "effect": "앞으로 짧게 미끄러지며 좁은 길을 베고 적을 늦춥니다."
+        },
+        {
+          "id": "rk_s7",
+          "name": "설화빙벽",
+          "label": "설화빙벽",
+          "cooldown_seconds": 15,
+          "spirit_cost": 16,
+          "effect": "얼음 보호막을 두르고 가까운 적의 움직임을 잠시 멈춥니다."
+        },
+        {
+          "id": "rk_s8",
+          "name": "빙화쇄",
+          "label": "빙화쇄",
+          "cooldown_seconds": 18,
+          "spirit_cost": 20,
+          "effect": "전방의 냉기를 깨뜨립니다. 느려진 적은 더 큰 피해를 받고 둔화가 풀립니다."
+        }
+      ]
+    },
+    {
+      "id": "orihime",
+      "extra_skills": [
+        {
+          "id": "oh_s5",
+          "name": "삼천결순·겹결",
+          "label": "겹결",
+          "cooldown_seconds": 14,
+          "spirit_cost": 18,
+          "effect": "강한 결계를 세우며 가까운 적을 바깥으로 밀어냅니다."
+        },
+        {
+          "id": "oh_s6",
+          "name": "고천참순·화우",
+          "label": "화우",
+          "cooldown_seconds": 9,
+          "spirit_cost": 14,
+          "effect": "꽃잎 영탄을 부채꼴로 날려 앞쪽의 여러 적을 타격합니다."
+        },
+        {
+          "id": "oh_s7",
+          "name": "사천항순·환류",
+          "label": "환류",
+          "cooldown_seconds": 14,
+          "spirit_cost": 16,
+          "effect": "반격 결계로 공격을 받아내면 피해를 되돌려주고 영압을 22 회복합니다."
+        },
+        {
+          "id": "oh_s8",
+          "name": "쌍천귀순·귀화",
+          "label": "귀화",
+          "cooldown_seconds": 22,
+          "spirit_cost": 24,
+          "effect": "체력을 회복하고 작은 결계를 세웁니다. 체력이 3분의 1 미만이면 회복량이 크게 늘어납니다."
+        }
+      ]
+    },
+    {
+      "id": "yoruichi",
+      "extra_skills": [
+        {
+          "id": "yr_s5",
+          "name": "섬뢰각",
+          "label": "섬뢰각",
+          "cooldown_seconds": 8,
+          "spirit_cost": 12,
+          "effect": "앞으로 파고들며 번개 발차기로 가까운 적의 행동을 잠시 멈춥니다."
+        },
+        {
+          "id": "yr_s6",
+          "name": "뇌섬연타",
+          "label": "뇌섬연타",
+          "cooldown_seconds": 12,
+          "spirit_cost": 16,
+          "effect": "가까운 한 적을 먼저 친 뒤 네 번의 번개 타격을 이어갑니다."
+        },
+        {
+          "id": "yr_s7",
+          "name": "묘영반격",
+          "label": "묘영반격",
+          "cooldown_seconds": 13,
+          "spirit_cost": 14,
+          "effect": "가까운 적의 뒤로 넘어가 짧게 반격을 준비합니다. 먼 적에게는 제자리에서 준비합니다."
+        },
+        {
+          "id": "yr_s8",
+          "name": "순홍·뇌추",
+          "label": "뇌추",
+          "cooldown_seconds": 18,
+          "spirit_cost": 22,
+          "effect": "발밑에 번개를 내려 주변을 타격합니다. 일반 적을 띄우고 보스를 잠시 멈춥니다."
+        }
+      ]
+    },
+    {
+      "id": "soifon",
+      "extra_skills": [
+        {
+          "id": "sf_s5",
+          "name": "비침각인",
+          "label": "비침각인",
+          "cooldown_seconds": 8,
+          "spirit_cost": 11,
+          "effect": "멀리 있는 한 적에게 침을 날려 표식을 남깁니다."
+        },
+        {
+          "id": "sf_s6",
+          "name": "봉문파",
+          "label": "봉문파",
+          "cooldown_seconds": 11,
+          "spirit_cost": 15,
+          "effect": "전방을 관통하며 막고 있는 적의 방어를 한 겹 깎습니다."
+        },
+        {
+          "id": "sf_s7",
+          "name": "잔영이탈",
+          "label": "잔영이탈",
+          "cooldown_seconds": 10,
+          "spirit_cost": 13,
+          "effect": "전방을 찌른 뒤 비스듬히 물러납니다. 타이밍을 맞추면 정밀 회피가 발동합니다."
+        },
+        {
+          "id": "sf_s8",
+          "name": "표화난무",
+          "label": "표화난무",
+          "cooldown_seconds": 17,
+          "spirit_cost": 21,
+          "effect": "앞쪽을 베고 표식이 찍힌 표적에게 침을 네 번 더 꽂습니다. 표식은 유지됩니다."
+        }
+      ]
+    },
+    {
+      "id": "rangiku",
+      "extra_skills": [
+        {
+          "id": "rg_s5",
+          "name": "회묘포진",
+          "label": "회묘포진",
+          "cooldown_seconds": 9,
+          "spirit_cost": 12,
+          "effect": "겨눈 적 근처에 재구름을 설치합니다. 재구름은 최대 두 개까지 유지됩니다."
+        },
+        {
+          "id": "rg_s6",
+          "name": "회풍인",
+          "label": "회풍인",
+          "cooldown_seconds": 11,
+          "spirit_cost": 15,
+          "effect": "가까운 적을 가장 가까운 재구름 쪽으로 끌어당기고 늦춥니다. 구름이 없으면 자신 쪽으로 당깁니다."
+        },
+        {
+          "id": "rg_s7",
+          "name": "회묘막",
+          "label": "회묘막",
+          "cooldown_seconds": 14,
+          "spirit_cost": 16,
+          "effect": "가까운 적을 밀고 보호막을 얻습니다. 재구름 근처에서 쓰면 보호막이 강해집니다."
+        },
+        {
+          "id": "rg_s8",
+          "name": "잿빛연쇄",
+          "label": "잿빛연쇄",
+          "cooldown_seconds": 18,
+          "spirit_cost": 21,
+          "effect": "재구름을 각각 터뜨립니다. 두 구름이 겹친 곳은 두 번 맞으며, 구름이 없으면 가까운 적만 타격합니다."
+        }
+      ]
+    },
+    {
+      "id": "unohana",
+      "extra_skills": [
+        {
+          "id": "un_s5",
+          "name": "회도·맥류",
+          "label": "회도·맥류",
+          "cooldown_seconds": 11,
+          "spirit_cost": 14,
+          "effect": "체력을 조금 회복합니다. 회복 태세에서 쓰면 보호막도 얻습니다."
+        },
+        {
+          "id": "un_s6",
+          "name": "혈도일섬",
+          "label": "혈도일섬",
+          "cooldown_seconds": 10,
+          "spirit_cost": 15,
+          "effect": "전방을 벱니다. 검격 태세에서는 적의 방어를 한 겹 깎고 더 강하게 타격합니다."
+        },
+        {
+          "id": "un_s7",
+          "name": "만상반전",
+          "label": "만상반전",
+          "cooldown_seconds": 14,
+          "spirit_cost": 17,
+          "effect": "짧게 받아치기를 준비합니다. 반격에 성공하면 회복과 검격 태세가 서로 바뀝니다."
+        },
+        {
+          "id": "un_s8",
+          "name": "유혈귀원",
+          "label": "유혈귀원",
+          "cooldown_seconds": 19,
+          "spirit_cost": 22,
+          "effect": "주변 적을 벱니다. 회복 태세에서는 체력을 회복하고, 검격 태세에서는 검격이 강해집니다."
+        }
+      ]
+    }
+  ]
+}

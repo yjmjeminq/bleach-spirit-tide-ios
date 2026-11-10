@@ -1,10 +1,10 @@
 {
-  "version": "0.13.1",
+  "version": "0.16.1",
   "scenes": 340,
-  "base_lines": 826,
+  "base_lines": 829,
   "lead_responses": 186,
   "town_replies": 105,
-  "source": "Tools/prepare_dialogue.py + Tools/prepare_quests.py",
+  "source": "Tools/prepare_dialogue.py + Tools/prepare_quests.py + Tools/campaign_milestones.py",
   "runtime": "Assets/SpiritTide/Resources/SpiritTide/Data/dialogue.json",
   "script": "Docs/character-dialogue-script.txt",
   "chapters": [

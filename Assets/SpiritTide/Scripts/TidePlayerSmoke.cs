@@ -99,14 +99,14 @@ namespace SpiritTide
             {
                 canvas.renderMode=RenderMode.ScreenSpaceCamera;canvas.worldCamera=camera;canvas.planeDistance=1;
                 camera.targetTexture=target;Canvas.ForceUpdateCanvases();camera.Render();RenderTexture.active=target;
+                capture.ReadPixels(new Rect(0,0,Screen.width,Screen.height),0,0);capture.Apply();
+                File.WriteAllBytes(Path.Combine(output,name+".png"),capture.EncodeToPNG());
                 CheckTouchLayout(name);
                 foreach(Text label in game.GetComponentsInChildren<Text>())
                     Check("text fits "+name+" / "+label.text.Replace("\n"," "),label.preferredHeight<=label.rectTransform.rect.height+2);
-                capture.ReadPixels(new Rect(0,0,Screen.width,Screen.height),0,0);capture.Apply();
                 Color32[] pixels=capture.GetPixels32();int colored=0;
                 for(int i=0;i<pixels.Length;i+=31)if(pixels[i].r>20||pixels[i].g>40||pixels[i].b>45)colored++;
                 Check("rendered canvas contains visible content "+name,colored>pixels.Length/310);
-                File.WriteAllBytes(Path.Combine(output,name+".png"),capture.EncodeToPNG());
             }
             finally
             {
@@ -138,7 +138,7 @@ namespace SpiritTide
             if(Array.IndexOf(Environment.GetCommandLineArgs(),"-spirit-motion-review")>=0){yield return ReviewNaturalMotion();yield break;}
             if(Array.IndexOf(Environment.GetCommandLineArgs(),"-spirit-interface-review")>=0)
             {
-                yield return ReviewOpening();yield return ReviewTouchInput();yield return ReviewVoicePresentation();yield break;
+                yield return ReviewOpening();yield return ReviewTouchInput();yield return ReviewLoadout();yield return ReviewVoicePresentation();yield break;
             }
             if(Array.IndexOf(Environment.GetCommandLineArgs(),"-spirit-requests-review")>=0)
             {
@@ -148,6 +148,7 @@ namespace SpiritTide
                 yield return ReviewQuestGameplay();yield return ReviewConvenience();yield break;
             }
             yield return ReviewOpening();
+            yield return ReviewLoadout();
             int openingRoster=game.Session.Profile.recruitedHeroes;
             game.Session.Profile.recruitedHeroes=TideProgress.AllHeroes;game.Session.Revision++;yield return null;
             yield return ReviewUi();

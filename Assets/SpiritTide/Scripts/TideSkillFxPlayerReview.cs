@@ -14,6 +14,16 @@ namespace SpiritTide
             while(game.Session.Clock<until&&guard++<600){for(int i=0;i<4&&game.Session.Clock<until;i++)game.Session.Step(1f/60,Vector2.zero,false);yield return null;}
             Check("effect review simulation advances without a loop",game.Session.Clock>=until);
         }
+        private string EquipReviewCast(int skill)
+        {
+            var session=game.Session;
+            int equipped=session.EquippedSlot(skill);
+            if(equipped>=0)return "skill-"+equipped;
+            session.Pause();
+            Check("skill effect can be equipped in training "+skill,session.EquipSkill(0,skill));
+            session.Resume();
+            return "skill-0";
+        }
         private IEnumerator ReviewSkillEffects()
         {
             string saved=JsonUtility.ToJson(game.Session.Profile);int casts=0,peak=0;game.ReviewStepping=true;
@@ -24,10 +34,10 @@ namespace SpiritTide
                 {
                     game.ReturnTown();yield return TapUi("hero-"+hero);game.StartBattle(true);yield return null;
                     int nodes=game.GetComponentsInChildren<TideSkillFxGraphic>(true).Length;
-                    for(int slot=0;slot<5;slot++)
+                    for(int slot=0;slot<CharacterDef.SkillCount;slot++)
                     {
                         game.Session.X=0;game.Session.Y=0;game.Session.EnemyX=2.3f;game.Session.EnemyY=0;
-                        yield return TapUi("skill-"+slot);float duration=game.Session.ActionDuration;
+                        yield return TapUi(EquipReviewCast(slot));float duration=game.Session.ActionDuration;
                         yield return StepSkillSeconds(duration*.48f);Canvas.ForceUpdateCanvases();
                         string id=game.Session.Hero.Skill(slot).id;var definition=TideSkillFx.Get(hero,slot);
                         Check("real skill cast selects its own effect "+id,game.LastSkillFxId==id&&game.SkillFxActiveCount>0);
@@ -42,15 +52,15 @@ namespace SpiritTide
                         Check("repeated skill casts reuse the mesh pool "+id,game.GetComponentsInChildren<TideSkillFxGraphic>(true).Length==nodes);
                     }
                     game.Session.Profile.reducedEffects=true;game.Session.Revision++;yield return null;
-                    yield return TapUi("skill-4");yield return StepSkillSeconds(.5f);yield return Capture("91-reduced-"+hero);
+                    yield return TapUi(EquipReviewCast(CharacterDef.Awakening));yield return StepSkillSeconds(.5f);yield return Capture("91-reduced-"+hero);
                     Check("reduced mode retains the hero ultimate motif "+hero,game.LastSkillFxId==game.Session.Hero.ultimate.id&&game.SkillFxActiveCount>0);
                     yield return TapUi("pause");float clock=game.Session.Clock;string motif=game.LastSkillFxId;yield return null;
                     Check("pause preserves active effect time and identity "+hero,game.Session.Clock==clock&&game.LastSkillFxId==motif);yield return TapUi("resume");
                     game.Session.Profile.reducedEffects=false;game.Session.Revision++;game.ReturnTown();yield return null;
                     Check("return to town clears all battle skill meshes "+hero,game.SkillFxActiveCount==0&&game.GetComponentsInChildren<TideSkillFxGraphic>().Length==0);
                 }
-                Check("all thirty distinct playable skills rendered",casts==30);
-                File.WriteAllText(Path.Combine(output,"skill-effects-review.json"),"{\"passed\":true,\"version\":\""+Application.version+"\",\"guid\":\""+Application.buildGUID+"\",\"cast_skills\":30,\"hero_motifs\":6,\"peak_vertices\":"+peak+",\"pool_capacity\":"+game.SkillFxPoolCapacity+",\"scope\":\"Windows actual Unity mesh rendering and input events; not iPhone GPU performance\"}");
+                Check("all fifty-four distinct playable skills rendered",casts==6*CharacterDef.SkillCount);
+                File.WriteAllText(Path.Combine(output,"skill-effects-review.json"),"{\"passed\":true,\"version\":\""+Application.version+"\",\"guid\":\""+Application.buildGUID+"\",\"cast_skills\":"+casts+",\"hero_motifs\":6,\"peak_vertices\":"+peak+",\"pool_capacity\":"+game.SkillFxPoolCapacity+",\"scope\":\"Windows actual Unity mesh rendering and input events; not iPhone GPU performance\"}");
                 if(Screen.width==2556&&Screen.height==1179)yield return SkillEffectsMovie();
             }
             finally {game.ReviewStepping=false;JsonUtility.FromJsonOverwrite(saved,game.Session.Profile);game.Session.ClearQuestNotifications();game.ReturnTown();}
@@ -65,7 +75,8 @@ namespace SpiritTide
                 canvas.renderMode=RenderMode.ScreenSpaceCamera;canvas.worldCamera=camera;canvas.planeDistance=1;camera.targetTexture=rt;
                 for(int hero=0;hero<6;hero++)
                 {
-                    game.ReturnTown();Click("hero-"+hero);game.StartBattle(true);game.Session.X=0;game.Session.EnemyX=2.3f;game.ReviewTime=index/30f;Click("skill-4");
+                    game.ReturnTown();Click("hero-"+hero);game.StartBattle(true);game.Session.X=0;game.Session.EnemyX=2.3f;game.ReviewTime=index/30f;
+                    string cast=EquipReviewCast(CharacterDef.Awakening);yield return null;Click(cast);
                     for(int frame=0;frame<framesPerHero;frame++,index++)
                     {
                         game.ReviewTime=index/30f;game.Session.Step(1f/30,Vector2.zero,false);yield return null;

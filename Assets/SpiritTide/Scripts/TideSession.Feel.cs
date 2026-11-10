@@ -1,17 +1,37 @@
 using UnityEngine;
 namespace SpiritTide
 {
+    public enum TideImpactStrength { None, Light, Firm, Heavy }
+
     public sealed partial class TideSession
     {
         public float HitStopRemaining,ComboRemaining,DungeonDamageTaken,DungeonStartedAt;
         public int ChainHits,ChainPeak,CancelEvents,PerfectEvents,HitStopEvents,PoiseBreaks,HurtSerial;
+        public TideImpactStrength LastImpactStrength {get;private set;}
+        public int LastImpactDirection {get;private set;}=1;
         private int actionDamageStart;
+        private float impactClock=-1;
         public string ClearRank=>DungeonDamageTaken<=0&&ChainPeak>=20?"SS":DungeonDamageTaken<MaxHp*.25f?"S":DungeonDamageTaken<MaxHp*.7f?"A":"B";
-        private void ResetFightFeel(){HitStopRemaining=ComboRemaining=DungeonDamageTaken=0;ChainHits=ChainPeak=CancelEvents=PerfectEvents=HitStopEvents=PoiseBreaks=0;DungeonStartedAt=Clock;}
+        private void ResetFightFeel()
+        {
+            HitStopRemaining=ComboRemaining=DungeonDamageTaken=0;
+            ChainHits=ChainPeak=CancelEvents=PerfectEvents=HitStopEvents=PoiseBreaks=0;
+            LastImpactStrength=TideImpactStrength.None;impactClock=-1;DungeonStartedAt=Clock;
+        }
         private void RegisterImpact(TideEnemy e)
         {
             bool heavy=Action==MoveKind.Heavy||Action==MoveKind.Counter,ultimate=Action==MoveKind.Ultimate;
-            HitStopRemaining=Mathf.Max(HitStopRemaining,ultimate?.085f:heavy?.065f:.028f);HitStopEvents++;
+            bool finisher=Action==MoveKind.Basic&&Combo==2;
+            bool firm=finisher||Action==MoveKind.Launcher||Action>=MoveKind.Skill0;
+            var strength=heavy||ultimate?TideImpactStrength.Heavy:firm&&e.Guard==0?TideImpactStrength.Firm:TideImpactStrength.Light;
+            float pause=ultimate?.075f:heavy?.053f:strength==TideImpactStrength.Light?.015f:finisher?.037f:.024f;
+            e.ImpactDirection=Mathf.Abs(e.X-X)<.15f?Facing:e.X>X?1:-1;
+            e.ImpactStrength=strength;
+            if(impactClock!=PresentationClock||strength>LastImpactStrength)
+            {
+                impactClock=PresentationClock;LastImpactStrength=strength;LastImpactDirection=e.ImpactDirection;
+            }
+            HitStopRemaining=Mathf.Max(HitStopRemaining,pause);HitStopEvents++;
             ChainHits=ComboRemaining>0?ChainHits+1:1;ChainPeak=Mathf.Max(ChainPeak,ChainHits);ComboRemaining=2.6f;
             if(e.Def.IsBoss)
             {
@@ -24,7 +44,7 @@ namespace SpiritTide
             else if(e.Guard<=0)
             {
                 e.Stagger=Mathf.Max(e.Stagger,heavy?.32f:Action>=MoveKind.Skill0?.2f:.08f);
-                e.KnockVelocity=Facing*(ultimate?4.5f:heavy?3.2f:1.25f);
+                e.KnockVelocity=Facing*(ultimate?4.5f:heavy?3.2f:finisher?1.95f:1.25f);
                 if(heavy||ultimate){e.Telegraph=false;e.Timer=Mathf.Max(e.Timer,.65f);}
                 if(Action==MoveKind.Launcher){e.Lift=.1f;e.LiftVelocity=5.5f;e.Stagger=.6f;}
                 if(Action==MoveKind.Air&&e.Lift>.15f)e.LiftVelocity=Mathf.Max(e.LiftVelocity,2.2f);

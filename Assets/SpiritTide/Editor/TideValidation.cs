@@ -50,12 +50,13 @@ namespace SpiritTide.EditorTools
                     for(int i=0;i<60000&&s.IsFighting;i++)TideCombatDriver.Tick(s);
                     Check("replay rewards reduced and first loot never duplicated "+hero,s.Mode==TideMode.Result&&s.LastGearUid==0&&s.LastXp==24&&s.Profile.gear.Length==items&&s.Profile.reportedActs==mask);s.ReturnTown();
                 }
-                TestCombat();TestCheckpoint();TestStorage();TideUiValidation.Run(Check);TideExperienceValidation.Run(Check);TideDialogueValidation.Run(Check);TideQuestValidation.Run(Check);TideSkillFxValidation.Run(Check);TideSkillIconValidation.Run(Check);TideJourneyValidation.Run(Check);TideMotionValidation.Run(Check);TidePaceValidation.Run(Check);Save(true);
+                TestCombat();TestCheckpoint();TestStorage();TideLoadoutValidation.Run(Check);TideUiValidation.Run(Check);TideExperienceValidation.Run(Check);TideDialogueValidation.Run(Check);TideQuestValidation.Run(Check);TideSkillFxValidation.Run(Check);TideSkillIconValidation.Run(Check);TideJourneyValidation.Run(Check);TideMotionValidation.Run(Check);TidePaceValidation.Run(Check);Save(true);
             }
             catch{Save(false);throw;}
         }
         private static void TestCombat()
         {
+            TestAttackResponse();
             var ice=Practice();ice.Request(MoveKind.Skill1);Step(ice,.6f);Check("Rukia cold slows",ice.EnemySlow>0);
             var ward=Practice(1);ward.Hp=70;ward.Request(MoveKind.Skill1);Step(ward,.6f);Check("Orihime heals",ward.Hp>70);ward.Request(MoveKind.Skill0);Step(ward,.6f);Check("Orihime shield",ward.Shield>0);
             var fist=Practice(2);fist.Request(MoveKind.Skill2);Step(fist,.8f);Check("Yoruichi actual multi hit",fist.DamageEvents==3);
@@ -75,6 +76,39 @@ namespace SpiritTide.EditorTools
             float clock=multi.Clock;multi.Pause();Step(multi,3);Check("multi enemy pause freezes clock",multi.Clock==clock);multi.Resume();
             var gear=new TideSession(new TideProfile());gear.Profile.crystals=3;int old=gear.Profile.gold;Check("forge pays both resources exactly once",gear.UpgradeGear(1)&&gear.Profile.gold==old-120&&gear.Profile.crystals==0&&TideProgress.Gear(gear.Profile,1).upgrade==1);old=gear.Profile.gold;Check("failed forge cannot spend gold",!gear.UpgradeGear(1)&&gear.Profile.gold==old);
             Check("equipment bonus feeds damage stat",gear.EquipGear(1)&&gear.AttackBonus==3);
+        }
+        private static void TestAttackResponse()
+        {
+            for(int hero=0;hero<6;hero++)
+            {
+                var s=Practice(hero);
+                float oldDuration=hero==2||hero==3?.28f:hero==4?.43f:.35f;
+                int oldContactFrame=Mathf.CeilToInt(oldDuration*TideSession.ActionContactPhase*60);
+                float lightStop=0;
+                for(int combo=0;combo<3;combo++)
+                {
+                    s.EnemyX=s.X+1.8f;s.EnemyY=s.Y;
+                    Check("faster basic chain starts "+hero+" / "+combo,s.Request(MoveKind.Basic)&&s.Combo==combo&&s.ActionDuration<oldDuration);
+                    int damage=s.DamageEvents,frame=0;
+                    while(damage==s.DamageEvents&&frame<25){s.Step(1f/60,Vector2.zero,false);frame++;}
+                    var expected=combo==2?TideImpactStrength.Firm:TideImpactStrength.Light;
+                    Check($"attack contact and impact strength {hero} / {combo}, {frame} frames",
+                        damage<s.DamageEvents&&(combo==2?frame<=oldContactFrame:frame<oldContactFrame)
+                        &&s.ActionPosePhase==TideSession.ActionContactPhase&&s.LastImpactStrength==expected&&s.Target.ImpactStrength==expected);
+                    if(combo==0)lightStop=s.HitStopRemaining;
+                    if(combo==2)Check("combo finisher has a stronger stop "+hero,s.HitStopRemaining>lightStop);
+                    Step(s,s.ActionDuration+.09f);
+                }
+                s.EnemyX=s.X+1.8f;s.EnemyY=s.Y;
+                Check("quicker heavy release starts "+hero,s.Request(MoveKind.Heavy)&&s.ActionDuration<.58f);
+                int heavyDamage=s.DamageEvents;
+                for(int f=0;f<40&&s.DamageEvents==heavyDamage;f++)s.Step(1f/60,Vector2.zero,false);
+                Check("heavy contact has a separate impact "+hero,s.DamageEvents>heavyDamage&&s.LastImpactStrength==TideImpactStrength.Heavy&&s.HitStopRemaining>lightStop);
+            }
+            var miss=Practice();miss.EnemyY=1.3f;miss.Request(MoveKind.Basic);Step(miss,.5f);
+            Check("a whiff produces no impact event",miss.DamageEvents==0&&miss.HitStopEvents==0&&miss.LastImpactStrength==TideImpactStrength.None);
+            var ash=Practice(4);ash.Clouds[0]=ash.Target.Position;ash.CloudTime[0]=2;Step(ash,1.1f);
+            Check("periodic ash damage keeps its damage without a melee impact",ash.DamageEvents==1&&ash.HitStopEvents==0&&ash.Target.ImpactStrength==TideImpactStrength.None);
         }
         private static void TestCheckpoint()
         {

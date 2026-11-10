@@ -1,6 +1,7 @@
 using System.Collections;
 using System.IO;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace SpiritTide
 {
@@ -26,6 +27,13 @@ namespace SpiritTide
 
             yield return TapUi("title-start");
             yield return TapUi("choice-0");
+            var dialogue=game.transform.Find("GameCanvas/SafeArea/Dialogue/StoryStage");
+            var portrait=dialogue.Find("SpeakerPortrait").GetComponent<Image>();
+            var speech=dialogue.Find("DialogueSpeech");
+            Check("story composition uses a portrait and preserves the exact speaker and line",
+                portrait.sprite!=null&&!portrait.raycastTarget&&speech.Find("DialogueSpeaker").GetComponent<Text>().text==lines[1].speaker&&
+                speech.Find("StorySpeech").GetComponent<Text>().text==lines[1].text);
+            yield return Capture("00-story-speaking-portrait");
             yield return TapUi("story-previous");
             Check("previous opening line keeps the request unaccepted", game.StoryPage == 0 && game.Session.Quest == QuestState.Available);
             yield return ReadStory();
@@ -34,9 +42,20 @@ namespace SpiritTide
                 && game.Session.Quest == QuestState.Active && game.Session.AliveCount > 0);
             Check("only the starter technique is castable in the first fight",
                 game.Buttons["skill-0"].interactable && !game.Buttons["skill-1"].interactable
-                && !game.Buttons["skill-4"].interactable && !game.Session.Request(MoveKind.Ultimate));
+                && !game.Buttons["skill-3"].interactable && !game.Session.Request(MoveKind.Ultimate));
+            Check("locked technique art has a badge and the learned technique stays clear",
+                game.Buttons["skill-1"].transform.Find("SkillLocked").gameObject.activeInHierarchy
+                && !game.Buttons["skill-0"].transform.Find("SkillLocked").gameObject.activeInHierarchy);
+            Check("combat HUD keeps vitals and hides the wallet and inactive field actions",
+                VisibleText("루키아 · Lv.1")&&VisibleText(game.Session.EnemyName)&&!VisibleText("800 골드")
+                && !game.Buttons["field-interact"].gameObject.activeInHierarchy&&!game.Buttons["gate"].gameObject.activeInHierarchy);
             Check("field call is visible while movement remains available",
                 VisibleText(TideDialogue.Lines("a1_d1_entry", 0)[0].text) && game.Joystick.isActiveAndEnabled);
+            var fieldCard=game.transform.Find("GameCanvas/SafeArea/FieldDialogue");
+            Check("field speech separates the speaker from the line in a nonblocking strip",
+                fieldCard.gameObject.activeInHierarchy&&!fieldCard.GetComponent<Image>().raycastTarget&&
+                fieldCard.Find("FieldSpeaker").GetComponent<Text>().text==TideDialogue.Lines("a1_d1_entry",0)[0].speaker&&
+                !game.transform.Find("GameCanvas/SafeArea/StatusBackdrop").gameObject.activeInHierarchy);
             yield return Capture("00-story-first-fight");
             string call = TideDialogue.Lines("a1_d1_entry", 0)[0].text;
             yield return TapUi("pause");
@@ -61,12 +80,30 @@ namespace SpiritTide
             }
             Check("the first field rescue blocks the exit until the evidence is examined",
                 session.RoomCleared && session.MainInvestigationPending && !session.GateReady && profile.roomCheckpoint == 0);
+            for(int i=0;i<160&&Vector2.Distance(new Vector2(session.X,session.Y),new Vector2(-3,0))>.3f;i++)
+                TideQuestDriver.MoveTo(session,new Vector2(-3,0),.05f);
+            yield return null;
+            var interact=game.Buttons["field-interact"];
+            var gate=game.Buttons["gate"];
+            Check("distant required evidence displays guidance in the shared action slot",
+                interact.gameObject.activeInHierarchy&&!interact.interactable&&!gate.gameObject.activeInHierarchy&&VisibleText("조사 표지로 이동"));
+            yield return Capture("00-ui-context-guide");
             yield return InspectMainPoint(true);
             Check("Orihime joins through the rescue and the checkpoint becomes available",
                 profile.recruitedHeroes == 3 && profile.roomCheckpoint == 1 && session.GateReady && profile.hero == 0);
+            for(int i=0;i<160&&!session.AtGate;i++)
+                TideQuestDriver.MoveTo(session,new Vector2(session.GateX,0),.05f);
+            yield return null;
+            Rect gateBounds=Bounds((RectTransform)gate.transform);
+            bool fingerSize=Screen.width!=2556||Screen.height!=1179||gateBounds.height/3>=44&&gateBounds.width/3>=44;
+            Check("open gate reuses the investigation's touch target with room for a finger",
+                !interact.gameObject.activeInHierarchy&&gate.interactable&&gateBounds==Bounds((RectTransform)interact.transform)&&fingerSize);
+            CheckHit("gate");
+            yield return Capture("00-ui-context-exit");
             game.ReturnTown();
             yield return TapUi("hero-1");
             Check("only the rescued companion becomes selectable", profile.hero == 1 && !game.Buttons["hero-2"].interactable);
+            Check("wallet and save status return in town",VisibleText(profile.gold+" 골드")&&VisibleText("자동 저장"));
 
             var saved = TideStorage.Load(Path.Combine(output, "qa-profile.json"), out _);
             Check("recruitment and checkpoint survive checksum reload",
@@ -101,6 +138,13 @@ namespace SpiritTide
             string scene = point.evidence.scene;
             for (int i = 0; i < 240 && Vector2.Distance(new Vector2(session.X, session.Y), point.position) > .24f; i++)
                 TideQuestDriver.MoveTo(session, point.position, .05f);
+            if(capture)
+            {
+                yield return null;
+                Check("reachable evidence takes priority over the exit",
+                    game.Buttons["field-interact"].interactable&&!game.Buttons["gate"].gameObject.activeInHierarchy);
+                yield return Capture("00-ui-context-investigate");
+            }
             yield return TapUi("field-interact");
             Check("field interaction reveals the actual scene " + scene,
                 session.Mode == TideMode.Story && VisibleText(TideDialogue.Scene(scene).title));
@@ -145,8 +189,12 @@ namespace SpiritTide
             Check("rescue answer waits for a real lantern interaction in act " + act,
                 session.RoomIndex == 0 && session.EchoAvailable
                 && !TideDialogue.CanRead(session.Profile, TideDialogue.Scene(id)));
-            for (int i = 0; i < 100 && !session.NearInteraction; i++)
-                session.Step(.05f, (new Vector2(session.EchoX - session.X, -session.Y)).normalized, false);
+            var lantern=new Vector2(session.EchoX,0);
+            for(int i=0;i<140&&Vector2.Distance(new Vector2(session.X,session.Y),lantern)>.3f;i++)
+                TideQuestDriver.MoveTo(session,lantern,.05f);
+            yield return null;
+            Check("the lantern action is reachable in act "+act+" ("+session.Mode+", "+session.X+", "+session.Y+")",
+                session.NearInteraction&&game.Buttons["field-interact"].gameObject.activeInHierarchy&&game.Buttons["field-interact"].interactable);
             yield return TapUi("field-interact");
             int hero=session.Profile.hero;
             var lines=TideDialogue.Lines(id,hero);
@@ -156,14 +204,18 @@ namespace SpiritTide
             yield return Capture("51-story-lantern-act" + act);
             if(reviewReply)
             {
-                string expected=TideStory.HeroName(hero)+"  ·  "+lines[1].text;
-                for(int i=0;i<50&&!VisibleText(expected);i++)
+                var card=game.transform.Find("GameCanvas/SafeArea/FieldDialogue");
+                var speaker=card.Find("FieldSpeaker").GetComponent<Text>();
+                var speech=card.Find("FieldSpeech").GetComponent<Text>();
+                bool ShowsReply()=>speaker.isActiveAndEnabled&&speech.isActiveAndEnabled&&
+                    speaker.text==TideStory.HeroName(hero)&&speech.text==lines[1].text;
+                for(int i=0;i<50&&!ShowsReply();i++)
                 {
                     for(int step=0;step<9;step++)session.Step(1f/60,Vector2.zero,false);
                     yield return null;
                 }
                 Check("actual field response has the selected fighter's voice "+hero,
-                    VisibleText(expected)&&TideDialogue.ArchiveHero(session.Profile,id)==hero);
+                    ShowsReply()&&TideDialogue.ArchiveHero(session.Profile,id)==hero);
                 yield return Capture("51-voice-guide-"+hero);
             }
         }

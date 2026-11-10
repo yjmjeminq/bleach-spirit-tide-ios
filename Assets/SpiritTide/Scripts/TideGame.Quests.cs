@@ -171,7 +171,9 @@ namespace SpiritTide
         {
             Button("quest-log","의뢰 수첩 · Q",townRoot.transform,new Vector2(1,0),new Vector2(-120,260),new Vector2(220,84),()=>OpenQuestBook(),true);
             Button("training-tells","공격 예고",safe,Vector2.zero,new Vector2(140,445),new Vector2(220,84),()=>Session.ToggleTrainingAttacks(),true);
-            questTracker=Label("",safe,new Vector2(0,1),new Vector2(205,-225),new Vector2(380,68),18,muted,true);questTracker.name="QuestTracker";
+            var tracker=Surface("QuestTrackerCard",safe,new Vector2(0,1),new Vector2(187,-237),new Vector2(358,76),surfaceDark).rectTransform;
+            tracker.SetSiblingIndex(controlsRoot.transform.GetSiblingIndex());
+            questTracker=Label("",tracker,Center,Vector2.zero,new Vector2(324,66),18,ink,true);questTracker.name="QuestTracker";
             var board=Picture("TownMemoryBoard",world,new Vector2(1,.5f),new Vector2(-180,60),new Vector2(330,148),new Color(.07f,.14f,.16f,.82f));
             townMemory=Label("",board.transform,new Vector2(.5f,.5f),Vector2.zero,new Vector2(306,136),18,gold);townMemory.name="TownMemoryText";
             for(int i=0;i<5;i++){questBadges[i]=Label("",world,Vector2.zero,Vector2.zero,new Vector2(104,32),23,gold,true);questBadges[i].alignment=TextAnchor.MiddleCenter;}
@@ -189,7 +191,7 @@ namespace SpiritTide
             bool town=!Session.InBattle;townMemory.transform.parent.gameObject.SetActive(town);townMemory.text=TideQuests.TownMemory(Session.Profile);
             string[] npc={"urahara","tessai","kon","byakuya","kukaku"};
             for(int i=0;i<5;i++){int notices=TideQuests.Notices(Session.Profile,npc[i]);questBadges[i].gameObject.SetActive(Session.Mode==TideMode.Town&&notices>0);questBadges[i].text="부탁 "+notices;questBadges[i].rectTransform.anchoredPosition=Project(-4+i*2,.45f)+new Vector2(62,110);}
-            questTracker.gameObject.SetActive(Session.IsFighting&&!Session.IsTraining&&!Session.WardActive&&!Session.EchoAvailable&&!Session.RoomSignalPending&&Session.QuestPointCount==0);
+            questTracker.transform.parent.gameObject.SetActive(Session.IsFighting&&!Session.IsTraining&&!Session.WardActive&&!Session.EchoAvailable&&!Session.RoomSignalPending&&Session.QuestPointCount==0);
             var tracked=TideQuests.Find(Session.Profile.trackedSide);
             bool practiceDone=tracked!=null&&TideQuests.State(Session.Profile,tracked.id).step>0&&(tracked.steps[0].kind=="cancel"||tracked.steps[0].kind=="perfect");
             Buttons["training-tells"].gameObject.SetActive(Session.IsFighting&&Session.IsTraining);Say(Buttons["training-tells"].GetComponentInChildren<Text>(),(practiceDone?"수련 목표 달성\n":"")+(Session.TrainingAttacks?"공격 예고 · 켬":"공격 예고 · 끔"));
@@ -202,7 +204,6 @@ namespace SpiritTide
                 var point=Session.QuestPoint(i);questPointViews[i].anchoredPosition=Project(point.position.x,point.position.y);
                 questPointLabels[i].text=point.main?"주요 조사":"부탁";questPointPapers[i].color=point.main?new Color(.65f,.87f,1):new Color(.93f,.85f,.64f);
             }
-            if(Session.MainInvestigationPending)gateLabel.text="남은 조사\n표지를 살펴보세요";
         }
     }
 }

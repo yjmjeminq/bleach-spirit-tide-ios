@@ -22,6 +22,20 @@ namespace SpiritTide.EditorTools
                 }
             }
             check("all thirty playable skills have painted icons",count==30&&names.Count==30);
+            var crops=new List<Rect>();
+            for(int hero=0;hero<TideCatalog.Characters.Length;hero++)
+                for(int skill=CharacterDef.FirstExtraSkill;skill<CharacterDef.SkillCount;skill++)
+                {
+                    var def=TideSkillIcons.Definition(hero,skill);
+                    var sprite=TideSkillIcons.Get(hero,skill);
+                    Rect crop=def.rect.Bounds;
+                    check("expansion icon matches the real skill "+def.id,def.id==TideCatalog.Characters[hero].Skill(skill).id&&
+                        names.Add(def.id)&&sprite.name=="skill-icon-"+def.id&&crop==sprite.rect&&
+                        crop.xMin>=0&&crop.yMin>=0&&crop.xMax<=sprite.texture.width&&crop.yMax<=sprite.texture.height&&
+                        !crops.Exists(other=>other.Overlaps(crop)));
+                    crops.Add(crop);
+                }
+            check("all fifty-four playable skills have distinct icon crops",names.Count==54&&crops.Count==24);
         }
     }
 }

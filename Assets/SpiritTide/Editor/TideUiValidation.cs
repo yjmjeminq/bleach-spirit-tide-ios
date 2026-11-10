@@ -29,8 +29,11 @@ namespace SpiritTide.EditorTools
             burst.Pause();check("paused training cannot replace active hero",!burst.SelectHero(4));
             foreach(float width in new[]{1280f,1345f,1560f,1700f})foreach(float scale in new[]{1f,1.1f})
             {
-                bool separate=true,inside=true,largeEnough=true,nearAttack=true;
+                bool separate=true,inside=true,largeEnough=true,nearAttack=true,compact=true;
                 Rect joystick=new Rect((TideHudLayout.JoystickCenter-TideHudLayout.JoystickSize*.5f)*scale,TideHudLayout.JoystickSize*scale);
+                Vector2 contextSize=TideHudLayout.ContextSize*scale;
+                var context=new Rect(new Vector2(width,0)+TideHudLayout.ContextCenter*scale-contextSize*.5f,contextSize);
+                bool contextClear=!context.Overlaps(joystick);
                 Vector2 attack=TideHudLayout.Bounds(0,width,scale).center;
                 for(int i=0;i<TideHudLayout.Ids.Length;i++)
                 {
@@ -38,11 +41,19 @@ namespace SpiritTide.EditorTools
                     inside&=a.xMin>=0&&a.xMax<=width&&a.yMin>=0&&a.yMax<450;
                     largeEnough&=a.width>=84&&a.height>=84;
                     separate&=!a.Overlaps(joystick);
-                    if(i>=5)nearAttack&=Vector2.Distance(attack,a.center)<=180*scale;
+                    contextClear&=!a.Overlaps(context);
+                    if(i>=5)
+                    {
+                        nearAttack&=Vector2.Distance(attack,a.center)<=130*scale;
+                        compact&=a.width<=90*scale&&a.height<=90*scale;
+                    }
                     for(int j=0;j<i;j++)separate&=!a.Overlaps(TideHudLayout.Bounds(j,width,scale));
                 }
                 check("control preset stays separate and inside "+width+" / "+scale,separate&&inside&&largeEnough);
                 check("every skill is in the same thumb cluster as attack "+width+" / "+scale,nearAttack);
+                check("skill buttons remain compact at this preset "+width+" / "+scale,compact);
+                check("context action stays separate and inside "+width+" / "+scale,
+                    contextClear&&context.xMin>=0&&context.xMax<=width&&context.yMax<520&&context.height>=84);
                 float bodyRight=width*.23f+6*TideHudLayout.UnitX(width,scale)+160;
                 float nearestSkill=TideHudLayout.Bounds(5,width,scale).xMin;
                 check("first boss remains clear of action panel "+width+" / "+scale,bodyRight<=nearestSkill-23);
@@ -58,7 +69,7 @@ namespace SpiritTide.EditorTools
             check("control preferences persist without changing quest or gold",saved&&reloaded.gold==890&&reloaded.campaignAct==2&&reloaded.reportedActs==1&&reloaded.controlScale==1.1f&&reloaded.controlOpacity==.65f&&!reloaded.soundEnabled&&reloaded.keyboardHints==2);
             var bad=new TideProfile{controlScale=float.NaN,controlOpacity=float.PositiveInfinity};TideCatalog.Sanitize(bad);
             check("invalid control preferences have readable defaults",bad.controlScale==1&&bad.controlOpacity==.85f);
-            for(int hero=0;hero<6;hero++)for(int slot=0;slot<5;slot++)check("skill explanation exists "+hero+" / "+slot,!string.IsNullOrWhiteSpace(TideUiInfo.Skill(hero,slot)));
+            for(int hero=0;hero<6;hero++)for(int slot=0;slot<CharacterDef.SkillCount;slot++)check("skill explanation exists "+hero+" / "+slot,!string.IsNullOrWhiteSpace(TideUiInfo.Skill(hero,slot)));
         }
     }
 }

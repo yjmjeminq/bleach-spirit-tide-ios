@@ -14,19 +14,20 @@ namespace SpiritTide
         public readonly Dictionary<string, Button> Buttons = new Dictionary<string, Button>();
         public TideHold AttackHold { get; private set; }
         private TideHold heavyHold;
-        private RectTransform safe, world, panel, actor, enemyActor, warning, slash;
+        private RectTransform safe, world, panel, actor, enemyActor, warning, weaponSweep;
         private GameObject menuRoot, dialogueRoot, controlsRoot, townRoot, battleRoot;
-        private Image actorImage, enemyImage, warningImage, slashImage;
-        private Text titleText, statusText, hpText, enemyText, actionText, resourceText, goldText, questText;
+        private Image actorImage, enemyImage, warningImage;
+        private Text titleText, statusText, hpText, enemyText, actionText, resourceText, goldText;
         private Image hpFill, mpFill, enemyFill;
-        private Button[] heroButtons = new Button[6], skillButtons = new Button[5];
-        private Text[] skillLabels = new Text[5];
+        private Button[] heroButtons = new Button[6], skillButtons = new Button[TideLoadouts.SlotCount];
+        private Text[] skillLabels = new Text[TideLoadouts.SlotCount];
+        private static readonly KeyCode[] EquippedSkillKeys={KeyCode.A,KeyCode.S,KeyCode.D,KeyCode.F};
         private Sprite circle, square;
         private Font font, bold;
         private readonly Sprite[] heroSprites = new Sprite[6];
         private Sprite[] bossSprites = new Sprite[10];
         private string savePath, lastSaveNotice;
-        private int viewRevision = -1, damageSerial, lastWidth, lastHeight;
+        private int viewRevision = -1, lastWidth, lastHeight;
         private Rect lastSafe;
         private Rect? smokeSafeArea;
         private TideMode lastMode = (TideMode)(-1);
@@ -88,6 +89,7 @@ namespace SpiritTide
                 pixels[y * 64 + x] = new Color(1, 1, 1, Mathf.Clamp01((31 - Vector2.Distance(new Vector2(x, y), new Vector2(31.5f, 31.5f))) * .8f));
             texture.SetPixels(pixels); texture.Apply(false, true);
             circle = Sprite.Create(texture, new Rect(0, 0, 64, 64), new Vector2(.5f, .5f), 64);
+            surfaceSkin=MakeTouchSprite("Spirit Tide surface",false,sliced:true);
         }
         private void MakeAudio()
         {
@@ -111,11 +113,10 @@ namespace SpiritTide
             if(!SmokeMode||!ReviewStepping)Session.Step(Time.unscaledDeltaTime, movement, !blockHeldAttackUntilRelease&&(AttackHold.Held || Input.GetKey(KeyCode.Z)));
             if (lastMode != Session.Mode || viewRevision != Session.Revision) Refresh();
             MaybeEncounterStory();MaybeQuestStory();DrawWorld();UpdateHud();
+            TickDialoguePresentation(Time.unscaledDeltaTime);
             if(lastPersistRevision!=Session.SaveRevision){Persist();lastPersistRevision=Session.SaveRevision;}
             UpdateFeedback(SmokeMode&&ReviewStepping?1f/30:Time.unscaledDeltaTime);
             audioSource.volume=Session.Profile.soundEnabled?.13f:0;
-            if (damageSerial != Session.DamageEvents)
-            { bool landed=Session.DamageEvents>damageSerial;damageSerial = Session.DamageEvents; if (landed&&audioSource != null) PlayImpactSound(); }
         }
         private void ReadKeyboard()
         {
@@ -137,15 +138,14 @@ namespace SpiritTide
             }
             if (!Session.IsFighting) return;
             if(Input.GetKeyDown(KeyCode.E)){if(Session.NearInteraction)InteractField();else if(Session.RoomCleared)AdvanceRoom();return;}
-            if (Input.GetKeyDown(KeyCode.Z)){blockHeldAttackUntilRelease=false;Session.Request(Input.GetKey(KeyCode.UpArrow) ? MoveKind.Launcher : MoveKind.Basic);}
+            if (Input.GetKeyDown(KeyCode.Z)){blockHeldAttackUntilRelease=false;RequestAttack(keyboardMove.y>0&&keyboardMove.x==0);}
             if (Input.GetKeyDown(KeyCode.X)) Session.BeginHeavy();
             if (Input.GetKeyUp(KeyCode.X)) Session.ReleaseHeavy();
             if (Input.GetKeyDown(KeyCode.C)) Session.Jump();
             if (Input.GetKeyDown(KeyCode.T)) Session.ToggleTrainingAttacks();
             if (Input.GetKeyDown(KeyCode.Space)) Session.Dodge(keyboardMove);
             if (Input.GetKeyDown(KeyCode.V) && Session.UsePotion()) Persist();
-            KeyCode[] keys = { KeyCode.A, KeyCode.S, KeyCode.D, KeyCode.F, KeyCode.R };
-            for (int i = 0; i < keys.Length; i++) if (Input.GetKeyDown(keys[i])) Session.Request((MoveKind)((int)MoveKind.Skill0 + i));
+            for (int i=0;i<EquippedSkillKeys.Length;i++)if(Input.GetKeyDown(EquippedSkillKeys[i]))Session.RequestEquippedSkill(i);
         }
         public void ResetInput()
         {

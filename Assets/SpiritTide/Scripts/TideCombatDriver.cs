@@ -46,19 +46,21 @@ namespace SpiritTide
             if(attackOpportunity&&!danger&&s.ActionRemaining<=0&&s.DodgeRemaining<=0)
             {
                 int heal=s.Profile.hero==1?1:s.Profile.hero==5?0:-1;
-                if(heal>=0&&s.SkillAvailable(heal)&&s.Hp<s.MaxHp*.75f&&s.Cooldowns[heal]<=s.Clock&&s.Mp>=s.Hero.Skill(heal).spirit_cost)s.Request((MoveKind)((int)MoveKind.Skill0+heal));
+                int healSlot=heal>=0?s.EquippedSlot(heal):-1;
+                if(healSlot>=0&&s.SkillAvailable(heal)&&s.Hp<s.MaxHp*.75f&&s.Cooldowns[heal]<=s.Clock&&s.Mp>=s.Hero.Skill(heal).spirit_cost)s.RequestEquippedSkill(healSlot);
                 else if(Mathf.Abs(dx)<6&&Mathf.Abs(dy)<1.1f)
                 {
                     int slot=-1;
                     for(int i=4;i>=0;i--)if(s.SkillAvailable(i)&&s.Cooldowns[i]<=s.Clock&&s.Mp>=s.Hero.Skill(i).spirit_cost)
                     {
+                        int equipped=s.EquippedSlot(i);if(equipped<0)continue;
                         if(s.Profile.hero==1&&i!=2&&i!=4)continue;
                         if(s.Profile.hero==5&&i!=1&&i!=4)continue;
                         if(s.Profile.hero==4&&i==3&&s.CloudTime[0]<=0&&s.CloudTime[1]<=0)continue;
                         if(s.Profile.hero==3&&i==3&&s.Mark<=0)continue;
-                        slot=i;break;
+                        slot=equipped;break;
                     }
-                    if(slot>=0)s.Request((MoveKind)((int)MoveKind.Skill0+slot));
+                    if(slot>=0)s.RequestEquippedSkill(slot);
                     else if(Mathf.Abs(dx)<2.5f)s.Request(nearest.Guard>0?MoveKind.Heavy:MoveKind.Basic);
                 }
             }
@@ -70,6 +72,11 @@ namespace SpiritTide
             foreach(var g in s.Profile.gear)if(g.slot=="power"&&(power==null||g.Attack>power.Attack))power=g;else if(g.slot=="guard"&&(guard==null||g.Health>guard.Health))guard=g;
             if(power!=null){s.EquipGear(power.uid);s.UpgradeGear(power.uid);}if(guard!=null)s.EquipGear(guard.uid);
             while(s.Profile.potions<3&&s.BuyPotion()){}
+            if(s.SkillAvailable(CharacterDef.Awakening)&&s.EquippedSlot(CharacterDef.Awakening)<0)
+            {
+                int replace=s.Profile.hero==1?0:s.Profile.hero==2?3:s.Profile.hero==3?1:2;
+                s.EquipSkill(replace,CharacterDef.Awakening);
+            }
         }
     }
 }

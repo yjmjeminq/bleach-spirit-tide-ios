@@ -6,6 +6,8 @@ namespace SpiritTide
     public sealed class TideEnemy
     {
         public int Uid,Pattern,Attacks,Mark,Guard,ReturnHits,DamageSerial,Phase=1;
+        public int ImpactDirection;
+        public TideImpactStrength ImpactStrength;
         public float Stagger,KnockVelocity,Lift,LiftVelocity,Poise=100;
         public TideFoeDef Def;
         public float X,Y,Hp,MaxHp,Stun,Slow,Flash,Exposed,Timer=1,TellDuration=1,Recovery,LastDamage;

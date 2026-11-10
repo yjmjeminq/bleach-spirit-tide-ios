@@ -50,7 +50,7 @@ namespace SpiritTide
             for(int hero=0;hero<6;hero++)
             {
                 Click("hero-"+hero);Click("pause");Click("help");Click("help-skills");
-                for(int slot=0;slot<5;slot++)
+                for(int slot=0;slot<TideLoadouts.SlotCount;slot++)
                 {
                     Click("help-slot-"+slot);yield return Capture("21-skill-"+hero+"-"+slot);
                     Check("skill details match selected hero and slot "+hero+" / "+slot,VisibleText(game.Session.Hero.Skill(slot).name)&&VisibleText(TideUiInfo.Skill(hero,slot)));
@@ -65,7 +65,8 @@ namespace SpiritTide
             Check("deeper player draws behind enemy",actors.Find("Player").GetSiblingIndex()<actors.Find("target-0").GetSiblingIndex());game.Session.Y=-1;yield return null;
             Check("nearer player draws in front of enemy",actors.Find("Player").GetSiblingIndex()>actors.Find("target-0").GetSiblingIndex());game.Session.Y=0;
             while(game.Session.ActionRemaining>0)yield return null;
-            Click("skill-4");yield return new WaitForSecondsRealtime(.1f);Click("pause");
+            Click("pause");Click("training-loadout");Click("loadout-skill-4");Click("loadout-equip");Click("close");Click("resume");
+            Click("skill-0");yield return new WaitForSecondsRealtime(.1f);Click("pause");
             float remaining=game.Session.ActionRemaining,clock=game.Session.Clock;int damage=game.Session.DamageEvents;
             Check("pause keeps the current cast",remaining>0&&game.Session.IsPaused);
             Click("help");yield return Capture("22-paused-help");game.NavigateBack();

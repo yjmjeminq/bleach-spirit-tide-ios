@@ -6,8 +6,8 @@
   "rigs": [
     {
       "id": "rukia",
-      "vertices": 7287,
-      "triangles": 12970,
+      "vertices": 7173,
+      "triangles": 12780,
       "resource": "SpiritTide/Art/Rig/rukia-bind-v1",
       "hair_vertices": 0,
       "hair_triangles": 0,
@@ -42,8 +42,8 @@
     },
     {
       "id": "rangiku",
-      "vertices": 7798,
-      "triangles": 14090,
+      "vertices": 7659,
+      "triangles": 13858,
       "resource": "SpiritTide/Art/Rig/rangiku-body-v2",
       "hair_vertices": 1761,
       "hair_triangles": 3250,
@@ -51,8 +51,8 @@
     },
     {
       "id": "unohana",
-      "vertices": 7463,
-      "triangles": 13504,
+      "vertices": 7336,
+      "triangles": 13290,
       "resource": "SpiritTide/Art/Rig/unohana-bind-v1",
       "hair_vertices": 0,
       "hair_triangles": 0,

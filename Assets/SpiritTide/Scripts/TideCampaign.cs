@@ -74,24 +74,27 @@ namespace SpiritTide
     {
         public const int MaxLevel=40,AllDungeons=0x3fffffff;
         public const int AllHeroes=63;
-        private static readonly int[] LearningLevels={1,3,5,8};
+        private static readonly int[] LearningLevels={1,3,5,8,0,4,7,12,18};
         public static int NeedXp(int level){return 80+Mathf.Clamp(level,1,MaxLevel)*20;}
         public static bool HeroJoined(TideProfile p,int hero)=>hero>=0&&hero<6&&(p.recruitedHeroes&(1<<hero))!=0;
         public static bool SkillLearned(TideProfile p,int slot)
         {
-            if(slot<0||slot>4)return false;
-            return p.classicSkills||(slot==4?(p.reportedActs&4)!=0:p.level>=LearningLevels[slot]);
+            if(slot<0||slot>=CharacterDef.SkillCount)return false;
+            return slot<CharacterDef.FirstExtraSkill&&p.classicSkills
+                ||(slot==CharacterDef.Awakening?(p.reportedActs&4)!=0:p.level>=LearningLevels[slot]);
         }
-        public static string SkillRequirement(int slot)=>slot==4?"Act 3 보고 후 습득":"Lv."+LearningLevels[slot]+" 습득";
-        public static string LearningBadge(int slot)=>slot==4?"Act 3":"Lv."+LearningLevels[slot];
+        public static string SkillRequirement(int slot)=>slot==CharacterDef.Awakening?"Act 3 보고 후 습득":"Lv."+LearningLevels[slot]+" 습득";
+        public static string LearningBadge(int slot)=>slot==CharacterDef.Awakening?"Act 3":"Lv."+LearningLevels[slot];
         public static string LearnedByLevel(TideProfile p,int before)
         {
-            if(p.classicSkills||before==p.level)return "";
+            if(before==p.level)return "";
             var names=new List<string>();
             for(int slot=1;slot<LearningLevels.Length;slot++)
-                if(before<LearningLevels[slot]&&p.level>=LearningLevels[slot])
+                if(slot!=CharacterDef.Awakening&&before<LearningLevels[slot]&&SkillLearned(p,slot)
+                    &&(!p.classicSkills||slot>=CharacterDef.FirstExtraSkill))
                     names.Add(TideCatalog.Characters[p.hero].Skill(slot).name);
-            return names.Count==0?"":"새 기술 · "+string.Join(" · ",names);
+            if(names.Count==0)return "";
+            return names.Count==1?"새 기술 · "+names[0]:"새 기술 · "+names[0]+" 외 "+(names.Count-1)+"개 · 기술 장착에서 확인";
         }
         public static TideGear Gear(TideProfile p,int uid){if(p.gear!=null)foreach(var g in p.gear)if(g!=null&&g.uid==uid)return g;return null;}
         public static void Sanitize(TideProfile p)

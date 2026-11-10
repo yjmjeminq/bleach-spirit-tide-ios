@@ -36,7 +36,7 @@ namespace SpiritTide
             for(int i=0;i<5;i++)
             {
                 int index=i;var b=Button("town-figure-"+i,"",actorLayer,Vector2.zero,Vector2.zero,new Vector2(i==2?100:156,i==2?100:218),()=>Talk(ids[index]));
-                townFigures[i]=b.GetComponent<Image>();townFigures[i].sprite=TideArt.Grid("town_npcs_v1",i,3,2);townFigures[i].color=Color.white;townFigures[i].preserveAspect=true;((RectTransform)b.transform).pivot=new Vector2(.5f,0);
+                townFigures[i]=b.GetComponent<Image>();townFigures[i].sprite=TideArt.Grid("town_npcs_v1",i,3,2);townFigures[i].type=Image.Type.Simple;townFigures[i].color=Color.white;townFigures[i].preserveAspect=true;((RectTransform)b.transform).pivot=new Vector2(.5f,0);
                 townSigns[i]=Label(names[i],world,Vector2.zero,Vector2.zero,new Vector2(142,44),17,gold,true);townSigns[i].alignment=TextAnchor.MiddleCenter;
                 memorials[i]=Picture("Memorial-"+i,world,Vector2.zero,Vector2.zero,new Vector2(56,90),Color.white,TideArt.Grid("town_npcs_v1",5,3,2));memorials[i].preserveAspect=true;
             }
@@ -50,8 +50,8 @@ namespace SpiritTide
             foreach(var value in new[]{wardFigure,echoFigure,signalFigure})value.transform.SetSiblingIndex(actorLayer.GetSiblingIndex());
             environmentArea=Picture("EnvironmentTell",world,Vector2.zero,Vector2.zero,new Vector2(100,30),new Color(.25f,.8f,1,.3f));environmentArea.transform.SetSiblingIndex(actorLayer.GetSiblingIndex());
             environmentSecond=Picture("EnvironmentPreview",world,Vector2.zero,Vector2.zero,new Vector2(100,30),new Color(.35f,.65f,1,.14f));environmentSecond.transform.SetSiblingIndex(actorLayer.GetSiblingIndex());
-            Button("field-interact","",safe,Vector2.zero,new Vector2(140,445),new Vector2(220,84),InteractField,true);Buttons["field-interact"].transform.SetSiblingIndex(menuRoot.transform.GetSiblingIndex());
-            for(int i=0;i<roomMarkers.Length;i++){roomMarkers[i]=Picture("RoomMarker-"+i,safe,new Vector2(.5f,1),new Vector2((i-3.5f)*14,-156),new Vector2(10,4),muted);roomMarkers[i].transform.SetSiblingIndex(menuRoot.transform.GetSiblingIndex());}
+            for(int i=0;i<roomMarkers.Length;i++)
+                roomMarkers[i]=Picture("RoomMarker-"+i,progressPlate,Center,new Vector2(0,14),new Vector2(10,4),muted);
         }
         private void DrawExperienceWorld()
         {
@@ -82,8 +82,6 @@ namespace SpiritTide
                 signalLabel.rectTransform.anchoredPosition=signalFigure.rectTransform.anchoredPosition+new Vector2(0,68);
                 Say(signalLabel,Session.Room.signal_title);
             }
-            Buttons["field-interact"].gameObject.SetActive(ward||echo||signal||Session.IsFighting&&Session.QuestPointCount>0);Buttons["field-interact"].interactable=Session.NearInteraction;
-            Say(Buttons["field-interact"].GetComponentInChildren<Text>(),ShowKeyboardHints?Session.FieldInteractionLabel:Session.FieldInteractionLabel.Replace(" · E",""));
             bool hazard=ward&&Session.EnvironmentWarning;environmentArea.gameObject.SetActive(hazard);environmentSecond.gameObject.SetActive(hazard&&Session.Room.hazard=="shadow"&&Session.EnvironmentTimer>Session.EnvironmentDuration*.45f);
             if(hazard)
             {
@@ -98,7 +96,7 @@ namespace SpiritTide
                 bool active=Session.InBattle&&i<rooms;
                 roomMarkers[i].gameObject.SetActive(active);
                 if(!active)continue;
-                roomMarkers[i].rectTransform.anchoredPosition=new Vector2((i-(rooms-1)*.5f)*14,-162);
+                roomMarkers[i].rectTransform.anchoredPosition=new Vector2((i-(rooms-1)*.5f)*14,15);
                 roomMarkers[i].color=i<Session.RoomIndex?new Color(.5f,.85f,.7f):i==Session.RoomIndex?gold:muted;
             }
         }

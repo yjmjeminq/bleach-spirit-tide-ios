@@ -19,6 +19,10 @@ namespace SpiritTide.EditorTools
                 {
                     voiced++;
                     check("six individually authored lead replies "+scene.id,scene.responses.Length==6&&new HashSet<string>(scene.responses).Count==6);
+                    for(int i=1;i<scene.lines.Length;i++)
+                        if(scene.lines[i].speaker=="$lead")
+                            for(int hero=0;hero<6;hero++)
+                                check("lead reply answers a different speaker "+scene.id+" / "+hero,scene.lines[i-1].speaker!=TideStory.HeroName(hero));
                 }
                 for(int hero=0;hero<6;hero++)
                 {

@@ -12,7 +12,7 @@ namespace SpiritTide
         private string routeTitle;
         private bool routeVisit;
         private Text saveIndicator;
-        private readonly Text[] skillKeys=new Text[5];
+        private readonly Text[] skillKeys=new Text[TideLoadouts.SlotCount];
         private bool ShowKeyboardHints=>Session.Profile.keyboardHints==1||Session.Profile.keyboardHints==0&&!Application.isMobilePlatform&&!smokeSafeArea.HasValue;
 
         private void BuildHome()
@@ -22,10 +22,11 @@ namespace SpiritTide
             string next=Session.CampaignFinished?"완료한 이야기 다시 읽기":Session.Quest==QuestState.Available?"우라하라에게 이번 의뢰 듣기":Session.Quest==QuestState.Ready?"우라하라에게 귀환 보고":"조사 계속 · "+TideCampaign.Dungeon(Session.Profile.campaignAct,Session.Profile.campaignStage).title;
             Button("home-primary",next,panel,new Vector2(.5f,.5f),new Vector2(-165,112),new Vector2(620,84),ContinueObjective,true);
             Button("home-guide","이야기 · 전투 준비",panel,new Vector2(.5f,.5f),new Vector2(325,112),new Vector2(310,84),()=>OpenJourney()).GetComponentInChildren<Text>().fontSize=24;
-            string[] ids={"home-quests","home-gear","home-map","home-journal","home-shop","home-settings"};
-            string[] names={"의뢰 수첩","장비 비교 · 강화","출정 지도","조사 기록 · 대화록","회복 영자 보급","보기 · 조작 설정"};
-            System.Action[] actions={()=>OpenQuestBook(),()=>OpenMenu(TideMode.Inventory),()=>OpenMenu(TideMode.Missions),OpenJournal,()=>OpenMenu(TideMode.Shop),()=>OpenMenu(TideMode.Settings)};
-            for(int i=0;i<ids.Length;i++)Button(ids[i],names[i],panel,new Vector2(.5f,.5f),new Vector2((i%3-1)*310,8-i/3*100),new Vector2(294,84),actions[i]).GetComponentInChildren<Text>().fontSize=24;
+            string[] ids={"home-loadout","home-gear","home-map","home-quests","home-journal","home-shop","home-settings"};
+            string[] names={"기술 장착","장비 비교 · 강화","출정 지도","의뢰 수첩","조사 기록 · 대화록","회복 영자 보급","보기 · 조작 설정"};
+            System.Action[] actions={OpenSkillLoadout,()=>OpenMenu(TideMode.Inventory),()=>OpenMenu(TideMode.Missions),()=>OpenQuestBook(),OpenJournal,()=>OpenMenu(TideMode.Shop),()=>OpenMenu(TideMode.Settings)};
+            for(int i=0;i<ids.Length;i++)
+                Button(ids[i],names[i],panel,Center,new Vector2((i%4-1.5f)*238,8-i/4*100),new Vector2(222,84),actions[i],i==0).GetComponentInChildren<Text>().fontSize=24;
             Label("Lv."+Session.Profile.level+" · 회복 영자 "+Session.Profile.potions+" / 5 · 장비 "+Session.Profile.gear.Length+" / 48",panel,new Vector2(.5f,.5f),new Vector2(0,-167),new Vector2(950,40),22,muted);
             Button("back","게임으로",panel,new Vector2(.5f,.5f),new Vector2(0,-236),new Vector2(950,84),NavigateBack);
         }

@@ -1,4 +1,4 @@
-BLEACH: 영해의 균열 · iPhone 빌드 0.13.1
+BLEACH: 영해의 균열 · iPhone 빌드 0.16.1
 
 대상: iPhone 15 Pro, iOS 17 이상, 가로 양방향, Metal, ARM64.
 화면: Screen.safeArea 적용, 이동 패드와 공격·기술의 독립 포인터 처리, 큰 조작 버튼·대화 글자·선명도·키 안내 설정, 60fps 목표.
@@ -7,7 +7,7 @@ BLEACH: 영해의 균열 · iPhone 빌드 0.13.1
 제작
 1. Unity 6000.3.27f1과 iOS Build Support에서 Tools/export-ios.ps1 실행.
 2. Tools/IOSBuild.py prepare로 Builds/iOS-Xcode를 봉인하고 모든 파일의 SHA-256 목록 생성.
-3. 공개 저장소 yjmjeminq/bleach-spirit-tide-ios의 수동 macOS workflow에 입력 릴리스 태그와 SHA-256 전달.
+3. 저장소 yjmjeminq/bleach-spirit-tide-ios의 초안 릴리스에 내보낸 ZIP을 첨부하고, macOS workflow에 태그와 SHA-256 전달.
 4. Mac에서 입력 파일 검증 후 Xcode로 iOS 기기용 ARM64 앱을 컴파일. 서명 없이 Payload/*.app 구조의 IPA 작성.
 5. 다운로드한 IPA의 SHA-256·ZIP CRC·Mach-O 기기 플랫폼·앱 ID·버전·게임 데이터 전체 목록·실행 권한을 검증.
 

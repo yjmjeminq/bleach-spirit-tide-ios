@@ -20,7 +20,14 @@ namespace SpiritTide
         {
             Check("all ten encounter introductions and resolutions were played",game.Session.Profile.seenIntros==1023&&game.Session.Profile.seenOutros==1023);
             Check("all fifteen settings were rendered during the campaign",reviewedSettings.Count==15);
-            game.ReturnTown();yield return null;yield return TapUi("town-figure-0");Check("visible NPC opens its own service",game.Session.Mode==TideMode.Dialogue&&game.transform.Find("GameCanvas/SafeArea/Dialogue").GetComponentInChildren<Text>().text.StartsWith("우라하라"));game.NavigateBack();yield return null;
+            game.ReturnTown();yield return null;yield return TapUi("town-figure-0");
+            var dialogue=game.transform.Find("GameCanvas/SafeArea/Dialogue/DialogueCard");
+            Check("visible NPC opens its own service",game.Session.Mode==TideMode.Dialogue&&
+                dialogue.Find("DialogueSpeech/DialogueSpeaker").GetComponent<Text>().text=="우라하라");
+            var first=(RectTransform)game.Buttons["choice-0"].transform;var second=(RectTransform)game.Buttons["choice-1"].transform;
+            Check("NPC replies stack beside the speaking portrait",first.anchoredPosition.x==second.anchoredPosition.x&&
+                first.anchoredPosition.y-second.anchoredPosition.y>=first.rect.height&&dialogue.Find("SpeakerPortrait").GetComponent<Image>().sprite!=null);
+            game.NavigateBack();yield return null;
             int gold=game.Session.Profile.gold;yield return TapUi("npc-kon");yield return TapUi("choice-0");yield return ReadStory();Check("Kon accepts an actual rescue follow-up",(game.Session.Profile.rescueReports&1)!=0&&game.Session.Profile.gold>=gold+100);
             string saved=JsonUtility.ToJson(game.Session.Profile);
             for(int act=1;act<=5;act++)for(int hero=0;hero<6;hero++)for(int phase=0;phase<4;phase++)

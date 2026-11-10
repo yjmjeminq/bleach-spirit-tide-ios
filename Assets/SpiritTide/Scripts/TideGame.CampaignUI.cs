@@ -10,8 +10,9 @@ namespace SpiritTide
         private int mapAct=1,gearPage,gearSelection,lastPersistRevision;
         private Image scenery;
         private RectTransform actorLayer,gateView;
-        private Text gateLabel,progressText;
-        private RectTransform statusPlate;
+        private RectTransform gateCaption;
+        private Text progressText;
+        private RectTransform statusPlate,progressPlate;
         private sealed class FoeView
         {
             public RectTransform root,shadow;public TideFoeMotionGraphic body;public Image hp;public Text label,damage;
@@ -22,14 +23,15 @@ namespace SpiritTide
         {
             scenery=Stretch("Scenery",world).gameObject.AddComponent<Image>();scenery.raycastTarget=false;scenery.color=Color.white;scenery.transform.SetAsFirstSibling();
             Image dim=Stretch("SceneryShade",world).gameObject.AddComponent<Image>();dim.color=new Color(.025f,.06f,.09f,.23f);dim.raycastTarget=false;dim.transform.SetSiblingIndex(1);
-            var statePlate=Picture("PlayerStateBackdrop",safe,new Vector2(0,1),new Vector2(180,-146),new Vector2(360,92),new Color(.025f,.06f,.09f,.78f));statePlate.transform.SetSiblingIndex(resourceText.transform.GetSiblingIndex());
-            statusPlate=Picture("StatusBackdrop",safe,Vector2.zero,Vector2.zero,new Vector2(600,70),new Color(.025f,.06f,.09f,.88f)).rectTransform;statusPlate.SetSiblingIndex(statusText.transform.GetSiblingIndex());
+            statusPlate=Surface("StatusBackdrop",safe,Vector2.zero,Vector2.zero,new Vector2(600,70),surfaceDark).rectTransform;
+            statusPlate.SetSiblingIndex(statusText.transform.GetSiblingIndex());
+            BuildFieldDialogue();
             actorLayer=(RectTransform)actor.parent;
-            gateView=Picture("ExitGate",world,Vector2.zero,Vector2.zero,new Vector2(30,135),new Color(.4f,.95f,.85f,.6f),circle).rectTransform;
-            gateLabel=Label("",gateView,new Vector2(.5f,.5f),new Vector2(0,96),new Vector2(220,52),22,gold,true);gateLabel.alignment=TextAnchor.MiddleCenter;
-            progressText=Label("",safe,new Vector2(.5f,1),new Vector2(0,-180),new Vector2(720,36),22,muted);progressText.alignment=TextAnchor.MiddleCenter;progressText.transform.SetSiblingIndex(controlsRoot.transform.GetSiblingIndex());
-            Button("gate","다음 방 · E",safe,new Vector2(.5f,0),new Vector2(0,190),new Vector2(280,84),AdvanceRoom,true);
-            Buttons["gate"].transform.SetSiblingIndex(menuRoot.transform.GetSiblingIndex());
+            BuildGateMarker();
+            progressPlate=Surface("RoomProgress",safe,new Vector2(.5f,1),new Vector2(86,-112),new Vector2(428,50),surfaceDark).rectTransform;
+            progressPlate.SetSiblingIndex(controlsRoot.transform.GetSiblingIndex());
+            progressText=Label("",progressPlate,Center,new Vector2(0,-5),new Vector2(402,31),20,ink);
+            progressText.alignment=TextAnchor.MiddleCenter;
             Button("target-next","대상 변경",safe,Vector2.zero,new Vector2(140,350),new Vector2(200,84),()=>Session.CycleTarget());Buttons["target-next"].transform.SetSiblingIndex(menuRoot.transform.GetSiblingIndex());
             for(int i=0;i<4;i++)
             {
@@ -39,11 +41,28 @@ namespace SpiritTide
                 int slot=i;var b=Button("target-"+i,"",actorLayer,Vector2.zero,Vector2.zero,new Vector2(150,205),()=>{if(slot<Session.Enemies.Count)Session.FocusEnemy(Session.Enemies[slot].Uid);});
                 b.GetComponent<Image>().color=Color.clear;b.GetComponent<Image>().raycastTarget=false;v.body=Node("FoeSprite",b.transform,new Vector2(.5f,.5f),Vector2.zero,new Vector2(150,205)).gameObject.AddComponent<TideFoeMotionGraphic>();v.body.color=Color.white;b.targetGraphic=v.body;v.body.preserveAspect=true;v.root=(RectTransform)b.transform;v.root.pivot=new Vector2(.5f,0);
                 v.label=Label("",v.root,new Vector2(.5f,1),new Vector2(0,-15),new Vector2(260,35),19,ink,true);v.label.alignment=TextAnchor.MiddleCenter;
-                v.hp=Meter(v.root,new Vector2(75,-5),100,new Color(.85f,.35f,.3f));var track=(RectTransform)v.hp.transform.parent;track.anchorMin=track.anchorMax=new Vector2(.5f,1);track.anchoredPosition=new Vector2(0,-34);
+                v.hp=Meter(v.root,new Vector2(75,-5),84,new Color(.81f,.37f,.32f));var track=(RectTransform)v.hp.transform.parent;track.anchorMin=track.anchorMax=new Vector2(.5f,1);track.anchoredPosition=new Vector2(0,-34);
+                track.sizeDelta=new Vector2(84,6);v.hp.rectTransform.sizeDelta=track.sizeDelta;
                 v.damage=Label("",world,Vector2.zero,Vector2.zero,new Vector2(100,40),27,gold,true);v.damage.alignment=TextAnchor.MiddleCenter;
                 foeViews.Add(v);
             }
         }
+        private void BuildGateMarker()
+        {
+            var light=new Color(.53f,.98f,.86f);
+            gateView=Node("ExitGate",world,Vector2.zero,Vector2.zero,new Vector2(98,138));
+            Picture("ThresholdShadow",gateView,Center,new Vector2(0,-51),new Vector2(92,20),new Color(.015f,.10f,.12f,.75f),circle);
+            var baseRing=Node("ThresholdBase",gateView,Center,new Vector2(0,-51),new Vector2(92,20)).gameObject.AddComponent<TideArc>();
+            baseRing.Shape(360,.12f,32);baseRing.color=light;baseRing.raycastTarget=false;
+            Picture("ThresholdLight",gateView,Center,new Vector2(0,6),new Vector2(54,123),new Color(.3f,.86f,.82f,.26f),circle);
+            var rim=Node("ThresholdRim",gateView,Center,new Vector2(0,6),new Vector2(54,123)).gameObject.AddComponent<TideArc>();
+            rim.Shape(360,.10f,32);rim.color=light;rim.raycastTarget=false;
+            Stroke("ThresholdArrow",gateView,new Vector2(-8,22),new Vector2(8,6),3,light);
+            Stroke("ThresholdArrow",gateView,new Vector2(8,6),new Vector2(-8,-10),3,light);
+            gateCaption=Surface("ExitCaption",gateView,Center,new Vector2(0,89),new Vector2(120,37),surfaceDark).rectTransform;
+            Label("출구",gateCaption,Center,Vector2.zero,new Vector2(104,31),19,ink,true).alignment=TextAnchor.MiddleCenter;
+        }
+
         private void DrawCampaignWorld()
         {
             bool battle=Session.InBattle;scenery.sprite=TideArt.Background(battle?Session.IsCampaign?Session.Dungeon.background:"battle_act_"+Session.BattleAct:"town");
@@ -54,8 +73,6 @@ namespace SpiritTide
             scenery.rectTransform.offsetMin=new Vector2(-margin+pan,-16-extra*.4f)+impactOffset;scenery.rectTransform.offsetMax=new Vector2(margin+pan,16+extra*.6f)+impactOffset;
             enemyActor.gameObject.SetActive(false);warning.gameObject.SetActive(false);enemyShadow.gameObject.SetActive(false);enemyFeedback.gameObject.SetActive(false);
             actor.gameObject.SetActive(!Session.InBattle||battle);
-            Vector2 pos=Project(Session.X,Session.Y)+new Vector2(0,Session.Z*54);actor.anchoredPosition=pos;
-            float wave=Session.ActionRemaining>0?Mathf.Sin(Session.ActionElapsed/Mathf.Max(.01f,Session.ActionDuration)*Mathf.PI):0;
 
             var sorting=new List<KeyValuePair<float,Transform>>{new KeyValuePair<float,Transform>(Session.Y-.04f,actor)};
             for(int i=0;i<foeViews.Count;i++)
@@ -64,34 +81,35 @@ namespace SpiritTide
                 v.root.gameObject.SetActive(show);v.shadow.gameObject.SetActive(show);v.damage.gameObject.SetActive(false);foreach(var area in v.areas)area.gameObject.SetActive(false);if(!show)continue;
                 if(v.uid!=e.Uid){v.uid=e.Uid;v.damageSerial=e.DamageSerial;v.body.sprite=TideArt.Enemy(e.Def.id);v.flash=0;}
                 v.root.anchoredPosition=Project(e.X,e.Y)+new Vector2(0,e.Lift*32);v.root.sizeDelta=e.Def.IsBoss?new Vector2(250,180):new Vector2(190,190);
-                v.body.rectTransform.sizeDelta=v.root.sizeDelta;v.body.rectTransform.localScale=new Vector3(e.X>=Session.X?1:-1,1,1);
-                v.body.color=e.Flash>0&&!Session.Profile.reducedEffects?new Color(.7f,.85f,1):Color.white;
-                v.body.Tick(e,Session.PresentationEpoch,Session.PresentationClock,TideHudLayout.UnitX(safe.rect.width,Session.Profile.controlScale));
+                v.body.rectTransform.sizeDelta=v.root.sizeDelta;
+                v.body.color=Session.Profile.reducedEffects?Color.white:
+                    Color.Lerp(Color.white,new Color(.75f,.86f,1),Mathf.Clamp01(e.Flash/.12f));
+                v.body.Tick(e,Session.PresentationEpoch,Session.PresentationClock,TideHudLayout.UnitX(safe.rect.width,Session.Profile.controlScale),e.X>=Session.X?1:-1);
+                v.body.rectTransform.localScale=new Vector3(v.body.DisplayFacing,1,1);
                 v.shadow.anchoredPosition=Project(e.X,e.Y);v.hp.fillAmount=e.Hp/e.MaxHp;
-                v.label.gameObject.SetActive(e.Mark>0||e.Guard>0);v.hp.transform.parent.gameObject.SetActive(!e.Def.IsBoss);
+                v.label.gameObject.SetActive(e.Mark>0||e.Guard>0);
+                v.hp.transform.parent.gameObject.SetActive(!e.Def.IsBoss&&e!=Session.Target&&e.Hp<e.MaxHp-.01f);
                 Say(v.label,(e.Mark>0?"표식 ":"")+(e.Guard>0?"방어":""));
                 if(v.damageSerial!=e.DamageSerial){v.damageSerial=e.DamageSerial;v.flash=.7f;v.damage.text=Mathf.CeilToInt(e.LastDamage).ToString();}
                 v.flash=Mathf.Max(0,v.flash-Time.unscaledDeltaTime);v.damage.gameObject.SetActive(Session.IsFighting&&v.flash>0);v.damage.rectTransform.anchoredPosition=Project(e.X,e.Y)+new Vector2(20,220+(.7f-v.flash)*30);
                 sorting.Add(new KeyValuePair<float,Transform>(e.Y,v.root));DrawAreas(v,e);
             }
             sorting.Sort((a,b)=>b.Key.CompareTo(a.Key));foreach(var pair in sorting)pair.Value.SetAsLastSibling();
-            gateView.gameObject.SetActive(Session.IsFighting&&Session.IsCampaign&&Session.RoomCleared&&!Session.IsFieldVisit);
-            gateView.anchoredPosition=Project(Session.GateX,0)+new Vector2(0,55);gateLabel.text="통로 정화 →\n출구로 이동";
-            Buttons["gate"].gameObject.SetActive(Session.IsFighting&&Session.IsCampaign&&Session.RoomCleared);
-            Buttons["gate"].interactable=Session.IsFieldVisit||Session.AtGate&&Session.GateReady;
-            Buttons["gate"].GetComponentInChildren<Text>().text=Session.IsFieldVisit?"거점으로 귀환":
-                Session.MainInvestigationPending?"남은 조사 살피기":Session.AtGate?"다음 방"+(ShowKeyboardHints?" · E":""):"오른쪽 출구로 이동 →";
+            gateView.gameObject.SetActive(Session.IsFighting&&Session.IsCampaign&&Session.GateReady&&!Session.IsFieldVisit);
+            gateView.anchoredPosition=Project(Session.GateX,0)+new Vector2(0,51);
+            gateCaption.gameObject.SetActive(!Session.AtGate);
             Buttons["target-next"].gameObject.SetActive(Session.IsFighting&&Session.AliveCount>1);
-            progressText.gameObject.SetActive(battle);
-            string waveLabel=Session.IsCampaign&&Session.Room.WaveCount>1?" · 증원 "+Session.RoomWave+"/"+Session.Room.WaveCount:"";
-            Say(progressText,OpeningHint()??(Session.IsCampaign?"Act "+Session.Dungeon.act+" · "+Session.Dungeon.number+"구역 · "+(Session.RoomIndex+1)+"/"+Session.Dungeon.rooms.Length+"방"+waveLabel+" · 적 "+Session.AliveCount:Session.IsTraining?"수련 · 조작과 기술을 자유롭게 확인":"보스 기록 재현 · 진행 보상 없음"));
-            questText.gameObject.SetActive(false);
+            progressPlate.anchoredPosition=new Vector2(86,battleRoot.activeSelf?-112:-52);
+            progressPlate.gameObject.SetActive(Session.IsFighting&&!Session.IsTraining);
+            string waveLabel=Session.IsCampaign&&Session.Room.WaveCount>1?"  ·  증원 "+Session.RoomWave+"/"+Session.Room.WaveCount:"";
+            string roomSummary=Session.IsCampaign
+                ? Session.Dungeon.number+"구역  ·  "+(Session.RoomIndex+1)+"/"+Session.Dungeon.rooms.Length+"방"+waveLabel+(Session.RoomCleared?"  ·  정화 완료":"  ·  적 "+Session.AliveCount)
+                : "보스 기록 재현 · 진행 보상 없음";
+            Say(progressText,OpeningHint()??roomSummary);
             beaconView.gameObject.SetActive(false);lureView.gameObject.SetActive(Session.IsFighting&&Session.LureActive);lureView.anchoredPosition=Project(Session.WarningPosition.x,Session.WarningPosition.y)+new Vector2(0,90);
-            warningText.gameObject.SetActive(Session.IsFighting&&(Session.Telegraph||Session.BodyExposed));
-            warningText.text=Session.BodyExposed?"본체 노출 · 피해 +25%":Session.Target.Cue+"  "+Session.EnemyTimer.ToString("0.0")+"초";
+            if(Session.IsFighting&&(Session.Telegraph||Session.BodyExposed))
+                Say(warningText,Session.BodyExposed?"본체 노출 · 피해 +25%":Session.Target.Cue+"  ·  "+Session.EnemyTimer.ToString("0.0")+"초");
             for(int i=0;i<2;i++){cloudViews[i].gameObject.SetActive(battle&&Session.CloudTime[i]>0);cloudViews[i].anchoredPosition=Project(Session.Clouds[i].x,Session.Clouds[i].y);}
-            slash.gameObject.SetActive(Session.IsFighting&&Session.ActionRemaining>0&&Session.ActionElapsed>Session.ActionDuration*.3f&&Session.ActionElapsed<Session.ActionDuration*.7f);
-            slash.anchoredPosition=pos+new Vector2(Session.Facing*85,75);slash.localRotation=Quaternion.Euler(0,0,-Session.Facing*wave*35);slash.sizeDelta=new Vector2(Session.Profile.hero==4?220:140,Session.Profile.hero==3?6:14);
         }
         private void DrawAreas(FoeView view,TideEnemy e)
         {
@@ -119,7 +137,9 @@ namespace SpiritTide
             {
                 int number=n;var d=TideCampaign.Dungeon(mapAct,n);bool destination=mapAct==routeAct&&n==routeStage;bool clear=(Session.Profile.clearedDungeons&(1<<d.index))!=0,current=Session.Profile.campaignAct==mapAct&&Session.Profile.campaignStage==n&&Session.Quest==QuestState.Active;
                 var button=Button("dungeon-"+n,(destination?"목적지 · ":clear?"정화 · ":current?"현재 · ":"잠김 · ")+n+"\n"+d.title,panel,new Vector2(.5f,.5f),new Vector2(((n-1)%3-1)*310,0-(n-1)/3*100),new Vector2(294,88),()=>{if(destination)DepartRoute();else DepartDungeon(mapAct,number,clear&&!current);},destination||current);
-                var thumb=Picture("MapThumbnail",button.transform,new Vector2(.5f,.5f),Vector2.zero,new Vector2(294,88),new Color(1,1,1,.27f),TideArt.Background(d.background));thumb.transform.SetAsFirstSibling();
+                var thumb=Picture("MapThumbnail",button.transform,Center,Vector2.zero,new Vector2(274,68),
+                    new Color(1,1,1,destination||current||clear?.33f:.18f),TideArt.Background(d.background));
+                thumb.transform.SetAsFirstSibling();
                 var text=button.GetComponentInChildren<Text>();text.fontSize=21;var outline=text.gameObject.AddComponent<Outline>();outline.effectColor=new Color(0,.02f,.03f,.95f);outline.effectDistance=new Vector2(1,-1);button.interactable=destination?RouteReady():clear||current;
             }
             if(routeAct>0)
@@ -182,10 +202,26 @@ namespace SpiritTide
         private void BuildCampaignResult()
         {
             MenuTitle(Session.IsCampaign?"던전 정화 · "+Session.Dungeon.title:"보스 전투 재현 완료");
-            Label(Session.IsCampaign?"등급 "+Session.ClearRank+" · 최고 "+Session.ChainPeak+" HIT · 받은 피해 "+Mathf.CeilToInt(Session.DungeonDamageTaken)+"\n"+Session.LastReward:"수련 기록 · 조사와 보상에 영향을 주지 않습니다.",panel,new Vector2(.5f,.5f),new Vector2(0,125),new Vector2(950,126),21,gold);
+            if(Session.IsCampaign)
+            {
+                var rank=Surface("ResultRank",panel,Center,new Vector2(-394,111),new Vector2(160,144),new Color(.46f,.37f,.22f)).rectTransform;
+                var grade=Label(Session.ClearRank,rank,Center,new Vector2(0,34),new Vector2(138,70),50,gold,true);
+                grade.alignment=TextAnchor.MiddleCenter;
+                var gradeCaption=Label("정화 등급",rank,Center,new Vector2(0,-14),new Vector2(138,24),18,ink);
+                gradeCaption.alignment=TextAnchor.MiddleCenter;
+                var stats=Label("최고 "+Session.ChainPeak+" HIT\n받은 피해 "+Mathf.CeilToInt(Session.DungeonDamageTaken),rank,Center,
+                    new Vector2(0,-48),new Vector2(142,44),16,ink);
+                stats.alignment=TextAnchor.MiddleCenter;
+                var rewards=Surface("ResultRewards",panel,Center,new Vector2(90,111),new Vector2(768,144),surfaceButton).rectTransform;
+                Label("전투 보상",rewards,Center,new Vector2(0,53),new Vector2(722,28),20,gold,true);
+                var rewardBody=Label(Session.LastReward,rewards,Center,new Vector2(0,-12),new Vector2(722,100),19,ink);
+                rewardBody.alignment=TextAnchor.UpperLeft;
+            }
+            else
+                Label("수련 기록 · 조사와 보상에 영향을 주지 않습니다.",panel,Center,new Vector2(0,125),new Vector2(950,64),24,gold);
             bool midpoint=Session.IsCampaign&&!Session.IsReplay&&Session.Dungeon.number==3;
             bool fieldResult=Session.IsCampaign&&!Session.IsReplay&&Session.Dungeon.number!=3&&Session.Dungeon.number!=6;
-            Label(Session.IsCampaign?midpoint?TideJourney.Data.chapters[Session.Dungeon.act-1].midpoint:TideStory.DungeonOutcome(Session.Dungeon,Session.Profile):"공격 예고와 기술 연계를 확인했습니다. 다음에는 다른 동료로 도전해 보세요.",panel,new Vector2(.5f,.5f),new Vector2(0,midpoint||fieldResult?-7:-45),new Vector2(950,midpoint||fieldResult?120:180),24);
+            Label(Session.IsCampaign?midpoint?TideJourney.Data.chapters[Session.Dungeon.act-1].midpoint:TideStory.DungeonOutcome(Session.Dungeon,Session.Profile):"공격 예고와 기술 연계를 확인했습니다. 다음에는 다른 동료로 도전해 보세요.",panel,Center,new Vector2(0,midpoint||fieldResult?-18:-45),new Vector2(950,midpoint||fieldResult?114:168),24);
             AddResultBreather();
             if(fieldResult)
                 Button("result-story","현장 대화",panel,new Vector2(.5f,.5f),new Vector2(0,-121),new Vector2(270,84),ReadResultStory);
@@ -195,12 +231,13 @@ namespace SpiritTide
                     ()=>{ReturnTown();OpenQuestBook(startWithSide:true);});
             bool next=Session.IsCampaign&&!Session.IsReplay&&Session.Quest==QuestState.Active;
             bool report=Session.IsCampaign&&!Session.IsReplay&&Session.Quest==QuestState.Ready;
-            Button("next-dungeon",next?"다음 · "+TideJourney.Current(Session.Profile).title:report?"귀환 보고":"마을로",panel,new Vector2(.5f,.5f),new Vector2(-240,-214),new Vector2(420,84),()=>{
+            Button("next-dungeon",next?"다음 · "+TideJourney.Current(Session.Profile).title:report?"귀환 보고":"마을로",panel,Center,new Vector2(Session.IsCampaign?-240:0,-214),new Vector2(420,84),()=>{
                 if(next){Session.ReturnTown();StartBattle(false);}
                 else if(report){Session.ReturnTown();BeginActReport();}
                 else ReturnTown();
             },true).GetComponentInChildren<Text>().fontSize=22;
-            Button("result-gear","전리품 확인",panel,new Vector2(.5f,.5f),new Vector2(240,-214),new Vector2(420,84),()=>{ReturnTown();SelectLoot(Session.LastGearUid);OpenMenu(TideMode.Inventory);});
+            if(Session.IsCampaign)
+                Button("result-gear","전리품 확인",panel,new Vector2(.5f,.5f),new Vector2(240,-214),new Vector2(420,84),()=>{ReturnTown();SelectLoot(Session.LastGearUid);OpenMenu(TideMode.Inventory);});
         }
     }
 }

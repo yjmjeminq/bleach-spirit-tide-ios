@@ -15,7 +15,7 @@ namespace SpiritTide
                 bool storyFits=true,archiveFits=true;
                 foreach(var line in TideDialogue.Lines(scene.id,hero))
                 {
-                    probe.text=line.text;probe.fontSize=40;probe.rectTransform.sizeDelta=new Vector2(704,180);storyFits&=probe.preferredHeight<=180;
+                    probe.text=line.text;probe.fontSize=40;probe.rectTransform.sizeDelta=TideGame.SceneSpeechSize;storyFits&=probe.preferredHeight<=TideGame.SceneSpeechSize.y;
                     probe.fontSize=31;probe.rectTransform.sizeDelta=new Vector2(950,112);archiveFits&=probe.preferredHeight<=112;
                 }
                 Check("all dialogue pages fit maximum story font "+scene.id+" / "+hero,storyFits);

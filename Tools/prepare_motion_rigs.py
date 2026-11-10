@@ -20,6 +20,10 @@ LANDMARKS=[
  dict(pelvis=(414,659),chest=(420,377),neck=(408,258),head=(409,146),shoulders=[(293,312),(503,317)],elbows=[(196,515),(598,530)],wrists=[(95,716),(711,724)],hips=[(337,699),(487,699)],knees=[(290,1025),(516,1025)],ankles=[(216,1432),(560,1432)],soles=[(222,1505),(605,1504)],floor=1512,weapon=(901,240)),
 ]
 
+# Preserve the painted cuff and wrist. A closed hand replaces the open fingers
+# on the three sword rigs, with the grip set a little behind the guard.
+SWORD_GRIPS={0:((84,696),(915,320)),4:((93,696),(900,320)),5:((94,704),(896,312))}
+
 
 def sub(a,b):return (a[0]-b[0],a[1]-b[1])
 def length(a):return math.hypot(*a)
@@ -42,7 +46,12 @@ def r(value):return round(value,5)
 def make(hero,index):
  body_name=f'{hero}-body-v2' if index in (1,2,3,4) else f'{hero}-bind-v1'
  raw=ROOT/f'Assets/SpiritTide/Resources/SpiritTide/Art/Rig/{body_name}.png'
- im=Image.open(raw).convert('RGBA');alpha=im.getchannel('A');m=LANDMARKS[index]
+ im=Image.open(raw).convert('RGBA');alpha=im.getchannel('A');m=LANDMARKS[index].copy()
+ wrist_cut=None
+ if index in SWORD_GRIPS:
+  wrist,m['weapon']=SWORD_GRIPS[index]
+  m['wrists']=[wrist,m['wrists'][1]]
+  wrist_cut=wrist[1]
  scale=192/(m['floor']-14)
  def point(p):return {'x':r((p[0]-m['pelvis'][0])*scale),'y':r((m['floor']-p[1])*scale)}
  bone=[m['pelvis'],m['chest'],m['neck'],m['neck']]
@@ -96,6 +105,7 @@ def make(hero,index):
   sample=max([center,*points],key=opacity);kind=classify(sample if opacity(center)<32 else center)
   ids=[vertex(x,y,kind) for x,y in points];triangles[group(kind)].extend(ids)
  def cell(x,y,x1,y1):
+  if wrist_cut is not None and x1<=152 and y>=wrist_cut and y<840:return
   if alpha.crop((x,y,x1,y1)).getextrema()[1]<16:return
   triangle([(x,y),(x1,y1),(x1,y)]);triangle([(x,y),(x,y1),(x1,y1)])
  step=8

@@ -21,7 +21,7 @@ import uuid
 import zipfile
 
 BUNDLE = 'com.yjmjemin.bleachspirittide'
-VERSION, BUILD = '0.16.0', '13'
+VERSION, BUILD = '0.16.1', '14'
 IPA_NAME = f'SpiritTide-iPhone-unsigned-v{VERSION}.ipa'
 ROOT = Path(__file__).resolve().parents[1]
 

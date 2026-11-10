@@ -20,7 +20,8 @@ namespace SpiritTide
             vh.Clear();VertexCount=0;if(effect==null)return;mesh=vh;
             float end=duration+effect.tail;fade=Mathf.Clamp01(age/.055f)*Mathf.Clamp01((end-age)/.32f)*(reduced?.46f:1);
             if(fade<=0)return;power=effect.slot==4?1.35f:1;
-            switch(effect.hero){case 0:Frost();break;case 1:Flowers();break;case 2:Thunder();break;case 3:Hornet();break;case 4:Ash();break;case 5:Crimson();break;}
+            if(effect.slot>=CharacterDef.FirstExtraSkill)ExtraEffect();
+            else switch(effect.hero){case 0:Frost();break;case 1:Flowers();break;case 2:Thunder();break;case 3:Hornet();break;case 4:Ash();break;case 5:Crimson();break;}
             VertexCount=vh.currentVertCount;
         }
         private float Progress=>age/Mathf.Max(.01f,duration);

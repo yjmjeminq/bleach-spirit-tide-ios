@@ -13,11 +13,12 @@ namespace SpiritTide
         private TideEnemy enemy;private string definition;
         private Vector2 previous,stepDirection=Vector2.left;
         private float worldPixels=48,bodyWidth=150,bodyHeight=190;
-        private float clock,phase,travel,lean,recoil,follow;
-        private int epoch=-1,attacks,damage;
+        private float clock,phase,travel,lean,recoil,recoilPower,follow,tell,turnAge;
+        private int epoch=-1,attacks,damage,recoilSide;
         public int VertexCount {get;private set;}
         public float Travel=>travel;
         public float MotionPhase=>phase;
+        public int DisplayFacing {get;private set;}=1;
         public Anatomy BodyType {get;private set;}
         public static Anatomy Classify(string id)
         {
@@ -32,50 +33,74 @@ namespace SpiritTide
                 default:return Anatomy.Humanoid;
             }
         }
-        public void Tick(TideEnemy value,int worldEpoch,float time,float pixelsPerWorldUnit=48)
+        public void Tick(TideEnemy value,int worldEpoch,float time,float pixelsPerWorldUnit,int look)
         {
             worldPixels=pixelsPerWorldUnit;
             if(enemy!=value||epoch!=worldEpoch||definition!=value.Def.id)
             {
                 enemy=value;definition=value.Def.id;epoch=worldEpoch;previous=value.Position;clock=time;
-                attacks=value.Attacks;damage=value.DamageSerial;phase=value.Uid*.71f;travel=lean=recoil=follow=0;
+                attacks=value.Attacks;damage=value.DamageSerial;phase=value.Uid*.71f;travel=lean=recoil=recoilPower=follow=tell=turnAge=0;
+                DisplayFacing=look;stepDirection=Vector2.left;
                 BodyType=Classify(value.Def.id);SetVerticesDirty();return;
             }
             float dt=Mathf.Clamp(time-clock,0,.05f);if(dt<=0)return;
             Vector2 delta=value.Position-previous;Vector2 pixels=new Vector2(delta.x*worldPixels,delta.y*35);float distance=pixels.magnitude/worldPixels;
-            if(pixels.sqrMagnitude>.000001f)stepDirection=new Vector2(pixels.x*rectTransform.localScale.x,pixels.y).normalized;
-            // Instant gameplay dashes keep their real world position. Do not turn
-            // their teleport distance into several implausibly fast gait cycles.
-            if(distance<.65f){phase+=distance*(BodyType==Anatomy.Heavy?5.1f:7.2f);}
-            float moving=distance<.65f?Mathf.Clamp01(distance/Mathf.Max(.001f,dt)/1.1f):0;
-            travel=Mathf.Lerp(travel,moving,1-Mathf.Exp(-13*dt));
-            if(damage!=value.DamageSerial){damage=value.DamageSerial;recoil=1;}
+            if(damage!=value.DamageSerial)
+            {
+                damage=value.DamageSerial;
+                if(value.ImpactStrength!=TideImpactStrength.None)
+                {
+                    recoil=1;recoilPower=.52f+(int)value.ImpactStrength*.26f;
+                    recoilSide=value.ImpactDirection*DisplayFacing;
+                }
+            }
             if(attacks!=value.Attacks){attacks=value.Attacks;follow=1;}
-            recoil=Mathf.Max(0,recoil-dt*5.5f);follow=Mathf.Max(0,follow-dt*4.4f);
-            float tell=value.Telegraph?Mathf.SmoothStep(0,1,1-value.Timer/Mathf.Max(.01f,value.TellDuration)):0;
-            float target=tell*5.5f-follow*9+Mathf.Sin(recoil*Mathf.PI)*8;
-            lean=Mathf.Lerp(lean,target,1-Mathf.Exp(-26*dt));
+            else follow=Mathf.Max(0,follow-dt*(BodyType==Anatomy.Heavy?3.5f:4.5f));
+            recoil=Mathf.Max(0,recoil-dt*4.8f);
+            // Look away only after finishing the committed attack. Retreat and
+            // knockback may move opposite to the direction of the silhouette.
+            turnAge=look==DisplayFacing||value.Telegraph||follow>.24f||recoil>.35f?0:turnAge+dt;
+            if(turnAge>.065f){DisplayFacing=look;turnAge=0;}
+            bool walking=distance<.65f&&value.Lift<.03f&&value.Stagger<=0&&Mathf.Abs(value.KnockVelocity)<.12f;
+            if(walking&&pixels.sqrMagnitude>.000001f)
+            {
+                Vector2 direction=new Vector2(pixels.x*DisplayFacing,pixels.y).normalized;
+                stepDirection=Vector2.Lerp(stepDirection,direction,1-Mathf.Exp(-19*dt));
+                phase=Mathf.Repeat(phase+distance*(BodyType==Anatomy.Heavy?5.1f:7.2f),2*Mathf.PI);
+            }
+            float moving=walking?Mathf.Clamp01(distance/Mathf.Max(.001f,dt)/.8f):0;
+            travel=Mathf.Lerp(travel,moving,1-Mathf.Exp(-17*dt));
+            float warningProgress=1-value.Timer/Mathf.Max(.01f,value.TellDuration);
+            tell=value.Telegraph?Mathf.SmoothStep(0,1,Mathf.InverseLerp(.12f,.88f,warningProgress)):0;
+            float strike=Mathf.SmoothStep(0,1,follow);
+            float target=-tell*(value.Pattern==1?4:8)+strike*(value.Pattern==1?7:14)-Mathf.Sin(recoil*Mathf.PI)*9*recoilPower*recoilSide;
+            lean=Mathf.Lerp(lean,target,1-Mathf.Exp(-(strike>0?32:19)*dt));
             previous=value.Position;clock=time;SetVerticesDirty();
         }
         public Vector2 Deform(Vector2 p)
         {
             float t=clock,cycle=Mathf.Sin(phase),side=(float)System.Math.Tanh((p.x-.5f)*18);
+            float strike=Mathf.SmoothStep(0,1,follow);
             float torso=Mathf.SmoothStep(0,1,Mathf.InverseLerp(.29f,.66f,p.y));
             Vector2 pivot=new Vector2(.5f,.4f);
             Vector2 rotated=TideRigGraphic.Rotate(p-pivot,lean)+pivot;
             p=Vector2.Lerp(p,rotated,torso);
             float breath=Mathf.Sin(t*2.1f+(enemy==null?0:enemy.Uid))*.0022f;
-            p.y+=torso*breath;
+            float flinch=recoil*recoil*recoilPower*torso;
+            p.x+=flinch*recoilSide*.044f;
+            p.y+=torso*(breath-.013f*tell-.009f*strike)-flinch*.017f;
             float below=1-Mathf.SmoothStep(0,1,Mathf.InverseLerp(.08f,.44f,p.y));
             if(BodyType==Anatomy.Winged)
             {
                 float outer=Mathf.SmoothStep(0,1,Mathf.InverseLerp(.18f,.43f,Mathf.Abs(p.x-.5f)))*Mathf.SmoothStep(0,1,Mathf.InverseLerp(.45f,.77f,p.y));
-                p.x+=side*outer*Mathf.Sin(t*4.6f)*.022f;p.y+=outer*Mathf.Sin(t*4.6f+.45f)*.033f;
+                p.x+=side*outer*(Mathf.Sin(t*4.6f)*.018f-.035f*tell+.048f*strike);
+                p.y+=outer*(Mathf.Sin(t*4.6f+.45f)*.026f+.038f*tell-.04f*strike);
             }
             if(BodyType==Anatomy.Serpent||BodyType==Anatomy.Tentacles)
             {
                 float edge=BodyType==Anatomy.Serpent?1-torso:Mathf.SmoothStep(0,1,Mathf.InverseLerp(.16f,.4f,Mathf.Abs(p.x-.5f)));
                 p.x+=Mathf.Sin(t*3.4f+p.y*9)*.013f*edge;p.y+=Mathf.Sin(t*3.4f+p.x*8)*.009f*edge;
+                p.x-=(.075f*strike-.024f*tell)*torso*(BodyType==Anatomy.Serpent?1:edge);
             }
             else
             {
@@ -86,7 +111,8 @@ namespace SpiritTide
                 Vector2 feet=Vector2.Lerp(near,far,side*.5f+.5f)*travel*below;
                 p.x+=feet.x/Mathf.Max(1,bodyWidth);p.y+=feet.y/Mathf.Max(1,bodyHeight);
                 float arm=Mathf.SmoothStep(0,1,Mathf.InverseLerp(.2f,.42f,Mathf.Abs(p.x-.5f)))*Mathf.Sin(Mathf.Clamp01((p.y-.34f)/.55f)*Mathf.PI);
-                p.y+=arm*(-cycle*side*travel*.008f-Mathf.Sin(follow*Mathf.PI)*.022f);
+                p.x+=arm*(.024f*tell-.055f*strike);
+                p.y+=arm*(-cycle*side*travel*.009f+.032f*tell-.030f*strike);
             }
             return p;
         }

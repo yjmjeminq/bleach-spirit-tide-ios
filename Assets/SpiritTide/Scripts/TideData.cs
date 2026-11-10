@@ -3,13 +3,23 @@ using UnityEngine;
 
 namespace SpiritTide
 {
-    [Serializable] public class SkillDef { public string id, name, effect; public float cooldown_seconds, spirit_cost; }
+    [Serializable] public class SkillDef { public string id, name, effect, label; public float cooldown_seconds, spirit_cost; }
     [Serializable] public class CharacterDef
     {
         public string id, name, role, feel, basic, combo, appearance;
-        public SkillDef[] skills;
+        public const int Awakening = 4, FirstExtraSkill = 5, SkillCount = 9;
+        public SkillDef[] skills, extra_skills;
         public SkillDef ultimate;
-        public SkillDef Skill(int index) { return index == 4 ? ultimate : skills[index]; }
+        public SkillDef Skill(int index)
+        {
+            if (index == Awakening) return ultimate;
+            return index < FirstExtraSkill ? skills[index] : extra_skills[index - FirstExtraSkill];
+        }
+        public int SkillIndex(string id)
+        {
+            for (int i = 0; i < SkillCount; i++) if (Skill(i).id == id) return i;
+            return -1;
+        }
     }
     [Serializable] public class CharacterCatalog { public CharacterDef[] characters; }
     [Serializable] public class PatternDef { public string name, tell, action, counter; }
@@ -22,9 +32,9 @@ namespace SpiritTide
     [Serializable] public class ActDef { public int act; public string title, region, midboss_id, boss_id; public DungeonDef[] dungeons; }
     [Serializable] public class ActCatalog { public ActDef[] acts; }
 
-    public enum TideMode { Town, Combat, Training, Dialogue, Inventory, Shop, Missions, Settings, Pause, Result, Defeat, Story, Help, ConfirmRetreat, Forge, Journal, Quests, Home, Journey, Title }
+    public enum TideMode { Town, Combat, Training, Dialogue, Inventory, Shop, Missions, Settings, Pause, Result, Defeat, Story, Help, ConfirmRetreat, Forge, Journal, Quests, Home, Journey, Title, Loadout }
     public enum QuestState { Available, Active, Ready, Completed }
-    public enum MoveKind { Basic, Heavy, Launcher, Air, Counter, Skill0, Skill1, Skill2, Skill3, Ultimate }
+    public enum MoveKind { Basic, Heavy, Launcher, Air, Counter, Skill0, Skill1, Skill2, Skill3, Ultimate, Skill5, Skill6, Skill7, Skill8 }
 
     [Serializable] public class TideProfile
     {
@@ -45,6 +55,7 @@ namespace SpiritTide
         public bool classicSkills;
         public string trackedSide="";
         public TideSideQuestState[] sideQuests=Array.Empty<TideSideQuestState>();
+        public TideEquippedSkills[] skillLoadouts;
     }
 
     public static class TideCatalog
@@ -56,15 +67,31 @@ namespace SpiritTide
         public static void Load()
         {
             Characters = Read<CharacterCatalog>("characters").characters;
+            var expandedSkills = Read<CharacterCatalog>("extra_skills").characters;
             Bosses = Read<BossCatalog>("bosses").bosses;
             Enemies = Read<EnemyCatalog>("enemies").enemies;
             Acts = Read<ActCatalog>("acts").acts;
-            if (Characters == null || Characters.Length != 6 || Bosses == null || Bosses.Length != 10 ||
+            if (Characters == null || Characters.Length != 6 || expandedSkills == null || expandedSkills.Length != Characters.Length ||
+                Bosses == null || Bosses.Length != 10 ||
                 Enemies == null || Enemies.Length != 60 || Acts == null || Acts.Length != 5)
                 throw new InvalidOperationException("Design catalog is incomplete.");
-            foreach (CharacterDef c in Characters)
-                if (c.skills == null || c.skills.Length != 4 || c.ultimate == null)
+            for (int hero = 0; hero < Characters.Length; hero++)
+            {
+                CharacterDef c = Characters[hero];
+                if (expandedSkills[hero]?.id != c.id) throw new InvalidOperationException("Mismatched skills for " + c.id);
+                c.extra_skills = expandedSkills[hero].extra_skills;
+                if (c.skills == null || c.skills.Length != CharacterDef.Awakening || c.ultimate == null ||
+                    c.extra_skills == null || c.extra_skills.Length != CharacterDef.SkillCount - CharacterDef.FirstExtraSkill)
                     throw new InvalidOperationException("Missing skills for " + c.id);
+                for (int i = 0; i < CharacterDef.SkillCount; i++)
+                {
+                    var skill = c.Skill(i);
+                    if (skill == null || string.IsNullOrEmpty(skill.id) || string.IsNullOrEmpty(skill.name) ||
+                        skill.cooldown_seconds <= 0 || skill.spirit_cost < 0 || c.SkillIndex(skill.id) != i ||
+                        i >= CharacterDef.FirstExtraSkill && (string.IsNullOrEmpty(skill.label) || string.IsNullOrEmpty(skill.effect)))
+                        throw new InvalidOperationException("Invalid skill for " + c.id + " / " + i);
+                }
+            }
             TideCampaign.Load();TideQuests.Load();
         }
         private static T Read<T>(string name)
@@ -89,6 +116,7 @@ namespace SpiritTide
             TideProgress.Sanitize(p);
             TideQuests.Sanitize(p);
             TideDialogue.Sanitize(p);
+            TideLoadouts.Sanitize(p);
         }
     }
 }

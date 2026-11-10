@@ -23,7 +23,8 @@ namespace SpiritTide.EditorTools
                 check("dedicated skill sound is audible distinct and unclipped "+fx.id,energy/data.Length>.00002f&&peak<.95f&&waves.Add(hash));
                 UnityEngine.Object.DestroyImmediate(clip);
             }
-            check("all thirty skills have authored visuals and sound",ids.Count==30&&motifs.Count==30&&waves.Count==30);
+            int expected=TideCatalog.Characters.Length*CharacterDef.SkillCount;
+            check("all fifty-four skills have authored visuals and sound",ids.Count==expected&&motifs.Count==expected&&waves.Count==expected);
         }
     }
 }

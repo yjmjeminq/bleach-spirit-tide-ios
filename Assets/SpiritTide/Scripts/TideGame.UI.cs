@@ -40,7 +40,7 @@ namespace SpiritTide
         }
         private Button Button(string id, string label, Transform parent, Vector2 anchor, Vector2 position, Vector2 size, Action action, bool primary = false)
         {
-            Image image = Picture(id, parent, anchor, position, size, primary ? new Color(.18f,.4f,.43f) : card);
+            Image image = Surface(id, parent, anchor, position, size, primary ? surfaceAction : surfaceButton);
             image.raycastTarget = true;
             Button b = image.gameObject.AddComponent<Button>();
             b.gameObject.AddComponent<TideFocusRing>();
@@ -85,9 +85,7 @@ namespace SpiritTide
             enemyImage.preserveAspect = true; enemyActor = enemyImage.rectTransform; enemyActor.pivot = new Vector2(.5f,0);
             actorImage = Picture("Player", actorsLayer, Vector2.zero, Vector2.zero, new Vector2(128,192), Color.white, heroSprites[0]);
             actorImage.preserveAspect = true; actor = actorImage.rectTransform; actor.pivot = new Vector2(.5f,0);
-            slashImage = Picture("AttackTrace", world, Vector2.zero, Vector2.zero, new Vector2(130,12), new Color(.65f,.88f,1,.7f));
-            slash = slashImage.rectTransform;
-            warningText = Label("", world, new Vector2(.5f,1),new Vector2(0,-216),new Vector2(860,40),24,gold,true);warningText.alignment=TextAnchor.MiddleCenter;
+            weaponSweep=Stretch("WeaponSweep",world);weaponSweep.pivot=Vector2.zero;
             lureView.SetAsLastSibling();
             townRoot = Stretch("TownServices", safe).gameObject;
             string[] npcIds = {"urahara","tessai","kon","byakuya","kukaku"};
@@ -97,15 +95,9 @@ namespace SpiritTide
                 string npc = npcIds[i];
                 Button("npc-"+npc, npcLabels[i], townRoot.transform, new Vector2(.5f,.18f), new Vector2((i-2)*160,0), new Vector2(150,94), () => Talk(npc));
             }
-            Button("objective","",townRoot.transform,new Vector2(.5f,1),new Vector2(0,-150),new Vector2(560,88),ContinueObjective,true);
-            Picture("Header", safe, new Vector2(.5f,1), new Vector2(0,-50), new Vector2(2200,100), new Color(.055f,.11f,.145f,.97f));
-            titleText = Label("영해의 균열", safe, new Vector2(0,1), new Vector2(210,-25), new Vector2(390,40), 27, gold, true);
-            hpText = Label("", safe, new Vector2(0,1), new Vector2(180,-58), new Vector2(330,30), 23);
-            hpFill = Meter(safe, new Vector2(180,-79), 330, new Color(.4f,.8f,.58f));
-            mpFill = Meter(safe, new Vector2(180,-94), 330, new Color(.42f,.7f,.9f));
-            resourceText = Label("", safe, new Vector2(0,1), new Vector2(180,-114), new Vector2(330,32), 21, muted);
-            goldText = Label("", safe, new Vector2(1,1), new Vector2(-260,-28), new Vector2(160,40), 25, gold);
-            saveIndicator=Label("자동 저장",safe,new Vector2(1,1),new Vector2(-260,-66),new Vector2(160,26),16,muted);saveIndicator.name="SaveIndicator";
+            var objective=Button("objective","",townRoot.transform,new Vector2(.5f,1),new Vector2(0,-136),new Vector2(560,84),ContinueObjective,true);
+            objective.GetComponentInChildren<Text>().fontSize=24;
+            BuildPlayerVitals();
             for (int i = 0; i < 6; i++)
             {
                 int index = i;
@@ -113,23 +105,16 @@ namespace SpiritTide
                     safe, new Vector2(.5f,1), new Vector2((i-2.5f)*103,-43), new Vector2(96,84), () => SelectHero(index));
                 heroButtons[i].GetComponentInChildren<Text>().fontSize=20;
             }
-            Button("pause","메뉴",safe,new Vector2(1,1),new Vector2(-72,-44),new Vector2(116,84),ToggleMainMenu);
-            battleRoot = Stretch("BossHud", safe).gameObject;
-            enemyText = Label("",battleRoot.transform,new Vector2(.5f,1),new Vector2(0,-119),new Vector2(800,34),25,gold,true);
-            enemyText.alignment = TextAnchor.MiddleCenter;
-            enemyFill = Meter(battleRoot.transform,new Vector2(safe.rect.width*.5f,-146),640,new Color(.67f,.38f,.38f));
-            enemyFill.rectTransform.parent.GetComponent<RectTransform>().anchorMin = enemyFill.rectTransform.parent.GetComponent<RectTransform>().anchorMax = new Vector2(.5f,1);
-            enemyFill.rectTransform.parent.GetComponent<RectTransform>().anchoredPosition = new Vector2(0,-146);
-            questText = Label("",safe,new Vector2(.5f,1),new Vector2(0,-180),new Vector2(640,35),23,muted);
-            questText.alignment=TextAnchor.MiddleCenter;
+            Button("pause","메뉴",safe,new Vector2(1,1),new Vector2(-59,-49),new Vector2(100,84),ToggleMainMenu);
+            BuildEnemyVitals();
             actionText = Label("",safe,new Vector2(.5f,0),new Vector2(0,130),new Vector2(600,42),25,gold,true); actionText.alignment=TextAnchor.MiddleCenter;
             statusText = Label("",safe,new Vector2(.5f,0),new Vector2(0,32),new Vector2(940,40),21,muted); statusText.alignment=TextAnchor.MiddleCenter;
             controlsRoot=Stretch("TouchControls",safe).gameObject;
             BuildTouchControls();
             menuRoot=Stretch("Menus",safe).gameObject;MakeModalShade(menuRoot);
             openingBackdrop=SceneBackground("OpeningBackdrop",menuRoot.transform,"act1_river_v1");
-            panel=Node("MenuCard",menuRoot.transform,new Vector2(.5f,.5f),new Vector2(0,-15),new Vector2(1060,560));
-            Image panelBackground=panel.gameObject.AddComponent<Image>();panelBackground.color=new Color(.08f,.16f,.19f,.99f);panelBackground.raycastTarget=true;
+            var panelBackground=Surface("MenuCard",menuRoot.transform,Center,new Vector2(0,-15),new Vector2(1060,560),surfaceMenu);
+            panelBackground.raycastTarget=true;panel=panelBackground.rectTransform;
             dialogueRoot=Stretch("Dialogue",safe).gameObject;
             MakeModalShade(dialogueRoot);
             Button("interact","E · 대화",safe,new Vector2(1,0),new Vector2(-110,105),new Vector2(184,96),()=>Talk(NearestNpc()),true);
@@ -147,61 +132,62 @@ namespace SpiritTide
             actorImage.sprite=heroSprites[Session.Profile.hero];enemyImage.sprite=bossSprites[Session.BossIndex];
             bool fighting=Session.Mode==TideMode.Combat||Session.Mode==TideMode.Training;
             bool town=Session.Mode==TideMode.Town;
-            townRoot.SetActive(town);battleRoot.SetActive(Session.InBattle&&Session.AliveCount>0);controlsRoot.SetActive(town||fighting);
-            questText.gameObject.SetActive(Session.InBattle);
+            townRoot.SetActive(town);battleRoot.SetActive(fighting&&Session.AliveCount>0);controlsRoot.SetActive(town||fighting);
+            LayoutEnemyVitals(Session.IsTraining);
+            playerVitals.gameObject.SetActive(town||fighting);
+            wallet.gameObject.SetActive(town);
             Buttons["interact"].gameObject.SetActive(town);
             foreach(Button b in heroButtons)b.gameObject.SetActive(town||Session.Mode==TideMode.Training);
-            for(int i=0;i<6;i++)heroButtons[i].GetComponent<Image>().color=Session.Profile.hero==i?new Color(.3f,.4f,.32f):card;
             for(int i=0;i<6;i++)
             {
                 bool joined=TideProgress.HeroJoined(Session.Profile,i);
                 heroButtons[i].interactable=joined&&!(Session.InBattle&&!Session.IsTraining);
+                heroButtons[i].GetComponent<Image>().color=Session.Profile.hero==i?surfaceAction:surfaceButton;
                 Say(heroButtons[i].GetComponentInChildren<Text>(),TideStory.HeroName(i)+(joined?"":"\n미합류"));
             }
-            for(int i=0;i<5;i++)skillButtons[i].gameObject.SetActive(fighting);
+            foreach(Button skillButton in skillButtons)skillButton.gameObject.SetActive(fighting);
             foreach(string id in new[]{"attack","heavy","jump","dodge"})Buttons[id].gameObject.SetActive(fighting);
             Buttons["potion"].gameObject.SetActive(fighting&&!Session.IsTraining);
             bool overlay=!town&&!fighting&&Session.Mode!=TideMode.Dialogue&&Session.Mode!=TideMode.Story;
             menuRoot.SetActive(overlay);dialogueRoot.SetActive(Session.Mode==TideMode.Dialogue||Session.Mode==TideMode.Story);
             bool front=Session.Mode==TideMode.Title;
             openingBackdrop.gameObject.SetActive(front);
-            openingBackdrop.color=Session.Mode==TideMode.Title?new Color(.52f,.64f,.76f):new Color(.35f,.46f,.56f);
-            panel.GetComponent<Image>().color=Session.Mode==TideMode.Title?Color.clear:new Color(.08f,.16f,.19f,front?.9f:.99f);
+            openingBackdrop.color=new Color(.60f,.69f,.78f);
+            panel.GetComponent<Image>().color=front?Color.clear:surfaceMenu;
             Buttons["pause"].gameObject.SetActive(town||fighting);
             if(overlay)BuildMenu();
             if(Session.Mode==TideMode.Dialogue)BuildDialogue();
             if(Session.Mode==TideMode.Story)BuildStory();
             ApplyHudPreferences();UpdateHud();FocusMenu();
             viewRevision=Session.Revision;lastMode=Session.Mode;
-            titleText.text="영해의 균열 · "+(Session.InBattle?Session.IsTraining?"수련장":"Act "+Session.BattleAct:"거점");
+            Say(titleText,town?"거점 · 우라하라 상점":Session.IsTraining?"수련장 · 기술 연습":"ACT "+Session.BattleAct.ToString("00")+" · "+(Session.IsCampaign?"조사 현장":"보스 기록"));
             if(Session.Mode==TideMode.Result||Session.Mode==TideMode.Defeat)Persist();
         }
         private void ResetWhenModeChanges(){if(lastMode!=Session.Mode)ResetInput();}
         private void UpdateHud()
         {
-            hpText.text=TideStory.HeroName(Session.Profile.hero)+" · Lv."+Session.Profile.level+" · "+Mathf.CeilToInt(Session.Hp)+" / "+Session.MaxHp;
-            hpFill.fillAmount=Session.Hp/Session.MaxHp;mpFill.fillAmount=Session.Mp/100;
-            resourceText.text="영압 "+Mathf.FloorToInt(Session.Mp)+(Session.Shield>0?"  보호 "+Mathf.CeilToInt(Session.Shield):"");
-            goldText.text=Session.Profile.gold+" 골드";
-            questText.text=Session.InBattle?(Session.Mark>0?"첫 표식 · 봉익일섬 강화":Session.PerfectRemaining>0?"정밀 회피 · 공격하면 반격":Session.IsTraining?"수련 중 · 자원 소모 없음":"Act 1 · "+(Session.BossIndex==0?"사역체의 함정":"기억의 미끼")):
-                Session.Quest==QuestState.Available?"우라하라에게 첫 의뢰를 확인하세요":Session.Quest==QuestState.Active?"진행 중 · 쿠카쿠에게 출정 위치를 확인하세요":
-                Session.Quest==QuestState.Ready?"보고 가능 · 우라하라에게 기록을 전달하세요":"Act 1 보고 완료 · 수련과 전투 재현을 이용할 수 있습니다";
-            enemyText.text=(Session.Target.Def?.id=="a3_boss_ulquiorra"?"["+Session.Target.Phase+" / 3단계] ":"")+(Session.IsTraining?"수련용 기록 · ":"")+Session.EnemyName+"  "+Mathf.CeilToInt(Session.EnemyHp)+" / "+Mathf.CeilToInt(Session.EnemyMaxHp)+(Session.Target.Def!=null&&Session.Target.Def.IsBoss?" · 자세 "+Mathf.CeilToInt(Session.Target.Poise):"");
-            enemyFill.fillAmount=Session.EnemyHp/Mathf.Max(1,Session.EnemyMaxHp);
-            actionText.text=Session.IsCharging?"강공격 준비 "+Mathf.RoundToInt(Session.HeavyProgress*100)+"%":Session.ActionRemaining>0?Session.ActionName:Session.PerfectRemaining>0?"반격 기회":"";
-            Say(statusText,FieldStatus());
-            Buttons["potion"].GetComponentInChildren<Text>().text="회복 +"+(45+Session.Profile.level*2)+"\n"+(Session.IsCampaign?Session.Profile.potions+"개":"연습용 · 무료")+(ShowKeyboardHints?" · V":"");
+            UpdateVitals();
+            Say(actionText,Session.IsCharging?"강공격 준비 "+Mathf.RoundToInt(Session.HeavyProgress*100)+"%":Session.ActionRemaining>0?Session.ActionName:Session.IsTraining&&Session.PerfectRemaining>0?"반격 기회":"");
+            string status=FieldStatus(out StoryLine call);
+            DrawFieldDialogue(call);
+            Say(statusText,status);
+            statusText.gameObject.SetActive(Session.IsMovingMode&&!string.IsNullOrWhiteSpace(status));
+            statusPlate.gameObject.SetActive(statusText.gameObject.activeSelf);
+            Say(potionName,"회복 +"+(45+Session.Profile.level*2));
+            Say(potionDetail,Session.IsCampaign?Session.Profile.potions+"개"+(ShowKeyboardHints?" · V":""):"연습용 · 무료");
             Buttons["potion"].interactable=Session.IsFighting&&!Session.IsTraining&&Session.Hp<Session.MaxHp&&(!Session.IsCampaign||Session.Profile.potions>0);
             if(Session.Mode==TideMode.Town)Buttons["interact"].GetComponentInChildren<Text>().text="대화 · "+new[]{"우라하라","텟사이","콘","뱌쿠야","쿠카쿠"}[NearestNpcIndex()];
             if(Session.Mode==TideMode.Town)Say(Buttons["objective"].GetComponentInChildren<Text>(),Session.CampaignFinished?"함께 돌아온 여섯 사람\n마을의 이야기와 지나온 길":TideQuests.Main(Session.Profile.campaignAct).title+"\n"+(Session.Quest==QuestState.Available?"우라하라에게 부탁 듣기":Session.Quest==QuestState.Ready?"우라하라에게 귀환 보고":TideCampaign.Dungeon(Session.Profile.campaignAct,Session.Profile.campaignStage).title));
             Say(Buttons["quest-log"].GetComponentInChildren<Text>(),"의뢰 수첩"+(ShowKeyboardHints?" · Q":""));
-            for(int i=0;i<5;i++)
+            for(int i=0;i<TideLoadouts.SlotCount;i++)
             {
-                skillKeys[i].gameObject.SetActive(ShowKeyboardHints);
-                SkillDef skill=Session.Hero.Skill(i);float remaining=Mathf.Max(0,Session.Cooldowns[i]-Session.Clock);
-                Say(skillLabels[i],TideSkillIcons.Definition(Session.Profile.hero,i).label);UpdateSkillIcon(i,remaining);
-                bool available=Session.SkillAvailable(i);
-                Say(skillFooters[i],!available?TideProgress.LearningBadge(i):Session.IsTraining?"수련":remaining>0?Mathf.CeilToInt(remaining)+"초":Session.Mp<skill.spirit_cost?"영압 부족":"영압 "+skill.spirit_cost);
+                int equipped=Session.EquippedSkill(i);
+                Say(skillKeys[i],ShowKeyboardHints?TideUiInfo.Keys[i]:(i+1).ToString());
+                SkillDef skill=Session.Hero.Skill(equipped);float remaining=Mathf.Max(0,Session.Cooldowns[equipped]-Session.Clock);
+                bool available=Session.SkillAvailable(equipped);
+                Say(skillLabels[i],TideSkillIcons.Definition(Session.Profile.hero,equipped).label);
+                UpdateSkillIcon(i,equipped,available,remaining);
+                Say(skillFooters[i],!available?TideProgress.LearningBadge(equipped):Session.IsTraining?"수련":remaining>0?"재사용":Session.Mp<skill.spirit_cost?"영압 부족":"영압 "+skill.spirit_cost);
                 skillFooters[i].color=!available||Session.Mp<skill.spirit_cost&&!Session.IsTraining?gold:muted;
                 skillCooldownFills[i].fillAmount=Session.IsTraining?0:remaining/Mathf.Max(.01f,skill.cooldown_seconds);
                 skillButtons[i].interactable=Session.IsFighting&&available&&(Session.IsTraining||(remaining<=0&&Session.Mp>=skill.spirit_cost));
@@ -210,9 +196,10 @@ namespace SpiritTide
         private Vector2 Project(float x,float y)
         {
             float camera=Session.InBattle?naturalCameraX:0;
-            return new Vector2(safe.rect.width*(Session.InBattle?.30f:.32f)+(x-camera)*(Session.InBattle?TideHudLayout.UnitX(safe.rect.width,Session.Profile.controlScale):62),safe.rect.height*.4f+y*35)+(Session.InBattle?impactOffset:Vector2.zero);
+            float groundLine=safe.rect.height*(Session.InBattle?.32f:.40f);
+            return new Vector2(safe.rect.width*(Session.InBattle?.30f:.32f)+(x-camera)*(Session.InBattle?TideHudLayout.UnitX(safe.rect.width,Session.Profile.controlScale):62),groundLine+y*35)+(Session.InBattle?impactOffset:Vector2.zero);
         }
-        private void DrawWorld(){UpdateMotionCamera();DrawCampaignWorld();DrawExperienceWorld();DrawQuestWorld();DrawFeel();DrawSkillEffects();}
+        private void DrawWorld(){UpdateImpactOffset();UpdateMotionCamera();DrawCampaignWorld();DrawExperienceWorld();DrawContextAction();DrawQuestWorld();DrawFeel();DrawSkillEffects();}
         private void Talk(string npc)
         {
             if(Session.InBattle||Session.Mode==TideMode.Story)return;
@@ -228,15 +215,20 @@ namespace SpiritTide
         private string NearestNpc(){return new[]{"urahara","tessai","kon","byakuya","kukaku"}[NearestNpcIndex()];}
         private void Dialogue(string speaker,string text, string[] labels, Action[] actions)
         {
-            Clear(dialogueRoot.transform);
-            RectTransform r=Node("DialogueCard",dialogueRoot.transform,new Vector2(.5f,.5f),new Vector2(0,-20),new Vector2(1080,480));
-            currentDialogueCard=r;
-            Image img=r.gameObject.AddComponent<Image>();img.color=new Color(.08f,.16f,.19f,.99f);img.raycastTarget=true;
-            Label(speaker,r,new Vector2(.5f,.5f),new Vector2(-140,195),new Vector2(660,55),31,gold,true);
-            Button("dialogue-back","뒤로",r,new Vector2(.5f,.5f),new Vector2(470,188),new Vector2(84,84),NavigateBack);
-            Text body=Label(text,r,new Vector2(.5f,.5f),new Vector2(0,25),new Vector2(980,260),Mathf.RoundToInt(28*Session.Profile.uiScale));
-            body.alignment=TextAnchor.UpperLeft;
-            for(int i=0;i<labels.Length;i++){int n=i;Button("choice-"+i,labels[i],r,new Vector2(.5f,.5f),new Vector2((i-(labels.Length-1)*.5f)*320,-177),new Vector2(304,88),()=>{actions[n]();Refresh();});}
+            RectTransform stage=currentDialogueCard=OpenDialogueStage("DialogueCard","town");
+            PlaceDialoguePortrait(stage,PortraitCrop(speaker),speaker,true,26);
+            DialogueHeading(stage,"ACT "+Session.Profile.campaignAct.ToString("00")+"  ·  카라쿠라","우라하라 상점");
+            DialogueButton("dialogue-back","뒤로",stage,new Vector2(470,255),new Vector2(84,84),NavigateBack);
+            DrawDialogueSpeech(stage,speaker,text,-213);
+            for(int i=0;i<labels.Length;i++)
+            {
+                var reply=DialogueButton("choice-"+i,labels[i],stage,new Vector2(330,149-i*94),new Vector2(350,84),
+                    actions[i],i==0);
+                Text option=reply.GetComponentInChildren<Text>();
+                option.rectTransform.sizeDelta=new Vector2(292,46);
+                option.rectTransform.anchoredPosition=new Vector2(-5,0);
+                option.alignment=TextAnchor.MiddleLeft;
+            }
         }
         private void BuildDialogue()
         {
@@ -267,11 +259,14 @@ namespace SpiritTide
                 Buttons["choice-1"].interactable=Session.Quest!=QuestState.Available;
             }
             var card=currentDialogueCard;int notices=TideQuests.Notices(Session.Profile,dialogueNpc);
-            Button("npc-requests",notices>0?"부탁 · "+notices:"의뢰 수첩",card,new Vector2(.5f,.5f),new Vector2(300,188),new Vector2(190,84),()=>OpenQuestBook(dialogueNpc),notices>0);
+            DialogueButton("npc-requests",notices>0?"부탁 · "+notices:"의뢰 수첩",card,new Vector2(318,255),
+                new Vector2(188,84),()=>OpenQuestBook(dialogueNpc),notices>0);
         }
         private void MenuTitle(string title,string subtitle="")
         {
-            Clear(panel);Label(title,panel,new Vector2(.5f,.5f),new Vector2(-45,230),new Vector2(860,60),35,gold,true);
+            Clear(panel);
+            Picture("MenuAccent",panel,Center,new Vector2(-498,230),new Vector2(3,37),gold);
+            Label(title,panel,Center,new Vector2(-45,230),new Vector2(860,60),35,ink,true);
             Button("close","뒤로",panel,new Vector2(.5f,.5f),new Vector2(470,230),new Vector2(84,84),NavigateBack);
             if(subtitle.Length>0)Label(subtitle,panel,new Vector2(.5f,.5f),new Vector2(0,167),new Vector2(950,66),26,muted);
         }
@@ -281,6 +276,7 @@ namespace SpiritTide
             {
                 case TideMode.Title:BuildTitle();break;
                 case TideMode.Home:BuildHome();break;
+                case TideMode.Loadout:BuildSkillLoadout();break;
                 case TideMode.Journey:BuildJourney();break;
                 case TideMode.Inventory:BuildGear(false);break;
                 case TideMode.Forge:BuildGear(true);break;
@@ -303,9 +299,20 @@ namespace SpiritTide
                     Button("hud-size","조작 버튼 "+(Session.Profile.controlScale>1?"크게":"기본"),panel,new Vector2(.5f,.5f),new Vector2(-320,-40),new Vector2(300,84),()=>{Session.Profile.controlScale=Session.Profile.controlScale>1?1:1.1f;PreferencesChanged();});
                     Button("hud-opacity","버튼 선명도 "+Mathf.RoundToInt(Session.Profile.controlOpacity*100)+"%",panel,new Vector2(.5f,.5f),new Vector2(0,-40),new Vector2(300,84),()=>{Session.Profile.controlOpacity=Session.Profile.controlOpacity>.95f?.65f:Session.Profile.controlOpacity>.75f?1:.85f;PreferencesChanged();});
                     Button("sound",Session.Profile.soundEnabled?"효과음 · 켬":"효과음 · 끔",panel,new Vector2(.5f,.5f),new Vector2(320,-40),new Vector2(300,84),()=>{Session.Profile.soundEnabled=!Session.Profile.soundEnabled;PreferencesChanged();});
-                    Button("resume",Session.InBattle?"전투 계속":"뒤로",panel,new Vector2(.5f,.5f),new Vector2(Session.InBattle?-320:-190,-190),new Vector2(300,88),()=>{if(Session.InBattle)ResumeFromMenu();else NavigateBack();},true);
-                    Button("help","조작·기술 설명",panel,new Vector2(.5f,.5f),new Vector2(Session.InBattle?0:190,-190),new Vector2(300,88),ShowHelp);
-                    if(Session.InBattle)Button("retreat",Session.IsTraining?"수련 종료":"마을로 귀환",panel,new Vector2(.5f,.5f),new Vector2(320,-190),new Vector2(300,88),RequestRetreat);break;
+                    if(Session.IsTraining)
+                    {
+                        Button("resume","수련 계속",panel,Center,new Vector2(-354,-190),new Vector2(222,88),ResumeFromMenu,true);
+                        Button("training-loadout","기술 장착",panel,Center,new Vector2(-118,-190),new Vector2(222,88),OpenSkillLoadout);
+                        Button("help","조작·기술 설명",panel,Center,new Vector2(118,-190),new Vector2(222,88),ShowHelp);
+                        Button("retreat","수련 종료",panel,Center,new Vector2(354,-190),new Vector2(222,88),RequestRetreat);
+                    }
+                    else
+                    {
+                        Button("resume",Session.InBattle?"전투 계속":"뒤로",panel,Center,new Vector2(Session.InBattle?-320:-190,-190),new Vector2(300,88),()=>{if(Session.InBattle)ResumeFromMenu();else NavigateBack();},true);
+                        Button("help","조작·기술 설명",panel,Center,new Vector2(Session.InBattle?0:190,-190),new Vector2(300,88),ShowHelp);
+                        if(Session.InBattle)Button("retreat","마을로 귀환",panel,Center,new Vector2(320,-190),new Vector2(300,88),RequestRetreat);
+                    }
+                    break;
                 case TideMode.Help:BuildHelp();break;
                 case TideMode.ConfirmRetreat:
                     MenuTitle("마을로 돌아갈까요?","정화한 방은 저장됩니다. 현재 방의 적 체력은 재입장 시 회복됩니다.");

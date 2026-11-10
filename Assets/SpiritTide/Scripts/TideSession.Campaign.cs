@@ -20,7 +20,7 @@ namespace SpiritTide
             if(Profile.campaignAct==5){Profile.quest=(int)QuestState.Completed;Profile.claimed=true;}
             else {Profile.campaignAct++;Profile.campaignStage=1;Profile.roomCheckpoint=0;Profile.quest=(int)QuestState.Available;Profile.claimed=false;}
             TideCatalog.Sanitize(Profile);PersistentChange();Changed(LastActReported==3&&!Profile.classicSkills
-                ?"각성기 습득 · "+Hero.ultimate.name:"Act "+LastActReported+" 보고 완료 · "+reward+" 골드");return true;
+                ?"각성기 습득 · "+Hero.ultimate.name+" · 메뉴에서 기술 장착":"Act "+LastActReported+" 보고 완료 · "+reward+" 골드");return true;
         }
         public bool BeginBossPractice(int index)
         {
@@ -52,10 +52,11 @@ namespace SpiritTide
         private void StartBattleState(bool training)
         {
             PresentationEpoch++;LastDamageFoe=LastDamageCue=null;
+            trainingLoadouts=null;
             InBattle=true;IsTraining=training;IsReplay=!IsCampaign&&!training;IsPaused=false;RoomCleared=false;Mode=training?TideMode.Training:TideMode.Combat;
             TrainingAttacks=training&&HasPerfectTrainingObjective();
             Hp=MaxHp;Mp=100;Shield=0;ResetFightFeel();WardActive=EnvironmentWarning=false;X=-3;Y=Z=JumpSpeed=0;Facing=1;hurtInvulnerability=0;PerfectRemaining=ReflectRemaining=DodgeRemaining=0;CounterStance=false;
-            Enemies.Clear();target=null;cloudTick=1;Array.Clear(CloudTime,0,2);Array.Clear(Cooldowns,0,5);ClearAction();LastXp=LastGold=LastGearUid=0;LastReward="";
+            Enemies.Clear();target=null;cloudTick=1;Array.Clear(CloudTime,0,2);Array.Clear(Cooldowns,0,Cooldowns.Length);ClearAction();LastXp=LastGold=LastGearUid=0;LastReward="";
         }
         private void LoadRoom()
         {
@@ -78,7 +79,17 @@ namespace SpiritTide
                 return;
             }
             EnvironmentWarning=false;
-            foreach(var e in Enemies)e.Telegraph=false;ClearAction();
+            foreach(var e in Enemies)e.Telegraph=false;
+            bool followThrough=IsCampaign&&(IsFieldVisit||RoomIndex<Dungeon.rooms.Length-1)
+                &&ActionRemaining>0&&contactSerial==AttackSerial&&contactClock==PresentationClock;
+            int followUps=followThrough&&Action==MoveKind.Basic?queuedBasics:0;
+            ClearAction();
+            if(followThrough)
+            {
+                clearStrikeUntil=PresentationClock+ClearStrikeDuration;
+                queuedBasics=followUps;
+                if(followUps>0)basicContinueUntil=Clock+ClearStrikeDuration+BasicLinkGrace;
+            }
             if(!IsCampaign){Mode=TideMode.Result;Changed("보스 전투 재현 완료 · 조사 진행과 보상은 유지됩니다.");return;}
             RoomCleared=true;
             QuestFieldEvent("clear");

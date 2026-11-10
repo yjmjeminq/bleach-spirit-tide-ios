@@ -57,11 +57,13 @@ def main():
     phone_interface_path, phone_interface = latest_player("2556x1179",build_path.stat().st_mtime,build,"interface-only")
     for report in (desktop_interface,phone_interface):
         names={row['name'] for row in report['checks'] if row['passed']}
-        assert sum(name.startswith('skill button stays in reach of attack at scale ') for name in names)==10
+        assert sum(name.startswith('skill button stays in reach of attack at scale ') for name in names)==8
         assert all(f"actual field response has the selected fighter's voice {hero}" in names for hero in range(6))
         assert 'joystick lights the direction ring and displaces the thumb cap' in names
         assert 'opening a modal clears joystick visuals' in names
         assert 'a skill beside attack casts while the movement finger stays down' in names
+        assert 'game UI saved both loadouts before returning to combat' in names
+        assert 'equipped slot changes live icon, cast identity and effect' in names
     media = read(phone_path.parent / "combat-review-encoded.json")
     assert media["guid"] == build["guid"] and media["decode_passed"]
     assert digest(phone_path.parent / "combat-review.mp4") == media["movie_sha256"]
@@ -138,19 +140,19 @@ def main():
             assert required in names, required
     for report in [desktop,phone]:
         names={row['name'] for row in report['checks'] if row['passed']}
-        assert 'all thirty distinct playable skills rendered' in names
-        assert sum(name.startswith('real skill cast selects its own effect ') for name in names)==30
+        assert 'all fifty-four distinct playable skills rendered' in names
+        assert sum(name.startswith('real skill cast selects its own effect ') for name in names)==54
     skill_fx=read(phone_path.parent/'skill-effects-review.json')
     skill_media=read(phone_path.parent/'skill-effects-review-encoded.json')
-    assert skill_fx['passed'] and skill_fx['cast_skills']==30 and skill_fx['guid']==build['guid']
+    assert skill_fx['passed'] and skill_fx['cast_skills']==54 and skill_fx['guid']==build['guid']
     assert skill_media['guid']==build['guid'] and skill_media['decode_passed'] and skill_media['frames']==432
     assert digest(phone_path.parent/'skill-effects-review.mp4')==skill_media['movie_sha256']
     for report in [desktop,phone]:
         names={row['name'] for row in report['checks'] if row['passed']}
-        assert 'all thirty live skill icons and help icons were reviewed' in names
-        assert sum(name.startswith('compact skill label renders real glyphs ') for name in names)==30
+        assert 'all fifty-four live skill icons were reviewed' in names
+        assert sum(name.startswith('compact skill label renders real glyphs ') for name in names)==54
     icon_review=read(phone_path.parent/'skill-icons-review.json')
-    assert icon_review['passed'] and icon_review['guid']==build['guid'] and icon_review['icons']==30
+    assert icon_review['passed'] and icon_review['guid']==build['guid'] and icon_review['icons']==54 and icon_review['atlas_files']==7
     icon_art=read(ROOT/'Docs/skill-icon-art-sources.json')
     assert icon_art['atlas_files']==6 and icon_art['logical_icons']==30
     for row in icon_art['files']:assert digest(ROOT/row['path'])==row['sha256']
@@ -166,24 +168,27 @@ def main():
         assert sum(name.startswith('midpoint rest connects a real companion scene and keeps rewards ') for name in names)==5
     journey=read(phone_path.parent/'journey-review.json')
     assert journey['passed'] and journey['guid']==build['guid'] and journey['story_contexts']==41 and journey['boss_practices']==10 and journey['midpoint_rests']==5
+    skill_poses=skill_fx['cast_skills']
     for report in [desktop,phone]:
         names={row['name'] for row in report['checks'] if row['passed']}
-        assert 'all six articulated heroes and thirty skill poses reviewed' in names
+        assert 'all six articulated heroes and their skill poses reviewed' in names
         assert 'all seventy canonical enemies use continuous motion' in names
         for hero in range(6):
             for stem in ['actual enemy hit triggers the hero recoil ', 'live pause freezes all eighteen bones ', 'holding into the wall stops the gait ', 'live return resets grounded locomotion ']:
                 assert stem+str(hero) in names
-        assert sum(n.startswith('real skill pose input accepted ') for n in names)==30
+        assert sum(n.startswith('real skill pose input accepted ') for n in names)==skill_poses
+        assert sum(n.startswith('normal AI drives the enemy impact and release pose ') for n in names)==70
         assert all('painted scenery covers the full world at map edge '+str(side) in names and 'pause freezes the follow camera at map edge '+str(side) in names for side in [1,-1])
     motion=read(phone_path.parent/'motion-review.json');motion_media=read(phone_path.parent/'motion-review-encoded.json')
-    assert motion['passed'] and motion['guid']==build['guid'] and motion['heroes']==6 and motion['skill_poses']==30 and motion['foes']==70
+    assert motion['passed'] and motion['guid']==build['guid'] and motion['heroes']==6 and motion['skill_poses']==skill_poses and motion['foes']==70
     assert motion_media['guid']==build['guid'] and motion_media['decode_passed'] and motion_media['frames']==1350
     assert digest(phone_path.parent/'motion-review.mp4')==motion_media['movie_sha256']
     assert digest(phone_path.parent/'motion-trace.json')==motion_media['trace_sha256']
     kinematics=read(ROOT/'BuildLogs/motion-kinematics.json')
     assert len(kinematics['heroes'])==6
     for row in kinematics['heroes']:
-        assert row['finite'] and row['frozen'] and row['warp_safe'] and row['actions']==12
+        assert row['finite'] and row['frozen'] and row['warp_safe'] and row['actions']==skill_poses//motion['heroes']+7
+        assert row['slow_steps']>=3 and row['slow_contact_slide']<.05 and row['strike_contacts']==3 and row['strike_support_error']<.05
         assert row['maximum_foot_error']<.05 and row['maximum_contact_slide']<.05 and row['maximum_limb_error']<.02 and row['framerate_difference']<4 and row['landing_pose_step']<11 and row['cancel_wrist_step']<25 and (row['hero']==3 or row['cancel_weapon_step']<25)
     motion_art=read(ROOT/'Docs/rig-art-sources.json');motion_layers=read(ROOT/'Docs/rig-layer-art-sources.json')
     assert len(motion_art['files'])==6 and len(motion_layers['files'])==8
@@ -239,27 +244,29 @@ def main():
     shutil.copy2(phone_path.parent/'skill-effects-review.mp4',qa/'skill-effects.mp4')
     shutil.copy2(phone_path.parent/'skill-effects-review.wav',qa/'skill-effects.wav')
     write(qa/'skill-effects-media.json',skill_media)
-    fx_sources=['Assets/SpiritTide/Scripts/TideSkillFx.cs','Assets/SpiritTide/Scripts/TideSkillFxGraphic.cs','Assets/SpiritTide/Scripts/TideSkillFxGraphic.Heroes.cs','Assets/SpiritTide/Scripts/TideGame.SkillFx.cs','Assets/SpiritTide/Resources/SpiritTide/Vfx/SkillGlow.shader']
+    fx_sources=['Assets/SpiritTide/Scripts/TideSkillFx.cs','Assets/SpiritTide/Scripts/TideSkillFxGraphic.cs','Assets/SpiritTide/Scripts/TideSkillFxGraphic.Heroes.cs','Assets/SpiritTide/Scripts/TideSkillFxGraphic.Extras.cs','Assets/SpiritTide/Scripts/TideGame.SkillFx.cs','Assets/SpiritTide/Resources/SpiritTide/Vfx/SkillGlow.shader']
+    expansion_data='Assets/SpiritTide/Resources/SpiritTide/Data/extra_skills.json'
+    expansion_atlas='Assets/SpiritTide/Resources/SpiritTide/Art/Skills/extra-skills.png'
     write(qa/'skill-effects-verification.json',{
-        'passed':True,'version':build['version'],'guid':build['guid'],'cast_skills_per_layout':30,'hero_motifs':6,'skill_sounds':30,
+        'passed':True,'version':build['version'],'guid':build['guid'],'cast_skills_per_layout':54,'hero_motifs':6,'skill_sounds':54,
         'peak_vertices':skill_fx['peak_vertices'],'pool_capacity':skill_fx['pool_capacity'],
-        'source_sha256':{path:digest(ROOT/path) for path in fx_sources},'catalog':read(ROOT/'Docs/skill-effects-index.json'),
-        'tested':['Thirty real button-triggered casts per layout','Dedicated geometry and sound for every skill','Actual shield, cloud, stance and marked-target state','Nonblocking bounded meshes','Pool reuse and tail cleanup','Reduced effects for all six ultimates','Frozen effect clocks while paused','All six hero ultimates in the timed native showcase'],
+        'source_sha256':{path:digest(ROOT/path) for path in fx_sources},'catalog':read(ROOT/'Docs/skill-effects-index.json'),'expansion_sha256':digest(ROOT/expansion_data),
+        'tested':['Fifty-four real button-triggered casts per layout','Dedicated geometry and sound for every skill','Actual shield, cloud, stance and marked-target state','Nonblocking bounded meshes','Pool reuse and tail cleanup','Reduced effects for all six ultimates','Frozen effect clocks while paused','All six hero ultimates in the timed native showcase'],
         'scope':skill_fx['scope'],'media_scope':skill_media['scope'],'physical_iphone_tested':False
     })
     write(qa/'skill-icons-verification.json',{
-        'passed':True,'version':build['version'],'guid':build['guid'],'painted_icons':30,'atlas_files':6,
+        'passed':True,'version':build['version'],'guid':build['guid'],'painted_icons':30,'pictograms':24,'atlas_files':7,
         'art_manifest':'Docs/skill-icon-art-sources.json','art_sha256':{row['path']:row['sha256'] for row in icon_art['files']},
-        'mapping_sha256':digest(ROOT/'Assets/SpiritTide/Resources/SpiritTide/Data/skill_icons.json'),
-        'evidence':['QA/92-painted-icons-0.png','QA/92-painted-icons-5.png','QA/92-painted-help-1.png','QA/93-icon-cooldown-and-spirit.png'],
-        'tested':['All thirty skill and help buttons show their own painted icon','Compact labels produce actual rendered glyphs','Icon art receives no pointer events','Radial overlay and countdown match the real cooldown','Insufficient spirit dims the art and blocks casts','Button hit areas and safe area remain valid'],
+        'mapping_sha256':digest(ROOT/'Assets/SpiritTide/Resources/SpiritTide/Data/skill_icons.json'),'expansion_art_sha256':digest(ROOT/expansion_atlas),
+        'evidence':['QA/87-skill-loadout.png','QA/92-library-0.png','QA/92-painted-icons-5.png','QA/92-painted-help-1.png','QA/93-icon-cooldown-and-spirit.png'],
+        'tested':['All fifty-four skills display individual icons in the library','Combat and help reuse the equipped icon','Compact labels produce actual rendered glyphs','Icon art receives no pointer events','Radial overlay and countdown match the real cooldown','Insufficient spirit dims the art and blocks casts','Button hit areas and safe area remain valid'],
         'scope':icon_review['scope'],'physical_iphone_tested':False
     })
     for shot in phone_path.parent.glob('1*.png'):shutil.copy2(shot,qa/shot.name)
     for name in ['motion-review.mp4','motion-review.wav','motion-trace.json']:shutil.copy2(phone_path.parent/name,qa/name)
     write(qa/'motion-media.json',motion_media)
-    motion_sources=['Assets/SpiritTide/Scripts/TideNaturalMotion.cs','Assets/SpiritTide/Scripts/TideRigGraphic.cs','Assets/SpiritTide/Scripts/TideRigData.cs','Assets/SpiritTide/Scripts/TideGame.Motion.cs','Assets/SpiritTide/Scripts/TideFoeMotionGraphic.cs','Assets/SpiritTide/Resources/SpiritTide/Data/motion_rigs.json','Tools/prepare_motion_rigs.py']
-    write(qa/'motion-verification.json',{'passed':True,'version':build['version'],'guid':build['guid'],'managed_sha256':build['managed_sha256'],'heroes':6,'skill_poses_per_layout':30,'foes':70,'enemy_anatomies':7,'bones_per_hero':18,'source_sha256':{name:digest(ROOT/name) for name in motion_sources},'kinematics':kinematics,'art_sha256':{row['path']:row['sha256'] for row in motion_art['files']+motion_layers['files']},'native_scope':motion['scope'],'media_scope':motion_media['scope'],'physical_iphone_tested':False})
+    motion_sources=['Assets/SpiritTide/Scripts/TideNaturalMotion.cs','Assets/SpiritTide/Scripts/TideRigGraphic.cs','Assets/SpiritTide/Scripts/TideRigData.cs','Assets/SpiritTide/Scripts/TideGame.Motion.cs','Assets/SpiritTide/Scripts/TideGame.Feel.cs','Assets/SpiritTide/Scripts/TideGame.UI.cs','Assets/SpiritTide/Scripts/TideFoeMotionGraphic.cs','Assets/SpiritTide/Scripts/TideSession.cs','Assets/SpiritTide/Scripts/TideSession.Campaign.cs','Assets/SpiritTide/Resources/SpiritTide/Data/motion_rigs.json','Tools/prepare_motion_rigs.py']
+    write(qa/'motion-verification.json',{'passed':True,'version':build['version'],'guid':build['guid'],'managed_sha256':build['managed_sha256'],'heroes':6,'skill_poses_per_layout':skill_poses,'foes':70,'enemy_anatomies':7,'bones_per_hero':18,'source_sha256':{name:digest(ROOT/name) for name in motion_sources},'kinematics':kinematics,'art_sha256':{row['path']:row['sha256'] for row in motion_art['files']+motion_layers['files']},'native_scope':motion['scope'],'media_scope':motion_media['scope'],'physical_iphone_tested':False})
     journey_sources=['Assets/SpiritTide/Scripts/TideJourney.cs','Assets/SpiritTide/Scripts/TideGame.Journey.cs','Assets/SpiritTide/Scripts/TideSession.cs','Assets/SpiritTide/Scripts/TideSession.Campaign.cs','Assets/SpiritTide/Resources/SpiritTide/Data/journey.json','Tools/prepare_dialogue.py']
     write(qa/'rpg-flow-verification.json',{
         'passed':True,'version':build['version'],'guid':build['guid'],
@@ -289,7 +296,7 @@ def main():
         "dialogue_base_lines":dialogue_index["base_lines"],"dialogue_lead_responses":dialogue_index["lead_responses"],"town_reply_states":105,
         "maximum_font_resolved_scene_variants_per_layout":scene_count*6,
         "story_act_links_reviewed":5,
-        "tested":["six input-only normal-health campaigns","one native five-act campaign per layout","70 reachable foe IDs","troop and named separation","room gate and saved checkpoint","defeat and retry","one-time reports and loot","reduced replay rewards","real XP and gear upgrades","legacy saves and corrupt backup recovery","30 skill explanations","UI pointer targets and text bounds","future preview and lock visuals","all 15 combat settings rendered","10 boss introductions and resolutions","600 maximum-font NPC conversations per layout","all 30 journal pages","visible town NPC raycast","optional rescue reward and replay recovery","environment warning and real ward deactivation","skill cancel, hit stop, knockback, launch and poise break","Ulquiorra three-phase behavior","fixed-step input replay with effect-audio cues"],
+        "tested":["six input-only normal-health campaigns","one native five-act campaign per layout","70 reachable foe IDs","troop and named separation","room gate and saved checkpoint","defeat and retry","one-time reports and loot","reduced replay rewards","real XP and gear upgrades","legacy saves and corrupt backup recovery","54 skill explanations","UI pointer targets and text bounds","future preview and lock visuals","all 15 combat settings rendered","10 boss introductions and resolutions","600 maximum-font NPC conversations per layout","all 30 journal pages","visible town NPC raycast","optional rescue reward and replay recovery","environment warning and real ward deactivation","skill cancel, hit stop, knockback, launch and poise break","Ulquiorra three-phase behavior","fixed-step input replay with effect-audio cues"],
         "player_sha256": digest(ROOT / "Builds" / "Windows" / "SpiritTide.exe"),
         "render_scope": "Live uGUI canvas rendered through the Unity camera to a texture; pointer-event simulation in Windows Direct3D11.",
         "phone_scope": "2556x1179 landscape with example safe-area insets. Not an iPhone OS/device run.",
@@ -297,10 +304,10 @@ def main():
         "review_video_scope": media["scope"] + "; " + media["audio_scope"],
         "pending": ["production VFX and audio", "native iPhone touch and Metal/performance checks"],
         "ipa_deferred": False,
-        "motion": {"articulated_heroes":6,"bones_per_hero":18,"skill_poses_per_layout":30,"responsive_foes":70,"enemy_anatomies":7,"movie_frames":1350,"movie_fps":30,"maximum_foot_error":max(r["maximum_foot_error"] for r in kinematics["heroes"])},
+        "motion": {"articulated_heroes":6,"bones_per_hero":18,"skill_poses_per_layout":skill_poses,"responsive_foes":70,"enemy_anatomies":7,"movie_frames":1350,"movie_fps":30,"maximum_foot_error":max(r["maximum_foot_error"] for r in kinematics["heroes"])},
         "rpg_flow": {"story_contexts_per_layout":41,"boss_practices_per_layout":10,"midpoint_rests_per_layout":5,"revised_story_scenes":9,"added_story_lines":13,"recap_spoiler_gated":True,"practice_resources_preserved":True},
-        "skill_icons": {"painted_icons":30,"atlas_files":6,"tool":"built-in image_gen","radial_cooldowns":True,"icon_help":True},
-        "skill_effects": {"dedicated_skills":30,"hero_motifs":6,"sounds":30,"showcase_frames":432,"showcase_fps":30,"scope":"Unity mesh effects and synthesized game sounds; not iPhone hardware performance"},
+        "skill_icons": {"painted_icons":30,"pictograms":24,"atlas_files":7,"radial_cooldowns":True,"icon_help":True},
+        "skill_effects": {"dedicated_skills":54,"hero_motifs":6,"sounds":54,"showcase_frames":432,"showcase_fps":30,"scope":"Unity mesh effects and synthesized game sounds; not iPhone hardware performance"},
     }
     ios_report=ROOT/"Artifacts"/("SpiritTide-ios-package-verification-v"+build["version"]+".json")
     if ios_report.exists():
@@ -385,7 +392,7 @@ def main():
         if path.is_file() and "BackUpThisFolder" not in str(path) and path.suffix not in {".pdb", ".mdb"}:
             windows_files.append((path, "SpiritTide-Windows/" + path.relative_to(ROOT / "Builds" / "Windows").as_posix()))
     notice = artifacts / "PLAY.txt"
-    notice.write_text("BLEACH: 영해의 균열 · 캠페인 검증본 "+build["version"]+"\n\nZIP 전체를 압축 해제한 다음 SpiritTide.exe를 여세요.\n방향키 이동 / Z 공격 / X 모으기 / C 점프 / Space 회피\nA S D F 기술 / R 각성기 / V 회복 / E 대화·장치·다음 방 / H 도움말\n메뉴: 방향키·Tab 이동 / Enter 확인 / Esc 뒤로\n\n우라하라 의뢰 → 쿠카쿠의 균열 지도 → 6개 던전 → 액트 보고 → 다음 액트.\n방 정화 뒤 오른쪽 출구로 이동해 다음 방을 누르세요.\n장비 비교·강화는 텟사이에서, 겹친 적 선택은 대상 변경 버튼을 사용하세요.\n귀환 등불을 두 곳 안내하고 콘에게 구조 소식을 보고하세요.\n환경 예고를 피하거나 영압 장치를 끄세요.\n기본 공격 명중 직후 기술로 연계하고, 강공격·반격으로 보스 자세를 무너뜨릴 수 있습니다.\n\n5액트 30던전 114방 · 적 70종 · 전투 배경 15종 · 파티 성장·장비 강화.\n여섯 캐릭터는 관절 기반 연속 동작, 실제 지면의 발 고정과 연결 공격을 사용합니다. 아이폰용 IPA는 별도 배포 파일을 사용하세요.\n",encoding="utf-8-sig")
+    notice.write_text("BLEACH: 영해의 균열 · 캠페인 검증본 "+build["version"]+"\n\nZIP 전체를 압축 해제한 다음 SpiritTide.exe를 여세요.\n방향키 이동 / Z 공격 / X 모으기 / C 점프 / Space 회피\nA S D F 장착한 기술 4개 / V 회복 / E 대화·장치·다음 방 / H 도움말\n메뉴: 방향키·Tab 이동 / Enter 확인 / Esc 뒤로\n거점 메뉴의 기술 장착에서 슬롯을 고르고 기술을 장착합니다.\n\n우라하라 의뢰 → 쿠카쿠의 균열 지도 → 6개 던전 → 액트 보고 → 다음 액트.\n방 정화 뒤 오른쪽 출구로 이동해 다음 방을 누르세요.\n장비 비교·강화는 텟사이에서, 겹친 적 선택은 대상 변경 버튼을 사용하세요.\n귀환 등불을 두 곳 안내하고 콘에게 구조 소식을 보고하세요.\n환경 예고를 피하거나 영압 장치를 끄세요.\n기본 공격 명중 직후 기술로 연계하고, 강공격·반격으로 보스 자세를 무너뜨릴 수 있습니다.\n\n5액트 30던전 114방 · 적 70종 · 전투 배경 15종 · 파티 성장·장비 강화.\n여섯 캐릭터는 관절 기반 연속 동작, 실제 지면의 발 고정과 연결 공격을 사용합니다. 아이폰용 IPA는 별도 배포 파일을 사용하세요.\n",encoding="utf-8-sig")
     with notice.open("a",encoding="utf-8") as paper:
         paper.write("\n대화록: 뱌쿠야 → 조사 기록 확인 → 대화록.\n동료 대화: 현재 액트 의뢰 수락 후 콘 → 동료와 이야기.\n전체 대본은 character-dialogue-script.txt에 있으며 결말을 포함합니다.\n")
         paper.write("\n빠른 메뉴: 마을의 메뉴에서 의뢰·장비·지도·기록·보급·설정을 직접 엽니다.\n부탁의 목적지 보기 → 표시한 목적지로 출정. 장비는 슬롯 필터·정렬·착용 수치 차이를 확인하세요.\n진행 대화는 이전 문장, 대화록은 장면 목록을 사용할 수 있습니다.\n키 안내는 설정에서 자동·표시·숨김을 선택합니다.\n")

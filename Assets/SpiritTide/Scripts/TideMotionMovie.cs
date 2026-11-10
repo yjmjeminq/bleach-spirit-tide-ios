@@ -3,30 +3,55 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace SpiritTide
 {
     public sealed partial class TidePlayerSmoke
     {
-        [Serializable] private class MotionFrameRow {public int hero,frame,serial,action,combo,facing;public float clock,phase,foot_error;public TideRigPoint root,near_foot,far_foot;public bool near_contact,far_contact;public TideRigPoint[] joints;}
+        [Serializable] private class MotionFrameRow {public int hero,frame,serial,action,combo,facing,input_facing,damage_events,strike_limb,impact_strength;public float clock,phase,action_phase,speed,foot_error;public TideRigPoint root,near_foot,far_foot;public bool near_contact,far_contact;public TideRigPoint[] joints;}
         [Serializable] private class MotionTrace {public string version,guid;public MotionFrameRow[] frames;}
         private static TideRigPoint MotionPoint(Vector2 p)=>new TideRigPoint{x=p.x,y=p.y};
         private IEnumerator ReviewFoeMotion()
         {
             game.ReturnTown();game.StartBattle(true);if(!game.Session.TrainingAttacks)game.Session.ToggleTrainingAttacks();
             var families=new HashSet<TideFoeMotionGraphic.Anatomy>();int count=0;
+            var session=game.Session;
             foreach(var def in TideCampaign.Data.foes)
             {
                 // A training fixture swaps only the encounter identity. Movement,
                 // telegraphs, attacks and player damage use the normal enemy AI.
-                var e=game.Session.Target;e.Def=def;e.Uid=10000+count;e.X=1.8f;e.Y=0;e.Hp=e.MaxHp=def.base_hp;e.Attacks=0;e.DamageSerial=0;
-                e.Stun=e.Stagger=e.Lift=e.Recovery=e.Exposed=0;e.Telegraph=false;e.Timer=.05f;game.Session.Revision++;
+                var e=session.Target;e.Def=def;e.Uid=10000+count;
+                bool ranged=def.brain=="ranged"||def.brain=="zone";
+                e.X=session.X+(ranged?1.95f:def.brain=="dash"?3.45f:2.75f);e.Y=session.Y;
+                e.Hp=e.MaxHp=def.base_hp;e.Attacks=e.DamageSerial=0;
+                e.Stun=e.Stagger=e.Lift=e.LiftVelocity=e.KnockVelocity=e.Recovery=e.Exposed=0;e.Telegraph=false;e.Timer=.23f;session.Revision++;
                 yield return MotionAdvance(3,Vector2.zero);Canvas.ForceUpdateCanvases();var body=game.GetComponentInChildren<TideFoeMotionGraphic>();
                 Check("canonical foe has a bounded live motion surface "+def.id,body!=null&&body.sprite.name==def.id&&body.VertexCount==425);CheckHit("target-0");count++;
-                if(families.Add(body.BodyType))
+                float initialPhase=body.MotionPhase;
+                yield return MotionAdvance(9,Vector2.zero);
+                Check("normal pursuit or retreat drives the enemy gait "+def.id,body.MotionPhase!=initialPhase&&body.Travel>.08f);
+                int wait=0;
+                while(!e.Telegraph&&wait++<60)yield return MotionAdvance(1,Vector2.zero);
+                Check("normal AI starts a visible attack tell "+def.id,e.Telegraph);
+                bool sampleFamily=families.Add(body.BodyType);
+                if(sampleFamily)
                 {
-                    yield return MotionAdvance(32,Vector2.zero);yield return Capture("110-motion-foe-"+body.BodyType+"-tell");
-                    yield return MotionAdvance(210,Vector2.zero);Check("normal AI drives the enemy motion events "+body.BodyType,e.Attacks>0);
+                    yield return MotionAdvance(Mathf.FloorToInt(e.TellDuration*.72f*60),Vector2.zero);
+                    yield return Capture("110-motion-foe-"+body.BodyType+"-tell");
+                }
+                else
+                {
+                    e.Timer=Mathf.Min(e.Timer,.2f);
+                    yield return MotionAdvance(3,Vector2.zero);
+                }
+                Vector2 woundUp=body.Deform(new Vector2(.27f,.74f));
+                wait=0;
+                while(e.Attacks==0&&wait++<120)yield return MotionAdvance(1,Vector2.zero);
+                yield return MotionAdvance(3,Vector2.zero);
+                Check("normal AI drives the enemy impact and release pose "+def.id,e.Attacks>0&&Vector2.Distance(woundUp,body.Deform(new Vector2(.27f,.74f)))>.014f);
+                if(sampleFamily)
+                {
                     yield return Capture("111-motion-foe-"+body.BodyType+"-follow");
                     Vector2 sample=body.Deform(new Vector2(.2f,.72f));game.Session.Pause();yield return MotionAdvance(5,Vector2.right);
                     Check("pause freezes enemy surface "+body.BodyType,body.Deform(new Vector2(.2f,.72f))==sample);game.Session.Resume();
@@ -48,6 +73,9 @@ namespace SpiritTide
                 Vector2 at=rect.anchoredPosition;game.Session.Pause();yield return MotionAdvance(5,Vector2.right);
                 Check("pause freezes the follow camera at map edge "+side,rect.anchoredPosition==at);game.Session.Resume();
             }
+            game.Session.X=-2;game.Session.Y=1.45f;yield return MotionAdvance(30,Vector2.zero);
+            game.Session.Jump();yield return MotionAdvance(21,Vector2.zero);
+            CheckFaceClear("campaign back lane");yield return Capture("113-motion-campaign-jump");
             game.ReturnTown();yield return null;
         }
         private IEnumerator NaturalMotionMovie()
@@ -61,19 +89,29 @@ namespace SpiritTide
                 for(int hero=0;hero<6;hero++)
                 {
                     game.ReturnTown();game.Session.SelectHero(hero);game.StartBattle(true);game.Session.EnemyX=6;game.Session.EnemyY=0;int initialSerial=game.Session.AttackSerial,lastSerial=initialSerial;var actions=new HashSet<MoveKind>();var combos=new HashSet<int>();
+                    var attack=game.Buttons["attack"].gameObject;
+                    var finger=new PointerEventData(EventSystem.current){pointerId=90};
                     for(int frame=0;frame<perHero;frame++,index++)
                     {
                         var s=game.Session;game.ReviewTime=index/30f;
-                        Vector2 move=frame>=8&&frame<45?Vector2.right:frame>=45&&frame<63?Vector2.left:frame>=63&&frame<75?Vector2.up:Vector2.zero;
+                        Vector2 move=frame>=8&&frame<24?Vector2.right*.35f:frame>=24&&frame<45?Vector2.right:
+                            frame>=45&&frame<63?Vector2.left:frame>=63&&frame<75?Vector2.up:Vector2.zero;
                         if(frame==76){s.EnemyX=s.X+2;s.EnemyY=s.Y;}
-                        if(frame==80||frame==96||frame==112)s.Request(MoveKind.Basic);
+                        if(frame==80||frame==82||frame==84)
+                        {
+                            ExecuteEvents.Execute(attack,finger,ExecuteEvents.pointerDownHandler);
+                            ExecuteEvents.Execute(attack,finger,ExecuteEvents.pointerUpHandler);
+                        }
                         if(frame==128)s.Request(MoveKind.Heavy);
                         if(frame==148)s.Jump();if(frame==153)s.Request(MoveKind.Basic);
                         if(frame==171)s.Dodge(Vector2.left);if(frame==183)s.Request(MoveKind.Ultimate);
-                        s.Step(1f/30,move,false);yield return null;
+                        s.Step(1f/30,move,game.AttackHold.Held);yield return null;
                         if(s.AttackSerial!=lastSerial){lastSerial=s.AttackSerial;actions.Add(s.Action);if(s.Action==MoveKind.Basic)combos.Add(s.Combo);}
                         var motion=game.NaturalMotion;var joints=new TideRigPoint[18];for(int b=0;b<18;b++)joints[b]=MotionPoint(motion.Positions[b]);
-                        trace.Add(new MotionFrameRow{hero=hero,frame=frame,serial=s.AttackSerial,action=(int)s.Action,combo=s.Combo,facing=s.Facing,clock=s.PresentationClock,phase=motion.Phase,foot_error=motion.FootError,root=MotionPoint(((RectTransform)game.ArticulatedActor.transform.parent).anchoredPosition),near_foot=MotionPoint(motion.Feet[0]),far_foot=MotionPoint(motion.Feet[1]),near_contact=motion.Contacts[0],far_contact=motion.Contacts[1],joints=joints});
+                        trace.Add(new MotionFrameRow{hero=hero,frame=frame,serial=s.AttackSerial,action=(int)s.Action,combo=s.Combo,facing=motion.DisplayFacing,input_facing=s.Facing,
+                            clock=s.PresentationClock,phase=motion.Phase,action_phase=s.ActionPosePhase,speed=motion.Speed,foot_error=motion.FootError,
+                            damage_events=s.DamageEvents,strike_limb=motion.StrikeLimb,impact_strength=(int)s.LastImpactStrength,root=MotionPoint(((RectTransform)game.ArticulatedActor.transform.parent).anchoredPosition),
+                            near_foot=MotionPoint(motion.Feet[0]),far_foot=MotionPoint(motion.Feet[1]),near_contact=motion.Contacts[0],far_contact=motion.Contacts[1],joints=joints});
                         RenderTexture.active=rt;Canvas.ForceUpdateCanvases();camera.Render();texture.ReadPixels(new Rect(0,0,Screen.width,Screen.height),0,0);texture.Apply();
                         File.WriteAllBytes(Path.Combine(folder,index.ToString("D4")+".jpg"),texture.EncodeToJPG(78));
                     }

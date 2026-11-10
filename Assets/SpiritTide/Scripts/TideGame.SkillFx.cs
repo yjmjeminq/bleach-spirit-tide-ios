@@ -31,15 +31,15 @@ namespace SpiritTide
             if(shader==null)throw new System.InvalidOperationException("Missing skill glow shader");
             skillGlowMaterial=new Material(shader){name="Spirit Tide shared skill glow"};
             skillGroundRoot=Stretch("SkillGroundFX",world);skillGroundRoot.SetSiblingIndex(warning.GetSiblingIndex());
-            skillAirRoot=Stretch("SkillAirFX",world);skillAirRoot.SetSiblingIndex(warningText.transform.GetSiblingIndex());
+            skillAirRoot=Stretch("SkillAirFX",world);skillAirRoot.SetSiblingIndex(weaponSweep.GetSiblingIndex()+1);
             skillFxPool=new SkillFxView[TideSkillFx.PoolSize];for(int i=0;i<skillFxPool.Length;i++)skillFxPool[i]=NewSkillView("SkillFx-"+i);
             skillStatusFx=new SkillFxView[4];for(int i=0;i<skillStatusFx.Length;i++)skillStatusFx[i]=NewSkillView("SkillStatus-"+i);
-            skillSounds=new AudioClip[30];for(int i=0;i<skillSounds.Length;i++)skillSounds[i]=TideSkillFx.Sound(TideSkillFx.All[i]);
+            skillSounds=new AudioClip[TideSkillFx.All.Length];for(int i=0;i<skillSounds.Length;i++)skillSounds[i]=TideSkillFx.Sound(TideSkillFx.All[i]);
         }
         private AudioClip CurrentCastSound()
         {
             int slot=(int)Session.Action-(int)MoveKind.Skill0;
-            return slot>=0&&slot<5&&skillSounds!=null?skillSounds[Session.Profile.hero*5+slot]:attackSounds[Session.Profile.hero];
+            return slot>=0&&slot<CharacterDef.SkillCount&&skillSounds!=null?skillSounds[TideSkillFx.Index(Session.Profile.hero,slot)]:attackSounds[Session.Profile.hero];
         }
         private void SetSkillView(SkillFxView view,bool visible,float age)
         {
@@ -55,6 +55,13 @@ namespace SpiritTide
             foreach(var fx in skillStatusFx)SetSkillView(fx,false,0);
             skillFxSerial=Session.AttackSerial;SkillFxActiveCount=SkillFxMeshVertices=0;LastSkillFxId=null;
         }
+        private void BeginSkillEffect(TideSkillFxDef definition,Vector2 at)
+        {
+            var fx=skillFxPool[skillFxCursor++%skillFxPool.Length];fx.active=true;fx.def=definition;
+            fx.source=new Vector2(Session.X,Session.Y);fx.target=at;fx.facing=Session.Facing;
+            fx.started=Session.Clock-Session.ActionElapsed;fx.duration=Session.ActionDuration;fx.seed=skillFxSerial*31+skillFxCursor*17;
+            LastSkillFxId=fx.def.id;
+        }
         private void DrawSkillEffects()
         {
             if(skillFxPool==null)return;
@@ -67,12 +74,27 @@ namespace SpiritTide
             if(skillFxSerial!=Session.AttackSerial)
             {
                 skillFxSerial=Session.AttackSerial;int slot=(int)Session.Action-(int)MoveKind.Skill0;
-                if(Session.IsFighting&&Session.ActionRemaining>0&&slot>=0&&slot<5)
+                if(Session.IsFighting&&Session.ActionRemaining>0&&slot>=0&&slot<CharacterDef.SkillCount)
                 {
-                    var fx=skillFxPool[skillFxCursor++%skillFxPool.Length];fx.active=true;fx.def=TideSkillFx.Get(Session.Profile.hero,slot);
-                    fx.source=new Vector2(Session.X,Session.Y);fx.target=new Vector2(Session.EnemyX,Session.EnemyY);fx.facing=Session.Facing;
-                    fx.started=Session.Clock-Session.ActionElapsed;fx.duration=Session.ActionDuration;fx.seed=skillFxSerial*31+Session.Profile.hero*73;
-                    LastSkillFxId=fx.def.id;
+                    var fx=TideSkillFx.Get(Session.Profile.hero,slot);
+                    var player=new Vector2(Session.X,Session.Y);
+                    var at=new Vector2(Session.EnemyX,Session.EnemyY);
+                    if(fx.hero==4&&slot==8)
+                    {
+                        bool hasCloud=false;
+                        for(int i=0;i<Session.Clouds.Length;i++)
+                        {
+                            if(Session.CloudTime[i]<=0)continue;
+                            hasCloud=true;BeginSkillEffect(fx,Session.Clouds[i]);
+                        }
+                        if(!hasCloud)BeginSkillEffect(fx,player);
+                    }
+                    else
+                    {
+                        if(fx.hero==4&&slot==5)at=Session.AshPlacement();
+                        if(fx.hero==4&&slot==6)at=Session.AshAttraction(at);
+                        BeginSkillEffect(fx,at);
+                    }
                 }
             }
             SkillFxActiveCount=SkillFxMeshVertices=0;
@@ -98,6 +120,7 @@ namespace SpiritTide
         }
         private void OnDestroy()
         {
+            ReleaseDialogueArt();
             if(skillGlowMaterial!=null)Destroy(skillGlowMaterial);
             if(skillSounds!=null)foreach(var clip in skillSounds)if(clip!=null)Destroy(clip);
         }

@@ -116,6 +116,7 @@ namespace SpiritTide
                     case TideMode.Dialogue:case TideMode.Story:preferred="choice-0";break;
                     case TideMode.Title:preferred="title-start";break;
                     case TideMode.Home:preferred="home-primary";break;
+                    case TideMode.Loadout:preferred="loadout-slot-"+loadoutSlot;break;
                     case TideMode.Inventory:preferred="equip";break;
                     case TideMode.Forge:preferred="upgrade";break;
                     case TideMode.Journal:preferred=journalDialogue?"dialogue-records":"journal-map";break;
