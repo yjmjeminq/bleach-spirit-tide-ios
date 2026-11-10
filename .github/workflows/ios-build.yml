@@ -1,13 +1,14 @@
 name: Build Spirit Tide iPhone IPA
+run-name: Compile Spirit Tide iPhone ${{ inputs.source_tag }}
 on:
   workflow_dispatch:
     inputs:
       source_tag:
-        description: Public release containing the sealed 0.13.1 Unity export
+        description: Draft release containing the sealed 0.14.0 Unity export
         required: true
         type: string
       source_sha256:
-        description: SHA256 of SpiritTide-ios-export-v0.13.1.zip
+        description: SHA256 of SpiritTide-ios-export-v0.14.0.zip
         required: true
         type: string
 permissions:
@@ -23,18 +24,19 @@ jobs:
       contents: write
     env:
       DEVELOPER_DIR: /Applications/Xcode_16.4.app/Contents/Developer
-      TIDE_VERSION: 0.13.1
+      TIDE_VERSION: 0.14.0
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
           persist-credentials: false
-      - name: Verify public repository and download this game's sealed export
+      - name: Download the sealed export from the draft release
         env:
           GH_TOKEN: ${{ github.token }}
           SOURCE_TAG: ${{ inputs.source_tag }}
           GH_REPO: ${{ github.repository }}
         run: |
           test "$(gh repo view "$GH_REPO" --json visibility --jq .visibility)" = PUBLIC
+          test "$(gh release view "$SOURCE_TAG" --json isDraft --jq .isDraft)" = true
           mkdir -p input output
           gh release download "$SOURCE_TAG" --pattern "SpiritTide-ios-export-v$TIDE_VERSION.zip" --dir input
       - name: Verify archive and every exported file
@@ -43,13 +45,14 @@ jobs:
         run: python3 Tools/IOSBuild.py extract --archive "input/SpiritTide-ios-export-v$TIDE_VERSION.zip" --sha256 "$SOURCE_SHA256" --output output/extracted
       - name: Compile ARM64 iOS device app and package unsigned IPA
         run: python3 Tools/IOSBuild.py build --project output/extracted/ios-export --ipa "output/SpiritTide-iPhone-unsigned-v$TIDE_VERSION.ipa" --work output/work --report output/build-report.json
-      - name: Attach the verified IPA to the public input release
+      - name: Attach the verified IPA to the draft release
         env:
           GH_TOKEN: ${{ github.token }}
           SOURCE_TAG: ${{ inputs.source_tag }}
           GH_REPO: ${{ github.repository }}
         run: |
           test "$(gh repo view "$GH_REPO" --json visibility --jq .visibility)" = PUBLIC
+          test "$(gh release view "$SOURCE_TAG" --json isDraft --jq .isDraft)" = true
           gh release upload "$SOURCE_TAG" \
             "output/SpiritTide-iPhone-unsigned-v$TIDE_VERSION.ipa" \
             "output/SpiritTide-iPhone-unsigned-v$TIDE_VERSION.ipa.sha256" \
