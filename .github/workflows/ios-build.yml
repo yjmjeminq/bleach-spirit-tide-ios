@@ -4,11 +4,11 @@ on:
   workflow_dispatch:
     inputs:
       source_tag:
-        description: Draft release containing the sealed 0.15.0 Unity export
+        description: Draft release containing the sealed 0.16.0 Unity export
         required: true
         type: string
       source_sha256:
-        description: SHA256 of SpiritTide-ios-export-v0.15.0.zip
+        description: SHA256 of SpiritTide-ios-export-v0.16.0.zip
         required: true
         type: string
 permissions:
@@ -24,7 +24,7 @@ jobs:
       contents: write
     env:
       DEVELOPER_DIR: /Applications/Xcode_16.4.app/Contents/Developer
-      TIDE_VERSION: 0.15.0
+      TIDE_VERSION: 0.16.0
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
         with:
